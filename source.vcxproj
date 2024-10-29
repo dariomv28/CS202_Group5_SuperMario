@@ -139,6 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Source\Headers\GameEngine.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="source.rc" />
