@@ -133,13 +133,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\MainMenu.cpp" />
+    <ClCompile Include="Source\MyApp.cpp" />
     <ClCompile Include="Source\Main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Source\State.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Headers\MainMenu.h" />
+    <ClInclude Include="Source\Headers\MyApp.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Source\Headers\GameEngine.h" />
+    <ClInclude Include="Source\Headers\stdafx.h" />
+    <ClInclude Include="Source\Headers\State.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="source.rc" />
