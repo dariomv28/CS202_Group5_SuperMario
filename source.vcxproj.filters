@@ -24,15 +24,18 @@
     <ClCompile Include="Source\State.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\MainMenu.cpp">
+    <ClCompile Include="Source\MainMenuState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Headers\GameEngine.h">
+    <ClInclude Include="Source\Headers\resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Headers\MyApp.h">
@@ -44,13 +47,22 @@
     <ClInclude Include="Source\Headers\State.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Headers\MainMenu.h">
+    <ClInclude Include="Source\Headers\MainMenuState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Headers\GUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Headers\GameState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="source.rc">
+    <ResourceCompile Include="Source\Headers\source.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Config\WindowIni.txt" />
   </ItemGroup>
 </Project>

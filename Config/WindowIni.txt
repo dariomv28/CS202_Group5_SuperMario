@@ -1,0 +1,4 @@
+SuperPowerMario
+800 600
+120
+0
