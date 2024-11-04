@@ -1,17 +1,18 @@
 #pragma once
 //#include "stdafx.h"
-#include "MainMenu.h"
+#include "MainMenuState.h"
+#include "GameState.h"
 
 class MyApp
 {
 private:
 	sf::RenderWindow* window;
 	sf::Event sfEvent;
-	sf::Clock dtClock;
 	
-	float dt;
+	sf::Clock dtClock;
+	float dt; 
 
-	std::stack<State*> states;
+	std::stack<State*> states; // Applying polymorphism and abstraction here!
 
 	void initVariables();
 	void initStates();
@@ -25,6 +26,7 @@ public:
 	//Functions
 
 	//Regular
+	void endApplication();
 
 	//Update
 	void updateDT();
