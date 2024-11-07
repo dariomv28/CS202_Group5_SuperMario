@@ -1,12 +1,15 @@
 #pragma once
 #include "State.h"
 
+enum menu_options { BTN_CONTINUE = 0, BTN_NEWGAME, BTN_LEADER, BTN_EXIT };
+
 class MainMenuState : 
 	public State
 {
 private:
-	sf::RenderWindow* window;
-	
+	int nButtons;
+	float btn_Width, btn_Height, btn_CharSize;
+
 	sf::Texture backgroundTexture;
 	sf::Sprite background;
 
@@ -15,16 +18,23 @@ private:
 
 	sf::Font font;
 
-	//void initVariables();
-	//void initBackground();
-	//void initFonts();
+	std::vector<GUI::Button*> buttons;
+
+	void initVariables();
+	void initBackground();
+	void initButtons();
+	void initFonts();
 	//void initKeybinds();
-	//void initText();
 public:
-	MainMenuState(sf::RenderWindow* window);
+	MainMenuState(StateData* stateData);
 	virtual ~MainMenuState();
 
+	void updateGUI();
 	void update(const float& dt);
-	void render(sf::RenderTarget* target = nullptr);
+
+	void resetGUI();
+
+	void renderGUI();
+	void render(sf::RenderTarget* target);
 };
 
