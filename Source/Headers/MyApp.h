@@ -12,11 +12,13 @@ private:
 	sf::Clock dtClock;
 	float dt; 
 
+	StateData stateData;
 	std::stack<State*> states; // Applying polymorphism and abstraction here!
 
 	void initVariables();
-	void initStates();
 	void initWindow();
+	void initStateData();
+	void initStates();
 
 public:
 	//Constructors & Destructors

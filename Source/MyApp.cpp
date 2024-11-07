@@ -32,9 +32,15 @@ void MyApp::initWindow()
 	this->window->setVerticalSyncEnabled(vertical_sync_enabled);
 }
 
+void MyApp::initStateData()
+{
+	this->stateData.window = this->window;
+	this->stateData.states = &this->states;
+}
+
 void MyApp::initStates()
 {
-	this->states.push(new GameState(this->window));
+	this->states.push(new MainMenuState(&this->stateData));
 }
 
 // Constructors & Destructors	
@@ -43,6 +49,7 @@ MyApp::MyApp()
 {
 	this->initVariables();
 	this->initWindow();
+	this->initStateData();
 	this->initStates();
 }
 

@@ -1,8 +1,10 @@
 #include "Headers/State.h"
 
-State::State(sf::RenderWindow* window)
+State::State(StateData* stateData)
 {
-	this->window = window;
+	this->stateData = stateData;
+	this->states = stateData->states;
+	this->window = stateData->window;
 	this->quit = false;
 }
 
@@ -22,5 +24,14 @@ void State::checkForQuit()
 	}
 }	
 
+void State::endState()
+{
+	this->quit = true;
+}
+
+void State::updateMousePosition()
+{
+	this->mousePosWindow = sf::Mouse::getPosition(*this->window);
+}
 
 
