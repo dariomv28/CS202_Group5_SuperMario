@@ -30,7 +30,7 @@ void MainMenuState::initButtons()
 	float x = window->getSize().x / 2 - btn_Width / 2;
 	float y = window->getSize().y / 2.2;
 
-	buttons[BTN_CONTINUE] = new GUI::TextureButton(
+	buttons[BTN_CONTINUE] = new GUI::TextureButton(false,
 		x, y, btn_Width, btn_Height,
 		&font, "coninue", btn_CharSize,
 		sf::Color::Black, sf::Color::White, sf::Color::White,
@@ -40,7 +40,7 @@ void MainMenuState::initButtons()
 	);
 	
 	y += btn_Height * 1.5;
-	buttons[BTN_NEWGAME] = new GUI::TextureButton(
+	buttons[BTN_NEWGAME] = new GUI::TextureButton(false,
 		x, y, btn_Width, btn_Height,
 		&font, "new game", btn_CharSize,
 		sf::Color::Black, sf::Color::White, sf::Color::White,
@@ -50,7 +50,7 @@ void MainMenuState::initButtons()
 	);
 
 	y += btn_Height * 1.5;
-	buttons[BTN_LEADER] = new GUI::TextureButton(
+	buttons[BTN_LEADER] = new GUI::TextureButton(false,
 		x, y, btn_Width, btn_Height,
 		&font, "leader board", btn_CharSize,
 		sf::Color::Black, sf::Color::White, sf::Color::White,
@@ -60,7 +60,7 @@ void MainMenuState::initButtons()
 	);
 
 	y += btn_Height * 1.5;
-	buttons[BTN_EXIT] = new GUI::TextureButton(
+	buttons[BTN_EXIT] = new GUI::TextureButton(false, 
 		x, y, btn_Width, btn_Height,
 		&font, "exit", btn_CharSize,
 		sf::Color::Black, sf::Color::White, sf::Color::White,
@@ -97,16 +97,19 @@ void MainMenuState::updateGUI()
 
 	if (buttons[BTN_CONTINUE]->isPressed())
 	{
+		std::cout << "Continue Pressed\n";
 		//this->states.push(new GameState(this->window));
 	}
 
 	if (buttons[BTN_NEWGAME]->isPressed())
 	{
+		std::cout << "New Game Pressed\n";
 		//this->states.push(new GameState(this->window));
 	}
 
 	if (buttons[BTN_LEADER]->isPressed())
 	{
+		std::cout << "Leader Board Pressed\n";
 		//this->states.push(new GameState(this->window));
 	}
 
