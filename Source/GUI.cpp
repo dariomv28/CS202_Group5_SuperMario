@@ -5,6 +5,8 @@ namespace GUI
 	Button::Button(float x, float y, float width, float height,
 		sf::Font* font, std::string text, unsigned charSize)
 	{
+		this->width = width;
+		this->height = height;
 		this->buttonState = BTN_IDLE;	
 		this->font = font;
 		this->text.setFont(*this->font);

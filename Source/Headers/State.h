@@ -15,7 +15,9 @@ public:
 
 	virtual void checkForQuit();
 
-	virtual void endState() = 0;
+	virtual void endState() = 0; 
+
+	// dt: delta time (frame)
 
 	virtual void updateKeyBinds(const float& dt) = 0;
 	virtual void update(const float& dt) = 0;
