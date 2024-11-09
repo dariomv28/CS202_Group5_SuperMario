@@ -133,22 +133,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\AnimationComponent.cpp" />
     <ClCompile Include="Source\GameState.cpp" />
     <ClCompile Include="Source\GUI.cpp" />
     <ClCompile Include="Source\MainMenuState.cpp" />
+    <ClCompile Include="Source\Mario.cpp" />
     <ClCompile Include="Source\MenuLevelState.cpp" />
     <ClCompile Include="Source\MyApp.cpp" />
     <ClCompile Include="Source\Main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Source\PlayerManager.cpp" />
     <ClCompile Include="Source\State.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Headers\AnimationComponent.h" />
     <ClInclude Include="Source\Headers\GameState.h" />
     <ClInclude Include="Source\Headers\GUI.h" />
     <ClInclude Include="Source\Headers\MainMenuState.h" />
+    <ClInclude Include="Source\Headers\Mario.h" />
     <ClInclude Include="Source\Headers\MenuLevelState.h" />
     <ClInclude Include="Source\Headers\MyApp.h" />
+    <ClInclude Include="Source\Headers\PlayerManager.h" />
     <ClInclude Include="Source\Headers\resource.h" />
     <ClInclude Include="Source\Headers\stdafx.h" />
     <ClInclude Include="Source\Headers\State.h" />
