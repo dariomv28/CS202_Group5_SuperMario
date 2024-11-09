@@ -9,8 +9,8 @@ namespace GUI
 		this->stickyAllowed = stickyAllowed;
 		this->width = width;
 		this->height = height;
+		this->buttonState = BTN_IDLE;	
 		this->font = font;
-		
 		this->textIdleColor = textIdleColor;
 		this->textHoverColor = textHoverColor;
 		this->textActiveColor = textActiveColor;

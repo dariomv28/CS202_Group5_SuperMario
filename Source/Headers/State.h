@@ -7,7 +7,10 @@ class State;
 class StateData
 {
 public:
-	StateData() {};
+	StateData() {
+		window = nullptr;
+		states = nullptr;
+	}
 
 	//Variables
 	sf::RenderWindow* window;
@@ -33,8 +36,8 @@ public:
 
 	virtual void checkForQuit();
 
-	void endState();
-
+	virtual void endState();
+		
 	virtual void updateMousePosition();
 	virtual void update(const float& dt) = 0;
 	virtual void render(sf::RenderTarget* target = nullptr) = 0;	

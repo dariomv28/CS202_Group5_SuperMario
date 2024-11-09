@@ -6,7 +6,7 @@ enum menu_options { BTN_CONTINUE = 0, BTN_NEWGAME, BTN_LEADER, BTN_EXIT };
 class MainMenuState : 
 	public State
 {
-private:
+protected:
 	int nButtons;
 	float btn_Width, btn_Height, btn_CharSize;
 
@@ -22,15 +22,15 @@ private:
 
 	void initVariables();
 	void initBackground();
-	void initButtons();
+	virtual void initButtons();
 	void initFonts();
 	//void initKeybinds();
 public:
 	MainMenuState(StateData* stateData);
 	virtual ~MainMenuState();
 
-	void updateGUI();
-	void update(const float& dt);
+	virtual void updateGUI();
+	virtual void update(const float& dt);
 
 	void resetGUI();
 

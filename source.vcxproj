@@ -136,6 +136,7 @@
     <ClCompile Include="Source\GameState.cpp" />
     <ClCompile Include="Source\GUI.cpp" />
     <ClCompile Include="Source\MainMenuState.cpp" />
+    <ClCompile Include="Source\MenuLevelState.cpp" />
     <ClCompile Include="Source\MyApp.cpp" />
     <ClCompile Include="Source\Main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -146,6 +147,7 @@
     <ClInclude Include="Source\Headers\GameState.h" />
     <ClInclude Include="Source\Headers\GUI.h" />
     <ClInclude Include="Source\Headers\MainMenuState.h" />
+    <ClInclude Include="Source\Headers\MenuLevelState.h" />
     <ClInclude Include="Source\Headers\MyApp.h" />
     <ClInclude Include="Source\Headers\resource.h" />
     <ClInclude Include="Source\Headers\stdafx.h" />
