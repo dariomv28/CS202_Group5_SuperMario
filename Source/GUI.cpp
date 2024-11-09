@@ -8,12 +8,8 @@ namespace GUI
 	{
 		this->width = width;
 		this->height = height;
-<<<<<<< HEAD
 		this->buttonState = BTN_IDLE;	
-=======
->>>>>>> 2766e308e72c642b0b6038ddf1e1796353016ee8
 		this->font = font;
-		
 		this->textIdleColor = textIdleColor;
 		this->textHoverColor = textHoverColor;
 		this->textActiveColor = textActiveColor;
