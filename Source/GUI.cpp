@@ -2,10 +2,11 @@
 
 namespace GUI
 {
-	Button::Button(float x, float y, float width, float height,
+	Button::Button(bool stickyAllowed, float x, float y, float width, float height,
 		sf::Font* font, std::string text, unsigned charSize,
 		sf::Color textIdleColor, sf::Color textHoverColor, sf::Color textActiveColor)
 	{
+		this->stickyAllowed = stickyAllowed;
 		this->width = width;
 		this->height = height;
 		this->font = font;
@@ -48,12 +49,12 @@ namespace GUI
 		this->text.setString(text);
 	}
 
-	TextButton::TextButton(float x, float y, float width, float height,
+	TextButton::TextButton(bool stickyAllowed, float x, float y, float width, float height,
 		sf::Font* font, std::string text, unsigned character_size,
 		sf::Color text_idle_color, sf::Color text_hover_color, sf::Color text_active_color,
 		sf::Color idle_color, sf::Color hover_color, sf::Color active_color,
 		sf::Color outline_idle_color, sf::Color outline_hover_color)
-		: Button(x, y, width, height, font, text, character_size,
+		: Button(stickyAllowed, x, y, width, height, font, text, character_size,
 			text_idle_color, text_hover_color, text_active_color)
 	{
 		this->shape.setPosition({x,y});
@@ -81,18 +82,31 @@ namespace GUI
 
 		//Idle
 		this->buttonState = BTN_IDLE;
+		//Check if the users have unpressed
 
+		if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			this->unpressed = true;
 		//Hover
 		if (this->shape.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos)))
 		{
 			this->buttonState = BTN_HOVER;
 
 			//Pressed
-			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			if (this->stickyAllowed && sf::Mouse::isButtonPressed(sf::Mouse::Left))
 			{
 				this->buttonState = BTN_ACTIVE;
+				this->unpressed = false;
+			}
+			else if (!this->stickyAllowed && this->unpressed && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			{
+				this->buttonState = BTN_ACTIVE;
+				this->unpressed = false;
 			}
 		}
+
+		//Check if the users is still pressing
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			this->unpressed = false;
 
 		switch (this->buttonState)
 		{
@@ -125,11 +139,11 @@ namespace GUI
 		target->draw(this->text);
 	}
 
-	TextureButton::TextureButton(float x, float y, float width, float height,
+	TextureButton::TextureButton(bool stickyAllowed, float x, float y, float width, float height,
 		sf::Font* font, std::string text, unsigned charSize,
 		sf::Color text_idle_color, sf::Color text_hover_color, sf::Color text_active_color,
 		std::string idleDirec, std::string hoverDirec, std::string activeDirec) :
-		Button(x, y, width, height, font, text, charSize,
+		Button(stickyAllowed, x, y, width, height, font, text, charSize,
 			text_idle_color, text_hover_color, text_active_color)
 	{
 		this->idleTexture.loadFromFile(idleDirec);
@@ -151,19 +165,33 @@ namespace GUI
 
 		//Idle
 		this->buttonState = BTN_IDLE;
+		//Check if the users have unpressed
 
+		if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			this->unpressed = true;
 		//Hover
 		if (this->sprite.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos)))
 		{
 			this->buttonState = BTN_HOVER;
 
 			//Pressed
-			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			if (this->stickyAllowed && sf::Mouse::isButtonPressed(sf::Mouse::Left))
 			{
 				this->buttonState = BTN_ACTIVE;
+				this->unpressed = false;
+			}
+			else if (!this->stickyAllowed && this->unpressed && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			{
+				this->buttonState = BTN_ACTIVE;
+				this->unpressed = false;
 			}
 		}
 
+		//Check if the users is still pressing
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			this->unpressed = false;
+
+		//Set the texture
 		switch (this->buttonState)
 		{
 		case BTN_IDLE:

@@ -19,8 +19,11 @@ namespace GUI
 		float width;
 		float height;
 		short unsigned buttonState;
+
+		bool stickyAllowed;
+		bool unpressed;
 	public:
-		Button(float x, float y, float width, float height,
+		Button(bool stickyAllowed, float x, float y, float width, float height,
 			sf::Font* font, std::string text, unsigned charSize,
 			sf::Color textIdleColor, sf::Color textHoverColor, sf::Color textActiveColor);
 		~Button();
@@ -52,7 +55,7 @@ namespace GUI
 		sf::Color outlineActiveColor;
 
 	public:
-		TextButton(float x, float y, float width, float height,
+		TextButton(bool stickyAllowed, float x, float y, float width, float height,
 			sf::Font* font, std::string text, unsigned character_size,
 			sf::Color text_idle_color, sf::Color text_hover_color, sf::Color text_active_color,
 			sf::Color idle_color, sf::Color hover_color, sf::Color active_color,
@@ -73,7 +76,7 @@ namespace GUI
 
 		sf::Sprite sprite;
 	public:
-		TextureButton(float x, float y, float width, float height,
+		TextureButton(bool stickyAllowed, float x, float y, float width, float height,
 			sf::Font* font, std::string text, unsigned charSize,
 			sf::Color text_idle_color, sf::Color text_hover_color, sf::Color text_active_color,
 			std::string idleDirec, std::string hoverDirec, std::string activeDirec);
