@@ -91,11 +91,11 @@ void MyApp::update()
 	this->updateSFMLEvents();
 
 	if (!this->states.empty())
-	{
+	{	
 		this->states.top()->update(this->dt);
 		if (this->states.top()->getQuit())
 		{
-			this->states.top()->endState();	
+			// std::cout << this->states.size() << "\n";
 			delete this->states.top();
 			this->states.pop();
 		}

@@ -1,4 +1,5 @@
 #include "Headers/MainMenuState.h"
+#include "Headers/MenuLevelState.h"
 
 void MainMenuState::initVariables()
 {
@@ -32,7 +33,7 @@ void MainMenuState::initButtons()
 
 	buttons[BTN_CONTINUE] = new GUI::TextureButton(
 		x, y, btn_Width, btn_Height,
-		&font, "coninue", btn_CharSize,
+		&font, "continue", btn_CharSize,
 		sf::Color::Black, sf::Color::White, sf::Color::White,
 		"Source/Resources/texture/menu_button.png", 
 		"Source/Resources/texture/menu_button.png", 
@@ -102,7 +103,7 @@ void MainMenuState::updateGUI()
 
 	if (buttons[BTN_NEWGAME]->isPressed())
 	{
-		//this->states.push(new GameState(this->window));
+		this->states->push(new MenuLevelState(this->stateData));
 	}
 
 	if (buttons[BTN_LEADER]->isPressed())
