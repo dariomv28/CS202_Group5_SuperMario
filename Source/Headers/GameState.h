@@ -6,7 +6,7 @@ class GameState :
 private:
 
 public:
-    GameState(sf::RenderWindow* window);
+    GameState(StateData* stateData);
     virtual ~GameState();
 
     // Functions

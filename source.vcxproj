@@ -157,6 +157,9 @@
   <ItemGroup>
     <Text Include="Config\WindowIni.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Source\Resources\texture\menu_background.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

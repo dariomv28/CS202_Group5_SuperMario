@@ -1,6 +1,7 @@
 #include "Headers/GameState.h"
 
-GameState::GameState(sf::RenderWindow* window) : State(window) {
+GameState::GameState(StateData* stateData) : 
+	State(stateData) {
 
 }
 

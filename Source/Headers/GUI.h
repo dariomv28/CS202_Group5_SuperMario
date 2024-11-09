@@ -1,10 +1,10 @@
 #pragma once
 #include "stdafx.h"
 
-enum button_states { BTN_IDLE = 0, BTN_HOVER, BTN_ACTIVE };
-
 namespace GUI
 {
+	enum button_states { BTN_IDLE = 0, BTN_HOVER, BTN_ACTIVE };
+
 	//Abstract Button class
 	class Button
 	{
@@ -12,13 +12,17 @@ namespace GUI
 		sf::Font* font;
 		sf::Text text;
 
-		sf::Vector2f positon;
+		sf::Color textIdleColor;
+		sf::Color textHoverColor;
+		sf::Color textActiveColor;
+
 		float width;
 		float height;
 		short unsigned buttonState;
 	public:
 		Button(float x, float y, float width, float height,
-			sf::Font* font, std::string text = "", unsigned charSize = -1);
+			sf::Font* font, std::string text, unsigned charSize,
+			sf::Color textIdleColor, sf::Color textHoverColor, sf::Color textActiveColor);
 		~Button();
 
 		//Getters
@@ -29,7 +33,7 @@ namespace GUI
 		void setText(const std::string text);
 
 		virtual void render(sf::RenderTarget* target) = 0;
-		virtual void update(const sf::Vector2f mousePos) = 0;
+		virtual void update(const sf::Vector2i mousePos) = 0;
 	};
 
 	//Classic Button with RectangleShape and Text
@@ -39,26 +43,24 @@ namespace GUI
 
 		sf::RectangleShape shape;
 
-		sf::Color textIdleColor;
-		sf::Color textHoverColor;
-		sf::Color textActiveColor;
-
 		sf::Color idleColor;
 		sf::Color hoverColor;
+		sf::Color activeColor;
 
 		sf::Color outlineIdleColor;
 		sf::Color outlineHoverColor;
+		sf::Color outlineActiveColor;
 
 	public:
 		TextButton(float x, float y, float width, float height,
 			sf::Font* font, std::string text, unsigned character_size,
-			sf::Color text_idle_color, sf::Color text_hover_color,
-			sf::Color idle_color, sf::Color hover_color,
+			sf::Color text_idle_color, sf::Color text_hover_color, sf::Color text_active_color,
+			sf::Color idle_color, sf::Color hover_color, sf::Color active_color,
 			sf::Color outline_idle_color = sf::Color::Transparent, sf::Color outline_hover_color = sf::Color::Transparent);
 		~TextButton();
 
 		void render(sf::RenderTarget* target);
-		void update(const sf::Vector2f mousePos);
+		void update(const sf::Vector2i mousePos);
 	};
 
 	//Button with Texture and Text
@@ -67,15 +69,18 @@ namespace GUI
 	private:
 		sf::Texture idleTexture;
 		sf::Texture hoverTexture;
+		sf::Texture activeTexture;
 
 		sf::Sprite sprite;
 	public:
 		TextureButton(float x, float y, float width, float height,
-			std::string idleDirec, std::string hoverDirec);
+			sf::Font* font, std::string text, unsigned charSize,
+			sf::Color text_idle_color, sf::Color text_hover_color, sf::Color text_active_color,
+			std::string idleDirec, std::string hoverDirec, std::string activeDirec);
 		~TextureButton();
 
 		void render(sf::RenderTarget* target);
-		void update(const sf::Vector2f mousePos);
+		void update(const sf::Vector2i mousePos);
 	};
 };
 
