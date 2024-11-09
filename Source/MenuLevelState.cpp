@@ -17,7 +17,7 @@ void MenuLevelState::initButtons()
     float x = window->getSize().x / 2 - btn_Width / 2;
     float y = window->getSize().y / 2.2;
 
-    buttons[BTN_LEVEL1] = new GUI::TextureButton(
+    buttons[BTN_LEVEL1] = new GUI::TextureButton( false,
         x, y, btn_Width, btn_Height,
         &font, "Level 1", btn_CharSize,
         sf::Color::Black, sf::Color::White, sf::Color::White,
@@ -27,7 +27,7 @@ void MenuLevelState::initButtons()
     );
 
     y += btn_Height * 1.5;
-    buttons[BTN_LEVEL2] = new GUI::TextureButton(
+    buttons[BTN_LEVEL2] = new GUI::TextureButton(false,
         x, y, btn_Width, btn_Height,
         &font, "Level 2", btn_CharSize,
         sf::Color::Black, sf::Color::White, sf::Color::White,
@@ -37,7 +37,7 @@ void MenuLevelState::initButtons()
     );
 
     y += btn_Height * 1.5;
-    buttons[BTN_LEVEL3] = new GUI::TextureButton(
+    buttons[BTN_LEVEL3] = new GUI::TextureButton(false,
         x, y, btn_Width, btn_Height,
         &font, "Level 3", btn_CharSize,
         sf::Color::Black, sf::Color::White, sf::Color::White,
@@ -47,7 +47,7 @@ void MenuLevelState::initButtons()
     );
 
     y += btn_Height * 1.5;
-    buttons[BTN_BACK] = new GUI::TextureButton(
+    buttons[BTN_BACK] = new GUI::TextureButton(false,
         x, y, btn_Width, btn_Height,
         &font, "Back", btn_CharSize,
         sf::Color::Black, sf::Color::White, sf::Color::White,
