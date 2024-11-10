@@ -8,7 +8,7 @@ bool GameObject::checkCollision(const GameObject& other) {
 	if ((other.position.y == position.y - other.size.y || other.position.y == position.y + size.y) && other.position.x >= position.x - other.size.x && other.position.x <= position.x + other.size.x) {
 		return true;
 	}
-	else if ((other.position.y == position.y - other.size.y || other.position.y == position.y + size.y) && other.position.x >= position.x - other.size.x && other.position.x <= position.x + other.size.x) {
+	else if ((other.position.x == position.x - other.size.x || other.position.x == position.x + size.x) && other.position.y >= position.y - other.size.y && other.position.y <= position.y + other.size.y) {
 		return true;
 	}
 	return false;
