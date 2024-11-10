@@ -5,7 +5,13 @@ GameObject::GameObject(sf::Vector2f position, sf::Vector2f velocity, sf::Vector2
 GameObject::GameObject(const GameObject& other) : position(other.position), velocity(other.velocity), size(other.size) {}
 
 bool GameObject::checkCollision(const GameObject& other) {
-
+	if ((other.position.y == position.y - other.size.y || other.position.y == position.y + size.y) && other.position.x >= position.x - other.size.x && other.position.x <= position.x + other.size.x) {
+		return true;
+	}
+	else if ((other.position.y == position.y - other.size.y || other.position.y == position.y + size.y) && other.position.x >= position.x - other.size.x && other.position.x <= position.x + other.size.x) {
+		return true;
+	}
+	return false;
 }
 
 sf::Vector2f GameObject::getPosition() {
