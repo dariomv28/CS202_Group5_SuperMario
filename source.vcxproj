@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\GameObject.cpp" />
     <ClCompile Include="Source\PhysicsEngine.cpp" />
     <ClCompile Include="Source\AnimationComponent.cpp" />
@@ -149,6 +150,7 @@
     <ClCompile Include="Source\State.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Headers\Enemy.h" />
     <ClInclude Include="Source\Headers\GameObject.h" />
     <ClInclude Include="Source\Headers\PhysicsEngine.h" />
     <ClInclude Include="Source\Headers\AnimationComponent.h" />
