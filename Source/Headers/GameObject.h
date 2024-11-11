@@ -11,7 +11,7 @@ public:
 	GameObject() {};
 	GameObject(sf::Vector2f position, sf::Vector2f velocity, sf::Vector2f size);
 	GameObject(const GameObject& other);
-	virtual void move() = 0;
+	virtual void move();
 	bool checkCollision(const GameObject& other);
 	sf::Vector2f getPosition();
 	void setForce(sf::Vector2f force);
