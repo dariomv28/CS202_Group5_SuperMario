@@ -1,4 +1,5 @@
 #include "Headers/MenuLevelState.h"
+#include "Headers/GameState.h"
 
 MenuLevelState::MenuLevelState(StateData* stateData) : MainMenuState(stateData)
 {
@@ -66,15 +67,21 @@ void MenuLevelState::updateGUI()
 
     if (buttons[BTN_LEVEL1]->isPressed())
     {
-        // Logic to start Level 1
+        GameState* gameState = new GameState(this->stateData);
+        gameState->loadLevel(1);
+        this->states->push(gameState);
     }
     else if (buttons[BTN_LEVEL2]->isPressed())
     {
-        // Logic to start Level 2
+        GameState* gameState = new GameState(this->stateData);
+        gameState->loadLevel(2);
+        this->states->push(gameState);
     }
     else if (buttons[BTN_LEVEL3]->isPressed())
     {
-        // Logic to start Level 3
+        GameState* gameState = new GameState(this->stateData);
+        gameState->loadLevel(3);
+        this->states->push(gameState);
     }
     else if (buttons[BTN_BACK]->isPressed())
     {

@@ -1,31 +1,38 @@
 #include "Headers/GameState.h"
 
-GameState::GameState(StateData* stateData) : 
-	State(stateData) {
-
+GameState::GameState(StateData* stateData) : State(stateData), mapManager(nullptr) {
+    
 }
+
 
 GameState::~GameState() {
-
+    delete mapManager;
 }
 
-void GameState::endState() {
-	std::cout << "Ending GameState!" << "\n";
-}
+void GameState::loadLevel(int level)
+{
+    MapManager* mapManager = new MapManager();
 
-void GameState::updateKeyBinds(const float& dt) {
-	this->checkForQuit();
+    if (level == 1) {
+        mapManager->loadMap("Level1_Map");
+    }
+    else if (level == 2) {
+        mapManager->loadMap("Level2_Map"); 
+    }
+    else if (level == 3) {
+        mapManager->loadMap("Level3_Map"); 
+    }
+
+    this->mapManager = mapManager;
 }
 
 void GameState::update(const float& dt) {
-	// Update the state of GameState
-	this->updateKeyBinds(dt);
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-		std::cout << "A" << "\n";
-	}
+    mapManager->update(dt);
 }
 
 void GameState::render(sf::RenderTarget* target) {
-
+    if (target) {
+        mapManager->render();
+    }
 }
+

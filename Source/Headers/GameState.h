@@ -1,20 +1,16 @@
 #pragma once
 #include "State.h"
-class GameState :
-    public State
-{
-private:
+#include "MapManager.h"
 
+class GameState : public State {
+private:
+    MapManager* mapManager;
 public:
     GameState(StateData* stateData);
     virtual ~GameState();
 
-    // Functions
-
-    void endState();
-    
-    void updateKeyBinds(const float& dt);
-    void update(const float& dt);
-    void render(sf::RenderTarget* target = nullptr);
+    void loadLevel(int levelID);
+    void update(const float& dt) override;
+    void render(sf::RenderTarget* target = nullptr) override;
 };
 

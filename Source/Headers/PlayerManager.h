@@ -1,9 +1,9 @@
 #ifndef PLAYERMANAGER_H
 #define PLAYERMANAGER_H
-
+#include "GameObject.h"
 #include <string>
 
-class PlayerManager {
+class PlayerManager : public GameObject {
 public:
     PlayerManager();
     virtual ~PlayerManager();
