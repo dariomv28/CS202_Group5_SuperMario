@@ -1,3 +1,4 @@
+#pragma
 #ifndef ANIMATIONCOMPONENT_H
 #define ANIMATIONCOMPONENT_H
 

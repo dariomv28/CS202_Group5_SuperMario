@@ -1,6 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "GUI.h"
+#include "GameState.h"
 
 class State;
 
