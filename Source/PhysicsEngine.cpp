@@ -14,6 +14,7 @@ void PhysicsEngine::applyUserInput(GameObject& obj) {
 	obj.setForce(userInputForce);
 }
 
+
 void PhysicsEngine::updatePhysics() {
 
 }

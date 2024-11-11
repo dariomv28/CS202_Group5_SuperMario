@@ -10,7 +10,7 @@ private:
 
 
 public:
-	PhysicsEngine();
+	PhysicsEngine() {};
 	void applyGravity(GameObject& obj);
 	bool checkCollision(GameObject& obj1, GameObject& obj2);
 	void resolveCollision(GameObject& obj1, GameObject& obj2);

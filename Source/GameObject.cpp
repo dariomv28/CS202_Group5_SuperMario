@@ -18,6 +18,12 @@ sf::Vector2f GameObject::getPosition() {
 	return position;
 }
 
+
+void GameObject::exertForceOnOther(GameObject& other, sf::Vector2f force) {
+	other.setForce(force);
+}
+
+
 void GameObject::setForce(sf::Vector2f force) {
 	netForce.x += force.x;
 	netForce.y += force.y;

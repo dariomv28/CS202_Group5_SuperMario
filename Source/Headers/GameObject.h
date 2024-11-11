@@ -15,5 +15,6 @@ public:
 	bool checkCollision(const GameObject& other);
 	sf::Vector2f getPosition();
 	void setForce(sf::Vector2f force);
+	void exertForceOnOther(GameObject& other, sf::Vector2f force);
 };
 
