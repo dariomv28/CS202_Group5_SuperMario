@@ -17,3 +17,4 @@ public:
 	void setForce(sf::Vector2f force);
 };
 
+	
