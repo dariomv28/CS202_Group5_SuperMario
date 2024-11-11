@@ -6,8 +6,7 @@ class PhysicsEngine
 private:
 	std::list<GameObject> objects;
 	sf::Vector2f gravity;
-	sf::Vector2f horizontalUserForce;
-	sf::Vector2f verticalUserForce;
+	sf::Vector2f userInputForce;
 
 
 public:
@@ -16,6 +15,6 @@ public:
 	bool checkCollision(GameObject& obj1, GameObject& obj2);
 	void resolveCollision(GameObject& obj1, GameObject& obj2);
 	void updatePhysics();
-
+	void applyUserInput(GameObject& obj);
 };
 
