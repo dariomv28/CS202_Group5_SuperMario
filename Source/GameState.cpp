@@ -1,8 +1,9 @@
 #include "Headers/GameState.h"
 
-GameState::GameState(StateData* stateData) : State(stateData), mapManager(new MapManager()) {
+GameState::GameState(StateData* stateData) : State(stateData), mapManager(nullptr) {
     
 }
+
 
 GameState::~GameState() {
     delete mapManager;
@@ -31,6 +32,7 @@ void GameState::update(const float& dt) {
 
 void GameState::render(sf::RenderTarget* target) {
     if (target) {
-        mapManager->render(*target);
+        mapManager->render();
     }
 }
+

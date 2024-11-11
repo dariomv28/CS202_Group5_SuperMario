@@ -3,6 +3,7 @@
 #define MAPMANAGER_H
 
 #include "LevelManager.h"
+#include "stdafx.h"
 
 class MapManager {
 public:
