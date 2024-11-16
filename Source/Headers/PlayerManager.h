@@ -1,11 +1,12 @@
-#ifndef PLAYERMANAGER_H
-#define PLAYERMANAGER_H
-#include "GameObject.h"
-#include <string>
+#pragma once
+#include "LivingEntity.h"
 
-class PlayerManager : public GameObject {
+class PlayerManager : 
+    public LivingEntity {
 public:
-    PlayerManager();
+    PlayerManager(sf::Vector2f position, sf::Vector2f size, 
+		int health, int speed, PhysicsEngine* physicEngine);
+    PlayerManager() {};
     virtual ~PlayerManager();
 
     // Initialization function
@@ -16,4 +17,3 @@ protected:
     std::string m_imagePath;
 };
 
-#endif // PLAYERMANAGER_H
