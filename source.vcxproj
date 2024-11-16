@@ -133,6 +133,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\MovementComponent.cpp" />
+    <ClCompile Include="Source\LivingEntity.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\GameObject.cpp" />
     <ClCompile Include="Source\LevelManager.cpp" />
@@ -155,6 +157,8 @@
     <ClCompile Include="Source\State.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Headers\MovementComponent.h" />
+    <ClInclude Include="Source\Headers\LivingEntity.h" />
     <ClInclude Include="Source\Headers\Enemy.h" />
     <ClInclude Include="Source\Headers\GameObject.h" />
     <ClInclude Include="Source\Headers\LevelManager.h" />
