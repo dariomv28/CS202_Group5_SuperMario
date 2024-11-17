@@ -1,7 +1,13 @@
 #include "Headers/GameState.h"
 
 GameState::GameState(StateData* stateData) : State(stateData), mapManager(nullptr) {
+<<<<<<< HEAD
   
+=======
+    mario = new Mario();
+    mario->init();
+	//loadLevel(1);
+>>>>>>> 1e335b1f56b07937bb01e12648e34ed1eee3edc6
 }
 
 
@@ -31,8 +37,10 @@ void GameState::update(const float& dt) {
 }
 
 void GameState::render(sf::RenderTarget* target) {
-    if (target) {
-        mapManager->render();
-    }
+    if (!target) {
+		target = window;
+	}
+    mapManager->render();
+    mario->render(target);
 }
 
