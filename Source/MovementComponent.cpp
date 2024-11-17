@@ -1,70 +1,72 @@
 #include "Headers/MovementComponent.h"
 
 MovementComponent::MovementComponent() {
-	acceleration = 2;
-	maxVelocity = 10;
-	isMoveLeft = false;
-	isMoveRight = false;
-	isJump = false;
-	onGround = false;
-	hitCeiling = false;
-	velocity = sf::Vector2f(0, 0);
-
+    acceleration = 1000.0f;
+    maxVelocity = 500.0f;
+    isMoveLeft = false;
+    isMoveRight = false;
+    isJump = false;
+    onGround = true;       
+    hitCeiling = false;
+    velocity = sf::Vector2f(0.0f, 0.0f);
 }
 
 MovementComponent::MovementComponent(int a, int maxV) {
-	acceleration = a;
-	maxVelocity = maxV;
-	isMoveLeft = false;
-	isMoveRight = false;
-	isJump = false;
-	onGround = false;
-	hitCeiling = false;
-	velocity = sf::Vector2f(0, 0);
-
+    acceleration = static_cast<float>(a);
+    maxVelocity = static_cast<float>(maxV);
+    isMoveLeft = false;
+    isMoveRight = false;
+    isJump = false;
+    onGround = true;
+    hitCeiling = false;
+    velocity = sf::Vector2f(0.0f, 0.0f);
 }
 
 MovementComponent::~MovementComponent() {
-
 }
 
 void MovementComponent::moveLeft(const float& dt) {
-	if (!isMoveLeft) return;
-	velocity.x -= acceleration*dt;
-	if (velocity.x < -maxVelocity) {
-		velocity.x = -maxVelocity;
-	}
+    velocity.x -= acceleration * dt;
+    if (velocity.x < -maxVelocity) {
+        velocity.x = -maxVelocity;
+    }
+
 }
 
 void MovementComponent::moveRight(const float& dt) {
-	if (!isMoveRight) return;
-	velocity.x += acceleration*dt;
-	if (velocity.x > maxVelocity) {
-		velocity.x = maxVelocity;
-	}
+    velocity.x += acceleration * dt;
+    if (velocity.x > maxVelocity) {
+        velocity.x = maxVelocity;
+    }
+
 }
 
 void MovementComponent::jump(const float& dt) {
-	if (!onGround) {
-		isJump = false;
-	}
-	if (!isJump) return;
-	velocity.y -= maxVelocity;
+    if (onGround && isJump) {
+        velocity.y = -1.0f;  // Negative velocity for upward movement
+        onGround = false;
+        isJump = false;       // Reset jump flag
+    }
 }
 
 void MovementComponent::idle(const float& dt) {
-	if (isMoveLeft || isMoveRight) return;
-	if (velocity.x > 0) {
-		//Decelerate
-		velocity.x -= acceleration*dt;
-		if (velocity.x < 0) {
-			velocity.x = 0;
-		}
-	}
-	else if (velocity.x < 0) {
-		velocity.x += acceleration*dt;
-		if (velocity.x > 0) {
-			velocity.x = 0;
-		}
-	}
+    // Apply friction/deceleration
+    const float friction = 0.f;
+
+    if (!isMoveLeft && !isMoveRight) {
+        if (velocity.x > 0) {
+            velocity.x = std::max(0.0f, velocity.x - friction * dt);
+        }
+        else if (velocity.x < 0) {
+            velocity.x = std::min(0.0f, velocity.x + friction * dt);
+        }
+    }
+
+    if (!onGround) {
+        velocity.y += 1500.0f * dt; 
+    }
+
+    if (velocity.y > 1000.0f) {
+        velocity.y = 1000.0f;
+    }
 }

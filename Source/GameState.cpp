@@ -35,7 +35,7 @@ void GameState::loadLevel(int level) {
     if (level == 1) {
         mapManager->loadMap("Level1_Map");
         // You might want to set Mario's initial position based on the level
-        player->setPosition(400.f, 300.f);
+        player->setPosition(400.f, 500.f); // Assump that the ground is at 500.f (y)
     }
     else if (level == 2) {
         mapManager->loadMap("Level2_Map");

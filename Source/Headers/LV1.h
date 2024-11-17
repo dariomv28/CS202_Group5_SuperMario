@@ -11,7 +11,7 @@ public:
 
     void loadLevel() override;
     void update(float dt) override; 
-    void render() override; 
+    void render() override;
 };
 
 #endif // LV1_H
