@@ -5,6 +5,7 @@ Mario::Mario(sf::Vector2f position, sf::Vector2f size,
     int health, int speed, PhysicsEngine* physicEngine) :
     PlayerManager(position, size, health, speed, physicEngine), is_big(false), currentAction("IDLE") {
     animationComponent = nullptr;
+    movementComponent = new MovementComponent(800, 400);
     init();
 }
 Mario::Mario(): is_big(false), currentAction("IDLE") {
@@ -61,8 +62,9 @@ bool Mario::isBig() const {
 }
 
 void Mario::update(const float& dt) {
+    handleInput(dt);
+    move(dt);
     PlayerManager::update(dt);
-
     updateState();
 
     if (animationComponent) {
@@ -108,3 +110,44 @@ void Mario::updateAnimation(const float& dt) {
 void Mario::updateState() {
 
 }
+
+void Mario::handleInput(const float& dt) {
+    movementComponent->isMoveLeft = false;
+    movementComponent->isMoveRight = false;
+
+    // Handle horizontal movement
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+        movementComponent->isMoveLeft = true;
+        movementComponent->moveLeft(dt);
+        // Flip sprite to face left
+        entitySprite.setScale(-4.0f, 4.0f);
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+        movementComponent->isMoveRight = true;
+        movementComponent->moveRight(dt);
+        // Flip sprite to face right
+        entitySprite.setScale(4.0f, 4.0f);
+    }
+    else {
+        movementComponent->idle(dt);
+    }
+
+    // Handle jumping
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && movementComponent->onGround) {
+        movementComponent->isJump = true;
+        movementComponent->jump(dt);
+    }
+
+}
+
+void Mario::move(const float& dt) {
+    if (movementComponent) {
+        // Apply velocity to position
+        position.x += movementComponent->velocity.x * dt;
+        position.y += movementComponent->velocity.y * dt;
+
+        // Update sprite and hitbox positions
+        entitySprite.setPosition(position);
+        hitbox.setPosition(position);
+    }
+}   

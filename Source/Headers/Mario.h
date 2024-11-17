@@ -25,4 +25,7 @@ public:
     void render(sf::RenderTarget* target) override;
     void updateState();
     void updateAnimation(const float& dt);
+
+    void handleInput(const float& dt);
+    void move(const float& dt);
 };
