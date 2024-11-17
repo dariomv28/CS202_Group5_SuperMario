@@ -13,10 +13,12 @@ private:
 	std::vector<Enemy*> enemies;
 	PlayerManager* player;
 	sf::Vector2f gravity;
+	sf::Vector2f friction;
 
 	void updateMovement(LivingEntity* entity, const float& dt);
 	//void updateReact(LivingEntity* entity, const float& dt);
 	void applyGravity(LivingEntity* obj, const float& dt);
+	void applyFriction(LivingEntity* obj, const float& dt);
 	void resolveCollision(LivingEntity* obj);
 public:
 	PhysicsEngine();

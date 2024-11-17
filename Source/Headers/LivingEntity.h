@@ -25,8 +25,8 @@ public:
 	int getHealth() const;
 	void setSpeed(int speed);
 	int getSpeed() const;
-	void setIsDefeated(bool isDefeated);
-	bool getIsDefeated() const;
+	//void setIsDefeated(bool isDefeated);
+	//bool getIsDefeated() const;
 	void setOnGround(bool onGround);
 	bool getOnGround() const;
 	void setHitCeiling(bool hitCeiling);
@@ -42,7 +42,7 @@ public:
 
 	//Movement
 	void updateVelocity(const float& dt);
-	void move();
+	virtual void move(const float& dt);
 
 	virtual void update(const float& dt);
 	virtual void render(sf::RenderTarget* target);

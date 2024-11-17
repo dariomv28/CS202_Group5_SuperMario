@@ -17,7 +17,7 @@ public:
 	GameObject(sf::Vector2f position, sf::Vector2f size, PhysicsEngine* physicEngine);
 	virtual ~GameObject() {};
 	sf::Vector2f getPosition();
-
+	sf::Vector2f getSize();
 	//Check Collisions in 4 sides of the object
 	bool checkCollisionUp(GameObject& obj);
 	bool checkCollisionDown(GameObject& obj);

@@ -5,7 +5,8 @@
 #include "Headers/Enemy.h"
 
 PhysicsEngine::PhysicsEngine() {
-	gravity = sf::Vector2f(0, 10);
+	gravity = sf::Vector2f(0, 40000.0f);
+	friction = sf::Vector2f(50000.0f, 0);
 	player = nullptr;
 }
 
@@ -21,9 +22,31 @@ void PhysicsEngine::applyGravity(LivingEntity* entity, const float& dt) {
 	entity->setVelocity(entity->getVelocity() + gravity * dt);
 }
 
+void PhysicsEngine::applyFriction(LivingEntity* entity, const float& dt) {
+	if (entity->getVelocity().x > 0) {
+		entity->setVelocity(entity->getVelocity() - friction * dt);
+		if (entity->getVelocity().x < 0) {
+			entity->setVelocity(sf::Vector2f(0, entity->getVelocity().y));
+		}
+	}
+	else if (entity->getVelocity().x < 0) {
+		entity->setVelocity(entity->getVelocity() + friction * dt);
+		if (entity->getVelocity().x > 0) {
+			entity->setVelocity(sf::Vector2f(0, entity->getVelocity().y));
+		}
+	}
+}
+
 void PhysicsEngine::resolveCollision(LivingEntity* entity) {
 	// Resolve on the ground
 	entity->setOnGround(false);
+
+	//Remove later when there is a ground
+	if (entity->getPosition().y + entity->getSize().y >= 600) {
+		entity->setOnGround(true);
+		entity->setPosition(sf::Vector2f(entity->getPosition().x, 600 - entity->getSize().y));
+	}
+
 	if (entity->getVelocity().y > 0) {
 		for (auto obj : objects) {
 			if (entity->checkCollisionDown(*obj)) {
@@ -66,9 +89,11 @@ void PhysicsEngine::resolveCollision(LivingEntity* entity) {
 
 void PhysicsEngine::updateMovement(LivingEntity* entity, const float& dt) {
 	resolveCollision(entity);
-	if (!entity->getOnGround()) {
+	if (!entity->getOnGround()) //{
 		applyGravity(entity, dt);
-	}
+//	} else {
+		applyFriction(entity, dt);
+	//}
 }
 
 void PhysicsEngine::playerUpdatePhysics(const float& dt) {

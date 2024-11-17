@@ -1,4 +1,5 @@
 #include "Headers/LivingEntity.h"
+#include "Headers/PhysicsEngine.h"
 
 LivingEntity::LivingEntity()
 {
@@ -110,26 +111,25 @@ void LivingEntity::updateVelocity(const float& dt)
 	this->movementComponent->moveLeft(dt);
 	this->movementComponent->moveRight(dt);
 	this->movementComponent->jump(dt);
-	this->movementComponent->idle(dt);
 }
 
-void LivingEntity::move()
+void LivingEntity::move(const float& dt)
 {
-	this->entitySprite.move(this->movementComponent->velocity);
-	this->position = this->entitySprite.getPosition();
+	//std::cout << "Moved " << this->getVelocity().x << ' ' << this->getVelocity().y << '\n';
+	this->position += this->movementComponent->velocity;
+	this->entitySprite.setPosition(this->position);
 	this->hitbox.setPosition(this->position);
 
 }
 
 void LivingEntity::update(const float& dt) {
 	updateVelocity(dt);
-	move();
 
 	// Update animation if it exists
-	if (animationComponent) {
+	//if (animationComponent) {
 		// Update animation based on current state
-		updateAnimation(dt);
-	}
+	//	updateAnimation(dt);
+	//}
 }
 
 void LivingEntity::render(sf::RenderTarget* target) {

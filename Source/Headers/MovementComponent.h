@@ -21,5 +21,4 @@ public:
 	void moveLeft(const float& dt);
 	void moveRight(const float& dt);
 	void jump(const float& dt);
-	void idle(const float& dt);
 };

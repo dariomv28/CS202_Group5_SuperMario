@@ -26,47 +26,28 @@ MovementComponent::~MovementComponent() {
 }
 
 void MovementComponent::moveLeft(const float& dt) {
+    if (!isMoveLeft) return;
     velocity.x -= acceleration * dt;
     if (velocity.x < -maxVelocity) {
         velocity.x = -maxVelocity;
     }
-
+    isMoveLeft = false;
 }
 
 void MovementComponent::moveRight(const float& dt) {
+    if (!isMoveRight) return;
     velocity.x += acceleration * dt;
     if (velocity.x > maxVelocity) {
         velocity.x = maxVelocity;
     }
-
+    isMoveRight = false;
 }
 
 void MovementComponent::jump(const float& dt) {
+    if (!onGround) isJump = false;
     if (onGround && isJump) {
         velocity.y = -2.5f;  // Negative velocity for upward movement
         onGround = false;
         isJump = false;       // Reset jump flag
-    }
-}
-
-void MovementComponent::idle(const float& dt) {
-    // Apply friction/deceleration
-    const float friction = 12.f;
-
-    if (!isMoveLeft && !isMoveRight) {
-        if (velocity.x > 0) {
-            velocity.x = std::max(0.0f, velocity.x - friction * dt);
-        }
-        else if (velocity.x < 0) {
-            velocity.x = std::min(0.0f, velocity.x + friction * dt);
-        }
-    }
-
-    if (!onGround) {
-        velocity.y += 18000.0f * dt; 
-    }
-
-    if (velocity.y > 1000.0f) {
-        velocity.y = 1000.0f;
     }
 }

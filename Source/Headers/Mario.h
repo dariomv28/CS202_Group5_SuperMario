@@ -27,5 +27,4 @@ public:
     void updateAnimation(const float& dt);
 
     void handleInput(const float& dt);
-    void move(const float& dt);
 };

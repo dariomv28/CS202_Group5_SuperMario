@@ -5,7 +5,7 @@ Mario::Mario(sf::Vector2f position, sf::Vector2f size,
     int health, int speed, PhysicsEngine* physicEngine) :
     PlayerManager(position, size, health, speed, physicEngine), is_big(false), currentAction("IDLE") {
     animationComponent = nullptr;
-    movementComponent = new MovementComponent(100000, 80000);
+    movementComponent = new MovementComponent(100000, 3);
     init();
 }
 Mario::Mario(): is_big(false), currentAction("IDLE") {
@@ -61,9 +61,11 @@ bool Mario::isBig() const {
 
 void Mario::update(const float& dt) {
     handleInput(dt);
-    move(dt);
-    PlayerManager::update(dt);
+    //PlayerManager::update(dt);
+    physicsEngine->playerUpdatePhysics(dt);
+    updateVelocity(dt);
     updateState();
+    move(dt);
 
     if (animationComponent) {
         updateAnimation(dt);
@@ -112,16 +114,17 @@ void Mario::updateState() {
 void Mario::handleInput(const float& dt) {
     movementComponent->isMoveLeft = false;
     movementComponent->isMoveRight = false;
+    movementComponent->isJump = false;
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
         movementComponent->isMoveLeft = true;
-        movementComponent->moveLeft(dt);
+      //  movementComponent->moveLeft(dt);
 
         entitySprite.setScale(-4.0f, 4.0f);
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         movementComponent->isMoveRight = true;
-        movementComponent->moveRight(dt);
+      //  movementComponent->moveRight(dt);
         entitySprite.setScale(4.0f, 4.0f);
     }
 
@@ -131,26 +134,4 @@ void Mario::handleInput(const float& dt) {
         movementComponent->isJump = true;
     }
 
-    movementComponent->jump(dt);
-    movementComponent->idle(dt);
-}
-
-
-void Mario::move(const float& dt) {
-    if (movementComponent) {
-        position.x += movementComponent->velocity.x * dt;
-        position.y += movementComponent->velocity.y * dt;
-
-        std::cout << movementComponent->velocity.x << " " << position.x << "\n";
-
-        entitySprite.setPosition(position);
-
-        if (position.y > 500.0f) {
-            position.y = 500.0f;
-            movementComponent->velocity.y = 0.0f;
-            movementComponent->onGround = true;
-        }
-
-        hitbox.setPosition(position);
-    }
 }

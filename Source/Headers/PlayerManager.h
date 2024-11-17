@@ -11,6 +11,7 @@ public:
 
     // Initialization function
     virtual void init();
+    virtual void update(const float& dt) override;
     std::string getImagePath() const;
 
 protected:

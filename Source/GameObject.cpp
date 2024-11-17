@@ -13,6 +13,10 @@ sf::Vector2f GameObject::getPosition() {
 	return position;
 }
 
+sf::Vector2f GameObject::getSize() {
+	return size;
+}
+
 bool GameObject::checkCollisionUp(GameObject& obj) {
 	sf::FloatRect thisBounds = this->hitbox.getGlobalBounds();
 	sf::FloatRect objectBounds = obj.hitbox.getGlobalBounds();

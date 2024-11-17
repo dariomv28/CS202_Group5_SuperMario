@@ -12,7 +12,7 @@ GameState::GameState(StateData* stateData) : State(stateData), mapManager(nullpt
     physicsEngine.addPlayer(player);
 
     // Add Mario to game objects
-    gameObjects.push_back(player);
+  //  gameObjects.push_back(player);
 }
 
 
@@ -55,10 +55,11 @@ void GameState::update(const float& dt) {
     if (mapManager) {
         mapManager->update(dt);
     }
+    player->update(dt);
 
     // Update physics first
-    physicsEngine.playerUpdatePhysics(dt);
-    physicsEngine.objectUpdatePhysics(dt);
+   // physicsEngine.playerUpdatePhysics(dt);
+  //  physicsEngine.objectUpdatePhysics(dt);
 
     // Then update all game objects
     for (auto& object : gameObjects) {
@@ -74,6 +75,8 @@ void GameState::render(sf::RenderTarget* target) {
     if (mapManager) {
         mapManager->render();
     }
+
+    player->render(target);
 
     for (auto& object : gameObjects) {
         object->render(target);
