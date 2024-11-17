@@ -1,7 +1,7 @@
 #include "Headers/GameState.h"
 
 GameState::GameState(StateData* stateData) : State(stateData), mapManager(nullptr) {
-    
+  
 }
 
 
