@@ -186,6 +186,8 @@
     <Text Include="Config\WindowIni.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Source\Resources\texture\mario.jpg" />
+    <Image Include="Source\Resources\texture\Mario_Luigi.png" />
     <Image Include="Source\Resources\texture\menu_background.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

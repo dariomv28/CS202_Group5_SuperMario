@@ -1,5 +1,7 @@
 #include "Headers/GameObject.h"
 
+GameObject::GameObject() {};
+
 GameObject::GameObject(sf::Vector2f position, sf::Vector2f size, PhysicsEngine* physicsEngine) : 
 		position(position), size(size), physicsEngine(physicsEngine) {
 	hitbox.setSize(size);
@@ -113,6 +115,16 @@ bool GameObject::checkCollisionRight(GameObject& obj) {
 		return (overlapRight < overlapLeft && overlapRight < overlapTop && overlapRight < overlapBottom);
 	}
 	return false;
+}
+
+void GameObject::setPosition(const sf::Vector2f& pos) {
+	position = pos;
+	entitySprite.setPosition(pos);
+	hitbox.setPosition(pos);
+}
+
+void GameObject::setPosition(float x, float y) {
+	setPosition(sf::Vector2f(x, y));
 }
 
 

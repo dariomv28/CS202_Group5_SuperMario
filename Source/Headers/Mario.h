@@ -7,7 +7,6 @@ class PhysicsEngine;
 class Mario : public PlayerManager {
 private:
     std::string m_name;
-
     bool is_big;
     std::string currentAction;
 public:
@@ -23,5 +22,7 @@ public:
     bool isBig() const;
 
     void update(const float& dt) override;
-    void render(sf::RenderTarget* target);
+    void render(sf::RenderTarget* target) override;
+    void updateState();
+    void updateAnimation(const float& dt);
 };

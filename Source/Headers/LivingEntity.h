@@ -10,17 +10,16 @@ protected:
     int health;
 	int speed;
 	
-	sf::Texture entityTexture;
-	sf::Sprite entitySprite;
-	
 	AnimationComponent* animationComponent;
 	MovementComponent* movementComponent;
+
+	virtual void updateAnimation(const float& dt) = 0;
 public:
 	LivingEntity();
 	LivingEntity(sf::Vector2f position, sf::Vector2f size, 
 				int health, int speed,	PhysicsEngine* physicEngine);
 	virtual ~LivingEntity();
-
+		
 	//Setters and Getters
 	void setHealth(int health);
 	int getHealth() const;
@@ -45,7 +44,7 @@ public:
 	void updateVelocity(const float& dt);
 	void move();
 
-	virtual void update(const float& dt) = 0;
-	virtual void render(sf::RenderTarget* target) = 0;
+	virtual void update(const float& dt);
+	virtual void render(sf::RenderTarget* target);
 };
 

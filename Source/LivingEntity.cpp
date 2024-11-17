@@ -120,3 +120,20 @@ void LivingEntity::move()
 	this->hitbox.setPosition(this->position);
 
 }
+
+void LivingEntity::update(const float& dt) {
+	updateVelocity(dt);
+	move();
+
+	// Update animation if it exists
+	if (animationComponent) {
+		// Update animation based on current state
+		updateAnimation(dt);
+	}
+}
+
+void LivingEntity::render(sf::RenderTarget* target) {
+	if (target) {
+		target->draw(entitySprite);
+	}
+}

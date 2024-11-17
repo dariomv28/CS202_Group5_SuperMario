@@ -8,10 +8,12 @@ class GameObject
 protected:
 	sf::Vector2f position;
 	sf::Vector2f size;
+	sf::Sprite entitySprite;
+	sf::Texture entityTexture;
+	PhysicsEngine* physicsEngine;
 	sf::RectangleShape hitbox;
-	PhysicsEngine* physicsEngine; //Apply Physics to each object. Act as a mediator
 public:
-	GameObject() {};
+	GameObject();
 	GameObject(sf::Vector2f position, sf::Vector2f size, PhysicsEngine* physicEngine);
 	virtual ~GameObject() {};
 	sf::Vector2f getPosition();
@@ -24,6 +26,9 @@ public:
 
 	virtual void update(const float& dt) = 0;
 	virtual void render(sf::RenderTarget* target) = 0;
+
+	virtual void setPosition(float x, float y);
+	virtual void setPosition(const sf::Vector2f& pos);
 };
 
 	
