@@ -1,8 +1,8 @@
 #include "Headers/MovementComponent.h"
 
 MovementComponent::MovementComponent() {
-    acceleration = 1000.0f;
-    maxVelocity = 500.0f;
+    acceleration = 100000.0f;
+    maxVelocity = 80000.0f;
     isMoveLeft = false;
     isMoveRight = false;
     isJump = false;
@@ -43,7 +43,7 @@ void MovementComponent::moveRight(const float& dt) {
 
 void MovementComponent::jump(const float& dt) {
     if (onGround && isJump) {
-        velocity.y = -1.0f;  // Negative velocity for upward movement
+        velocity.y = -2.5f;  // Negative velocity for upward movement
         onGround = false;
         isJump = false;       // Reset jump flag
     }
@@ -51,7 +51,7 @@ void MovementComponent::jump(const float& dt) {
 
 void MovementComponent::idle(const float& dt) {
     // Apply friction/deceleration
-    const float friction = 0.f;
+    const float friction = 12.f;
 
     if (!isMoveLeft && !isMoveRight) {
         if (velocity.x > 0) {
@@ -63,7 +63,7 @@ void MovementComponent::idle(const float& dt) {
     }
 
     if (!onGround) {
-        velocity.y += 1500.0f * dt; 
+        velocity.y += 18000.0f * dt; 
     }
 
     if (velocity.y > 1000.0f) {

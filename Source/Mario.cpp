@@ -5,7 +5,7 @@ Mario::Mario(sf::Vector2f position, sf::Vector2f size,
     int health, int speed, PhysicsEngine* physicEngine) :
     PlayerManager(position, size, health, speed, physicEngine), is_big(false), currentAction("IDLE") {
     animationComponent = nullptr;
-    movementComponent = new MovementComponent(1000, 500);
+    movementComponent = new MovementComponent(100000, 80000);
     init();
 }
 Mario::Mario(): is_big(false), currentAction("IDLE") {
@@ -126,7 +126,8 @@ void Mario::handleInput(const float& dt) {
     }
 
     // Handle jumping
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)
+        || sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
         movementComponent->isJump = true;
     }
 
