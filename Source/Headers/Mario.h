@@ -1,4 +1,5 @@
 #pragma once
+
 #include "PlayerManager.h"
 #include "AnimationComponent.h"
 
@@ -9,9 +10,11 @@ private:
     std::string m_name;
     bool is_big;
     std::string currentAction;
+    bool isAnimationInProgress;
+    std::unordered_map<std::string, sf::IntRect> spritesSheet;
+
 public:
-    Mario(sf::Vector2f position, sf::Vector2f size, 
-        int health, int speed, PhysicsEngine* physicEngine);
+    Mario(sf::Vector2f position, sf::Vector2f size, int health, int speed, PhysicsEngine* physicEngine);
     Mario();
     ~Mario();
 
@@ -19,12 +22,10 @@ public:
     void initAnimations();
 
     void setBig(bool big);
-    bool isBig() const;
+    bool getIsBig() const;
 
     void update(const float& dt) override;
     void render(sf::RenderTarget* target) override;
-    void updateState();
-    void updateAnimation(const float& dt);
-
     void handleInput(const float& dt);
+    void updateAnimation(const float& dt);
 };
