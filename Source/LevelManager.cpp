@@ -37,10 +37,11 @@ void LevelManager::add_brick_particles(const unsigned short i_x, const unsigned 
 	//Adding brick particles.
 	//I was too lazy to add randomness.
 	//It still looks cool, in my opinion.
-	brick_particles.push_back(Object(i_x, i_y, -0.25f * BRICK_PARTICLE_SPEED, -1.5f * BRICK_PARTICLE_SPEED));
+	//cerr << "!" << endl;
+	/*brick_particles.push_back(Object(i_x, i_y, -0.25f * BRICK_PARTICLE_SPEED, -1.5f * BRICK_PARTICLE_SPEED));
 	brick_particles.push_back(Object(i_x + 0.5f * CELL_SIZE, i_y, 0.25f * BRICK_PARTICLE_SPEED, -1.5f * BRICK_PARTICLE_SPEED));
 	brick_particles.push_back(Object(i_x, i_y + 0.5f * CELL_SIZE, -0.5f * BRICK_PARTICLE_SPEED, -BRICK_PARTICLE_SPEED));
-	brick_particles.push_back(Object(i_x + 0.5f * CELL_SIZE, i_y + 0.5f * CELL_SIZE, 0.5f * BRICK_PARTICLE_SPEED, -BRICK_PARTICLE_SPEED));
+	brick_particles.push_back(Object(i_x + 0.5f * CELL_SIZE, i_y + 0.5f * CELL_SIZE, 0.5f * BRICK_PARTICLE_SPEED, -BRICK_PARTICLE_SPEED));*/
 }
 
 void LevelManager::add_question_block_coin(const unsigned short i_x, const unsigned short i_y)
@@ -182,7 +183,9 @@ void LevelManager::draw_map(const bool i_draw_background, const bool i_undergrou
 						}
 					}
 
-					cell_sprite.setTextureRect(sf::IntRect(CELL_SIZE * sprite_x, CELL_SIZE * sprite_y, CELL_SIZE, CELL_SIZE));
+					cell_sprite.setTextureRect(sf::IntRect((CELL_SIZE / 4) * sprite_x, (CELL_SIZE / 4) * sprite_y, CELL_SIZE  / 4, CELL_SIZE / 4));
+
+					cell_sprite.setScale(4.f, 4.f);
 
 					i_window.draw(cell_sprite);
 				}
@@ -283,8 +286,8 @@ void LevelManager::draw_map(const bool i_draw_background, const bool i_undergrou
 						}
 					}
 
-					cell_sprite.setTextureRect(sf::IntRect(CELL_SIZE * sprite_x, CELL_SIZE * sprite_y, CELL_SIZE, CELL_SIZE));
-
+					cell_sprite.setTextureRect(sf::IntRect((CELL_SIZE / 4) * sprite_x, (CELL_SIZE / 4) * sprite_y, CELL_SIZE / 4, CELL_SIZE / 4));
+					cell_sprite.setScale(4.f, 4.f);
 					i_window.draw(cell_sprite);
 				}
 			}
@@ -294,12 +297,13 @@ void LevelManager::draw_map(const bool i_draw_background, const bool i_undergrou
 	//Drawing brick particles.
 	if (0 == i_draw_background)
 	{
-		for (const Object& brick_particle : brick_particles)
-		{
-			cell_sprite.setPosition(brick_particle.x, brick_particle.y);
-			cell_sprite.setTextureRect(sf::IntRect(0.25f * CELL_SIZE, CELL_SIZE * (0.25f + 2 * i_underground), 0.5f * CELL_SIZE, 0.5f * CELL_SIZE));
-			i_window.draw(cell_sprite);
-		}
+		//for (const Object& brick_particle : brick_particles)
+		//{
+		//	//cerr << "!" << endl;
+		//	cell_sprite.setPosition(brick_particle.x, brick_particle.y);
+		//	cell_sprite.setTextureRect(sf::IntRect(0.25f * CELL_SIZE, CELL_SIZE * (0.25f + 2 * i_underground), 0.5f * CELL_SIZE, 0.5f * CELL_SIZE));
+		//	i_window.draw(cell_sprite);
+		//}
 	}
 }
 

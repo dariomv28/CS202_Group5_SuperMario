@@ -27,8 +27,10 @@ void LV1::update(float dt) {
 
 void LV1::render() {
 	//this->draw_map(true, false, 0, *window);
-	//this->draw_map(true, false, 0, *window);
-	this->draw_map(false, true, view_x, *window);
+	this->draw_map(true, false , view_x, *window);
+	//this->draw_map(false, true, 0, *window);
+	
+	this->draw_map(false, false, view_x, *window);
 }
 
 

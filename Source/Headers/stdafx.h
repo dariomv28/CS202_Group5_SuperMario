@@ -53,7 +53,7 @@ constexpr float MARIO_WALK_SPEED = 2;
 constexpr float MAX_VERTICAL_SPEED = 8;
 constexpr float MUSHROOM_SPEED = 1;
 
-constexpr unsigned char CELL_SIZE = 16;
+constexpr unsigned char CELL_SIZE = 64;
 //We use this constant when Mario is growing or when he's invincible.
 constexpr unsigned char MARIO_BLINKING = 4;
 //Lemme explain:
