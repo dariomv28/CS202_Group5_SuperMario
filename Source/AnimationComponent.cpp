@@ -1,46 +1,51 @@
 #include "Headers/AnimationComponent.h"
+#include <iostream>
+
+AnimationComponent::AnimationComponent(sf::Sprite& sprite)
+    : sprite(sprite), currentFrameIndex(0), animationSpeed(0.1f), elapsedTime(0) {}
 
 
-AnimationComponent::AnimationComponent(sf::Sprite& sprite, sf::Texture& texture_sheet)
-    : sprite(sprite), textureSheet(texture_sheet) {}
-
-AnimationComponent::~AnimationComponent() {
-    for (auto& anim : this->animations)
-        delete anim.second;
-}
-
-
-AnimationComponent::Animation::Animation(sf::Sprite& sprite, sf::Texture& texture_sheet, float animation_timer,
-    int startX, int startY, int framesX, int framesY, int width, int height)
-    : sprite(sprite), textureSheet(texture_sheet), animationTimer(animation_timer), timer(0.f), width(width), height(height), currentFrame(0) {
-    for (int x = startX; x <= framesX; ++x) {
-        frames.push_back(sf::IntRect(x * width, startY * height, width, height));
+void AnimationComponent::setAnimation(const std::string& animationName, const std::unordered_map<std::string, sf::IntRect>& spritesSheet, float speed) {
+    // Si l'animation demandée est déjà en cours, ne rien faire
+    if (currentAnimationName == animationName) {
+        return;
     }
-    sprite.setTexture(texture_sheet);
-    sprite.setTextureRect(frames[0]);
-}
 
-void AnimationComponent::Animation::play(const float& dt) {
-    timer += dt;
-    if (timer >= animationTimer) {
-        timer = 0.f;
-        currentFrame = (currentFrame + 1) % frames.size();
-        sprite.setTextureRect(frames[currentFrame]);
+    // Réinitialise l'animation actuelle
+    currentAnimationFrames.clear();
+    currentAnimationName = animationName;
+    currentFrameIndex = 0;
+    animationSpeed = speed;
+    elapsedTime = 0.f;
+
+    // Recherche toutes les frames correspondantes dans spritesSheet
+    for (const auto& pair : spritesSheet) {
+        if (pair.first.find(animationName) != std::string::npos) {
+            currentAnimationFrames.push_back(pair.second);
+        }
+    }
+
+    // Applique la première frame immédiatement
+    if (!currentAnimationFrames.empty()) {
+        sprite.setTextureRect(currentAnimationFrames[0]);
+    }
+    else {
+        std::cerr << "Animation '" << animationName << "' not found in spritesSheet!" << std::endl;
     }
 }
 
-void AnimationComponent::Animation::reset() {
-    timer = 0.f;
-    currentFrame = 0;
+
+
+void AnimationComponent::update(float deltaTime) {
+    if (currentAnimationFrames.empty())
+        return;
+
+    elapsedTime += deltaTime;
+    if (elapsedTime >= animationSpeed) {
+        elapsedTime = 0;
+
+        currentFrameIndex = (currentFrameIndex + 1) % currentAnimationFrames.size();
+        sprite.setTextureRect(currentAnimationFrames[currentFrameIndex]);
+    }
 }
 
-
-void AnimationComponent::addAnimation(const std::string& key, float animation_timer, int startX, int startY, int framesX, int framesY, int width, int height) {
-    this->animations[key] = new Animation(this->sprite, this->textureSheet, animation_timer, startX, startY, framesX, framesY, width, height);
-}
-
-
-void AnimationComponent::play(const std::string& key, const float& dt) {
-    if (this->animations.count(key))
-        this->animations[key]->play(dt);
-}
