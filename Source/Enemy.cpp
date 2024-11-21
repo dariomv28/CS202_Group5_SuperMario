@@ -11,3 +11,6 @@ void Enemy::update() {
 
 }
 
+Enemy::Enemy() {
+
+}

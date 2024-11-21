@@ -6,7 +6,7 @@
 
 class LV1 : public LevelManager {
 public:
-    LV1();
+    LV1(Mario* &Player, vector<Enemy*>& Enemies, sf::RenderWindow *window);
     ~LV1();
 
     void loadLevel() override;

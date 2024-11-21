@@ -4,21 +4,37 @@
 #include "Headers/LV3.h"
 #include <iostream>
 
-MapManager::MapManager() : levelManager(nullptr) {
-    // Constructor
+#include <array>
+#include <chrono>
+#include <cmath>
+//#include <SFML/Graphics.hpp>
+//#include "Headers/stdafx.h"
+using namespace std;
+//#include "Headers/Animation.hpp"
+//#include "Headers/Global.hpp"
+
+MapManager::MapManager() : levelManager(nullptr) 
+{
+
 }
+
+
+
+//MapManager::MapManager() : levelManager(nullptr) {
+//    // Constructor
+//}
 
 MapManager::~MapManager() {
     // Destructor
     delete levelManager;
 }
 
-void MapManager::loadMap(const std::string& mapName)
+void MapManager::loadMap(const std::string& mapName, Mario* &Player, vector<Enemy*>& Enemies, sf::RenderWindow *window)
 {
     std::cout << "Loading map: " << mapName << std::endl;
 
     if (mapName == "Level1_Map") {
-        levelManager = new LV1();  
+        levelManager = new LV1(Player, Enemies, window);
     }
     else if (mapName == "Level2_Map") {
         levelManager = new LV2();  

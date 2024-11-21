@@ -14,6 +14,8 @@ public:
     virtual void update(const float& dt) override;
     std::string getImagePath() const;
 
+	void Move(const float& dt, const float dir_x, const float dir_y);
+
 protected:
     std::string m_imagePath;
 };
