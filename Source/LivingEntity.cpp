@@ -119,6 +119,7 @@ void LivingEntity::move(const float& dt)
 	this->position += this->movementComponent->velocity;
 	this->entitySprite.setPosition(this->position);
 	this->hitbox.setPosition(this->position);
+	
 
 }
 
