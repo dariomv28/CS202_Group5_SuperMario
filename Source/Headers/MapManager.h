@@ -13,7 +13,7 @@ public:
     ~MapManager();
 
     void loadMap(const std::string& mapName, Mario* &Player, vector<Enemy*>& Enemies, sf::RenderWindow *window);  
-    void update(float dt); 
+    void update(float dt, Mario* Player); 
     void render();  
 
     void setLevelManager(LevelManager* levelManager); 

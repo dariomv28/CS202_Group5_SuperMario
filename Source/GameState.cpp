@@ -63,7 +63,8 @@ void sleepOneSecond() {
 
 void GameState::update(const float& dt) {
     if (mapManager) {
-        mapManager->update(dt);
+        //mapManager->update(dt);
+		mapManager->update(dt, player);
     }
     player->update(dt);
        

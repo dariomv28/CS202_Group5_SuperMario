@@ -18,12 +18,19 @@ void LV1::loadLevel() {
     //convert_sketch(0, 0,i_enemies, sf::Color & i_background_color, LevelManager & i_level_manager, Mario & i_mario)
 }
 
-void LV1::update(float dt) {
-	View.move(2, 0);
-	view_x += 2;
-	window->setView(View);
+//void LV1::update(float dt) {
+//	/*View.move(2, 0);
+//	view_x += 2;*/
+//	window->setView(View);
+//
+//}
 
+void LV1::update(Mario*& Player) {
+	View.move(Player->getVelocity().x, 0);
+	view_x += Player->getVelocity().x;
+	window->setView(View);
 }
+
 
 void LV1::render() {
 	//this->draw_map(true, false, 0, *window);

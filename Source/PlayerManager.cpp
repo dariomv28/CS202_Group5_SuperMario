@@ -18,6 +18,10 @@ void PlayerManager::init() {
 void PlayerManager::update(const float& dt) {
 }
 
+void PlayerManager::render(sf::RenderTarget* target) {
+}
+
+
 std::string PlayerManager::getImagePath() const {
     return m_imagePath;
 }

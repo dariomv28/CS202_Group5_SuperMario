@@ -5,7 +5,7 @@
 #include "Headers/Enemy.h"
 
 PhysicsEngine::PhysicsEngine() {
-	gravity = sf::Vector2f(0, 40000.0f);
+	gravity = sf::Vector2f(0, 80000.0f);
 	friction = sf::Vector2f(50000.0f, 0);
 	player = nullptr;
 }
@@ -42,9 +42,9 @@ void PhysicsEngine::resolveCollision(LivingEntity* entity) {
 	entity->setOnGround(false);
 
 	//Remove later when there is a ground
-	if (entity->getPosition().y + entity->getSize().y >= 600) {
+	if (entity->getPosition().y + entity->getSize().y >= 800) {
 		entity->setOnGround(true);
-		entity->setPosition(sf::Vector2f(entity->getPosition().x, 600 - entity->getSize().y));
+		entity->setPosition(sf::Vector2f(entity->getPosition().x, 800 - entity->getSize().y));
 	}
 
 	if (entity->getVelocity().y > 0) {

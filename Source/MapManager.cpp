@@ -48,9 +48,10 @@ void MapManager::loadMap(const std::string& mapName, Mario* &Player, vector<Enem
     }
 }
 
-void MapManager::update(float dt) {
+void MapManager::update(float dt, Mario* Player) {
     if (levelManager) {
-        levelManager->update(dt);
+        //levelManager->update(dt);
+        levelManager->update(Player);
     }
 }
 

@@ -122,6 +122,8 @@ void LivingEntity::move(const float& dt)
 
 }
 
+
+
 void LivingEntity::update(const float& dt) {
 	updateVelocity(dt);
 

@@ -46,7 +46,7 @@ void MovementComponent::moveRight(const float& dt) {
 void MovementComponent::jump(const float& dt) {
     if (!onGround) isJump = false;
     if (onGround && isJump) {
-        velocity.y = -2.5f;  // Negative velocity for upward movement
+        velocity.y = -5.0f;  // Negative velocity for upward movement
         onGround = false;
         isJump = false;       // Reset jump flag
     }

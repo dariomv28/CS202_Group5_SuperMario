@@ -10,7 +10,8 @@ public:
     ~LV1();
 
     void loadLevel() override;
-    void update(float dt) override; 
+    //void update(float dt) override; 
+	void update(Mario*& Player) override;
     void render() override;
 };
 

@@ -13,6 +13,10 @@ void LevelManager::update(float dt) {
   
 }
 
+void LevelManager::update(Mario*& Player) {
+
+}
+
 void LevelManager::render() {
    
 }
@@ -323,36 +327,36 @@ void LevelManager::update_map_sketch(const unsigned char i_current_level)
 	map_sketch.loadFromFile("Source/Resources/texture/LevelSketch" + std::to_string(static_cast<unsigned short>(i_current_level)) + ".png");
 }
 
-void LevelManager::update()
-{
-	for (Object& question_block_coin : question_block_coins)
-	{
-		question_block_coin.vertical_speed += GRAVITY;
-
-		question_block_coin.y += question_block_coin.vertical_speed;
-	}
-
-	for (Object& brick_particle : brick_particles)
-	{
-		brick_particle.vertical_speed += GRAVITY;
-
-		brick_particle.x += brick_particle.horizontal_speed;
-		brick_particle.y += brick_particle.vertical_speed;
-	}
-
-	brick_particles.erase(remove_if(brick_particles.begin(), brick_particles.end(), [](const Object& i_brick_particle)
-		{
-			return SCREEN_HEIGHT <= i_brick_particle.y;
-		}), brick_particles.end());
-
-	question_block_coins.erase(remove_if(question_block_coins.begin(), question_block_coins.end(), [](const Object& i_question_block_coin)
-		{
-			return 0 <= i_question_block_coin.vertical_speed;
-		}), question_block_coins.end());
-
-	//coin_animation.update();
-	//question_block_animation.update();
-}
+//void LevelManager::update()
+//{
+//	for (Object& question_block_coin : question_block_coins)
+//	{
+//		question_block_coin.vertical_speed += GRAVITY;
+//
+//		question_block_coin.y += question_block_coin.vertical_speed;
+//	}
+//
+//	for (Object& brick_particle : brick_particles)
+//	{
+//		brick_particle.vertical_speed += GRAVITY;
+//
+//		brick_particle.x += brick_particle.horizontal_speed;
+//		brick_particle.y += brick_particle.vertical_speed;
+//	}
+//
+//	brick_particles.erase(remove_if(brick_particles.begin(), brick_particles.end(), [](const Object& i_brick_particle)
+//		{
+//			return SCREEN_HEIGHT <= i_brick_particle.y;
+//		}), brick_particles.end());
+//
+//	question_block_coins.erase(remove_if(question_block_coins.begin(), question_block_coins.end(), [](const Object& i_question_block_coin)
+//		{
+//			return 0 <= i_question_block_coin.vertical_speed;
+//		}), question_block_coins.end());
+//
+//	//coin_animation.update();
+//	//question_block_animation.update();
+//}
 
 sf::Color LevelManager::get_map_sketch_pixel(const unsigned short i_x, const unsigned short i_y) const {
 	/*if (i_x >= map_sketch.getSize().x || i_y >= map_sketch.getSize().y) {
