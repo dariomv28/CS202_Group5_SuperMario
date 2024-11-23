@@ -15,15 +15,27 @@ LV1::~LV1() {
 }
 
 void LV1::loadLevel() {
-    //convert_sketch(0, 0,i_enemies, sf::Color & i_background_color, LevelManager & i_level_manager, Mario & i_mario)
+    //convert_sketch(0, 0,i_enemies, sf::Color & i_background_color, LevelManager & i_level_manager, Madrio & i_mario)
 }
 
+//<<<<<<< HEAD
+////void LV1::update(float dt) {
+////	/*View.move(2, 0);
+////	view_x += 2;*/
+////	window->setView(View);
+////
+////}
+//=======
 //void LV1::update(float dt) {
-//	/*View.move(2, 0);
-//	view_x += 2;*/
+//	
+//	 View.move(2, 0);
+//	view_x += 2;
 //	window->setView(View);
-//
-//}
+//	
+//	
+//	
+//	
+//>>>>>>> 914c855cb8edf940258937002a1af5357cad408e
 
 void LV1::update(Mario*& Player) {
 	View.move(Player->getVelocity().x, 0);

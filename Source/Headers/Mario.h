@@ -44,6 +44,7 @@ private:
     bool isAnimationInProgress;
     std::unordered_map<std::string, sf::IntRect> spritesSheet;
 
+
 public:
     Mario(sf::Vector2f position, sf::Vector2f size, int health, int speed, PhysicsEngine* physicEngine);
     Mario();
