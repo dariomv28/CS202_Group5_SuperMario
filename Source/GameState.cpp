@@ -37,6 +37,9 @@ void GameState::loadLevel(int level) {
     mapManager = new MapManager();
     if (level == 1) {
         mapManager->loadMap("Level1_Map", player, Enemies, Blocks, window);
+        for (int i = 0; i < Blocks.size(); i++) {
+			physicsEngine.addBlock(Blocks[i]);
+		}
     }
     else if (level == 2) {
         //mapManager->loadMap("Level2_Map");
@@ -70,6 +73,7 @@ void GameState::update(const float& dt) {
     for (auto& object : gameObjects) {
         object->update(dt);
     }
+    cerr << player->getOnGround() << " " << player->getVelocity().x << " " << player->getVelocity().y << endl;
 }
   
 

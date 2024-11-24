@@ -1,7 +1,6 @@
 #pragma once
 #include "stdafx.h"	
 
-class GameObject;
 class PlayerManager;
 class LivingEntity;
 class Enemy;

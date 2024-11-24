@@ -1,6 +1,6 @@
 #include "Headers/PhysicsEngine.h"
 #include "Headers/PlayerManager.h"
-#include "Headers/GameObject.h"
+#include "Headers/Block.h"
 #include "Headers/LivingEntity.h"
 #include "Headers/Enemy.h"
 
@@ -46,21 +46,29 @@ void PhysicsEngine::resolveCollision(LivingEntity* entity) {
 	entity->setOnGround(false);
 
 	//Remove later when there is a ground
-	if (entity->getPosition().y + entity->getSize().y >= 828) {
-		entity->setOnGround(true);
-		entity->setPosition(sf::Vector2f(entity->getPosition().x, 828 - entity->getSize().y));
-		entity->movementComponent->resetJumps();  // Reset jumps when landing
-	}
-
-	if (entity->getVelocity().y > 0) {
+	//if (entity->getPosition().y + entity->getSize().y >= 828) {
+	//	entity->setOnGround(true);
+	//	entity->setPosition(sf::Vector2f(entity->getPosition().x, 828 - entity->getSize().y));
+	//	entity->movementComponent->resetJumps();  // Reset jumps when landing
+	//}
+	std::cout << "BLOCK " << blocks.size() << std::endl;
+	//if (entity->getVelocity().y >= 0) {
 		for (auto obj : blocks) {
 			if (entity->checkCollisionDown(obj)) {
 				entity->setOnGround(true);
+				std::cout << "IT IS ON GROUNDDDDD\n";
+				std::cout << "IT IS ON GROUNDDDDD\n";
+				std::cout << "IT IS ON GROUNDDDDD\n";
+				std::cout << "IT IS ON GROUNDDDDD\n";
+				std::cout << "IT IS ON GROUNDDDDD\n";
+				std::cout << "IT IS ON GROUNDDDDD\n";
+				entity->setVelocity(sf::Vector2f(entity->getVelocity().x, 0));
+				entity->setPosition(sf::Vector2f(entity->getPosition().x, obj->getPosition().y -32));
 				entity->movementComponent->resetJumps();  // Reset jumps when landing on objects
 				break;
 			}	
 		}
-	}
+	//}
 
 	// Resolve hitting the ceiling
 	if (entity->getVelocity().y < 0) {
@@ -104,11 +112,12 @@ void PhysicsEngine::updateMovement(LivingEntity* entity, const float& dt) {
 
 void PhysicsEngine::playerUpdatePhysics(const float& dt) {
 	updateMovement(player, dt);
+	std::cout << "ONGROUND: " << player->getPosition().y << std::endl;
 }
 
 void PhysicsEngine::objectUpdatePhysics(const float& dt) {
 	// React on Player
-	for (auto obj: objects) {
+	/*for (auto obj: Bloc) {
 		
-	}
+	}*/
 }

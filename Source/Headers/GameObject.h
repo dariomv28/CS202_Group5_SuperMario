@@ -1,6 +1,5 @@
 #pragma once
 #include "stdafx.h"
-#include "Block.h"
 
 class PhysicsEngine;
 
@@ -26,7 +25,7 @@ public:
 	bool checkCollisionRight(GameObject* obj);
 
 	virtual void update(const float& dt) = 0;
-	void reactToObject(PlayerManager* player, std::vector<Block*> blocks, std::vector<Enemy> enemies) = 0;
+	//virtual void reactToObject(PlayerManager* player, std::vector<Block*> blocks, std::vector<Enemy> enemies) = 0;
 
 	virtual void render(sf::RenderTarget* target) = 0;
 

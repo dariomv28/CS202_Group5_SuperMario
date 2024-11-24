@@ -46,10 +46,10 @@ bool GameObject::checkCollisionUp(GameObject* obj) {
 bool GameObject::checkCollisionDown(GameObject* obj) {
 	sf::FloatRect thisBounds = this->hitbox.getGlobalBounds();
 	sf::FloatRect objectBounds = obj->hitbox.getGlobalBounds();
-	float thisLeft = thisBounds.left;
-	float thisRight = thisBounds.left + thisBounds.width;
-	float thisTop = thisBounds.top;
-	float thisBottom = thisBounds.top + thisBounds.height;
+	float thisLeft = thisBounds.left -10;
+	float thisRight = thisBounds.left + thisBounds.width+10;
+	float thisTop = thisBounds.top-10;
+	float thisBottom = thisBounds.top + thisBounds.height+10;
 
 	float objectLeft = objectBounds.left;
 	float objectRight = objectBounds.left + objectBounds.width;
