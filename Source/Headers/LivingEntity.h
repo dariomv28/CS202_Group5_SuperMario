@@ -9,9 +9,6 @@ class LivingEntity :
 protected:
     int health;
 	int speed;
-	
-	AnimationComponent* animationComponent;
-	MovementComponent* movementComponent;
 
 	virtual void updateAnimation(const float& dt) = 0;
 public:
@@ -46,5 +43,8 @@ public:
 
 	virtual void update(const float& dt) override;
 	virtual void render(sf::RenderTarget* target) override;
+
+	AnimationComponent* animationComponent;
+	MovementComponent* movementComponent;
 };
 
