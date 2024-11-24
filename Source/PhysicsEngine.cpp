@@ -5,8 +5,8 @@
 #include "Headers/Enemy.h"
 
 PhysicsEngine::PhysicsEngine() {
-	gravity = sf::Vector2f(0, 80000.0f);
-	friction = sf::Vector2f(50000.0f, 0);
+	gravity = sf::Vector2f(0, 2.0f * PIXELS_PER_METER);
+	friction = sf::Vector2f(15.0f * PIXELS_PER_METER, 0);
 	player = nullptr;
 }
 
@@ -20,6 +20,10 @@ void PhysicsEngine::addPlayer(PlayerManager* obj) {
 
 void PhysicsEngine::applyGravity(LivingEntity* entity, const float& dt) {
 	entity->setVelocity(entity->getVelocity() + gravity * dt);
+	//const float maxFallSpeed = 3.0f * PIXELS_PER_METER;
+	//if (entity->getVelocity().y > maxFallSpeed) {
+	//	entity->setVelocity(sf::Vector2f(entity->getVelocity().x, maxFallSpeed));
+	//}
 }
 
 void PhysicsEngine::applyFriction(LivingEntity* entity, const float& dt) {
@@ -42,17 +46,19 @@ void PhysicsEngine::resolveCollision(LivingEntity* entity) {
 	entity->setOnGround(false);
 
 	//Remove later when there is a ground
-	if (entity->getPosition().y + entity->getSize().y >= 800) {
+	if (entity->getPosition().y + entity->getSize().y >= 828) {
 		entity->setOnGround(true);
-		entity->setPosition(sf::Vector2f(entity->getPosition().x, 800 - entity->getSize().y));
+		entity->setPosition(sf::Vector2f(entity->getPosition().x, 828 - entity->getSize().y));
+		entity->movementComponent->resetJumps();  // Reset jumps when landing
 	}
 
 	if (entity->getVelocity().y > 0) {
 		for (auto obj : objects) {
 			if (entity->checkCollisionDown(*obj)) {
 				entity->setOnGround(true);
+				entity->movementComponent->resetJumps();  // Reset jumps when landing on objects
 				break;
-			}
+			}	
 		}
 	}
 
