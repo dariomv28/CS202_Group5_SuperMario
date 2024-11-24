@@ -7,7 +7,7 @@ GameState::GameState(StateData* stateData) : State(stateData), mapManager(nullpt
         sf::Vector2f(400.f, 300.f),  // Starting position
         sf::Vector2f(64.f, 64.f),    // Size
         100,                         // Health
-        200,                         // Speed
+        2.0f,                       // Speed
         &physicsEngine              // Pointer to physics engine
     );
     Enemies.clear();
@@ -37,10 +37,6 @@ void GameState::loadLevel(int level) {
     mapManager = new MapManager();
     if (level == 1) {
         mapManager->loadMap("Level1_Map", player, Enemies, window);
-
-        // You might want to set Mario's initial position based on the level
-        //player->setPosition(400.f, 500.f); // Assump that the ground is at 500.f (y)
-
     }
     else if (level == 2) {
         //mapManager->loadMap("Level2_Map");
@@ -56,14 +52,12 @@ void GameState::loadLevel(int level) {
     }*/
 }
 
-
 void sleepOneSecond() {
     std::this_thread::sleep_for(std::chrono::seconds(1/3));
 }
 
 void GameState::update(const float& dt) {
     if (mapManager) {
-        //mapManager->update(dt);
 		mapManager->update(dt, player);
     }
     player->update(dt);
