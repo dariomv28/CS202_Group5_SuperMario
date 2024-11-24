@@ -5,13 +5,14 @@ class GameObject;
 class PlayerManager;
 class LivingEntity;
 class Enemy;
+class Block;
 
 class PhysicsEngine 
 {
 private:
 	const float PIXELS_PER_METER = 16.0f;
 
-	std::vector<GameObject*> objects;
+	std::vector<Block*> blocks;
 	std::vector<Enemy*> enemies;
 	PlayerManager* player;
 	sf::Vector2f gravity;
@@ -24,7 +25,7 @@ private:
 	void resolveCollision(LivingEntity* obj);
 public:
 	PhysicsEngine();
-	void addObject(GameObject* obj);
+	void addBlock(Block* obj);
 	void addPlayer(PlayerManager* obj);
 	void playerUpdatePhysics(const float& dt);
 	void objectUpdatePhysics(const float& dt);

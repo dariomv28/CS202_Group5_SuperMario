@@ -1,5 +1,7 @@
 #pragma once
 #include "GameObject.h"
+#include "PlayerManager.h"
+#include "Enemy.h"
 
 class Block :
     public GameObject
@@ -14,7 +16,8 @@ public:
 	void initSpritesSheet();
 
 	//Setters and Getters
-	void update(const float& dt) = 0;
-	void render(sf::RenderTarget* target) = 0;
+	virtual void update(const float& dt) = 0;
+	virtual void reactToObject(PlayerManager* player, std::vector<Block*> blocks, std::vector<Enemy> enemies) = 0;
+	virtual void render(sf::RenderTarget* target) = 0;
 };
 

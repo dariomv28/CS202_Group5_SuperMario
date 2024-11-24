@@ -17,9 +17,9 @@ sf::Vector2f GameObject::getSize() {
 	return size;
 }
 
-bool GameObject::checkCollisionUp(GameObject& obj) {
+bool GameObject::checkCollisionUp(GameObject* obj) {
 	sf::FloatRect thisBounds = this->hitbox.getGlobalBounds();
-	sf::FloatRect objectBounds = obj.hitbox.getGlobalBounds();
+	sf::FloatRect objectBounds = obj->hitbox.getGlobalBounds();
 	float thisLeft = thisBounds.left;
 	float thisRight = thisBounds.left + thisBounds.width;
 	float thisTop = thisBounds.top;
@@ -43,9 +43,9 @@ bool GameObject::checkCollisionUp(GameObject& obj) {
 	return false;
 }
 
-bool GameObject::checkCollisionDown(GameObject& obj) {
+bool GameObject::checkCollisionDown(GameObject* obj) {
 	sf::FloatRect thisBounds = this->hitbox.getGlobalBounds();
-	sf::FloatRect objectBounds = obj.hitbox.getGlobalBounds();
+	sf::FloatRect objectBounds = obj->hitbox.getGlobalBounds();
 	float thisLeft = thisBounds.left;
 	float thisRight = thisBounds.left + thisBounds.width;
 	float thisTop = thisBounds.top;
@@ -69,9 +69,9 @@ bool GameObject::checkCollisionDown(GameObject& obj) {
 	return false;
 }
 
-bool GameObject::checkCollisionLeft(GameObject& obj) {
+bool GameObject::checkCollisionLeft(GameObject* obj) {
 	sf::FloatRect thisBounds = this->hitbox.getGlobalBounds();
-	sf::FloatRect objectBounds = obj.hitbox.getGlobalBounds();
+	sf::FloatRect objectBounds = obj->hitbox.getGlobalBounds();
 	float thisLeft = thisBounds.left;
 	float thisRight = thisBounds.left + thisBounds.width;
 	float thisTop = thisBounds.top;
@@ -95,9 +95,9 @@ bool GameObject::checkCollisionLeft(GameObject& obj) {
 	return false;
 }
 
-bool GameObject::checkCollisionRight(GameObject& obj) {
+bool GameObject::checkCollisionRight(GameObject* obj) {
 	sf::FloatRect thisBounds = this->hitbox.getGlobalBounds();
-	sf::FloatRect objectBounds = obj.hitbox.getGlobalBounds();
+	sf::FloatRect objectBounds = obj->hitbox.getGlobalBounds();
 	float thisLeft = thisBounds.left;
 	float thisRight = thisBounds.left + thisBounds.width;
 	float thisTop = thisBounds.top;

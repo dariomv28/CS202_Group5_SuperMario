@@ -10,8 +10,8 @@ PhysicsEngine::PhysicsEngine() {
 	player = nullptr;
 }
 
-void PhysicsEngine::addObject(GameObject* obj) {
-	objects.push_back(obj);
+void PhysicsEngine::addBlock(Block* obj) {
+	blocks.push_back(obj);
 }
 
 void PhysicsEngine::addPlayer(PlayerManager* obj) {
@@ -53,8 +53,8 @@ void PhysicsEngine::resolveCollision(LivingEntity* entity) {
 	}
 
 	if (entity->getVelocity().y > 0) {
-		for (auto obj : objects) {
-			if (entity->checkCollisionDown(*obj)) {
+		for (auto obj : blocks) {
+			if (entity->checkCollisionDown(obj)) {
 				entity->setOnGround(true);
 				entity->movementComponent->resetJumps();  // Reset jumps when landing on objects
 				break;
@@ -64,8 +64,8 @@ void PhysicsEngine::resolveCollision(LivingEntity* entity) {
 
 	// Resolve hitting the ceiling
 	if (entity->getVelocity().y < 0) {
-		for (auto obj : objects) {
-			if (entity->checkCollisionUp(*obj)) {	
+		for (auto obj : blocks) {
+			if (entity->checkCollisionUp(obj)) {	
 				entity->setVelocity(sf::Vector2f(entity->getVelocity().x, 0));
 				break;
 			}
@@ -73,8 +73,8 @@ void PhysicsEngine::resolveCollision(LivingEntity* entity) {
 	}
 	// Resolve right side collision
 	if (entity->isMoveRight()) {
-		for (auto obj : objects) {
-			if (entity->checkCollisionRight(*obj)) {
+		for (auto obj : blocks) {
+			if (entity->checkCollisionRight(obj)) {
 				entity->setMoveRight(false);
 				break;
 			}
@@ -83,8 +83,8 @@ void PhysicsEngine::resolveCollision(LivingEntity* entity) {
 
 	// Resolve left side collision
 	if (entity->isMoveLeft()) {
-		for (auto obj : objects) {
-			if (entity->checkCollisionLeft(*obj)) {
+		for (auto obj : blocks) {
+			if (entity->checkCollisionLeft(obj)) {
 				entity->setMoveLeft(false);
 				break;
 			}
@@ -108,6 +108,7 @@ void PhysicsEngine::playerUpdatePhysics(const float& dt) {
 
 void PhysicsEngine::objectUpdatePhysics(const float& dt) {
 	// React on Player
-	// Check for on ground
-	
+	for (auto obj: objects) {
+		
+	}
 }

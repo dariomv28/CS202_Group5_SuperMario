@@ -11,10 +11,16 @@ SolidBlock::SolidBlock(sf::Vector2f position, sf::Vector2f size, PhysicsEngine* 
 
 }
 
+
+
 SolidBlock::~SolidBlock() {
 }
 
 void SolidBlock::update(const float& dt) {
+
+}
+
+void SolidBlock::reactToObject(PlayerManager* player, std::vector<Block*> blocks, std::vector<Enemy> enemies) {
 
 }
 

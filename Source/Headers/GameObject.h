@@ -1,5 +1,6 @@
 #pragma once
 #include "stdafx.h"
+#include "Block.h"
 
 class PhysicsEngine;
 
@@ -19,12 +20,14 @@ public:
 	sf::Vector2f getPosition();
 	sf::Vector2f getSize();
 	//Check Collisions in 4 sides of the object
-	bool checkCollisionUp(GameObject& obj);
-	bool checkCollisionDown(GameObject& obj);
-	bool checkCollisionLeft(GameObject& obj);
-	bool checkCollisionRight(GameObject& obj);
+	bool checkCollisionUp(GameObject* obj);
+	bool checkCollisionDown(GameObject* obj);
+	bool checkCollisionLeft(GameObject* obj);
+	bool checkCollisionRight(GameObject* obj);
 
 	virtual void update(const float& dt) = 0;
+	void reactToObject(PlayerManager* player, std::vector<Block*> blocks, std::vector<Enemy> enemies) = 0;
+
 	virtual void render(sf::RenderTarget* target) = 0;
 
 	virtual void setPosition(float x, float y);

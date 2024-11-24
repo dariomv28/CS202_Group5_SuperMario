@@ -11,6 +11,7 @@ public:
 
 	//Setters and Getters
 	void update(const float& dt) override;
+	void reactToObject(PlayerManager* player, std::vector<Block*> blocks, std::vector<Enemy> enemies) override;
 	void render(sf::RenderTarget* target) override;
 };
 

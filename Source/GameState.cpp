@@ -13,7 +13,6 @@ GameState::GameState(StateData* stateData) : State(stateData), mapManager(nullpt
     Enemies.clear();
 
     physicsEngine.addPlayer(player);
- 
     // Add Mario to game objects
   //  gameObjects.push_back(player);
 }
