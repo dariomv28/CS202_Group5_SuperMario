@@ -3,10 +3,10 @@
 void Block::initSpritesSheet()
 {
 	spritesSheet["ground_1_1"] = sf::IntRect(1, 1, 16, 16);
-	spritesSheet["underground_1_1"] = sf::IntRect(1, 18, 16, 33);
+	spritesSheet["underground_1_1"] = sf::IntRect(1, 18, 16, 16);
 
 	spritesSheet["ground_1_2"] = sf::IntRect(18, 1, 16, 16);
-	spritesSheet["underground_1_2"] = sf::IntRect(18, 18, 33, 33);
+	spritesSheet["underground_1_2"] = sf::IntRect(18, 18, 16, 16);
 
 	spritesSheet["ground_1_3"] = sf::IntRect(35, 1, 50, 16);
 	spritesSheet["underground_1_3"] = sf::IntRect(35, 18, 50, 33);
@@ -32,7 +32,7 @@ Block::Block(sf::Vector2f position, sf::Vector2f size, PhysicsEngine* physicEngi
 {	
 	initSpritesSheet();
 	this->name = name;
-	entityTexture.loadFromFile("Resources/Textures/Blocks/Tileset.png");
+	entityTexture.loadFromFile("Source/Resources/texture/Tileset.png");
 	hitbox.setSize(size);
 	hitbox.setPosition(position);
 	hitbox.setFillColor(sf::Color::Transparent);

@@ -8,7 +8,8 @@ SolidBlock::SolidBlock(sf::Vector2f position, sf::Vector2f size, PhysicsEngine* 
 {
 	entitySprite.setTexture(entityTexture);
 	entitySprite.setTextureRect(spritesSheet[name]);
-
+	entitySprite.setPosition(position);
+	entitySprite.setScale(size.x / entitySprite.getGlobalBounds().width, size.y / entitySprite.getGlobalBounds().height);
 }
 
 SolidBlock::~SolidBlock() {

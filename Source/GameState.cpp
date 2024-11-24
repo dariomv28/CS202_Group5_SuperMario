@@ -11,6 +11,7 @@ GameState::GameState(StateData* stateData) : State(stateData), mapManager(nullpt
         &physicsEngine              // Pointer to physics engine
     );
     Enemies.clear();
+	Blocks.clear();
 
     physicsEngine.addPlayer(player);
  
@@ -36,7 +37,7 @@ void GameState::loadLevel(int level) {
 
     mapManager = new MapManager();
     if (level == 1) {
-        mapManager->loadMap("Level1_Map", player, Enemies, window);
+        mapManager->loadMap("Level1_Map", player, Enemies, Blocks, window);
     }
     else if (level == 2) {
         //mapManager->loadMap("Level2_Map");
@@ -79,14 +80,15 @@ void GameState::render(sf::RenderTarget* target) {
     }
 
     if (mapManager) {
-        mapManager->render();
+        //mapManager->render();
     }
 
     player->render(target);
 	
 
-    for (auto& object : gameObjects) {
-        object->render(target);
+    for (auto& Block : Blocks) {
+        Block->render(target);
     }
+	//cerr << Blocks.size() << endl;
 }
 

@@ -6,13 +6,14 @@
 #include "stdafx.h"
 #include "Enemy.h"
 #include "Mario.h"
+#include "Block.h"
 
 class MapManager {
 public:
     MapManager();
     ~MapManager();
 
-    void loadMap(const std::string& mapName, Mario* &Player, vector<Enemy*>& Enemies, sf::RenderWindow *window);  
+    void loadMap(const std::string& mapName, Mario* &Player, vector<Enemy*>& Enemies, vector<Block*>& Blocks, sf::RenderWindow *window);  
     void update(float dt, Mario* Player); 
     void render();  
 

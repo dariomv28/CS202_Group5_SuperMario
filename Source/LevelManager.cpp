@@ -1,4 +1,5 @@
 #include "Headers/LevelManager.h"
+#include "Headers/SolidBlock.h"
 
 LevelManager::LevelManager() {
 	map_texture.loadFromFile("Source/Resources/texture/Map.png");
@@ -12,6 +13,7 @@ LevelManager::~LevelManager() {
 }
 
 void LevelManager::update(float dt) {
+	
   
 }
 
@@ -330,36 +332,6 @@ void LevelManager::update_map_sketch(const unsigned char i_current_level)
 	//cerr << map_sketch.getSize().x * 64 << endl;
 }
 
-//void LevelManager::update()
-//{
-//	for (Object& question_block_coin : question_block_coins)
-//	{
-//		question_block_coin.vertical_speed += GRAVITY;
-//
-//		question_block_coin.y += question_block_coin.vertical_speed;
-//	}
-//
-//	for (Object& brick_particle : brick_particles)
-//	{
-//		brick_particle.vertical_speed += GRAVITY;
-//
-//		brick_particle.x += brick_particle.horizontal_speed;
-//		brick_particle.y += brick_particle.vertical_speed;
-//	}
-//
-//	brick_particles.erase(remove_if(brick_particles.begin(), brick_particles.end(), [](const Object& i_brick_particle)
-//		{
-//			return SCREEN_HEIGHT <= i_brick_particle.y;
-//		}), brick_particles.end());
-//
-//	question_block_coins.erase(remove_if(question_block_coins.begin(), question_block_coins.end(), [](const Object& i_question_block_coin)
-//		{
-//			return 0 <= i_question_block_coin.vertical_speed;
-//		}), question_block_coins.end());
-//
-//	//coin_animation.update();
-//	//question_block_animation.update();
-//}
 
 sf::Color LevelManager::get_map_sketch_pixel(const unsigned short i_x, const unsigned short i_y) const {
 	/*if (i_x >= map_sketch.getSize().x || i_y >= map_sketch.getSize().y) {
@@ -370,7 +342,7 @@ sf::Color LevelManager::get_map_sketch_pixel(const unsigned short i_x, const uns
 
 
 
-void convert_sketch(const unsigned char i_current_level, unsigned short& i_level_finish, vector<Enemy*>& i_enemies, sf::Color& i_background_color, LevelManager& i_level_manager, Mario& i_mario)
+void convert_sketch(const unsigned char i_current_level, unsigned short& i_level_finish, vector<Enemy*>& i_enemies, vector<Block*> &Blocks, sf::Color& i_background_color, LevelManager& i_level_manager, Mario& i_mario)
 {
 	unsigned short map_height;
 
@@ -411,6 +383,7 @@ void convert_sketch(const unsigned char i_current_level, unsigned short& i_level
 				}
 				else if (sf::Color(0, 0, 0) == pixel || sf::Color(146, 73, 0) == pixel)
 				{
+					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), nullptr, "underground_1_2"));
 					i_level_manager.set_map_cell(a, b, Cell::Wall);
 				}
 				else
