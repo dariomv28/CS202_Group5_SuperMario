@@ -9,6 +9,8 @@ class Enemy;
 class PhysicsEngine 
 {
 private:
+	const float PIXELS_PER_METER = 16.0f;
+
 	std::vector<GameObject*> objects;
 	std::vector<Enemy*> enemies;
 	PlayerManager* player;
