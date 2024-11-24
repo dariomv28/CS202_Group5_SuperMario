@@ -1,5 +1,4 @@
 #include "Headers/AnimationComponent.h"
-#include <iostream>
 
 AnimationComponent::AnimationComponent(sf::Sprite& sprite)
     : sprite(sprite), currentFrameIndex(0), animationSpeed(0.1f), elapsedTime(0) {}

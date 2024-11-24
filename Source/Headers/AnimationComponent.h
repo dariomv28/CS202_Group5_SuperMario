@@ -1,10 +1,8 @@
 #ifndef ANIMATIONCOMPONENT_H
 #define ANIMATIONCOMPONENT_H
 
-#include <SFML/Graphics.hpp>
-#include <unordered_map>
-#include <string>
-#include <vector>
+#include "stdafx.h"
+
 
 class AnimationComponent {
 private:
