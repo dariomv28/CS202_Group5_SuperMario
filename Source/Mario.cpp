@@ -5,7 +5,7 @@
 Mario::Mario(sf::Vector2f position, sf::Vector2f size, int health, int speed, PhysicsEngine* physicEngine)
     : PlayerManager(position, size, health, speed, physicEngine), is_big(true), currentAction("IDLE"), isAnimationInProgress(false) {
     animationComponent = nullptr;
-    movementComponent = new MovementComponent(100000, 3);
+    movementComponent = new MovementComponent(15.0f, 5.0f);
     init();
 }
 
@@ -126,26 +126,36 @@ void Mario::handleInput(const float& dt) {
         isRunning = true;
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::W) ||
-        sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+    static bool spaceWasPressed = false;
+    bool spaceIsPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::Space) ||
+        sf::Keyboard::isKeyPressed(sf::Keyboard::W) ||
+        sf::Keyboard::isKeyPressed(sf::Keyboard::Up);
+
+    if (spaceIsPressed && !spaceWasPressed) {
         movementComponent->isJump = true;
         currentAction = "JUMP-";
         isAnimationInProgress = true;
-    }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-        if (is_big) {
-            currentAction = "CROUCH";
-            isAnimationInProgress = true;
+
+        // Reset animation when starting a new jump (either first or second)
+        if (!movementComponent->onGround && movementComponent->getJumpsRemaining() > 0) {
+            // Reset animation for double jump
+            animationComponent->currentFrameIndex = 0;
+            animationComponent->elapsedTime = 0;
         }
     }
-    else if (isWalking && isRunning) {
-        currentAction = "RUN-";
-    }
-    else if (isWalking) {
-        currentAction = "WALK-";
-    }
-    else {
-        currentAction = "IDLE";
+    spaceWasPressed = spaceIsPressed;
+
+    // Only change animation if we're not already jumping
+    if (currentAction != "JUMP-") {
+        if (isWalking && isRunning) {
+            currentAction = "RUN-";
+        }
+        else if (isWalking) {
+            currentAction = "WALK-";
+        }
+        else {
+            currentAction = "IDLE";
+        }
     }
 }
 
@@ -153,16 +163,23 @@ void Mario::updateAnimation(const float& dt) {
     std::string prefix = is_big ? "isBig_" : "";
     bool animationSet = false;
 
-    if (currentAction == "RUN-") {
-        animationComponent->setAnimation(prefix + "RUN-", spritesSheet, 0.3f, is_big);
+    if (currentAction == "JUMP-") {
+        // Use a faster animation speed to make sure we see the jump frames
+        animationComponent->setAnimation(prefix + "JUMP-", spritesSheet, 0.2f, is_big);
+        animationSet = true;
+
+        // If the jump animation has completed and we're on the ground
+        if (animationComponent->currentFrameIndex == animationComponent->currentAnimationFrames.size() - 1
+            && movementComponent->onGround) {
+            currentAction = "IDLE";
+        }
+    }
+    else if (currentAction == "RUN-") {
+        animationComponent->setAnimation(prefix + "RUN-", spritesSheet, 0.15f, is_big);
         animationSet = true;
     }
     else if (currentAction == "WALK-") {
-        animationComponent->setAnimation(prefix + "WALK-", spritesSheet, 0.5f, is_big);
-        animationSet = true;
-    }
-    else if (currentAction == "JUMP-") {
-        animationComponent->setAnimation(prefix + "JUMP-", spritesSheet, 0.5f, is_big);
+        animationComponent->setAnimation(prefix + "WALK-", spritesSheet, 0.2f, is_big);
         animationSet = true;
     }
     else if (currentAction == "CROUCH") {
