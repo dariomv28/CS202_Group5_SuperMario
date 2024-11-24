@@ -1,28 +1,37 @@
 #include "Headers/MovementComponent.h"
 
 MovementComponent::MovementComponent() {
-    acceleration = 100000.0f;
-    maxVelocity = 80000.0f;
+    acceleration = 15.0f;
+    maxVelocity = 5.0f;
     isMoveLeft = false;
     isMoveRight = false;
     isJump = false;
     onGround = true;       
     hitCeiling = false;
     velocity = sf::Vector2f(0.0f, 0.0f);
+    jumpsRemaining = MAX_JUMPS;  // Initialize jumps
 }
 
 MovementComponent::MovementComponent(int a, int maxV) {
-    acceleration = static_cast<float>(a);
-    maxVelocity = static_cast<float>(maxV);
+    acceleration = static_cast<float>(a) * PIXELS_PER_METER;
+    maxVelocity = static_cast<float>(maxV) * PIXELS_PER_METER;
     isMoveLeft = false;
     isMoveRight = false;
     isJump = false;
     onGround = true;
     hitCeiling = false;
     velocity = sf::Vector2f(0.0f, 0.0f);
+    jumpsRemaining = MAX_JUMPS;  // Initialize jumps
 }
 
-MovementComponent::~MovementComponent() {
+MovementComponent::~MovementComponent() {}
+
+void MovementComponent::resetJumps() {
+    jumpsRemaining = MAX_JUMPS;
+}
+
+int MovementComponent::getJumpsRemaining() const {
+    return jumpsRemaining;
 }
 
 void MovementComponent::moveLeft(const float& dt) {
@@ -44,10 +53,15 @@ void MovementComponent::moveRight(const float& dt) {
 }
 
 void MovementComponent::jump(const float& dt) {
-    if (!onGround) isJump = false;
     if (onGround && isJump) {
-        velocity.y = -5.0f;  // Negative velocity for upward movement
+        velocity.y = -0.6f * PIXELS_PER_METER;
         onGround = false;
-        isJump = false;       // Reset jump flag
+        isJump = false;
+        jumpsRemaining = MAX_JUMPS - 1;  // First jump used
+    }
+    else if (!onGround && isJump && jumpsRemaining > 0) {
+        velocity.y = -0.6f * PIXELS_PER_METER;  // Slightly lower jump height for second jump
+        isJump = false;
+        jumpsRemaining--;
     }
 }
