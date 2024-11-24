@@ -83,6 +83,8 @@ void MyApp::updateDT()
 
 	this->dt = this->dtClock.restart().asSeconds();
 
+	// std::cout << "Delta time: " << this->dt << "\n";
+
 	// Testing total time each frame
 	/*system("cls");
 	std::cout << this->dt << "\n";*/
@@ -99,7 +101,7 @@ void MyApp::updateSFMLEvents()
 
 void MyApp::update()
 {
-	this->updateDT();
+	// this->updateDT();
 	this->updateSFMLEvents();
 
 	if (!this->states.empty())
