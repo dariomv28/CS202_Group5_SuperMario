@@ -14,7 +14,7 @@ MovementComponent::MovementComponent() {
 
 MovementComponent::MovementComponent(int a, int maxV) {
     acceleration = static_cast<float>(a) * PIXELS_PER_METER;
-    maxVelocity = static_cast<float>(maxV) * PIXELS_PER_METER;
+    maxVelocity = static_cast<float>(maxV);
     isMoveLeft = false;
     isMoveRight = false;
     isJump = false;

@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Block.cpp" />
     <ClCompile Include="Source\MovementComponent.cpp" />
     <ClCompile Include="Source\LivingEntity.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
@@ -154,9 +155,11 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Source\PlayerManager.cpp" />
+    <ClCompile Include="Source\SolidBlock.cpp" />
     <ClCompile Include="Source\State.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Headers\Block.h" />
     <ClInclude Include="Source\Headers\MovementComponent.h" />
     <ClInclude Include="Source\Headers\LivingEntity.h" />
     <ClInclude Include="Source\Headers\Enemy.h" />
@@ -176,6 +179,7 @@
     <ClInclude Include="Source\Headers\MyApp.h" />
     <ClInclude Include="Source\Headers\PlayerManager.h" />
     <ClInclude Include="Source\Headers\resource.h" />
+    <ClInclude Include="Source\Headers\SolidBlock.h" />
     <ClInclude Include="Source\Headers\stdafx.h" />
     <ClInclude Include="Source\Headers\State.h" />
   </ItemGroup>
