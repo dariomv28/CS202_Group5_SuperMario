@@ -22,7 +22,7 @@ void LV1::update(Mario*& Player) {
 	ConstantLeft = CurrentLeft + (SCREEN_WIDTH * 3.0) / 10.0;
 	ConstantRight = CurrentLeft + (SCREEN_WIDTH * 6.0) / 10.0;
 
-	
+	//cerr << (map_sketch.getSize().x - 1) * CELL_SIZE * 4 << endl;
 
 	if (Player->getVelocity().x < 0 && Player->getPosition().x < ConstantLeft && CurrentLeft - abs(Player->getVelocity().x) >= 0) {
 		view_x -= abs(Player->getVelocity().x);
@@ -32,7 +32,7 @@ void LV1::update(Mario*& Player) {
 
 	}
 	else if (Player->getVelocity().x > 0 && Player->getPosition().x > ConstantRight 
-			&& CurrentRight + abs(Player->getVelocity().x) <= (map_sketch.getSize().x - 1) * CELL_SIZE * 4) {
+			&& CurrentRight + abs(Player->getVelocity().x) <= (map_sketch.getSize().x - 1) * 64) {
 		view_x += abs(Player->getVelocity().x);
 		View.move(abs(Player->getVelocity().x), 0);
 
