@@ -58,6 +58,12 @@ protected:
 	sf::View View;
 	float view_x;
 	Map map;
+	
+	float CurrentLeft;
+	float CurrentRight;
+
+	float ConstantLeft;
+	float ConstantRight;
     
 };
 

@@ -19,8 +19,28 @@ void LV1::loadLevel() {
 }
 
 void LV1::update(Mario*& Player) {
-	View.move(Player->getVelocity().x, 0);
-	view_x += Player->getVelocity().x;
+	ConstantLeft = CurrentLeft + (SCREEN_WIDTH * 3.0) / 10.0;
+	ConstantRight = CurrentLeft + (SCREEN_WIDTH * 6.0) / 10.0;
+
+	
+
+	if (Player->getVelocity().x < 0 && Player->getPosition().x < ConstantLeft && CurrentLeft - abs(Player->getVelocity().x) >= 0) {
+		view_x -= abs(Player->getVelocity().x);
+		View.move(-abs(Player->getVelocity().x), 0);
+		CurrentLeft -= abs(Player->getVelocity().x);
+		CurrentRight -= abs(Player->getVelocity().x);
+
+	}
+	else if (Player->getVelocity().x > 0 && Player->getPosition().x > ConstantRight 
+			&& CurrentRight + abs(Player->getVelocity().x) <= (map_sketch.getSize().x - 1) * CELL_SIZE * 4) {
+		view_x += abs(Player->getVelocity().x);
+		View.move(abs(Player->getVelocity().x), 0);
+
+		CurrentLeft += abs(Player->getVelocity().x);
+		CurrentRight += abs(Player->getVelocity().x);
+	}
+
+
 	window->setView(View);
 }
 

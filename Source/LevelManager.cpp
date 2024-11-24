@@ -3,6 +3,8 @@
 LevelManager::LevelManager() {
 	map_texture.loadFromFile("Source/Resources/texture/Map.png");
 	cell_sprite.setTexture(map_texture);
+	CurrentLeft = 0;
+	CurrentRight = SCREEN_WIDTH;
 }
 
 LevelManager::~LevelManager() {
@@ -325,6 +327,7 @@ void LevelManager::set_map_size(const unsigned short i_new_size)
 void LevelManager::update_map_sketch(const unsigned char i_current_level)
 {
 	map_sketch.loadFromFile("Source/Resources/texture/LevelSketch" + std::to_string(static_cast<unsigned short>(i_current_level)) + ".png");
+	//cerr << map_sketch.getSize().x * 64 << endl;
 }
 
 //void LevelManager::update()
