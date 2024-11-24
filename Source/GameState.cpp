@@ -7,7 +7,7 @@ GameState::GameState(StateData* stateData) : State(stateData), mapManager(nullpt
         sf::Vector2f(400.f, 300.f),  // Starting position
         sf::Vector2f(64.f, 64.f),    // Size
         100,                         // Health
-        15.0f,                       // Speed
+        150.0f,                       // Speed
         &physicsEngine              // Pointer to physics engine
     );
     Enemies.clear();
