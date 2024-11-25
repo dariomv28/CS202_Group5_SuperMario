@@ -11,8 +11,9 @@ protected:
 	sf::Sprite entitySprite;
 	sf::Texture entityTexture;
 	PhysicsEngine* physicsEngine;
-	sf::RectangleShape hitbox;
 public:
+	sf::RectangleShape hitbox;
+
 	GameObject();
 	GameObject(sf::Vector2f position, sf::Vector2f size, PhysicsEngine* physicEngine);
 	virtual ~GameObject() {};

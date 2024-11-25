@@ -20,107 +20,47 @@ sf::Vector2f GameObject::getSize() {
 }
 
 bool GameObject::checkCollisionUp(GameObject* obj) {
-    sf::FloatRect thisBounds = this->hitbox.getGlobalBounds();
-    sf::FloatRect objectBounds = obj->hitbox.getGlobalBounds();
-	float thisLeft = thisBounds.left;
-	float thisRight = thisBounds.left + thisBounds.width;
-	float thisTop = thisBounds.top;
-	float thisBottom = thisBounds.top + thisBounds.height;
-
-	float objectLeft = objectBounds.left;
-	float objectRight = objectBounds.left + objectBounds.width;
-	float objectTop = objectBounds.top;
-	float objectBottom = objectBounds.top + objectBounds.height;
-
-    if (thisBounds.intersects(objectBounds)) {
-		// Determine which side the collision occurred
-		float overlapLeft = thisRight - objectLeft;
-		float overlapRight = objectRight - thisLeft;
-		float overlapTop = thisBottom - objectTop;
-		float overlapBottom = objectBottom - thisTop;
-
-		// The side with the smallest overlap is where the collision happened
-		return (overlapTop < overlapBottom && overlapTop < overlapLeft && overlapTop < overlapRight);
-    }
-    return false;
+	sf::FloatRect intersection;
+	if (hitbox.getGlobalBounds().intersects(obj->hitbox.getGlobalBounds(), intersection)) {
+		float dyTop = intersection.top - hitbox.getGlobalBounds().top;
+		return dyTop > 0 && dyTop <= hitbox.getGlobalBounds().height;
+	}
+	return false;
 }
 
 bool GameObject::checkCollisionDown(GameObject* obj) {
-    sf::FloatRect thisBounds = this->hitbox.getGlobalBounds();
-    sf::FloatRect objectBounds = obj->hitbox.getGlobalBounds();
-	float thisLeft = thisBounds.left -10;
-	float thisRight = thisBounds.left + thisBounds.width+10;
-	float thisTop = thisBounds.top-10;
-	float thisBottom = thisBounds.top + thisBounds.height+10;
-
-	float objectLeft = objectBounds.left;
-	float objectRight = objectBounds.left + objectBounds.width;
-	float objectTop = objectBounds.top;
-	float objectBottom = objectBounds.top + objectBounds.height;
-
-    if (thisBounds.intersects(objectBounds)) {
-		// Determine which side the collision occurred
-		float overlapLeft = thisRight - objectLeft;
-		float overlapRight = objectRight - thisLeft;
-		float overlapTop = thisBottom - objectTop;
-		float overlapBottom = objectBottom - thisTop;
-
-		// The side with the smallest overlap is where the collision happened
-		return (overlapBottom < overlapTop && overlapBottom < overlapLeft && overlapBottom < overlapRight);
-    }
-    return false;
+	sf::FloatRect intersection;
+	if (hitbox.getGlobalBounds().intersects(obj->hitbox.getGlobalBounds(), intersection)) {
+		float dyBottom = (hitbox.getGlobalBounds().top + hitbox.getGlobalBounds().height) -
+			(intersection.top + intersection.height);
+		return dyBottom >= 0 && dyBottom < hitbox.getGlobalBounds().height;
+	}
+	return false;
 }
 
 bool GameObject::checkCollisionLeft(GameObject* obj) {
-    sf::FloatRect thisBounds = this->hitbox.getGlobalBounds();
-    sf::FloatRect objectBounds = obj->hitbox.getGlobalBounds();
-	float thisLeft = thisBounds.left;
-	float thisRight = thisBounds.left + thisBounds.width;
-	float thisTop = thisBounds.top;
-	float thisBottom = thisBounds.top + thisBounds.height;
-
-	float objectLeft = objectBounds.left;
-	float objectRight = objectBounds.left + objectBounds.width;
-	float objectTop = objectBounds.top;
-	float objectBottom = objectBounds.top + objectBounds.height;
-
-    if (thisBounds.intersects(objectBounds)) {
-		// Determine which side the collision occurred
-		float overlapLeft = thisRight - objectLeft;
-		float overlapRight = objectRight - thisLeft;
-		float overlapTop = thisBottom - objectTop;
-		float overlapBottom = objectBottom - thisTop;
-
-		// The side with the smallest overlap is where the collision happened
-		return (overlapLeft < overlapRight && overlapLeft < overlapTop && overlapLeft < overlapBottom);
-    }
-    return false;
+	if (checkCollisionDown(obj)) {
+		return false;
+	}
+	sf::FloatRect intersection;
+	if (hitbox.getGlobalBounds().intersects(obj->hitbox.getGlobalBounds(), intersection)) {
+		float dxLeft = intersection.left - hitbox.getGlobalBounds().left;
+		return dxLeft > 0 && dxLeft <= hitbox.getGlobalBounds().width;
+	}
+	return false;
 }
 
 bool GameObject::checkCollisionRight(GameObject* obj) {
-    sf::FloatRect thisBounds = this->hitbox.getGlobalBounds();
-    sf::FloatRect objectBounds = obj->hitbox.getGlobalBounds();
-	float thisLeft = thisBounds.left;
-	float thisRight = thisBounds.left + thisBounds.width;
-	float thisTop = thisBounds.top;
-	float thisBottom = thisBounds.top + thisBounds.height;
-
-	float objectLeft = objectBounds.left;
-	float objectRight = objectBounds.left + objectBounds.width;
-	float objectTop = objectBounds.top;
-	float objectBottom = objectBounds.top + objectBounds.height;
-
-    if (thisBounds.intersects(objectBounds)) {
-		// Determine which side the collision occurred
-		float overlapLeft = thisRight - objectLeft;
-		float overlapRight = objectRight - thisLeft;
-		float overlapTop = thisBottom - objectTop;
-		float overlapBottom = objectBottom - thisTop;
-
-		// The side with the smallest overlap is where the collision happened
-		return (overlapRight < overlapLeft && overlapRight < overlapTop && overlapRight < overlapBottom);
-    }
-    return false;
+	if (checkCollisionDown(obj)) {
+		return false;
+	}
+	sf::FloatRect intersection;
+	if (hitbox.getGlobalBounds().intersects(obj->hitbox.getGlobalBounds(), intersection)) {
+		float dxRight = (hitbox.getGlobalBounds().left + hitbox.getGlobalBounds().width) -
+			(intersection.left + intersection.width);
+		return dxRight > 0 && dxRight <= hitbox.getGlobalBounds().width;
+	}
+	return false;
 }
 
 void GameObject::setPosition(const sf::Vector2f& pos) {

@@ -42,29 +42,29 @@ void PhysicsEngine::resolveCollision(LivingEntity* entity) {
 	entity->setOnGround(false);
 
 	// Remove later when there is a ground
-	if (entity->getPosition().y + entity->getSize().y >= 800) {
-		entity->setOnGround(true);
-		entity->setPosition(sf::Vector2f(entity->getPosition().x, 800 - entity->getSize().y));
-		entity->setVelocity(sf::Vector2f(entity->getVelocity().x, 0));
-		entity->movementComponent->resetJumps();  // Reset jumps when landing
-	}
+	//if (entity->getPosition().y + entity->getSize().y >= 800) {
+	//	entity->setOnGround(true);
+	//	entity->setPosition(sf::Vector2f(entity->getPosition().x, 800 - entity->getSize().y));
+	//	entity->setVelocity(sf::Vector2f(entity->getVelocity().x, 0));
+	//	entity->movementComponent->resetJumps();  // Reset jumps when landing
+	//}
 
 	// Check for ground collision when moving downward
-	//if (entity->getVelocity().y >= 0) {
-	//	for (auto obj : blocks) {
-	//		if (entity->checkCollisionDown(obj)) {
-	//			entity->setOnGround(true);
-	//			// Align entity with the top of the block
-	//			entity->setPosition(sf::Vector2f(
-	//				entity->getPosition().x,
-	//				obj->getPosition().y - entity->getSize().y
-	//			));
-	//			entity->setVelocity(sf::Vector2f(entity->getVelocity().x, 0));
-	//			entity->movementComponent->resetJumps();
-	//			break;
-	//		}
-	//	}
-	//}
+	if (entity->getVelocity().y >= 0) {
+		for (auto obj : blocks) {
+			if (entity->checkCollisionDown(obj)) {
+				entity->setOnGround(true);
+				// Align entity with the top of the block
+				while (entity->checkCollisionDown(obj)) {
+					entity->setPosition(sf::Vector2f(entity->getPosition().x, entity->getPosition().y - 1));
+				}
+				entity->setPosition(sf::Vector2f(entity->getPosition().x, entity->getPosition().y + 1));
+				entity->setVelocity(sf::Vector2f(entity->getVelocity().x, 0));
+				entity->movementComponent->resetJumps();
+				break;
+			}
+		}
+	}
 	 
 	// Resolve hitting the ceiling
 	if (entity->getVelocity().y < 0) {

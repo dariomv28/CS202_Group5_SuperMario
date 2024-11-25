@@ -27,4 +27,5 @@ void SolidBlock::reactToObject(PlayerManager* player, std::vector<Block*> blocks
 
 void SolidBlock::render(sf::RenderTarget* target) {
 	target->draw(entitySprite);
+	target->draw(hitbox);
 }
