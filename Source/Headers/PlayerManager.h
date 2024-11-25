@@ -1,5 +1,6 @@
 #pragma once
 #include "LivingEntity.h"
+//#include "LevelManager.h"
 
 class PlayerManager : 
     public LivingEntity {
@@ -11,10 +12,14 @@ public:
 
     // Initialization function
     virtual void init();
-    virtual void update(const float& dt) override;
+    virtual void update(const float& dt);
+	virtual void render(sf::RenderTarget* target);
     std::string getImagePath() const;
+
+	//void Move(const float& dt, const float dir_x, const float dir_y);
 
 protected:
     std::string m_imagePath;
+    
 };
 

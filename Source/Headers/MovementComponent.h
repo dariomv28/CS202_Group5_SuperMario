@@ -1,9 +1,12 @@
 #pragma once
 #include "stdafx.h"
 
-//Movement caused by the object itself (user input, AI, etc.)
 class MovementComponent
 {
+private:
+	const float PIXELS_PER_METER = 16.0f;
+	int jumpsRemaining;
+	const int MAX_JUMPS = 2;
 public:
 	int acceleration;
 	int maxVelocity;
@@ -21,4 +24,7 @@ public:
 	void moveLeft(const float& dt);
 	void moveRight(const float& dt);
 	void jump(const float& dt);
+
+	void resetJumps();
+	int getJumpsRemaining() const;
 };

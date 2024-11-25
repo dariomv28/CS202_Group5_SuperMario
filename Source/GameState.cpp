@@ -1,18 +1,25 @@
 #include "Headers/GameState.h"
+#include <algorithm>
+using namespace std;
 
 GameState::GameState(StateData* stateData) : State(stateData), mapManager(nullptr) {
     player = new Mario(
-        sf::Vector2f(400.f, 300.f),  // Starting position
-        sf::Vector2f(64.f, 64.f),    // Size
-        100,                         // Health
-        200,                         // Speed
-        &physicsEngine              // Pointer to physics engine
+        // Starting position
+        sf::Vector2f(400.f, 500.f), 
+        // Size
+        sf::Vector2f(64.f, 64.f),   
+        // Health
+        100,  
+        // Speed
+        20.0f,                      
+        &physicsEngine              
     );
+    Enemies.clear();
+	Blocks.clear();
 
     physicsEngine.addPlayer(player);
-
     // Add Mario to game objects
-  //  gameObjects.push_back(player);
+    // gameObjects.push_back(player);
 }
 
 
@@ -33,15 +40,16 @@ void GameState::loadLevel(int level) {
 
     mapManager = new MapManager();
     if (level == 1) {
-        mapManager->loadMap("Level1_Map");
-        // You might want to set Mario's initial position based on the level
-        player->setPosition(400.f, 500.f); // Assump that the ground is at 500.f (y)
+        mapManager->loadMap("Level1_Map", player, Enemies, Blocks, window);
+        for (int i = 0; i < Blocks.size(); i++) {
+			physicsEngine.addBlock(Blocks[i]);
+		}
     }
     else if (level == 2) {
-        mapManager->loadMap("Level2_Map");
+        //mapManager->loadMap("Level2_Map");
     }
     else if (level == 3) {
-        mapManager->loadMap("Level3_Map");
+        //mapManager->loadMap("Level3_Map");
     }
 
     // Add level objects to physics engine
@@ -51,35 +59,41 @@ void GameState::loadLevel(int level) {
     }*/
 }
 
+void sleepOneSecond() {
+    std::this_thread::sleep_for(std::chrono::seconds(1/3));
+}
+
 void GameState::update(const float& dt) {
     if (mapManager) {
-        mapManager->update(dt);
+		mapManager->update(dt, player);
     }
     player->update(dt);
-
+       
     // Update physics first
-   // physicsEngine.playerUpdatePhysics(dt);
-  //  physicsEngine.objectUpdatePhysics(dt);
+    // physicsEngine.playerUpdatePhysics(dt);
+    // physicsEngine.objectUpdatePhysics(dt);
 
     // Then update all game objects
     for (auto& object : gameObjects) {
         object->update(dt);
     }
 }
-
+  
 void GameState::render(sf::RenderTarget* target) {
     if (!target) {
         target = window;
     }
 
     if (mapManager) {
-        mapManager->render();
+        //mapManager->render();
     }
 
     player->render(target);
+	
 
-    for (auto& object : gameObjects) {
-        object->render(target);
+    for (auto& Block : Blocks) {
+        Block->render(target);
     }
+	//cerr << Blocks.size() << endl;
 }
 

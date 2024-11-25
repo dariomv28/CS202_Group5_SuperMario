@@ -2,7 +2,10 @@
 #include "State.h"
 #include "MapManager.h"
 #include "Mario.h"
+#include "Enemy.h"
 #include "PhysicsEngine.h"
+#include "Block.h"
+#include "stdafx.h"
 
 class GameState : public State {
 private:
@@ -10,6 +13,8 @@ private:
     MapManager* mapManager;
     std::vector<GameObject*> gameObjects;
     Mario* player;
+	vector<Enemy*> Enemies;
+	vector<Block*> Blocks;
 public:
     GameState(StateData* stateData);
     virtual ~GameState();

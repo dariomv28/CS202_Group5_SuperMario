@@ -6,10 +6,9 @@ class Enemy : public LivingEntity
 private:
 
 public:
-	Enemy() {};
+	Enemy();
 	Enemy(const Enemy& other);
 	virtual void update() = 0;
-
 
 };
 

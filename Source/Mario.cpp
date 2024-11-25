@@ -3,14 +3,10 @@
 #include <stdexcept>
 
 Mario::Mario(sf::Vector2f position, sf::Vector2f size, int health, int speed, PhysicsEngine* physicEngine)
-    : PlayerManager(position, size, health, speed, physicEngine), is_big(true), currentAction("IDLE"), isAnimationInProgress(false) {
+    : PlayerManager(position, size, health, speed, physicEngine), is_big(false), currentAction("IDLE"), isAnimationInProgress(false) {
     animationComponent = nullptr;
-    movementComponent = new MovementComponent(100000, 3);
+    movementComponent = new MovementComponent(speed, 5.0f);
     init();
-}
-
-Mario::Mario() : is_big(true), currentAction("IDLE"), isAnimationInProgress(false) {
-    animationComponent = nullptr;
 }
 
 Mario::~Mario() {
@@ -26,49 +22,98 @@ void Mario::init() {
     }
 
     entitySprite.setTexture(entityTexture);
-    entitySprite.setOrigin(8.0f, 8.0f);
+    if (!is_big) {
+        entitySprite.setOrigin(8.0f, 8.0f);
+    }
+    else {
+		entitySprite.setOrigin(8.0f, 16.0f);
+    }
     entitySprite.setScale(4.0f, 4.0f);
-
-    animationComponent = new AnimationComponent(entitySprite);
+    
+        
+    this->animationComponent = new AnimationComponent(this->entitySprite);
     initAnimations();
 
-    // Initialiser l'animation par défaut à "IDLE-"
-    currentAction = "IDLE-";
-    animationComponent->setAnimation("IDLE", spritesSheet, 0.2f);
-}
+    if (!is_big) {
+        hitbox.setSize(sf::Vector2f(64.f, 64.f));
+        hitbox.setOrigin(32.f, 32.f);  // Half of 64x64
+        hitbox.setPosition(position);
+        hitbox.setFillColor(sf::Color::Transparent);
+        hitbox.setOutlineColor(sf::Color::Red);
+        hitbox.setOutlineThickness(1.f);
 
+        currentAction = "IDLE-";
+        animationComponent->setAnimation("IDLE", spritesSheet, 0.2f, is_big);
+    }
+    else {
+        hitbox.setSize(sf::Vector2f(70.f, 128.f));
+        hitbox.setOrigin(32.f, 64.f);  
+        hitbox.setPosition(position);
+        hitbox.setFillColor(sf::Color::Transparent);
+        hitbox.setOutlineColor(sf::Color::Red);
+        hitbox.setOutlineThickness(1.f);
+
+        currentAction = "isBig_IDLE-";
+        animationComponent->setAnimation("isBig_IDLE", spritesSheet, 0.2f, is_big);
+    }
+}
 
 void Mario::initAnimations() {
     spritesSheet = {
-        { "IDLE", sf::IntRect(1, 0, 16, 32) },
-        { "WALK-1", sf::IntRect(17, 0, 16, 32) },
-        { "WALK-2", sf::IntRect(37, 0, 16, 32) },
-        { "RUN-1", sf::IntRect(53, 0, 16, 32) },
-        { "RUN-2", sf::IntRect(69, 0, 16, 32) },
-        { "JUMP-1", sf::IntRect(86, 0, 16, 32) },
-        { "JUMP-2", sf::IntRect(103, 0, 16, 32) },
-        { "JUMP-3", sf::IntRect(120, 0, 16, 32) },
-        { "JUMP-4", sf::IntRect(139, 0, 16, 32) },
-        { "JUMP-5", sf::IntRect(156, 0, 16, 32) },
-        { "VICTORY-1", sf::IntRect(171, 0, 16, 32) },
-        { "VICTORY-2", sf::IntRect(189, 0, 16, 32) },
-        { "VICTORY-3", sf::IntRect(205, 0, 16, 32) },
-        { "BECOME_BIG", sf::IntRect(224, 0, 16, 32) },
-        { "isBig_IDLE", sf::IntRect(241, 0, 16, 32) },
-        { "isBig_WALK-1", sf::IntRect(256, 0, 16, 32) },
-        { "isBig_WALK-2", sf::IntRect(273, 0, 16, 32) },
-        { "isBig_RUN-1", sf::IntRect(290, 0, 16, 32) },
-        { "isBig_RUN-2", sf::IntRect(307, 0, 16, 32) },
-        { "isBig_JUMP-1", sf::IntRect(328, 0, 20, 32) },
-        { "isBig_JUMP-2", sf::IntRect(354, 0, 16, 32) },
-        { "isBig_JUMP-3", sf::IntRect(378, 0, 16, 32) },
-        { "isBig_JUMP-4", sf::IntRect(401, 0, 16, 32) },
-        { "isBig_JUMP-5", sf::IntRect(418, 0, 16, 32) },
-        { "isBig_CROUCH", sf::IntRect(433, 0, 16, 32) },
-        { "isBig_VICTORY-1", sf::IntRect(450, 0, 16, 32) },
-        { "isBig_VICTORY-2", sf::IntRect(467, 0, 16, 32) },
-        { "isBig_VICTORY-3", sf::IntRect(484, 0, 16, 32) },
-        { "isBig_VICTORY-4", sf::IntRect(501, 0, 16, 32) },
+        { "IDLE", sf::IntRect(1, 17, 16, 16) },
+
+        { "WALK-1", sf::IntRect(17, 17, 16, 16) },
+        { "WALK-2", sf::IntRect(37, 17, 16, 16) },
+        { "WALK-3", sf::IntRect(17, 17, 16, 16) },
+        { "WALK-4", sf::IntRect(1, 17, 16, 16) },
+
+        { "RUN-1", sf::IntRect(53, 17, 16, 16) },
+        //{ "RUN-2", sf::IntRect(69, 0, 16, 32) },
+        { "RUN-2", sf::IntRect(17, 17, 16, 16) },
+        { "RUN-3", sf::IntRect(37, 17, 16, 16) },
+        { "RUN-4", sf::IntRect(17, 17, 16, 16) },
+        { "RUN-5", sf::IntRect(1, 17, 16, 16) },
+
+        { "JUMP-1", sf::IntRect(86, 17, 16, 16) },
+        { "JUMP-2", sf::IntRect(103, 17, 16, 16) },
+        { "JUMP-3", sf::IntRect(120, 17, 16, 16) },
+
+        { "CLIMB-1", sf::IntRect(139, 17, 16, 16) },
+        { "CLIMB-2", sf::IntRect(156, 17, 16, 16) },
+
+        { "VICTORY-1", sf::IntRect(171, 17, 16, 16) },
+        { "VICTORY-2", sf::IntRect(189, 17, 16, 16) },
+        { "VICTORY-3", sf::IntRect(205, 17, 16, 16) },
+
+        { "BECOME_BIG", sf::IntRect(224, 3, 16, 32) },
+
+        { "isBig_IDLE", sf::IntRect(241, 3, 16, 32) },
+
+        { "isBig_WALK-1", sf::IntRect(256, 3, 16, 32) },
+        { "isBig_WALK-2", sf::IntRect(273, 3, 16, 32) },
+        { "isBig_WALK-3", sf::IntRect(256, 3, 16, 32) },
+        { "isBig_WALK-4", sf::IntRect(241, 3, 16, 32) },
+
+        { "isBig_RUN-1", sf::IntRect(290, 3, 16, 32) },
+        //{ "isBig_RUN-2", sf::IntRect(307, 0, 16, 32) },
+        { "isBig_RUN-2", sf::IntRect(256, 3, 16, 32) },
+        { "isBig_RUN-3", sf::IntRect(273, 3, 16, 32) },
+        { "isBig_RUN-4", sf::IntRect(256, 3, 16, 32) },
+        { "isBig_RUN-5", sf::IntRect(241, 3, 16, 32) },
+
+        { "isBig_JUMP-1", sf::IntRect(328, 3, 20, 32) },
+        { "isBig_JUMP-2", sf::IntRect(354, 3, 20, 32) },
+        { "isBig_JUMP-3", sf::IntRect(378, 3, 20, 32) },
+
+        { "isBig_CLIMB-1", sf::IntRect(401, 3, 16, 32) },
+        { "isBig_CLIMN-2", sf::IntRect(418, 3, 16, 32) },
+
+        { "isBig_CROUCH", sf::IntRect(433, 3, 16, 32) },
+
+        { "isBig_VICTORY-1", sf::IntRect(450, 3, 16, 32) },
+        { "isBig_VICTORY-2", sf::IntRect(467, 3, 16, 32) },
+        { "isBig_VICTORY-3", sf::IntRect(484, 3, 16, 32) },
+        { "isBig_VICTORY-4", sf::IntRect(501, 3, 16, 32) },
     };
 }
 
@@ -78,71 +123,116 @@ void Mario::update(const float& dt) {
     physicsEngine->playerUpdatePhysics(dt);
     updateVelocity(dt);
     move(dt);
+
 }
 
 void Mario::handleInput(const float& dt) {
-    // Reset les mouvements et les actions
     movementComponent->isMoveLeft = false;
     movementComponent->isMoveRight = false;
     movementComponent->isJump = false;
 
+    bool isWalking = false;
+    bool isRunning = false;
+	bool isCrouching = false;
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
         movementComponent->isMoveLeft = true;
-        entitySprite.setScale(-4.0f, 4.0f); // Inverser l'échelle pour regarder à gauche
-        currentAction = "WALK-";            // Animation WALK
+        entitySprite.setScale(-4.0f, 4.0f);
+        isWalking = true;
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         movementComponent->isMoveRight = true;
-        entitySprite.setScale(4.0f, 4.0f); // Échelle normale pour regarder à droite
-        currentAction = "WALK-";            // Animation WALK
-    }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::W) ||
-        sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-        movementComponent->isJump = true;
-        currentAction = "JUMP-";            // Animation JUMP
-        isAnimationInProgress = true;      // Indique qu'une animation prioritaire est en cours
+        entitySprite.setScale(4.0f, 4.0f);
+        isWalking = true;
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-        if(is_big){
-            currentAction = "CROUCH";          // Animation CROUCH
+        if (is_big) {
+            currentAction = "CROUCH";
             isAnimationInProgress = true;
+			isCrouching = true;
         }
-              // Indique qu'une animation prioritaire est en cours
     }
-    else {
-        currentAction = "IDLE";            // Animation IDLE si aucune touche n'est pressée
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) {
+        isRunning = true;
+    }
+
+    static bool spaceWasPressed = false;
+    bool spaceIsPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::Space) ||
+        sf::Keyboard::isKeyPressed(sf::Keyboard::W) ||
+        sf::Keyboard::isKeyPressed(sf::Keyboard::Up);
+
+    if (spaceIsPressed && !spaceWasPressed) {
+        movementComponent->isJump = true;
+        currentAction = "JUMP-";
+        isAnimationInProgress = true;
+
+        // Reset animation when starting a new jump (either first or second)
+        if (!movementComponent->onGround && movementComponent->getJumpsRemaining() > 0) {
+            // Reset animation for double jump
+            animationComponent->currentFrameIndex = 0;
+            animationComponent->elapsedTime = 0;
+        }
+    }
+    spaceWasPressed = spaceIsPressed;
+
+    // Only change animation if we're not already jumping
+    if (currentAction != "JUMP-") {
+        if (isWalking && isRunning) {
+            currentAction = "RUN-";
+        }
+        else if (isWalking) {
+            currentAction = "WALK-";
+        }
+        else if (isCrouching) {
+            currentAction = "CROUCH";
+        }
+        else {
+            currentAction = "IDLE";
+        }
     }
 }
 
 void Mario::updateAnimation(const float& dt) {
     std::string prefix = is_big ? "isBig_" : "";
-    bool animationSet = false; // Pour vérifier si une animation a été définie
+    bool animationSet = false;
 
-    if (currentAction == "WALK-") {
-        animationComponent->setAnimation(prefix + "WALK-", spritesSheet, 0.15f);
+    if (currentAction == "JUMP-") {
+        // Use a faster animation speed to make sure we see the jump frames
+        animationComponent->setAnimation(prefix + "JUMP-", spritesSheet, 0.2f, is_big);
+        animationSet = true;
+
+        // If the jump animation has completed and we're on the ground
+        if (animationComponent->currentFrameIndex == animationComponent->currentAnimationFrames.size() - 1
+            && movementComponent->onGround) {
+            currentAction = "IDLE";
+        }
+    }
+    else if (currentAction == "RUN-") {
+        animationComponent->setAnimation(prefix + "RUN-", spritesSheet, 0.15f, is_big);
         animationSet = true;
     }
-    else if (currentAction == "JUMP-") {
-        animationComponent->setAnimation(prefix + "JUMP-", spritesSheet, 0.2f);
+    else if (currentAction == "WALK-") {
+        animationComponent->setAnimation(prefix + "WALK-", spritesSheet, 0.2f, is_big);
         animationSet = true;
     }
     else if (currentAction == "CROUCH") {
-        animationComponent->setAnimation(prefix + "CROUCH", spritesSheet, 0.2f);
+        animationComponent->setAnimation(prefix + "CROUCH", spritesSheet, 0.2f, is_big);
         animationSet = true;
     }
 
-    // Si aucune animation n'est définie, jouer l'animation IDLE
     if (!animationSet) {
-        animationComponent->setAnimation(prefix + "IDLE", spritesSheet, 0.2f);
+        animationComponent->setAnimation(prefix + "IDLE", spritesSheet, 0.5f, is_big);
     }
 
-    // Toujours mettre à jour l'animation, même si la touche est maintenue
-    animationComponent->update(dt);
+    animationComponent->update(0.016f);
 }
 
 void Mario::render(sf::RenderTarget* target) {
     if (target) {
         target->draw(entitySprite);
+        target->draw(hitbox);
+        //std::cout << this->getOnGround() << std::endl;
     }
     else {
         std::cerr << "Render target is null!" << std::endl;

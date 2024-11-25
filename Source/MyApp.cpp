@@ -16,6 +16,8 @@ void MyApp::initWindow()
 
 	std::string title = "None";
 	sf::VideoMode window_bounds(800, 600);
+	//sf::VideoMode window_bounds(SCREEN_RESIZE * SCREEN_WIDTH, SCREEN_RESIZE * SCREEN_HEIGHT);
+	
 
 	unsigned framerate_limit = 120;
 	bool vertical_sync_enabled = false;
@@ -23,13 +25,23 @@ void MyApp::initWindow()
 	if (ifs.is_open()) {
 		std::getline(ifs, title);
 		ifs >> window_bounds.width >> window_bounds.height;
+		//int tmpx, tmpy;
+		//ifs >> tmpx >> tmpy;
 		ifs >> framerate_limit;
 		ifs >> vertical_sync_enabled;
 	}
 
 	this->window = new sf::RenderWindow(window_bounds, title);
+	//this->window(sf::VideoMode, "Super Mario Bros", sf::Style::Close);
+
 	this->window->setFramerateLimit(framerate_limit);
 	this->window->setVerticalSyncEnabled(vertical_sync_enabled);
+
+	//test by Minh Khoa
+	//this->window = new sf::RenderWindow(sf::VideoMode(SCREEN_RESIZE * SCREEN_WIDTH, SCREEN_RESIZE * SCREEN_HEIGHT), "Super Mario Bros", sf::Style::Close);
+	//window->setPosition(sf::Vector2i(window->getPosition().x, window->getPosition().y - 90));
+
+
 }
 
 void MyApp::initStateData()
@@ -71,6 +83,8 @@ void MyApp::updateDT()
 
 	this->dt = this->dtClock.restart().asSeconds();
 
+	// std::cout << "Delta time: " << this->dt << "\n";
+
 	// Testing total time each frame
 	/*system("cls");
 	std::cout << this->dt << "\n";*/
@@ -87,7 +101,7 @@ void MyApp::updateSFMLEvents()
 
 void MyApp::update()
 {
-	this->updateDT();
+	// this->updateDT();
 	this->updateSFMLEvents();
 
 	if (!this->states.empty())
