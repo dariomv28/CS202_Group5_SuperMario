@@ -1,20 +1,14 @@
 #pragma once
-#include "GameObject.h"
+#include "LivingEntity.h"
 
-class Enemy : public GameObject
+class Enemy : public LivingEntity
 {
 private:
-	std::string type;
-	bool isDefeated;
+
 public:
 	Enemy() {};
 	Enemy(const Enemy& other);
-	Enemy(std::string type, bool isDefeated);
-	void move() override;
-	void attack();
-	void takeDamage();
-	void respawn();
-	void update();
+	virtual void update() = 0;
 
 
 };

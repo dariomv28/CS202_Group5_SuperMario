@@ -1,21 +1,34 @@
 #pragma once
 #include "stdafx.h"
+
+class PhysicsEngine;
+
 class GameObject
 {
 protected:
 	sf::Vector2f position;
-	sf::Vector2f velocity;
 	sf::Vector2f size;
-	sf::Vector2f netForce;
+	sf::Sprite entitySprite;
+	sf::Texture entityTexture;
+	PhysicsEngine* physicsEngine;
+	sf::RectangleShape hitbox;
 public:
-	GameObject() {};
-	GameObject(sf::Vector2f position, sf::Vector2f velocity, sf::Vector2f size);
-	GameObject(const GameObject& other);
-	virtual void move();
-	bool checkCollision(const GameObject& other);
+	GameObject();
+	GameObject(sf::Vector2f position, sf::Vector2f size, PhysicsEngine* physicEngine);
+	virtual ~GameObject() {};
 	sf::Vector2f getPosition();
-	void setForce(sf::Vector2f force);
-	void exertForceOnOther(GameObject& other, sf::Vector2f force);
+	sf::Vector2f getSize();
+	//Check Collisions in 4 sides of the object
+	bool checkCollisionUp(GameObject& obj);
+	bool checkCollisionDown(GameObject& obj);
+	bool checkCollisionLeft(GameObject& obj);
+	bool checkCollisionRight(GameObject& obj);
+
+	virtual void update(const float& dt) = 0;
+	virtual void render(sf::RenderTarget* target) = 0;
+
+	virtual void setPosition(float x, float y);
+	virtual void setPosition(const sf::Vector2f& pos);
 };
 
 	

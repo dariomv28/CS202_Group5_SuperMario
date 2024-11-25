@@ -1,45 +1,26 @@
-#pragma
 #ifndef ANIMATIONCOMPONENT_H
 #define ANIMATIONCOMPONENT_H
 
 #include <SFML/Graphics.hpp>
-#include <map>
+#include <unordered_map>
 #include <string>
+#include <vector>
 
 class AnimationComponent {
-public:
-    
-    AnimationComponent(sf::Sprite& sprite, sf::Texture& texture_sheet);
-    virtual ~AnimationComponent();
-
-    
-    struct Animation {
-        sf::Sprite& sprite;
-        sf::Texture& textureSheet;
-        float animationTimer;
-        float timer;
-        int width;
-        int height;
-        std::vector<sf::IntRect> frames;
-        int currentFrame;
-
-        
-        Animation(sf::Sprite& sprite, sf::Texture& texture_sheet, float animation_timer,
-            int startX, int startY, int framesX, int framesY, int width, int height);
-
-       
-        void play(const float& dt);
-        void reset();
-    };
-
-    
-    void addAnimation(const std::string& key, float animation_timer, int startX, int startY, int framesX, int framesY, int width, int height);
-    void play(const std::string& key, const float& dt);
-
 private:
     sf::Sprite& sprite;
-    sf::Texture& textureSheet;
-    std::map<std::string, Animation*> animations;
+    std::vector<sf::IntRect> currentAnimationFrames;
+    size_t currentFrameIndex;
+    float animationSpeed;
+    float elapsedTime;
+    std::string currentAnimationName;
+
+public:
+    AnimationComponent(sf::Sprite& sprite);
+
+    void setAnimation(const std::string& animationName, const std::unordered_map<std::string, sf::IntRect>& spritesSheet, float speed);
+
+    void update(float deltaTime);
 };
 
-#endif
+#endif // ANIMATIONCOMPONENT_H
