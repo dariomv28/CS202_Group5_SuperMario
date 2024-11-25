@@ -22,72 +22,98 @@ void Mario::init() {
     }
 
     entitySprite.setTexture(entityTexture);
-    entitySprite.setOrigin(8.0f, 16.0f);
+    if (!is_big) {
+        entitySprite.setOrigin(8.0f, 8.0f);
+    }
+    else {
+		entitySprite.setOrigin(8.0f, 16.0f);
+    }
     entitySprite.setScale(4.0f, 4.0f);
-
-    animationComponent = new AnimationComponent(entitySprite);
+    
+        
+    this->animationComponent = new AnimationComponent(this->entitySprite);
     initAnimations();
 
-    currentAction = "IDLE-";
-    animationComponent->setAnimation("IDLE", spritesSheet, 0.2f, is_big);
+    if (!is_big) {
+        hitbox.setSize(sf::Vector2f(64.f, 64.f));
+        hitbox.setOrigin(32.f, 32.f);  // Half of 64x64
+        hitbox.setPosition(position);
+        hitbox.setFillColor(sf::Color::Transparent);
+        hitbox.setOutlineColor(sf::Color::Red);
+        hitbox.setOutlineThickness(1.f);
+
+        currentAction = "IDLE-";
+        animationComponent->setAnimation("IDLE", spritesSheet, 0.2f, is_big);
+    }
+    else {
+        hitbox.setSize(sf::Vector2f(70.f, 128.f));
+        hitbox.setOrigin(32.f, 64.f);  
+        hitbox.setPosition(position);
+        hitbox.setFillColor(sf::Color::Transparent);
+        hitbox.setOutlineColor(sf::Color::Red);
+        hitbox.setOutlineThickness(1.f);
+
+        currentAction = "isBig_IDLE-";
+        animationComponent->setAnimation("isBig_IDLE", spritesSheet, 0.2f, is_big);
+    }
 }
 
 void Mario::initAnimations() {
     spritesSheet = {
-        { "IDLE", sf::IntRect(1, 0, 16, 32) },
+        { "IDLE", sf::IntRect(1, 17, 16, 16) },
 
-        { "WALK-1", sf::IntRect(17, 0, 16, 32) },
-        { "WALK-2", sf::IntRect(37, 0, 16, 32) },
-        { "WALK-3", sf::IntRect(17, 0, 16, 32) },
-        { "WALK-4", sf::IntRect(1, 0, 16, 32) },
+        { "WALK-1", sf::IntRect(17, 17, 16, 16) },
+        { "WALK-2", sf::IntRect(37, 17, 16, 16) },
+        { "WALK-3", sf::IntRect(17, 17, 16, 16) },
+        { "WALK-4", sf::IntRect(1, 17, 16, 16) },
 
-        { "RUN-1", sf::IntRect(53, 0, 16, 32) },
+        { "RUN-1", sf::IntRect(53, 17, 16, 16) },
         //{ "RUN-2", sf::IntRect(69, 0, 16, 32) },
-        { "RUN-2", sf::IntRect(17, 0, 16, 32) },
-        { "RUN-3", sf::IntRect(37, 0, 16, 32) },
-        { "RUN-4", sf::IntRect(17, 0, 16, 32) },
-        { "RUN-5", sf::IntRect(1, 0, 16, 32) },
+        { "RUN-2", sf::IntRect(17, 17, 16, 16) },
+        { "RUN-3", sf::IntRect(37, 17, 16, 16) },
+        { "RUN-4", sf::IntRect(17, 17, 16, 16) },
+        { "RUN-5", sf::IntRect(1, 17, 16, 16) },
 
-        { "JUMP-1", sf::IntRect(86, 0, 16, 32) },
-        { "JUMP-2", sf::IntRect(103, 0, 16, 32) },
-        { "JUMP-3", sf::IntRect(120, 0, 16, 32) },
+        { "JUMP-1", sf::IntRect(86, 17, 16, 16) },
+        { "JUMP-2", sf::IntRect(103, 17, 16, 16) },
+        { "JUMP-3", sf::IntRect(120, 17, 16, 16) },
 
-        { "CLIMB-1", sf::IntRect(139, 0, 16, 32) },
-        { "CLIMB-2", sf::IntRect(156, 0, 16, 32) },
+        { "CLIMB-1", sf::IntRect(139, 17, 16, 16) },
+        { "CLIMB-2", sf::IntRect(156, 17, 16, 16) },
 
-        { "VICTORY-1", sf::IntRect(171, 0, 16, 32) },
-        { "VICTORY-2", sf::IntRect(189, 0, 16, 32) },
-        { "VICTORY-3", sf::IntRect(205, 0, 16, 32) },
+        { "VICTORY-1", sf::IntRect(171, 17, 16, 16) },
+        { "VICTORY-2", sf::IntRect(189, 17, 16, 16) },
+        { "VICTORY-3", sf::IntRect(205, 17, 16, 16) },
 
-        { "BECOME_BIG", sf::IntRect(224, 0, 16, 32) },
+        { "BECOME_BIG", sf::IntRect(224, 3, 16, 32) },
 
-        { "isBig_IDLE", sf::IntRect(241, 0, 16, 32) },
+        { "isBig_IDLE", sf::IntRect(241, 3, 16, 32) },
 
-        { "isBig_WALK-1", sf::IntRect(256, 0, 16, 32) },
-        { "isBig_WALK-2", sf::IntRect(273, 0, 16, 32) },
-        { "isBig_WALK-3", sf::IntRect(256, 0, 16, 32) },
-        { "isBig_WALK-4", sf::IntRect(241, 0, 16, 32) },
+        { "isBig_WALK-1", sf::IntRect(256, 3, 16, 32) },
+        { "isBig_WALK-2", sf::IntRect(273, 3, 16, 32) },
+        { "isBig_WALK-3", sf::IntRect(256, 3, 16, 32) },
+        { "isBig_WALK-4", sf::IntRect(241, 3, 16, 32) },
 
-        { "isBig_RUN-1", sf::IntRect(290, 0, 16, 32) },
+        { "isBig_RUN-1", sf::IntRect(290, 3, 16, 32) },
         //{ "isBig_RUN-2", sf::IntRect(307, 0, 16, 32) },
-        { "isBig_RUN-2", sf::IntRect(256, 0, 16, 32) },
-        { "isBig_RUN-3", sf::IntRect(273, 0, 16, 32) },
-        { "isBig_RUN-4", sf::IntRect(256, 0, 16, 32) },
-        { "isBig_RUN-5", sf::IntRect(241, 0, 16, 32) },
+        { "isBig_RUN-2", sf::IntRect(256, 3, 16, 32) },
+        { "isBig_RUN-3", sf::IntRect(273, 3, 16, 32) },
+        { "isBig_RUN-4", sf::IntRect(256, 3, 16, 32) },
+        { "isBig_RUN-5", sf::IntRect(241, 3, 16, 32) },
 
-        { "isBig_JUMP-1", sf::IntRect(328, 0, 20, 32) },
-        { "isBig_JUMP-2", sf::IntRect(354, 0, 20, 32) },
-        { "isBig_JUMP-3", sf::IntRect(378, 0, 20, 32) },
+        { "isBig_JUMP-1", sf::IntRect(328, 3, 20, 32) },
+        { "isBig_JUMP-2", sf::IntRect(354, 3, 20, 32) },
+        { "isBig_JUMP-3", sf::IntRect(378, 3, 20, 32) },
 
-        { "isBig_CLIMB-1", sf::IntRect(401, 0, 16, 32) },
-        { "isBig_CLIMN-2", sf::IntRect(418, 0, 16, 32) },
+        { "isBig_CLIMB-1", sf::IntRect(401, 3, 16, 32) },
+        { "isBig_CLIMN-2", sf::IntRect(418, 3, 16, 32) },
 
-        { "isBig_CROUCH", sf::IntRect(433, 0, 16, 32) },
+        { "isBig_CROUCH", sf::IntRect(433, 3, 16, 32) },
 
-        { "isBig_VICTORY-1", sf::IntRect(450, 0, 16, 32) },
-        { "isBig_VICTORY-2", sf::IntRect(467, 0, 16, 32) },
-        { "isBig_VICTORY-3", sf::IntRect(484, 0, 16, 32) },
-        { "isBig_VICTORY-4", sf::IntRect(501, 0, 16, 32) },
+        { "isBig_VICTORY-1", sf::IntRect(450, 3, 16, 32) },
+        { "isBig_VICTORY-2", sf::IntRect(467, 3, 16, 32) },
+        { "isBig_VICTORY-3", sf::IntRect(484, 3, 16, 32) },
+        { "isBig_VICTORY-4", sf::IntRect(501, 3, 16, 32) },
     };
 }
 
@@ -205,6 +231,7 @@ void Mario::updateAnimation(const float& dt) {
 void Mario::render(sf::RenderTarget* target) {
     if (target) {
         target->draw(entitySprite);
+        target->draw(hitbox);
     }
     else {
         std::cerr << "Render target is null!" << std::endl;

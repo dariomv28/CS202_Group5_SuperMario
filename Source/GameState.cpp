@@ -5,7 +5,7 @@ using namespace std;
 GameState::GameState(StateData* stateData) : State(stateData), mapManager(nullptr) {
     player = new Mario(
         // Starting position
-        sf::Vector2f(400.f, 761.f), 
+        sf::Vector2f(400.f, 781.f), 
         // Size
         sf::Vector2f(64.f, 64.f),   
         // Health

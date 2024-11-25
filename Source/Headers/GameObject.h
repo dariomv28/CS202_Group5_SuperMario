@@ -24,6 +24,8 @@ public:
 	bool checkCollisionLeft(GameObject* obj);
 	bool checkCollisionRight(GameObject* obj);
 
+	void setSize(const sf::Vector2f& newSize);
+
 	virtual void update(const float& dt) = 0;
 	//virtual void reactToObject(PlayerManager* player, std::vector<Block*> blocks, std::vector<Enemy> enemies) = 0;
 
