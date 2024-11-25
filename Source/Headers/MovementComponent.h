@@ -1,7 +1,6 @@
 #pragma once
 #include "stdafx.h"
 
-//Movement caused by the object itself (user input, AI, etc.)
 class MovementComponent
 {
 private:

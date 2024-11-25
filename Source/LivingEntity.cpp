@@ -119,8 +119,6 @@ void LivingEntity::move(const float& dt)
 	this->position += this->movementComponent->velocity;
 	this->position.x = std::max<float>(this->position.x, 32.0);
 	this->position.x = std::min<float>(this->position.x, 13416);
-
-	std::cout << position.x << "\n";
 	this->entitySprite.setPosition(this->position);
 	this->hitbox.setPosition(this->position);
 }

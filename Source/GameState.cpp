@@ -4,18 +4,22 @@ using namespace std;
 
 GameState::GameState(StateData* stateData) : State(stateData), mapManager(nullptr) {
     player = new Mario(
-        sf::Vector2f(400.f, 300.f),  // Starting position
-        sf::Vector2f(64.f, 64.f),    // Size
-        100,                         // Health
-        150.0f,                       // Speed
-        &physicsEngine              // Pointer to physics engine
+        // Starting position
+        sf::Vector2f(400.f, 761.f), 
+        // Size
+        sf::Vector2f(64.f, 64.f),   
+        // Health
+        100,  
+        // Speed
+        20.0f,                      
+        &physicsEngine              
     );
     Enemies.clear();
 	Blocks.clear();
 
     physicsEngine.addPlayer(player);
     // Add Mario to game objects
-  //  gameObjects.push_back(player);
+    // gameObjects.push_back(player);
 }
 
 
@@ -73,10 +77,8 @@ void GameState::update(const float& dt) {
     for (auto& object : gameObjects) {
         object->update(dt);
     }
-    cerr << player->getOnGround() << " " << player->getVelocity().x << " " << player->getVelocity().y << endl;
 }
   
-
 void GameState::render(sf::RenderTarget* target) {
     if (!target) {
         target = window;

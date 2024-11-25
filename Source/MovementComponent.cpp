@@ -57,10 +57,10 @@ void MovementComponent::jump(const float& dt) {
         velocity.y = -0.6f * PIXELS_PER_METER;
         onGround = false;
         isJump = false;
-        jumpsRemaining = MAX_JUMPS - 1;  // First jump used
+        jumpsRemaining = MAX_JUMPS - 1; 
     }
     else if (!onGround && isJump && jumpsRemaining > 0) {
-        velocity.y = -0.6f * PIXELS_PER_METER;  // Slightly lower jump height for second jump
+        velocity.y = -0.6f * PIXELS_PER_METER;  
         isJump = false;
         jumpsRemaining--;
     }

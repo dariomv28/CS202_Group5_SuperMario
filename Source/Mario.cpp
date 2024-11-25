@@ -9,7 +9,6 @@ Mario::Mario(sf::Vector2f position, sf::Vector2f size, int health, int speed, Ph
     init();
 }
 
-
 Mario::~Mario() {
     delete animationComponent;
 }
@@ -25,8 +24,6 @@ void Mario::init() {
     entitySprite.setTexture(entityTexture);
     entitySprite.setOrigin(8.0f, 16.0f);
     entitySprite.setScale(4.0f, 4.0f);
-
-    //entitySprite.setPosition(100.f, 500.f);
 
     animationComponent = new AnimationComponent(entitySprite);
     initAnimations();
@@ -110,6 +107,7 @@ void Mario::handleInput(const float& dt) {
 
     bool isWalking = false;
     bool isRunning = false;
+	bool isCrouching = false;
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
         movementComponent->isMoveLeft = true;
@@ -120,6 +118,13 @@ void Mario::handleInput(const float& dt) {
         movementComponent->isMoveRight = true;
         entitySprite.setScale(4.0f, 4.0f);
         isWalking = true;
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+        if (is_big) {
+            currentAction = "CROUCH";
+            isAnimationInProgress = true;
+			isCrouching = true;
+        }
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) {
@@ -152,6 +157,9 @@ void Mario::handleInput(const float& dt) {
         }
         else if (isWalking) {
             currentAction = "WALK-";
+        }
+        else if (isCrouching) {
+            currentAction = "CROUCH";
         }
         else {
             currentAction = "IDLE";
