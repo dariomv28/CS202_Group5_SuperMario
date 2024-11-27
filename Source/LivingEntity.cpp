@@ -6,6 +6,7 @@ LivingEntity::LivingEntity()
 	this->health = 0;
 	this->speed = 0;
 	this->movementComponent = new MovementComponent(2, speed);
+	//this->movementComponent->onGround = false;
 	//this->animationComponent = new AnimationComponent();
 }
 
@@ -15,6 +16,7 @@ LivingEntity::LivingEntity(sf::Vector2f position, sf::Vector2f size, int health,
 	this->health = health;
 	this->speed = speed;
 	this->movementComponent = new MovementComponent();
+	this->movementComponent->onGround = false;
 	//this->animationComponent = new AnimationComponent();
 }
 

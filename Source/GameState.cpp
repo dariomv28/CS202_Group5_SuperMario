@@ -14,6 +14,7 @@ GameState::GameState(StateData* stateData) : State(stateData), mapManager(nullpt
         20.0f,                      
         &physicsEngine              
     );
+	player->movementComponent->onGround = false;
     Enemies.clear();
 	Blocks.clear();
 

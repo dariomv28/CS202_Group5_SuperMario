@@ -34,8 +34,10 @@ Block::Block(sf::Vector2f position, sf::Vector2f size, PhysicsEngine* physicEngi
 	this->name = name;
 	entityTexture.loadFromFile("Source/Resources/texture/Tileset.png");
 	hitbox.setSize(size);
-	hitbox.setPosition(position);
+	//hitbox.setOrigin(size.x / 2, size.y / 2);
+	hitbox.setPosition(sf::Vector2f(position.x, position.y));
 	hitbox.setFillColor(sf::Color::Transparent);
 	hitbox.setOutlineColor(sf::Color::Red);
 	hitbox.setOutlineThickness(1);
+	//hitbox.setOrigin(size.x / 2, size.y / 2);
 }

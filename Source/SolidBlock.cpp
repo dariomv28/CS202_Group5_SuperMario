@@ -8,8 +8,13 @@ SolidBlock::SolidBlock(sf::Vector2f position, sf::Vector2f size, PhysicsEngine* 
 {
 	entitySprite.setTexture(entityTexture);
 	entitySprite.setTextureRect(spritesSheet[name]);
-	entitySprite.setPosition(position);
+	
 	entitySprite.setScale(size.x / entitySprite.getGlobalBounds().width, size.y / entitySprite.getGlobalBounds().height);
+	//entitySprite.setPosition(sf::Vector2f(0, 0));
+	//entitySprite.setOrigin(size.x / 2, size.y / 2);
+	entitySprite.setPosition(sf::Vector2f(position.x , position.y ));
+	//entitySprite.setOrigin(size.x / 2, size.y / 2);
+
 }
 
 

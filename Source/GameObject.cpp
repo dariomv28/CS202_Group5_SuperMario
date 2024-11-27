@@ -4,11 +4,11 @@ GameObject::GameObject() {};
 
 GameObject::GameObject(sf::Vector2f position, sf::Vector2f size, PhysicsEngine* physicsEngine) : 
 		position(position), size(size), physicsEngine(physicsEngine) {
-	hitbox.setSize(size);
+	/*hitbox.setSize(size);
 	hitbox.setPosition(position);
 	hitbox.setFillColor(sf::Color::Transparent);
 	hitbox.setOutlineColor(sf::Color::Red);
-	hitbox.setOutlineThickness(1.f);
+	hitbox.setOutlineThickness(1.f);*/
 }
 
 sf::Vector2f GameObject::getPosition() {
@@ -20,45 +20,71 @@ sf::Vector2f GameObject::getSize() {
 }
 
 bool GameObject::checkCollisionUp(GameObject* obj) {
-	sf::FloatRect intersection;
-	if (hitbox.getGlobalBounds().intersects(obj->hitbox.getGlobalBounds(), intersection)) {
-		float dyTop = intersection.top - hitbox.getGlobalBounds().top;
-		return dyTop > 0 && dyTop <= hitbox.getGlobalBounds().height;
+	// get top left and bottom right corners of the obj
+	sf::Vector2f objTopLeft = obj->hitbox.getPosition();
+	sf::Vector2f objBottomRight = obj->hitbox.getPosition() + obj->hitbox.getSize();
+	// get top left and bottom right corners of this object
+	sf::Vector2f thisTopLeft = hitbox.getPosition() + sf::Vector2f(0,-1);
+	sf::Vector2f thisBottomRight = hitbox.getPosition() + hitbox.getSize();
+
+	// check if the two rectangles intersect
+	if (thisTopLeft.x <= objBottomRight.x && thisBottomRight.x >= objTopLeft.x &&
+		thisTopLeft.y <= objBottomRight.y && thisBottomRight.y >= objTopLeft.y) {
+		return true;
 	}
 	return false;
 }
 
 bool GameObject::checkCollisionDown(GameObject* obj) {
-	sf::FloatRect intersection;
-	if (hitbox.getGlobalBounds().intersects(obj->hitbox.getGlobalBounds(), intersection)) {
-		float dyBottom = (hitbox.getGlobalBounds().top + hitbox.getGlobalBounds().height) -
-			(intersection.top + intersection.height);
-		return dyBottom >= 0 && dyBottom < hitbox.getGlobalBounds().height;
+	// get top left and bottom right corners of the obj
+	sf::Vector2f objTopLeft = obj->hitbox.getPosition();
+	sf::Vector2f objBottomRight = obj->hitbox.getPosition() + obj->hitbox.getSize();
+	// get top left and bottom right corners of this object
+	sf::Vector2f thisTopLeft = hitbox.getPosition();
+	sf::Vector2f thisBottomRight = hitbox.getPosition() + hitbox.getSize() + sf::Vector2f(0, 1);
+
+	// check if the two rectangles intersect
+	if (thisTopLeft.x <= objBottomRight.x && thisBottomRight.x >= objTopLeft.x &&
+		thisTopLeft.y <= objBottomRight.y && thisBottomRight.y >= objTopLeft.y) {
+		return true;
 	}
 	return false;
 }
 
 bool GameObject::checkCollisionLeft(GameObject* obj) {
-	if (checkCollisionDown(obj)) {
-		return false;
-	}
-	sf::FloatRect intersection;
-	if (hitbox.getGlobalBounds().intersects(obj->hitbox.getGlobalBounds(), intersection)) {
-		float dxLeft = intersection.left - hitbox.getGlobalBounds().left;
-		return dxLeft > 0 && dxLeft <= hitbox.getGlobalBounds().width;
+	// get top left and bottom right corners of the obj
+	sf::Vector2f objTopLeft = obj->hitbox.getPosition();
+	sf::Vector2f objBottomRight = obj->hitbox.getPosition() + obj->hitbox.getSize();
+	// get top left and bottom right corners of this object
+	sf::Vector2f thisTopLeft = hitbox.getPosition() + sf::Vector2f(-1, 0);
+	sf::Vector2f thisBottomRight = hitbox.getPosition() + hitbox.getSize();
+
+	// check if the two rectangles intersect
+	if (thisTopLeft.x <= objBottomRight.x && thisBottomRight.x >= objTopLeft.x &&
+		thisTopLeft.y <= objBottomRight.y && thisBottomRight.y >= objTopLeft.y) {
+		std::cerr << "__________________________________" << "\n";
+		std::cerr << sf::Vector2f(thisTopLeft.x, thisTopLeft.y).x << " " << sf::Vector2f(thisTopLeft.x, thisTopLeft.y).y << "\n";
+		std::cerr << sf::Vector2f(thisBottomRight.x, thisBottomRight.y).x << " " << sf::Vector2f(thisBottomRight.x, thisBottomRight.y).y << "\n";
+		std::cerr << "space\n";
+		std::cerr << sf::Vector2f(objTopLeft.x, objTopLeft.y).x << " " << sf::Vector2f(objTopLeft.x, objTopLeft.y).y << "\n";
+		std::cerr << sf::Vector2f(objBottomRight.x, objBottomRight.y).x << " " << sf::Vector2f(objBottomRight.x, objBottomRight.y).y << "\n";
+		return true;
 	}
 	return false;
 }
 
 bool GameObject::checkCollisionRight(GameObject* obj) {
-	if (checkCollisionDown(obj)) {
-		return false;
-	}
-	sf::FloatRect intersection;
-	if (hitbox.getGlobalBounds().intersects(obj->hitbox.getGlobalBounds(), intersection)) {
-		float dxRight = (hitbox.getGlobalBounds().left + hitbox.getGlobalBounds().width) -
-			(intersection.left + intersection.width);
-		return dxRight > 0 && dxRight <= hitbox.getGlobalBounds().width;
+	// get top left and bottom right corners of the obj
+	sf::Vector2f objTopLeft = obj->hitbox.getPosition();
+	sf::Vector2f objBottomRight = obj->hitbox.getPosition() + obj->hitbox.getSize();
+	// get top left and bottom right corners of this object
+	sf::Vector2f thisTopLeft = hitbox.getPosition();
+	sf::Vector2f thisBottomRight = hitbox.getPosition() + hitbox.getSize() + sf::Vector2f(1, 0);
+
+	// check if the two rectangles intersect
+	if (thisTopLeft.x <= objBottomRight.x && thisBottomRight.x >= objTopLeft.x &&
+		thisTopLeft.y <= objBottomRight.y && thisBottomRight.y >= objTopLeft.y) {
+		return true;
 	}
 	return false;
 }

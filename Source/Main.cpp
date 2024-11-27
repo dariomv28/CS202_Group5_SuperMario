@@ -1,4 +1,4 @@
-#include "Headers/MyApp.h"
+ #include "Headers/MyApp.h"
 
 int main() {
     MyApp app;
