@@ -3,6 +3,7 @@
 #include "Headers/Block.h"
 #include "Headers/LivingEntity.h"
 #include "Headers/Enemy.h"
+#include <iostream>
 
 PhysicsEngine::PhysicsEngine() {
 	gravity = sf::Vector2f(0, 2.0f * PIXELS_PER_METER);
@@ -61,7 +62,7 @@ void PhysicsEngine::resolveCollision(LivingEntity* entity) {
 				entity->setPosition(sf::Vector2f(entity->getPosition().x, entity->getPosition().y + 1));
 				entity->setVelocity(sf::Vector2f(entity->getVelocity().x, 0));
 				entity->movementComponent->resetJumps();
-				break;
+				//break;
 			}
 		}
 	}
@@ -70,8 +71,13 @@ void PhysicsEngine::resolveCollision(LivingEntity* entity) {
 	if (entity->getVelocity().y < 0) {
 		for (auto obj : blocks) {
 			if (entity->checkCollisionUp(obj)) {	
+				while (entity->checkCollisionUp(obj)) {
+					entity->setPosition(sf::Vector2f(entity->getPosition().x, entity->getPosition().y + 1));
+				}
+				entity->setPosition(sf::Vector2f(entity->getPosition().x, entity->getPosition().y - 1));
 				entity->setVelocity(sf::Vector2f(entity->getVelocity().x, 0));
-				break;
+				//entity->movementComponent->resetJumps();
+				//break;
 			}
 		}
 	}
@@ -79,8 +85,13 @@ void PhysicsEngine::resolveCollision(LivingEntity* entity) {
 	if (entity->isMoveRight()) {
 		for (auto obj : blocks) {
 			if (entity->checkCollisionRight(obj)) {
-				entity->setMoveRight(false);
-				break;
+				while (entity->checkCollisionRight(obj)) {
+					entity->setPosition(sf::Vector2f(entity->getPosition().x - 1, entity->getPosition().y));
+				}
+				entity->setPosition(sf::Vector2f(entity->getPosition().x + 1, entity->getPosition().y));
+				entity->setVelocity(sf::Vector2f(0, entity->getVelocity().y));
+				//entity->movementComponent->resetJumps();
+				//break;
 			}
 		}
 	}
@@ -89,8 +100,13 @@ void PhysicsEngine::resolveCollision(LivingEntity* entity) {
 	if (entity->isMoveLeft()) {
 		for (auto obj : blocks) {
 			if (entity->checkCollisionLeft(obj)) {
-				entity->setMoveLeft(false);
-				break;
+				while (entity->checkCollisionLeft(obj)) {
+					entity->setPosition(sf::Vector2f(entity->getPosition().x + 1, entity->getPosition().y));
+				}
+				entity->setPosition(sf::Vector2f(entity->getPosition().x - 1, entity->getPosition().y));
+				entity->setVelocity(sf::Vector2f(0, entity->getVelocity().y));
+				//entity->movementComponent->resetJumps();
+				//break;
 			}
 		}
 	}

@@ -23,10 +23,10 @@ void Mario::init() {
 
     entitySprite.setTexture(entityTexture);
     if (!is_big) {
-        entitySprite.setOrigin(8.0f, 8.0f);
+        //entitySprite.setOrigin(8.0f, 8.0f);
     }
     else {
-		entitySprite.setOrigin(8.0f, 16.0f);
+		//entitySprite.setOrigin(8.0f, 16.0f);
     }
     entitySprite.setScale(4.0f, 4.0f);
     
@@ -36,7 +36,7 @@ void Mario::init() {
 
     if (!is_big) {
         hitbox.setSize(sf::Vector2f(64.f, 64.f));
-        hitbox.setOrigin(32.f, 32.f);  // Half of 64x64
+        //hitbox.setOrigin(32.f, 32.f);  // Half of 64x64
         hitbox.setPosition(position);
         hitbox.setFillColor(sf::Color::Transparent);
         hitbox.setOutlineColor(sf::Color::Red);
@@ -47,7 +47,7 @@ void Mario::init() {
     }
     else {
         hitbox.setSize(sf::Vector2f(70.f, 128.f));
-        hitbox.setOrigin(32.f, 64.f);  
+        //hitbox.setOrigin(32.f, 64.f);  
         hitbox.setPosition(position);
         hitbox.setFillColor(sf::Color::Transparent);
         hitbox.setOutlineColor(sf::Color::Red);
