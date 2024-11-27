@@ -40,7 +40,6 @@ void MovementComponent::moveLeft(const float& dt) {
     if (velocity.x < -maxVelocity) {
         velocity.x = -maxVelocity;
     }
-    isMoveLeft = false;
 }
 
 void MovementComponent::moveRight(const float& dt) {
@@ -49,7 +48,6 @@ void MovementComponent::moveRight(const float& dt) {
     if (velocity.x > maxVelocity) {
         velocity.x = maxVelocity;
     }
-    isMoveRight = false;
 }
 
 void MovementComponent::jump(const float& dt) {

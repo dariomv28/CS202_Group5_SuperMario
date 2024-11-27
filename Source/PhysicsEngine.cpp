@@ -21,6 +21,7 @@ void PhysicsEngine::addPlayer(PlayerManager* obj) {
 
 void PhysicsEngine::applyGravity(LivingEntity* entity, const float& dt) {
 	entity->setVelocity(entity->getVelocity() + gravity * dt);
+	entity->setVelocity(sf::Vector2f(entity->getVelocity().x, std::min(entity->getVelocity().y, 15.0f * PIXELS_PER_METER)));
 }
 
 void PhysicsEngine::applyFriction(LivingEntity* entity, const float& dt) {
@@ -51,19 +52,27 @@ void PhysicsEngine::resolveCollision(LivingEntity* entity) {
 	//}
 
 	// Check for ground collision when moving downward
-	if (entity->getVelocity().y >= 0) {
+	if (entity->getVelocity().y > 0) {
 		for (auto obj : blocks) {
-			if (entity->checkCollisionDown(obj)) {
-				entity->setOnGround(true);
-				// Align entity with the top of the block
-				while (entity->checkCollisionDown(obj)) {
-					entity->setPosition(sf::Vector2f(entity->getPosition().x, entity->getPosition().y - 1));
-				}
-				entity->setPosition(sf::Vector2f(entity->getPosition().x, entity->getPosition().y + 1));
-				entity->setVelocity(sf::Vector2f(entity->getVelocity().x, 0));
-				entity->movementComponent->resetJumps();
-				//break;
+			// Check if the x-coordinate of the object 
+			// is in the range [entity->getPosition().x, entity->getPosition().x + entity->getSize().x]
+			if (obj->getPosition().x >= entity->getPosition().x + entity->getSize().x-1 ||
+				obj->getPosition().x + obj->getSize().x <= entity->getPosition().x+1) {
+				continue;
 			}
+
+			// Check if the object is below the entity
+			if (!entity->checkCollision(obj)) {
+				continue;
+			}
+			entity->setOnGround(true);
+			while (entity->getPosition().y + entity->getSize().y >= obj->getPosition().y) {
+				entity->setPosition(sf::Vector2f(entity->getPosition().x, entity->getPosition().y - 1));
+			}
+			entity->setPosition(sf::Vector2f(entity->getPosition().x, entity->getPosition().y));
+			entity->setVelocity(sf::Vector2f(entity->getVelocity().x, 0));
+			entity->movementComponent->resetJumps();
+			break;
 		}
 	}
 	 
@@ -84,30 +93,40 @@ void PhysicsEngine::resolveCollision(LivingEntity* entity) {
 	// Resolve right side collision
 	if (entity->isMoveRight()) {
 		for (auto obj : blocks) {
-			if (entity->checkCollisionRight(obj)) {
-				while (entity->checkCollisionRight(obj)) {
-					entity->setPosition(sf::Vector2f(entity->getPosition().x - 1, entity->getPosition().y));
-				}
-				entity->setPosition(sf::Vector2f(entity->getPosition().x + 1, entity->getPosition().y));
-				entity->setVelocity(sf::Vector2f(0, entity->getVelocity().y));
-				//entity->movementComponent->resetJumps();
-				//break;
+			//check if the object is in the range of the entity
+			if (obj->getPosition().y >= entity->getPosition().y + entity->getSize().y - 1 ||
+				obj->getPosition().y + obj->getSize().y <= entity->getPosition().y + 1) {
+				continue;
 			}
+			if (!entity->checkCollision(obj)) {
+				continue;
+			}
+			while (entity->checkCollision(obj)) {
+				entity->setPosition(sf::Vector2f(entity->getPosition().x - 1, entity->getPosition().y));
+			}
+			entity->setPosition(sf::Vector2f(entity->getPosition().x + 1, entity->getPosition().y));
+			entity->setVelocity(sf::Vector2f(0, entity->getVelocity().y));
+			break;
 		}
 	}
 
 	// Resolve left side collision
 	if (entity->isMoveLeft()) {
 		for (auto obj : blocks) {
-			if (entity->checkCollisionLeft(obj)) {
-				while (entity->checkCollisionLeft(obj)) {
-					entity->setPosition(sf::Vector2f(entity->getPosition().x + 1, entity->getPosition().y));
-				}
-				entity->setPosition(sf::Vector2f(entity->getPosition().x - 1, entity->getPosition().y));
-				entity->setVelocity(sf::Vector2f(0, entity->getVelocity().y));
-				//entity->movementComponent->resetJumps();
-				//break;
+			//check if the object is in the range of the entity
+			if (obj->getPosition().y >= entity->getPosition().y + entity->getSize().y - 1 ||
+				obj->getPosition().y + obj->getSize().y <= entity->getPosition().y + 1) {
+				continue;
 			}
+			if (!entity->checkCollision(obj)) {
+				continue;
+			}
+			while (entity->checkCollision(obj)) {
+				entity->setPosition(sf::Vector2f(entity->getPosition().x + 1, entity->getPosition().y));
+			}
+			entity->setPosition(sf::Vector2f(entity->getPosition().x - 1, entity->getPosition().y));
+			entity->setVelocity(sf::Vector2f(0, entity->getVelocity().y));
+			break;
 		}
 	}
 

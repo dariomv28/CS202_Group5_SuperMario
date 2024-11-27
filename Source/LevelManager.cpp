@@ -400,7 +400,7 @@ void convert_sketch(const unsigned char i_current_level, unsigned short& i_level
 			{
 				if (sf::Color(255, 0, 0) == pixel)
 				{
-					i_mario.setPosition(CELL_SIZE * a, 0);
+					i_mario.setPosition(CELL_SIZE * a, 250);
 				}
 				else if (sf::Color(182, 73, 0) == pixel)
 				{
