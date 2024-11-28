@@ -43,7 +43,7 @@ bool PhysicsEngine::checkCollision(GameObject* obj1, GameObject* obj2) {
 	return obj1->hitbox.getGlobalBounds().intersects(obj2->hitbox.getGlobalBounds());
 }
 
-bool PhysicsEngine::checkOnGround(GameObject* obj1, GameObject* obj2) {
+bool PhysicsEngine::checkCollideDown(GameObject* obj1, GameObject* obj2) {
 	if (obj2->getPosition().x >= obj1->getPosition().x + obj1->getSize().x - 1 ||
 		obj2->getPosition().x + obj2->getSize().x <= obj1->getPosition().x + 1) {
 		return false;
@@ -60,7 +60,7 @@ bool PhysicsEngine::checkOnGround(GameObject* obj1, GameObject* obj2) {
 	return true;
 }
 
-bool PhysicsEngine::checkCeiling(GameObject* obj1, GameObject* obj2) {
+bool PhysicsEngine::checkCollideUp(GameObject* obj1, GameObject* obj2) {
 	if (obj2->getPosition().x >= obj1->getPosition().x + obj1->getSize().x - 1 ||
 		obj2->getPosition().x + obj2->getSize().x <= obj1->getPosition().x + 1) {
 		return false;
@@ -78,6 +78,26 @@ bool PhysicsEngine::checkCeiling(GameObject* obj1, GameObject* obj2) {
 	return true;
 }
 
+bool PhysicsEngine::checkCollideLeft(GameObject* obj1, GameObject* obj2) {
+	if (obj2->getPosition().y >= obj1->getPosition().y + obj1->getSize().y - 2 ||
+		obj2->getPosition().y + obj2->getSize().y <= obj1->getPosition().y + 2) {
+		return false;
+	}
+
+	// Check if the object is to the left of the entity and they collide
+	return (obj2->getPosition().x <= obj1->getPosition().x && checkCollision(obj1, obj2));
+}
+
+bool PhysicsEngine::checkCollideRight(GameObject* obj1, GameObject* obj2) {
+	if (obj2->getPosition().y >= obj1->getPosition().y + obj1->getSize().y - 2 ||
+		obj2->getPosition().y + obj2->getSize().y <= obj1->getPosition().y + 2) {
+		return false;
+	}
+
+	// Check if the object is to the right of the entity and they collide
+	return (obj2->getPosition().x >= obj1->getPosition().x && checkCollision(obj1, obj2));	
+}
+
 
 void PhysicsEngine::resolveCollision(LivingEntity* entity) {
 	// Resolve on the ground
@@ -85,80 +105,68 @@ void PhysicsEngine::resolveCollision(LivingEntity* entity) {
 
 	for (auto obj : blocks) {
 		//Resolve the ground
-		if (entity->getVelocity().y >= 0 && checkOnGround(entity, obj)) {
+		if (entity->getVelocity().y >= 0 && checkCollideDown(entity, obj)) {
 			entity->setOnGround(true);
 			while (checkCollision(entity,obj)) {
 				entity->setPosition(sf::Vector2f(entity->getPosition().x, entity->getPosition().y - 1));
 			}
-			//entity->setPosition(sf::Vector2f(entity->getPosition().x, entity->getPosition().y));
+			entity->setPosition(sf::Vector2f(entity->getPosition().x, entity->getPosition().y + 1));
+
 			entity->setVelocity(sf::Vector2f(entity->getVelocity().x, 0));
 			entity->movementComponent->resetJumps();
 			continue;
 		}
 		//Resolve the ceiling
-		if (entity->getVelocity().y < 0 && checkCeiling(entity,obj)) {
-		
+		if (entity->getVelocity().y < 0 && checkCollideUp(entity,obj)) {
 			while (checkCollision(entity, obj)) {
 				entity->setPosition(sf::Vector2f(entity->getPosition().x, entity->getPosition().y + 1));
 			}
-			//entity->setPosition(sf::Vector2f(entity->getPosition().x, entity->getPosition().y + 1));
 			entity->setVelocity(sf::Vector2f(entity->getVelocity().x, 0));
 			continue;
-			//break;
 		}
 
+		//Resolve the right side
 		if (entity->isMoveRight()) {
-			if (!(obj->getPosition().y >= entity->getPosition().y + entity->getSize().y-2 ||
-				obj->getPosition().y + obj->getSize().y <= entity->getPosition().y+2) && 
-				obj->getPosition().x >= entity->getPosition().x) {
-				if (checkCollision(entity, obj)) {
-					while (checkCollision(entity, obj)) {
-						entity->setPosition(sf::Vector2f(entity->getPosition().x - 1, entity->getPosition().y));
-					}
-					entity->setVelocity(sf::Vector2f(0, entity->getVelocity().y));
-
+			if (checkCollideRight(entity,obj)) {
+				while (checkCollision(entity, obj)) {
+					entity->setPosition(sf::Vector2f(entity->getPosition().x - 1, entity->getPosition().y));
 				}
+				entity->setVelocity(sf::Vector2f(0, entity->getVelocity().y));
 			}
-			//entity->setPosition(sf::Vector2f(entity->getPosition().x + 1, entity->getPosition().y));
-			//break;
 		}
 
+		//Resolve the left side
 		if (entity->isMoveLeft()) {
-			if (obj->getPosition().y >= entity->getPosition().y + entity->getSize().y ||
-				obj->getPosition().y + obj->getSize().y <= entity->getPosition().y) {
-				continue;
+			if (checkCollideLeft(entity, obj)) {
+				while (checkCollision(entity, obj)) {
+					entity->setPosition(sf::Vector2f(entity->getPosition().x + 1, entity->getPosition().y));
+				}
+				entity->setVelocity(sf::Vector2f(0, entity->getVelocity().y));
 			}
-			//check if the object is to the left of the entity
-			if (obj->getPosition().x >= entity->getPosition().x + entity->getSize().x) {
-				continue;
-			}
-			if (!checkCollision(entity, obj)) {
-				continue;
-			}
-			while (checkCollision(entity, obj)) {
-				entity->setPosition(sf::Vector2f(entity->getPosition().x + 1, entity->getPosition().y));
-			}
-			//entity->setPosition(sf::Vector2f(entity->getPosition().x - 1, entity->getPosition().y));
-			entity->setVelocity(sf::Vector2f(0, entity->getVelocity().y));
-			//break;
 		}
 	}
-
-
 }
 
-void PhysicsEngine::updateMovement(LivingEntity* entity, const float& dt) {
-	resolveCollision(entity);
-	if (!entity->getOnGround()) {
-		applyGravity(entity, dt);
-	}
+void PhysicsEngine::applyExternalForces(LivingEntity* entity, const float& dt) {
+	applyGravity(entity, dt);
 	applyFriction(entity, dt);
 }
 
-void PhysicsEngine::playerUpdatePhysics(const float& dt) {
-	updateMovement(player, dt);
-}
+//void PhysicsEngine::updateMovement(LivingEntity* entity, const float& dt) {
+//	//Apply external forces
+//	applyExternalForces(entity, dt);
+//
+//	//Move the entity
+//	entity->setPosition(entity->getPosition() + entity->getVelocity() );
+//	
+//	//Resolve collisions
+//	resolveCollision(entity);
+//}
 
-void PhysicsEngine::objectUpdatePhysics(const float& dt) {
-
-}
+//void PhysicsEngine::playerUpdatePhysics(const float& dt) {
+//	updateMovement(player, dt);
+//}
+//
+//void PhysicsEngine::objectUpdatePhysics(const float& dt) {
+//
+//}

@@ -20,14 +20,7 @@ public:
 	sf::Vector2f getPosition();
 	sf::Vector2f getSize();
 	sf::Vector2f getCenter() const;
-
-    // Helper function to check if the line intersects the top of the object
    
-	//Check Collisions in 4 sides of the object
-	bool checkCollisionUp(GameObject* obj);
-	bool checkCollisionDown(GameObject* obj);
-	bool checkCollisionLeft(GameObject* obj);
-	bool checkCollisionRight(GameObject* obj);
 
 	void setSize(const sf::Vector2f& newSize);
 

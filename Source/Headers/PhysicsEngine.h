@@ -17,23 +17,23 @@ private:
 	PlayerManager* player;
 	sf::Vector2f gravity;
 	sf::Vector2f friction;
-	void updateMovement(LivingEntity* entity, const float& dt);
 	//void updateReact(LivingEntity* entity, const float& dt);
 	void applyGravity(LivingEntity* obj, const float& dt);
 	void applyFriction(LivingEntity* obj, const float& dt);
-	void resolveCollision(LivingEntity* obj);
 public:
 	PhysicsEngine();
 	bool checkCollision(GameObject* obj1, GameObject* obj2);
-	bool checkOnGround(GameObject* obj1, GameObject* obj2);
-	bool checkCeiling(GameObject* obj1, GameObject* obj2);
+	bool checkCollideDown(GameObject* obj1, GameObject* obj2);
+	bool checkCollideUp(GameObject* obj1, GameObject* obj2);
+	bool checkCollideLeft(GameObject* obj1, GameObject* obj2);
+	bool checkCollideRight(GameObject* obj1, GameObject* obj2);
+
 	void addBlock(Block* obj);
 	void addPlayer(PlayerManager* obj);
-	void playerUpdatePhysics(const float& dt);
-	void objectUpdatePhysics(const float& dt);
-	//bool checkCollision(GameObject& obj1, GameObject& obj2);
-	//void resolveCollision(GameObject& obj1, GameObject& obj2);
-	//void updatePhysics();
-	//void applyUserInput(GameObject& obj);
+	//void updateMovement(LivingEntity* entity, const float& dt);
+	//void playerUpdatePhysics(const float& dt);
+	//void objectUpdatePhysics(const float& dt);
+	void resolveCollision(LivingEntity* obj);
+	void applyExternalForces(LivingEntity* entity, const float& dt);
 };
 

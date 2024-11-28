@@ -117,12 +117,17 @@ void LivingEntity::updateVelocity(const float& dt)
 
 void LivingEntity::move(const float& dt)
 {
-	//std::cout << "Moved " << this->getVelocity().x << ' ' << this->getVelocity().y << '\n';
+	updateVelocity(dt);
+	this->physicsEngine->applyExternalForces(this, dt);
 	this->position += this->movementComponent->velocity;
+	this->physicsEngine->resolveCollision(this);
+
+	// Keep the player within the bounds of the map
 	this->position.x = std::max<float>(this->position.x, 32.0);
 	this->position.x = std::min<float>(this->position.x, 13416);
 	this->entitySprite.setPosition(this->position);
 	this->hitbox.setPosition(this->position);
+
 }
 
 void LivingEntity::update(const float& dt) {

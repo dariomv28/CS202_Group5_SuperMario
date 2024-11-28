@@ -120,9 +120,8 @@ void Mario::initAnimations() {
 void Mario::update(const float& dt) {
     handleInput(dt);
     updateAnimation(dt);
-    updateVelocity(dt);
-    physicsEngine->playerUpdatePhysics(dt);
     move(dt);
+    //physicsEngine->playerUpdatePhysics(dt);
 
 }
 
