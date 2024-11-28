@@ -5,6 +5,7 @@ class PlayerManager;
 class LivingEntity;
 class Enemy;
 class Block;
+class GameObject;
 
 class PhysicsEngine 
 {
@@ -16,7 +17,6 @@ private:
 	PlayerManager* player;
 	sf::Vector2f gravity;
 	sf::Vector2f friction;
-
 	void updateMovement(LivingEntity* entity, const float& dt);
 	//void updateReact(LivingEntity* entity, const float& dt);
 	void applyGravity(LivingEntity* obj, const float& dt);
@@ -24,6 +24,9 @@ private:
 	void resolveCollision(LivingEntity* obj);
 public:
 	PhysicsEngine();
+	bool checkCollision(GameObject* obj1, GameObject* obj2);
+	bool checkOnGround(GameObject* obj1, GameObject* obj2);
+	bool checkCeiling(GameObject* obj1, GameObject* obj2);
 	void addBlock(Block* obj);
 	void addPlayer(PlayerManager* obj);
 	void playerUpdatePhysics(const float& dt);

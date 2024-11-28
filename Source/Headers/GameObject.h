@@ -20,9 +20,6 @@ public:
 	sf::Vector2f getPosition();
 	sf::Vector2f getSize();
 	sf::Vector2f getCenter() const;
-	bool checkCollision(GameObject* obj) {
-		return hitbox.getGlobalBounds().intersects(obj->hitbox.getGlobalBounds());
-	}
 
     // Helper function to check if the line intersects the top of the object
    

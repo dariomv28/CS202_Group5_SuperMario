@@ -23,10 +23,10 @@ void Mario::init() {
 
     entitySprite.setTexture(entityTexture);
     if (!is_big) {
-        //entitySprite.setOrigin(8.0f, 8.0f);
+     //   entitySprite.setOrigin(8.0f, 8.0f);
     }
     else {
-		//entitySprite.setOrigin(8.0f, 16.0f);
+	//	entitySprite.setOrigin(8.0f, 16.0f);
     }
     entitySprite.setScale(4.0f, 4.0f);
     
