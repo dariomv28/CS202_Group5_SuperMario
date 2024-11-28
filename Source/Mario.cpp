@@ -1,4 +1,4 @@
-#include "Headers/Mario.h"
+﻿#include "Headers/Mario.h"
 #include "Headers/PhysicsEngine.h"
 #include <stdexcept>
 
@@ -138,12 +138,16 @@ void Mario::handleInput(const float& dt) {
         movementComponent->isMoveLeft = true;
         entitySprite.setScale(-4.0f, 4.0f);
 		hitbox.setScale(-1.0f, 1.0f);
+        /*entitySprite.setOrigin(0, 0);
+		hitbox.setOrigin(0, 0);*/
         isWalking = true;
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         movementComponent->isMoveRight = true;
         entitySprite.setScale(4.0f, 4.0f);
         hitbox.setScale(1.0f, 1.0f);
+        /*entitySprite.setOrigin(0, 0);
+        hitbox.setOrigin(0, 0);*/
         isWalking = true;
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
