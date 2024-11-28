@@ -115,6 +115,7 @@ void PhysicsEngine::resolveCollision(LivingEntity* entity) {
 
 		//Resolve the left side
 		if (entity->isMoveLeft() && checkCollideLeft(entity, obj)) {
+			std::cerr << "Collide left" << std::endl;
 			while (checkCollision(entity, obj)) {
 				entity->setPosition(sf::Vector2f(entity->getPosition().x + 1, entity->getPosition().y));
 			}
@@ -128,7 +129,7 @@ void PhysicsEngine::resolveCollision(LivingEntity* entity) {
 			while (checkCollision(entity,obj)) {
 				entity->setPosition(sf::Vector2f(entity->getPosition().x, entity->getPosition().y - 1));
 			}
-			//entity->setPosition(sf::Vector2f(entity->getPosition().x, entity->getPosition().y + 1));
+			entity->setPosition(sf::Vector2f(entity->getPosition().x, entity->getPosition().y + 1));
 
 			entity->setVelocity(sf::Vector2f(entity->getVelocity().x, 0));
 			entity->movementComponent->resetJumps();
