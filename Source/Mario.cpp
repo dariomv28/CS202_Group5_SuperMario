@@ -3,7 +3,7 @@
 #include <stdexcept>
 
 Mario::Mario(sf::Vector2f position, sf::Vector2f size, int health, int speed, PhysicsEngine* physicEngine)
-    : PlayerManager(position, size, health, speed, physicEngine), is_big(false), currentAction("IDLE"), isAnimationInProgress(false) {
+    : PlayerManager(position, size, health, speed, physicEngine), is_big(true), currentAction("IDLE"), isAnimationInProgress(false) {
     animationComponent = nullptr;
     movementComponent = new MovementComponent(speed, 5.0f);
     init();
@@ -46,7 +46,7 @@ void Mario::init() {
         animationComponent->setAnimation("IDLE", spritesSheet, 0.2f, is_big);
     }
     else {
-        hitbox.setSize(sf::Vector2f(70.f, 128.f));
+        hitbox.setSize(sf::Vector2f(64.f, 125.f));
         //hitbox.setOrigin(32.f, 64.f);  
         hitbox.setPosition(position);
         hitbox.setFillColor(sf::Color::Transparent);
