@@ -91,6 +91,7 @@ void GameState::render(sf::RenderTarget* target) {
 
     player->render(target);
 	
+    //levelGUI->render(target);
 
     for (auto& Block : Blocks) {
         Block->render(target);

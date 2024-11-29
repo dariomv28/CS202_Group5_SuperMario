@@ -6,6 +6,7 @@
 #include "PhysicsEngine.h"
 #include "Block.h"
 #include "stdafx.h"
+#include "LevelGUI.h"
 
 class GameState : public State {
 private:
@@ -15,6 +16,7 @@ private:
     Mario* player;
 	vector<Enemy*> Enemies;
 	vector<Block*> Blocks;
+    //LevelGUI* levelGUI;      
 public:
     GameState(StateData* stateData);
     virtual ~GameState();
