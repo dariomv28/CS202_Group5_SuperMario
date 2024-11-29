@@ -129,7 +129,7 @@ void PhysicsEngine::resolveCollision(LivingEntity* entity) {
 			while (checkCollision(entity,obj)) {
 				entity->setPosition(sf::Vector2f(entity->getPosition().x, entity->getPosition().y - 1));
 			}
-			entity->setPosition(sf::Vector2f(entity->getPosition().x, entity->getPosition().y + 1));
+			entity->setPosition(sf::Vector2f(entity->getPosition().x, entity->getPosition().y + 0.5));
 
 			entity->setVelocity(sf::Vector2f(entity->getVelocity().x, 0));
 			entity->movementComponent->resetJumps();
