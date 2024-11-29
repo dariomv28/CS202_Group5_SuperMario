@@ -39,25 +39,25 @@ void PhysicsEngine::applyFriction(LivingEntity* entity, const float& dt) {
 }
 
 bool PhysicsEngine::checkCollision(GameObject* obj1, GameObject* obj2) {
-	if (obj1->getPosition().x > obj2->getPosition().x + obj2->getSize().x ||
-		obj1->getPosition().x + obj1->getSize().x < obj2->getPosition().x) {
+	if (obj1->hitbox.getGlobalBounds().getPosition().x > obj2->hitbox.getGlobalBounds().getPosition().x + obj2->hitbox.getSize().x ||
+		obj1->hitbox.getGlobalBounds().getPosition().x + obj1->hitbox.getSize().x < obj2->hitbox.getGlobalBounds().getPosition().x) {
 		return false;
 	}
-	if (obj1->getPosition().y > obj2->getPosition().y + obj2->getSize().y ||
-		obj1->getPosition().y + obj1->getSize().y < obj2->getPosition().y) {
+	if (obj1->hitbox.getGlobalBounds().getPosition().y > obj2->hitbox.getGlobalBounds().getPosition().y + obj2->hitbox.getSize().y ||
+		obj1->hitbox.getGlobalBounds().getPosition().y + obj1->hitbox.getSize().y < obj2->hitbox.getGlobalBounds().getPosition().y) {
 		return false;
 	}
 	return true;
 }
 
 bool PhysicsEngine::checkCollideDown(GameObject* obj1, GameObject* obj2) {
-	if (obj2->getPosition().x >= obj1->getPosition().x + obj1->getSize().x - 8 ||
-		obj2->getPosition().x + obj2->getSize().x <= obj1->getPosition().x + 8) {
+	if (obj2->hitbox.getGlobalBounds().getPosition().x >= obj1->hitbox.getGlobalBounds().getPosition().x + obj1->hitbox.getSize().x - 2 ||
+		obj2->hitbox.getGlobalBounds().getPosition().x + obj2->hitbox.getSize().x <= obj1->hitbox.getGlobalBounds().getPosition().x + 2) {
 		return false;
 	}
 
 	// Check if object2 is below object1
-	if (obj2->getPosition().y >= obj1->getPosition().y + obj1->getSize().y) {
+	if (obj2->hitbox.getGlobalBounds().getPosition().y >= obj1->hitbox.getGlobalBounds().getPosition().y + obj1->hitbox.getSize().y) {
 		return false;
 	}
 
@@ -68,33 +68,33 @@ bool PhysicsEngine::checkCollideDown(GameObject* obj1, GameObject* obj2) {
 }
 
 bool PhysicsEngine::checkCollideUp(GameObject* obj1, GameObject* obj2) {
-	if (obj2->getPosition().x >= obj1->getPosition().x + obj1->getSize().x - 8 ||
-		obj2->getPosition().x + obj2->getSize().x <= obj1->getPosition().x + 8) {
+	if (obj2->hitbox.getGlobalBounds().getPosition().x >= obj1->hitbox.getGlobalBounds().getPosition().x + obj1->hitbox.getSize().x - 2 ||
+		obj2->hitbox.getGlobalBounds().getPosition().x + obj2->hitbox.getSize().x <= obj1->hitbox.getGlobalBounds().getPosition().x + 2) {
 		return false;
 	}
 
 	// Check if the object1 is below object2 and they collide
-	return ((obj2->getPosition().y <= obj1->getPosition().y) && checkCollision(obj1, obj2));
+	return ((obj2->hitbox.getPosition().y <= obj1->hitbox.getPosition().y) && checkCollision(obj1, obj2));
 }
 
 bool PhysicsEngine::checkCollideLeft(GameObject* obj1, GameObject* obj2) {
-	if (obj2->getPosition().y >= obj1->getPosition().y + obj1->getSize().y - 8 ||
-		obj2->getPosition().y + obj2->getSize().y <= obj1->getPosition().y + 8) {
+	if (obj2->hitbox.getGlobalBounds().getPosition().y >= obj1->hitbox.getGlobalBounds().getPosition().y + obj1->hitbox.getSize().y - 2 ||
+		obj2->hitbox.getGlobalBounds().getPosition().y + obj2->hitbox.getSize().y <= obj1->hitbox.getGlobalBounds().getPosition().y + 2) {
 		return false;
 	}
 
 	// Check if the object is to the left of the entity and they collide
-	return (obj2->getPosition().x + 8 <= obj1->getPosition().x && checkCollision(obj1, obj2));
+	return (obj2->hitbox.getGlobalBounds().getPosition().x + 2 <= obj1->hitbox.getGlobalBounds().getPosition().x && checkCollision(obj1, obj2));
 }
 
 bool PhysicsEngine::checkCollideRight(GameObject* obj1, GameObject* obj2) {
-	if (obj2->getPosition().y >= obj1->getPosition().y + obj1->getSize().y - 8 ||
-		obj2->getPosition().y + obj2->getSize().y <= obj1->getPosition().y + 8) {
+	if (obj2->hitbox.getGlobalBounds().getPosition().y >= obj1->hitbox.getGlobalBounds().getPosition().y + obj1->hitbox.getSize().y - 2 ||
+		obj2->hitbox.getGlobalBounds().getPosition().y + obj2->hitbox.getSize().y <= obj1->hitbox.getGlobalBounds().getPosition().y + 2) {
 		return false;
 	}
 
 	// Check if the object is to the right of the entity and they collide
-	return (obj2->getPosition().x >= obj1->getPosition().x + 8 && checkCollision(obj1, obj2));	
+	return (obj2->hitbox.getGlobalBounds().getPosition().x >= obj1->hitbox.getGlobalBounds().getPosition().x + 2 && checkCollision(obj1, obj2));
 }
 
 
@@ -129,7 +129,7 @@ void PhysicsEngine::resolveCollision(LivingEntity* entity) {
 			while (checkCollision(entity,obj)) {
 				entity->setPosition(sf::Vector2f(entity->getPosition().x, entity->getPosition().y - 1));
 			}
-			entity->setPosition(sf::Vector2f(entity->getPosition().x, entity->getPosition().y + 1));
+			entity->setPosition(sf::Vector2f(entity->getPosition().x, entity->getPosition().y + 0.5));
 
 			entity->setVelocity(sf::Vector2f(entity->getVelocity().x, 0));
 			entity->movementComponent->resetJumps();

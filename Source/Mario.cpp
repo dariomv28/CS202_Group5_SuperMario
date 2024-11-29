@@ -1,9 +1,9 @@
-#include "Headers/Mario.h"
+﻿#include "Headers/Mario.h"
 #include "Headers/PhysicsEngine.h"
 #include <stdexcept>
 
 Mario::Mario(sf::Vector2f position, sf::Vector2f size, int health, int speed, PhysicsEngine* physicEngine)
-    : PlayerManager(position, size, health, speed, physicEngine), is_big(false), currentAction("IDLE"), isAnimationInProgress(false) {
+    : PlayerManager(position, size, health, speed, physicEngine), is_big(true), currentAction("IDLE"), isAnimationInProgress(false) {
     animationComponent = nullptr;
     movementComponent = new MovementComponent(speed, 5.0f);
     init();
@@ -46,7 +46,7 @@ void Mario::init() {
         animationComponent->setAnimation("IDLE", spritesSheet, 0.2f, is_big);
     }
     else {
-        hitbox.setSize(sf::Vector2f(70.f, 128.f));
+        hitbox.setSize(sf::Vector2f(64.f, 125.f));
         //hitbox.setOrigin(32.f, 64.f);  
         hitbox.setPosition(position);
         hitbox.setFillColor(sf::Color::Transparent);
@@ -138,12 +138,16 @@ void Mario::handleInput(const float& dt) {
         movementComponent->isMoveLeft = true;
         entitySprite.setScale(-4.0f, 4.0f);
 		hitbox.setScale(-1.0f, 1.0f);
+        /*entitySprite.setOrigin(0, 0);
+		hitbox.setOrigin(0, 0);*/
         isWalking = true;
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         movementComponent->isMoveRight = true;
         entitySprite.setScale(4.0f, 4.0f);
         hitbox.setScale(1.0f, 1.0f);
+        /*entitySprite.setOrigin(0, 0);
+        hitbox.setOrigin(0, 0);*/
         isWalking = true;
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {

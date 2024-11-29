@@ -88,7 +88,7 @@ void GameState::render(sf::RenderTarget* target) {
     if (mapManager) {
         //mapManager->render();
     }
-
+    cerr << player->hitbox.getPosition().x << endl;
     player->render(target);
 	
     //levelGUI->render(target);
