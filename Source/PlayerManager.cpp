@@ -1,8 +1,8 @@
 #include "Headers/PlayerManager.h"
-#include "Headers/PhysicsEngine.h"
+#include "Headers/GameEventMediator.h"
 
-PlayerManager::PlayerManager(sf::Vector2f position, sf::Vector2f size, int health, int speed, PhysicsEngine* physicEngine)
-    : LivingEntity(position, size, health, speed, physicEngine) {
+PlayerManager::PlayerManager(sf::Vector2f position, sf::Vector2f size, int health, int speed)
+    : LivingEntity(position, size, health, speed) {
     init();
 }
 
@@ -17,6 +17,12 @@ void PlayerManager::update(const float& dt) {
 }
 
 void PlayerManager::render(sf::RenderTarget* target) {
+}
+
+void PlayerManager::handleInput(const float& dt) {
+}
+
+void PlayerManager::updateAnimation(const float& dt) {
 }
 
 

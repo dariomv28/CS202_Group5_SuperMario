@@ -7,12 +7,13 @@
 #include "Block.h"
 #include "stdafx.h"
 #include "LevelGUI.h"
+#include "GameEventMediator.h"
 
 class GameState : public State {
 private:
-    PhysicsEngine physicsEngine;
+    GameEventMediator* eventMediator;
+    PhysicsEngine* physicsEngine;
     MapManager* mapManager;
-    std::vector<GameObject*> gameObjects;
     Mario* player;
 	vector<Enemy*> Enemies;
 	vector<Block*> Blocks;
@@ -21,6 +22,7 @@ public:
     GameState(StateData* stateData);
     virtual ~GameState();
 
+    void initGameEventMediator();
     void loadLevel(int levelID);
     void update(const float& dt) override;
     void render(sf::RenderTarget* target = nullptr) override;
