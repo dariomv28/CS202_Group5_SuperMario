@@ -342,7 +342,9 @@ sf::Color LevelManager::get_map_sketch_pixel(const unsigned short i_x, const uns
 
 
 
-void convert_sketch(const unsigned char i_current_level, unsigned short& i_level_finish, vector<Enemy*>& i_enemies, vector<Block*> &Blocks, sf::Color& i_background_color, LevelManager& i_level_manager, Mario& i_mario)
+void convert_sketch(const unsigned char i_current_level, unsigned short& i_level_finish, 
+	vector<Enemy*>& i_enemies, vector<Block*> &Blocks, 
+	sf::Color& i_background_color, LevelManager& i_level_manager, Mario& i_mario)
 {
 	unsigned short map_height;
 
@@ -383,7 +385,7 @@ void convert_sketch(const unsigned char i_current_level, unsigned short& i_level
 				}
 				else if (sf::Color(0, 0, 0) == pixel || sf::Color(146, 73, 0) == pixel)
 				{
-					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), nullptr, "underground_1_2"));
+					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "underground_1_2"));
 					i_level_manager.set_map_cell(a, b, Cell::Wall);
 				}
 				else

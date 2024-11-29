@@ -11,13 +11,13 @@ protected:
 	std::unordered_map<std::string, sf::IntRect> spritesSheet;
 public:
 	Block();
-	Block(sf::Vector2f position, sf::Vector2f size, PhysicsEngine* physicEngine, std::string name);
+	Block(sf::Vector2f position, sf::Vector2f size, std::string name);
 	virtual ~Block();
 	void initSpritesSheet();
 
 	//Setters and Getters
 	virtual void update(const float& dt) = 0;
-	virtual void reactToObject(PlayerManager* player, std::vector<Block*> blocks, std::vector<Enemy> enemies) = 0;
+	virtual void reactToCollison(int collidedSide) = 0;
 	virtual void render(sf::RenderTarget* target) = 0;
 };
 

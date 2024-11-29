@@ -2,8 +2,8 @@
 
 GameObject::GameObject() {};
 
-GameObject::GameObject(sf::Vector2f position, sf::Vector2f size, PhysicsEngine* physicsEngine) : 
-		position(position), size(size), physicsEngine(physicsEngine) {
+GameObject::GameObject(sf::Vector2f position, sf::Vector2f size) : 
+		position(position), size(size) {
 	/*hitbox.setSize(size);
 	hitbox.setPosition(position);
 	hitbox.setFillColor(sf::Color::Transparent);
@@ -40,4 +40,8 @@ void GameObject::setPosition(float x, float y) {
 	entitySprite.setPosition(position);
 	// Make sure hitbox follows the position exactly
 	hitbox.setPosition(position);
+}
+
+void GameObject::setEventMediator(GameEventMediator* mediator) {
+	eventMediator = mediator;
 }
