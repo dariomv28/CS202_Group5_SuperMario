@@ -11,7 +11,7 @@ public:
     virtual ~PlayerManager();
 
     // Initialization function
-    virtual void init();
+    virtual void init();    
     virtual void update(const float& dt);
 	virtual void render(sf::RenderTarget* target);
     std::string getImagePath() const;

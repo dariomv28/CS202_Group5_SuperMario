@@ -76,7 +76,7 @@ void GameState::update(const float& dt) {
     // physicsEngine.playerUpdatePhysics(dt);
     // physicsEngine.objectUpdatePhysics(dt);
     
-    //levelGUI->updateInfo(player->getHealth(), player->getCoins());
+    levelGUI->updateInfo(player->getHealth(), 10);  
     
     // Then update all game objects
     for (auto& object : gameObjects) {
@@ -95,7 +95,7 @@ void GameState::render(sf::RenderTarget* target) {
     cerr << player->hitbox.getPosition().x << endl;
     player->render(target);
 	
-    //levelGUI->render(target);
+    levelGUI->render(target);
 
     for (auto& Block : Blocks) {
         Block->render(target);
