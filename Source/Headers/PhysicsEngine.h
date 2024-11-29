@@ -1,20 +1,14 @@
 #pragma once
 #include "stdafx.h"	
+#include "GameEventMediator.h"
 
-class PlayerManager;
-class LivingEntity;
-class Enemy;
-class Block;
-class GameObject;
 
 class PhysicsEngine 
 {
 private:
 	const float PIXELS_PER_METER = 16.0f;
 
-	std::vector<Block*> blocks;
-	std::vector<Enemy*> enemies;
-	PlayerManager* player;
+	GameEventMediator* eventMediator;
 	sf::Vector2f gravity;
 	sf::Vector2f friction;
 	//void updateReact(LivingEntity* entity, const float& dt);
@@ -22,18 +16,19 @@ private:
 	void applyFriction(LivingEntity* obj, const float& dt);
 public:
 	PhysicsEngine();
+
+	//Setters and Getters
+	void setEventMediator(GameEventMediator* mediator);
+
+	//Colissions checking
 	bool checkCollision(GameObject* obj1, GameObject* obj2);
 	bool checkCollideDown(GameObject* obj1, GameObject* obj2);
 	bool checkCollideUp(GameObject* obj1, GameObject* obj2);
 	bool checkCollideLeft(GameObject* obj1, GameObject* obj2);
 	bool checkCollideRight(GameObject* obj1, GameObject* obj2);
 
-	void addBlock(Block* obj);
-	void addPlayer(PlayerManager* obj);
-	//void updateMovement(LivingEntity* entity, const float& dt);
-	//void playerUpdatePhysics(const float& dt);
-	//void objectUpdatePhysics(const float& dt);
-	void resolveCollision(LivingEntity* obj);
+	//Physics functions
+	void resolveCollision(LivingEntity* entity, std::vector<Block*>& blocks, const float& dt);
 	void applyExternalForces(LivingEntity* entity, const float& dt);
 };
 

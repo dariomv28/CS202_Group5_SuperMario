@@ -27,8 +27,8 @@ Block::~Block()
 {
 }
 
-Block::Block(sf::Vector2f position, sf::Vector2f size, PhysicsEngine* physicEngine, std::string name)
-	: GameObject(position, size, physicEngine)
+Block::Block(sf::Vector2f position, sf::Vector2f size, std::string name)
+	: GameObject(position, size)
 {	
 	initSpritesSheet();
 	this->name = name;

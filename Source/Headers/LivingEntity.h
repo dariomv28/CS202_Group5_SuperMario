@@ -9,12 +9,10 @@ class LivingEntity :
 protected:
     int health;
 	int speed;
-
-	virtual void updateAnimation(const float& dt) = 0;
 public:
 	LivingEntity();
 	LivingEntity(sf::Vector2f position, sf::Vector2f size, 
-				int health, int speed,	PhysicsEngine* physicEngine);
+				int health, int speed);
 	virtual ~LivingEntity();
 		
 	//Setters and Getters
@@ -37,10 +35,10 @@ public:
 	bool isJump() const;
 	void setJump(bool jump);
 
-	//Movement
+	//Functions
 	void updateVelocity(const float& dt);
 	virtual void move(const float& dt);
-
+	virtual void updateAnimation(const float& dt) = 0;
 	virtual void update(const float& dt) override;
 	virtual void render(sf::RenderTarget* target) override;
 

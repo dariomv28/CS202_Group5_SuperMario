@@ -1,0 +1,69 @@
+#include "Headers/GameEventMediator.h"
+#include "Headers/PlayerManager.h"
+#include "Headers/Block.h"
+#include "Headers/Enemy.h"
+#include "Headers/PhysicsEngine.h"
+
+GameEventMediator::GameEventMediator() {
+}
+
+GameEventMediator::~GameEventMediator() {
+}
+
+void GameEventMediator::addPlayer(PlayerManager* player) {
+	this->player = player;
+}
+
+void GameEventMediator::addBlock(Block* block) {
+	blocks.push_back(block);
+}
+
+void GameEventMediator::addEnemy(Enemy* enemy) {
+	enemies.push_back(enemy);
+}
+
+void GameEventMediator::addPhysicsEngine(PhysicsEngine* physicsEngine) {
+	this->physicsEngine = physicsEngine;
+}
+
+void GameEventMediator::updateMovements(const float& dt) {
+	// Update velocity of all entities
+	player->updateVelocity(dt);
+	for (auto& enemy : enemies) {
+		enemy->updateVelocity(dt);
+	}
+	// Update position of all entities
+	player->move(dt);
+	for (auto& enemy : enemies) {
+		enemy->move(dt);
+	}
+}
+
+void GameEventMediator::applyExternalForcesToEntities(const float& dt) {
+	// Apply gravity to all entities
+	for (auto& enemy : enemies) {
+		physicsEngine->applyExternalForces(enemy, dt);
+	}
+	physicsEngine->applyExternalForces(player, dt);
+}
+
+void GameEventMediator::resolveCollision(const float& dt) {
+	// Resolve collision between player and blocks
+	physicsEngine->resolveCollision(player, blocks, dt);
+	// Resolve collision between enemies and blocks
+	for (auto& enemy : enemies) {
+		physicsEngine->resolveCollision(enemy, blocks, dt);
+	}
+}
+
+void GameEventMediator::updateInput(const float& dt) {
+	player->handleInput(dt);
+
+}
+
+void GameEventMediator::updateAnimations(const float& dt) {
+	player->updateAnimation(dt);
+	for (auto& enemy : enemies) {
+		enemy->updateAnimation(dt);
+	}
+}

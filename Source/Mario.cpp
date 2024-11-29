@@ -2,8 +2,8 @@
 #include "Headers/PhysicsEngine.h"
 #include <stdexcept>
 
-Mario::Mario(sf::Vector2f position, sf::Vector2f size, int health, int speed, PhysicsEngine* physicEngine)
-    : PlayerManager(position, size, health, speed, physicEngine), is_big(true), currentAction("IDLE"), isAnimationInProgress(false) {
+Mario::Mario(sf::Vector2f position, sf::Vector2f size, int health, int speed)
+    : PlayerManager(position, size, health, speed), is_big(true), currentAction("IDLE"), isAnimationInProgress(false) {
     animationComponent = nullptr;
     movementComponent = new MovementComponent(speed, 5.0f);
     init();

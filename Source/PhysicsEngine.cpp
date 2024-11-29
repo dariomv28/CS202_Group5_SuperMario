@@ -1,4 +1,5 @@
 #include "Headers/PhysicsEngine.h"
+#include "Headers/GameEventMediator.h"
 #include "Headers/PlayerManager.h"
 #include "Headers/Block.h"
 #include "Headers/LivingEntity.h"
@@ -7,15 +8,10 @@
 PhysicsEngine::PhysicsEngine() {
 	gravity = sf::Vector2f(0, 2.0f * PIXELS_PER_METER);
 	friction = sf::Vector2f(15.0f * PIXELS_PER_METER, 0);
-	player = nullptr;
 }
 
-void PhysicsEngine::addBlock(Block* obj) {
-	blocks.push_back(obj);
-}
-
-void PhysicsEngine::addPlayer(PlayerManager* obj) {
-	player = obj;
+void PhysicsEngine::setEventMediator(GameEventMediator* mediator) {
+	this->eventMediator = mediator;
 }
 
 void PhysicsEngine::applyGravity(LivingEntity* entity, const float& dt) {
@@ -98,7 +94,7 @@ bool PhysicsEngine::checkCollideRight(GameObject* obj1, GameObject* obj2) {
 }
 
 
-void PhysicsEngine::resolveCollision(LivingEntity* entity) {
+void PhysicsEngine::resolveCollision(LivingEntity* entity, std::vector<Block*>& blocks, const float& dt) {
 	// Resolve on the ground
 	entity->setOnGround(false);
 
@@ -115,7 +111,6 @@ void PhysicsEngine::resolveCollision(LivingEntity* entity) {
 
 		//Resolve the left side
 		if (entity->isMoveLeft() && checkCollideLeft(entity, obj)) {
-			std::cerr << "Collide left" << std::endl;
 			while (checkCollision(entity, obj)) {
 				entity->setPosition(sf::Vector2f(entity->getPosition().x + 1, entity->getPosition().y));
 			}

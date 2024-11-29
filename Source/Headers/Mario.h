@@ -15,18 +15,20 @@ private:
 
 
 public:
-    Mario(sf::Vector2f position, sf::Vector2f size, int health, int speed, PhysicsEngine* physicEngine);
+    Mario(sf::Vector2f position, sf::Vector2f size, int health, int speed);
     Mario();
     ~Mario();
 
+    // Initialization function
     void init();
     void initAnimations();
 
-    //void setBig(bool big);
+    //Setters and Getters
     bool getIsBig() const;
 
+    // Functions
     void update(const float& dt) override;
     void render(sf::RenderTarget* target) override;
     void handleInput(const float& dt);
-    void updateAnimation(const float& dt);
+    void updateAnimation(const float& dt) override;
 };

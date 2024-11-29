@@ -1,5 +1,5 @@
 #include "Headers/LivingEntity.h"
-#include "Headers/PhysicsEngine.h"
+#include "Headers/GameEventMediator.h"
 
 LivingEntity::LivingEntity()
 {
@@ -10,8 +10,8 @@ LivingEntity::LivingEntity()
 	//this->animationComponent = new AnimationComponent();
 }
 
-LivingEntity::LivingEntity(sf::Vector2f position, sf::Vector2f size, int health, int speed, PhysicsEngine* physicEngine):
-	GameObject(position, size, physicEngine)
+LivingEntity::LivingEntity(sf::Vector2f position, sf::Vector2f size, int health, int speed):
+	GameObject(position, size)
 {
 	this->health = health;
 	this->speed = speed;
@@ -117,17 +117,11 @@ void LivingEntity::updateVelocity(const float& dt)
 
 void LivingEntity::move(const float& dt)
 {
-	updateVelocity(dt);
-	this->physicsEngine->applyExternalForces(this, dt);
 	this->position += this->movementComponent->velocity;
-	this->physicsEngine->resolveCollision(this);
-
-	// Keep the player within the bounds of the map
 	this->position.x = std::max<float>(this->position.x, 32.0);
 	this->position.x = std::min<float>(this->position.x, 13416);
 	this->entitySprite.setPosition(this->position);
 	this->hitbox.setPosition(this->position);
-
 }
 
 void LivingEntity::update(const float& dt) {
