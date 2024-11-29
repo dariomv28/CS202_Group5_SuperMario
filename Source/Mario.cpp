@@ -2,8 +2,8 @@
 #include "Headers/PhysicsEngine.h"
 #include <stdexcept>
 
-Mario::Mario(sf::Vector2f position, sf::Vector2f size, int health, int speed, PhysicsEngine* physicEngine)
-    : PlayerManager(position, size, health, speed, physicEngine), is_big(true), currentAction("IDLE"), isAnimationInProgress(false) {
+Mario::Mario(sf::Vector2f position, sf::Vector2f size, int health, int speed)
+    : PlayerManager(position, size, health, speed), is_big(false), currentAction("IDLE"), isAnimationInProgress(false) {
     animationComponent = nullptr;
     movementComponent = new MovementComponent(speed, 5.0f);
     init();
@@ -22,21 +22,14 @@ void Mario::init() {
     }
 
     entitySprite.setTexture(entityTexture);
-    if (!is_big) {
-     //   entitySprite.setOrigin(8.0f, 8.0f);
-    }
-    else {
-	//	entitySprite.setOrigin(8.0f, 16.0f);
-    }
     entitySprite.setScale(4.0f, 4.0f);
-    
         
     this->animationComponent = new AnimationComponent(this->entitySprite);
     initAnimations();
 
     if (!is_big) {
         hitbox.setSize(sf::Vector2f(64.f, 64.f));
-        //hitbox.setOrigin(32.f, 32.f);  // Half of 64x64
+        //hitbox.setOrigin(32.f, 32.f);
         hitbox.setPosition(position);
         hitbox.setFillColor(sf::Color::Transparent);
         hitbox.setOutlineColor(sf::Color::Red);
@@ -121,8 +114,6 @@ void Mario::update(const float& dt) {
     handleInput(dt);
     updateAnimation(dt);
     move(dt);
-    //physicsEngine->playerUpdatePhysics(dt);
-
 }
 
 void Mario::handleInput(const float& dt) {
@@ -138,16 +129,12 @@ void Mario::handleInput(const float& dt) {
         movementComponent->isMoveLeft = true;
         entitySprite.setScale(-4.0f, 4.0f);
 		hitbox.setScale(-1.0f, 1.0f);
-        /*entitySprite.setOrigin(0, 0);
-		hitbox.setOrigin(0, 0);*/
         isWalking = true;
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         movementComponent->isMoveRight = true;
         entitySprite.setScale(4.0f, 4.0f);
         hitbox.setScale(1.0f, 1.0f);
-        /*entitySprite.setOrigin(0, 0);
-        hitbox.setOrigin(0, 0);*/
         isWalking = true;
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
