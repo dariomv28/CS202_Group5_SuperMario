@@ -72,41 +72,6 @@ void GameState::initGameEventMediator() {
 
 }
 
-void sleepOneSecond() {
-    std::this_thread::sleep_for(std::chrono::seconds(1/3));
-}
-
-void GameState::handleInput(const float& dt) {
-    player->handleInput(dt);
-}
-
-//void GameState::updateMovements(const float& dt) {
-//    // Update Velocity first
-//    player->updateVelocity(dt);
-//    for (auto& enemy : Enemies) {
-//		enemy->updateVelocity(dt);
-//	}
-//    // Apply physical External Forces
-//    physicsEngine->applyExternalForces(player, dt);
-//    for (auto& enemy : Enemies) {
-//        physicsEngine->applyExternalForces(enemy, dt);
-//    }
-//    
-//    //Move the entities
-//    player->move(dt);
-//    for (auto& enemy : Enemies) {
-//		enemy->move(dt);
-//	}
-//}
-//
-//void GameState::updateEvents(const float& dt) {
-//    // Events from collisions
-//    physicsEngine->resolveCollision(player, Blocks);
-//    for (auto& enemy : Enemies) {
-//		physicsEngine->resolveCollision(enemy, Blocks);
-//	}
-//
-//}
 
 void GameState::update(const float& dt) {
     if (mapManager) {
@@ -122,7 +87,6 @@ void GameState::update(const float& dt) {
     */
     eventMediator->updateInput(dt);
     eventMediator->updateAnimations(dt);
-    eventMediator->applyExternalForcesToEntities(dt);
     eventMediator->updateMovements(dt);
     eventMediator->resolveCollision(dt);
     //resolveCollision(dt);
@@ -132,7 +96,8 @@ void GameState::update(const float& dt) {
     // physicsEngine.objectUpdatePhysics(dt);
     
     levelGUI->updateInfo(player->getHealth(), 10);  
-    
+    sf::View view = window->getView();
+    levelGUI->updatePosition(view);
     // Then update all game objects
 }
   

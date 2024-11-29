@@ -49,3 +49,16 @@ void LevelGUI::render(sf::RenderTarget* target) {
     target->draw(this->healthBar);
     target->draw(this->coinsLabel);
 }
+
+void LevelGUI::updatePosition(const sf::View& view) {
+    sf::Vector2f viewCenter = view.getCenter();
+    sf::Vector2f viewSize = view.getSize();
+
+    
+    float xOffset = viewCenter.x - viewSize.x / 2.0f;
+    float yOffset = viewCenter.y - viewSize.y / 2.0f;
+
+    
+    this->healthBar.setPosition(xOffset + 10.f, yOffset + 10.f);
+    this->coinsLabel.setPosition(xOffset + 10.f, yOffset + 40.f);
+}

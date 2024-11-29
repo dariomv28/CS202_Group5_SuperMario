@@ -24,9 +24,6 @@ public:
 
     void initGameEventMediator();
     void loadLevel(int levelID);
-    void handleInput(const float& dt);
-    void updateMovements(const float& dt);
-    void updateEvents(const float& dt);
     void update(const float& dt) override;
     void render(sf::RenderTarget* target = nullptr) override;
 };

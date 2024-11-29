@@ -20,4 +20,5 @@ public:
 
     void updateInfo(int playerHealth, int coins);
     void render(sf::RenderTarget* target);
+    void updatePosition(const sf::View& view);
 };

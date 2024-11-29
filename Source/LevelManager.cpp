@@ -22,7 +22,7 @@ void LevelManager::update(Mario*& Player) {
 }
 
 void LevelManager::render() {
-   
+	
 }
 
 unsigned short LevelManager::get_map_sketch_height() const

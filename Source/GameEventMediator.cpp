@@ -32,6 +32,8 @@ void GameEventMediator::updateMovements(const float& dt) {
 	for (auto& enemy : enemies) {
 		enemy->updateVelocity(dt);
 	}
+	//Apply external forces to all entities
+	applyExternalForcesToEntities(dt);
 	// Update position of all entities
 	player->move(dt);
 	for (auto& enemy : enemies) {
