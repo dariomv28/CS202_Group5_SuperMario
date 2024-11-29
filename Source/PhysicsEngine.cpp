@@ -131,7 +131,7 @@ void PhysicsEngine::resolveCollisionPlayerBlock(PlayerManager* entity, std::vect
 	// Resolve on the ground
 	entity->setOnGround(false);
 
-	for (auto &obj : blocks) {
+	for (auto obj : blocks) {
 		//Resolve the right side
 
 		if (entity->isMoveRight() && checkCollideRight(entity, obj)) {

@@ -3,7 +3,7 @@
 #include <stdexcept>
 
 Mario::Mario(sf::Vector2f position, sf::Vector2f size, int health, int speed)
-    : PlayerManager(position, size, health, speed), is_big(true), currentAction("IDLE"), isAnimationInProgress(false) {
+    : PlayerManager(position, size, health, speed), is_big(false), currentAction("IDLE"), isAnimationInProgress(false) {
     animationComponent = nullptr;
     movementComponent = new MovementComponent(speed, 5.0f);
     init();
