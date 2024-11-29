@@ -26,7 +26,7 @@ void SolidBlock::update(const float& dt) {
 
 }
 
-void SolidBlock::reactToObject(int collidedSide) {
+void SolidBlock::reactToCollison(int collidedSide) {
 
 }
 

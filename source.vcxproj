@@ -133,6 +133,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Brick.cpp" />
+    <ClCompile Include="Source\Pipe.cpp" />
     <ClCompile Include="Source\CoinBlock.cpp" />
     <ClCompile Include="Source\GameEventMediator.cpp" />
     <ClCompile Include="Source\LevelGUI.cpp" />
@@ -162,6 +164,8 @@
     <ClCompile Include="Source\State.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Headers\Brick.h" />
+    <ClInclude Include="Source\Headers\Pipe.h" />
     <ClInclude Include="Source\Headers\CoinBlock.h" />
     <ClInclude Include="Source\Headers\GameEventMediator.h" />
     <ClInclude Include="Source\Headers\LevelGUI.h" />

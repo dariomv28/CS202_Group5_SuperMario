@@ -95,6 +95,13 @@ enum Cell
 	Wall
 };
 
+enum Side {
+	Collide_Top,
+	Collide_Bottom,
+	Collide_Left,
+	Collide_Right
+};
+
 //We use this for brick particles.
 //Damn, I should've called it "Particle"! I'm so dumb!
 struct Object

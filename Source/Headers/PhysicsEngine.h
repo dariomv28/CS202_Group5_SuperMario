@@ -28,7 +28,10 @@ public:
 	bool checkCollideRight(GameObject* obj1, GameObject* obj2);
 
 	//Physics functions
-	void resolveCollision(LivingEntity* entity, std::vector<Block*>& blocks, const float& dt);
+	void fixPosition(LivingEntity* entity, GameObject* obj, int collidedSide);
+	void resolveCollisionPlayerBlock(PlayerManager* entity, std::vector<Block*>& blocks, const float& dt);
+	void resolveCollisionPlayerEnemy(PlayerManager* entity, std::vector<Enemy*>& enemies, const float& dt);
+	void resolveCollisionEnemyBlock(std::vector<Enemy*>& enemies, std::vector<Block*>& blocks, const float& dt);
 	void applyExternalForces(LivingEntity* entity, const float& dt);
 };
 

@@ -17,7 +17,7 @@ public:
 
 	//Setters and Getters
 	virtual void update(const float& dt) = 0;
-	virtual void reactToObject(int collidedSide) = 0;
+	virtual void reactToCollison(int collidedSide) = 0;
 	virtual void render(sf::RenderTarget* target) = 0;
 };
 

@@ -2,20 +2,33 @@
 
 void Block::initSpritesSheet()
 {
+	//Grounds
 	spritesSheet["ground_1_1"] = sf::IntRect(1, 1, 16, 16);
 	spritesSheet["underground_1_1"] = sf::IntRect(1, 18, 16, 16);
 
 	spritesSheet["ground_1_2"] = sf::IntRect(18, 1, 16, 16);
 	spritesSheet["underground_1_2"] = sf::IntRect(18, 18, 16, 16);
 
-	spritesSheet["ground_1_3"] = sf::IntRect(35, 1, 50, 16);
-	spritesSheet["underground_1_3"] = sf::IntRect(35, 18, 50, 33);
+	spritesSheet["ground_1_3"] = sf::IntRect(35, 1, 16, 16);
+	spritesSheet["underground_1_3"] = sf::IntRect(35, 18, 16, 16);
 
-	spritesSheet["brick_1"] = sf::IntRect(1, 86, 16, 101);
+	//Walls
+	spritesSheet["wall_1"] = sf::IntRect(1, 155, 16, 16);
 
-	spritesSheet["coin_block_1"] = sf::IntRect(1, 52, 16, 67);
-	spritesSheet["coin_block_2"] = sf::IntRect(18, 52, 33, 67);
-	spritesSheet["coin_block_3"] = sf::IntRect(35, 52, 50, 67);
+	//Bricks
+	spritesSheet["brick_1"] = sf::IntRect(1, 86, 16, 16);
+
+	//Coins Blocks
+	spritesSheet["empty_coin_block_1"] = sf::IntRect(1, 69, 16, 16);
+	spritesSheet["coin_block_1_1"] = sf::IntRect(1, 52, 16, 16);
+	spritesSheet["coin_block_1_2"] = sf::IntRect(18, 52, 33, 16);
+	spritesSheet["coin_block_1_3"] = sf::IntRect(35, 52, 50, 16);
+
+	//Pipe
+	spritesSheet["pipe_bottom_left"] = sf::IntRect(103, 69, 16,16);
+	spritesSheet["pipe_bottom_right"] = sf::IntRect(120, 69, 16, 16);
+	spritesSheet["pipe_top_left"] = sf::IntRect(103, 52, 16, 16);
+	spritesSheet["pipe_top_right"] = sf::IntRect(120, 52, 16, 16);
 }
 
 Block::Block()
@@ -39,5 +52,6 @@ Block::Block(sf::Vector2f position, sf::Vector2f size, std::string name)
 	hitbox.setFillColor(sf::Color::Transparent);
 	hitbox.setOutlineColor(sf::Color::Red);
 	hitbox.setOutlineThickness(1);
+
 	//hitbox.setOrigin(size.x / 2, size.y / 2);
 }

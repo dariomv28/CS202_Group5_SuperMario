@@ -49,11 +49,11 @@ void GameEventMediator::applyExternalForcesToEntities(const float& dt) {
 
 void GameEventMediator::resolveCollision(const float& dt) {
 	// Resolve collision between player and blocks
-	physicsEngine->resolveCollision(player, blocks, dt);
+	physicsEngine->resolveCollisionPlayerBlock(player, blocks, dt);
 	// Resolve collision between enemies and blocks
-	for (auto& enemy : enemies) {
-		physicsEngine->resolveCollision(enemy, blocks, dt);
-	}
+	physicsEngine->resolveCollisionEnemyBlock(enemies, blocks, dt);
+	// Resolve collision between player and enemies
+	physicsEngine->resolveCollisionPlayerEnemy(player, enemies, dt);
 }
 
 void GameEventMediator::updateInput(const float& dt) {

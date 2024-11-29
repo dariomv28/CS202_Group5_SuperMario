@@ -93,54 +93,143 @@ bool PhysicsEngine::checkCollideRight(GameObject* obj1, GameObject* obj2) {
 	return (obj2->hitbox.getGlobalBounds().getPosition().x >= obj1->hitbox.getGlobalBounds().getPosition().x + 2 && checkCollision(obj1, obj2));
 }
 
+void PhysicsEngine::fixPosition(LivingEntity* entity, GameObject* obj, int collidedSide) {
+	switch (collidedSide) {
+	case Collide_Top:
+		while (checkCollision(entity, obj)) {
+			entity->setPosition(sf::Vector2f(entity->getPosition().x, entity->getPosition().y + 1));
+		}
+		entity->setVelocity(sf::Vector2f(entity->getVelocity().x, 0));
+		break;
+	case Collide_Bottom:
+		entity->setOnGround(true);
+		while (checkCollision(entity, obj))
+		{
+			entity->setPosition(sf::Vector2f(entity->getPosition().x, entity->getPosition().y - 1));
+		}
+		entity->setPosition(sf::Vector2f(entity->getPosition().x, entity->getPosition().y + 0.5));
+		entity->setVelocity(sf::Vector2f(entity->getVelocity().x, 0));
+		entity->movementComponent->resetJumps();
+		break;
+	case Collide_Left:
+		while (checkCollision(entity, obj)) {
+			entity->setPosition(sf::Vector2f(entity->getPosition().x + 1, entity->getPosition().y));
+		}
+		entity->setVelocity(sf::Vector2f(0, entity->getVelocity().y));
+		break;
+	case Collide_Right:
+		while (checkCollision(entity, obj)) {
+			entity->setPosition(sf::Vector2f(entity->getPosition().x - 1, entity->getPosition().y));
+		}
+		entity->setVelocity(sf::Vector2f(0, entity->getVelocity().y));
+		break;
+	}
+}
 
-void PhysicsEngine::resolveCollision(LivingEntity* entity, std::vector<Block*>& blocks, const float& dt) {
+
+void PhysicsEngine::resolveCollisionPlayerBlock(PlayerManager* entity, std::vector<Block*>& blocks, const float& dt) {
 	// Resolve on the ground
 	entity->setOnGround(false);
 
-	for (auto obj : blocks) {
+	for (auto &obj : blocks) {
 		//Resolve the right side
 
 		if (entity->isMoveRight() && checkCollideRight(entity, obj)) {
-			while (checkCollision(entity, obj)) {
-				entity->setPosition(sf::Vector2f(entity->getPosition().x - 1, entity->getPosition().y));
-			}
-			entity->setVelocity(sf::Vector2f(0, entity->getVelocity().y));
+			fixPosition(entity, obj, Collide_Right);
+			obj->reactToCollison(Collide_Left);
 			continue;
 		}
 
 		//Resolve the left side
 		if (entity->isMoveLeft() && checkCollideLeft(entity, obj)) {
-			while (checkCollision(entity, obj)) {
-				entity->setPosition(sf::Vector2f(entity->getPosition().x + 1, entity->getPosition().y));
-			}
-			entity->setVelocity(sf::Vector2f(0, entity->getVelocity().y));
+			fixPosition(entity, obj, Collide_Left);
+			obj->reactToCollison(Collide_Right);
 			continue;
 		}
 
 		//Resolve the ground
 		if (entity->getVelocity().y >= 0 && checkCollideDown(entity, obj)) {
-			entity->setOnGround(true);
-			while (checkCollision(entity,obj)) {
-				entity->setPosition(sf::Vector2f(entity->getPosition().x, entity->getPosition().y - 1));
-			}
-			entity->setPosition(sf::Vector2f(entity->getPosition().x, entity->getPosition().y + 0.5));
-
-			entity->setVelocity(sf::Vector2f(entity->getVelocity().x, 0));
-			entity->movementComponent->resetJumps();
+			fixPosition(entity, obj, Collide_Bottom);
+			obj->reactToCollison(Collide_Top);
 			continue;
 		}
 
 		//Resolve the ceiling
 		if (entity->getVelocity().y < 0 && checkCollideUp(entity,obj)) {
-			while (checkCollision(entity, obj)) {
-				entity->setPosition(sf::Vector2f(entity->getPosition().x, entity->getPosition().y + 1));
-			}
-			entity->setVelocity(sf::Vector2f(entity->getVelocity().x, 0));
+			fixPosition(entity, obj, Collide_Top);
+			obj->reactToCollison(Collide_Bottom);
 			continue;
 		}
 
 		
+	}
+}
+
+void PhysicsEngine::resolveCollisionPlayerEnemy(PlayerManager* entity, std::vector<Enemy*>& enemies, const float& dt) {
+	for (auto &obj : enemies) {
+		//Resolve the right side
+		if (entity->isMoveRight() && checkCollideRight(entity, obj)) {
+			fixPosition(entity, obj, Collide_Right);
+			//obj->reactToCollison(Collide_Left);
+			continue;
+		}
+
+		//Resolve the left side
+		if (entity->isMoveLeft() && checkCollideLeft(entity, obj)) {
+			fixPosition(entity, obj, Collide_Left);
+			//obj->reactToCollison(Collide_Right);
+			continue;
+		}
+
+		//Resolve the ground
+		if (entity->getVelocity().y >= 0 && checkCollideDown(entity, obj)) {
+			fixPosition(entity, obj, Collide_Bottom);
+			//obj->reactToCollison(Collide_Top);
+			continue;
+		}
+
+		//Resolve the ceiling
+		if (entity->getVelocity().y < 0 && checkCollideUp(entity, obj)) {
+			fixPosition(entity, obj, Collide_Top);
+			//obj->reactToCollison(Collide_Bottom);
+			continue;
+		}
+	}
+}
+
+void PhysicsEngine::resolveCollisionEnemyBlock(std::vector<Enemy*>& enemies, std::vector<Block*>& blocks, const float& dt) {
+	for (auto &enemy : enemies) {
+		for (auto &block : blocks) {
+			//Resolve the right side
+			if (enemy->isMoveRight() && checkCollideRight(enemy, block)) {
+				fixPosition(enemy, block, Collide_Right);
+				//enemy->reactToBlockCollison(Collide_Right);
+				continue;
+			}
+
+			//Resolve the left side
+			if (enemy->isMoveLeft() && checkCollideLeft(enemy, block)) {
+				fixPosition(enemy, block, Collide_Left);
+				//enemy->reactToBlockCollison(Collide_Left);
+				continue;
+			}
+
+			//Resolve the ground
+			if (enemy->getVelocity().y >= 0 && checkCollideDown(enemy, block)) {
+				fixPosition(enemy, block, Collide_Bottom);
+				//enemy->reactToBlockCollison(Collide_Bottom);
+
+				continue;
+			}
+
+			//Resolve the ceiling
+			if (enemy->getVelocity().y < 0 && checkCollideUp(enemy, block)) {
+				fixPosition(enemy, block, Collide_Top);
+				//enemy->reactToBlockCollison(Collide_Top);
+
+				continue;
+			}
+		}
 	}
 }
 
