@@ -20,7 +20,7 @@ public:
     virtual void handleInput(const float& dt);
     virtual void updateAnimation(const float& dt);
     virtual void update(const float& dt);
-	virtual void render(sf::RenderTarget* target);
+	  virtual void render(sf::RenderTarget* target);
     
 protected:
     std::string m_imagePath;

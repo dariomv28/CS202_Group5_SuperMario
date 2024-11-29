@@ -21,6 +21,8 @@ GameState::GameState(StateData* stateData) : State(stateData), mapManager(nullpt
 
     // Add Mario to game objects
     // gameObjects.push_back(player);
+
+    levelGUI = new LevelGUI();
 }
 
 
@@ -92,7 +94,10 @@ void GameState::update(const float& dt) {
     // Update physics first
     // physicsEngine.playerUpdatePhysics(dt);
     // physicsEngine.objectUpdatePhysics(dt);
-
+    
+    levelGUI->updateInfo(player->getHealth(), 10);  
+    sf::View view = window->getView();
+    levelGUI->updatePosition(view);
     // Then update all game objects
 }
   
@@ -107,7 +112,7 @@ void GameState::render(sf::RenderTarget* target) {
     cerr << player->hitbox.getPosition().x << endl;
     player->render(target);
 	
-    //levelGUI->render(target);
+    levelGUI->render(target);
 
     for (auto& Block : Blocks) {
         Block->render(target);

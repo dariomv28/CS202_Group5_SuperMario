@@ -17,7 +17,7 @@ private:
     Mario* player;
 	vector<Enemy*> Enemies;
 	vector<Block*> Blocks;
-    //LevelGUI* levelGUI;      
+    LevelGUI* levelGUI;      
 public:
     GameState(StateData* stateData);
     virtual ~GameState();
