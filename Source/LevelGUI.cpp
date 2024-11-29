@@ -8,7 +8,7 @@ LevelGUI::LevelGUI() {
     this->coinsCollected = 0;
 
     // Load font
-    if (!this->font.loadFromFile("Source/Resources/font/Super - Mario - Bros--3.ttf")) {
+    if (!this->font.loadFromFile("Source/Resources/font/Super-Mario-Bros--3.ttf")) {
         throw("ERROR::LEVELGUI::FAILED_TO_LOAD_FONT");
     }
 

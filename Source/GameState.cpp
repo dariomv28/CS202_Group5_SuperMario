@@ -21,6 +21,8 @@ GameState::GameState(StateData* stateData) : State(stateData), mapManager(nullpt
     physicsEngine.addPlayer(player);
     // Add Mario to game objects
     // gameObjects.push_back(player);
+
+    levelGUI = new LevelGUI();
 }
 
 
@@ -73,7 +75,9 @@ void GameState::update(const float& dt) {
     // Update physics first
     // physicsEngine.playerUpdatePhysics(dt);
     // physicsEngine.objectUpdatePhysics(dt);
-
+    
+    //levelGUI->updateInfo(player->getHealth(), player->getCoins());
+    
     // Then update all game objects
     for (auto& object : gameObjects) {
         object->update(dt);

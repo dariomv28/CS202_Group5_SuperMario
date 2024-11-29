@@ -1,7 +1,7 @@
 #pragma once
 #include "GUI.h"
 #include "PlayerManager.h"
-
+#include "LevelManager.h"
 
 
 
@@ -12,6 +12,7 @@ private:
     sf::RectangleShape healthBar;
     sf::Font font;
     sf::Text coinsLabel;
+    sf::Text levelCount;
 
 public:
     LevelGUI();
