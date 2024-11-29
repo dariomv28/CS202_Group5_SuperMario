@@ -77,7 +77,8 @@ void GameState::update(const float& dt) {
     // physicsEngine.objectUpdatePhysics(dt);
     
     levelGUI->updateInfo(player->getHealth(), 10);  
-    
+    sf::View view = window->getView();
+    levelGUI->updatePosition(view);
     // Then update all game objects
     for (auto& object : gameObjects) {
         object->update(dt);
