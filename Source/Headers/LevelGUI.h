@@ -9,6 +9,7 @@ class LevelGUI {
 private:
     int health;
     int coinsCollected;
+    sf::Text healthLabel;
     sf::RectangleShape healthBar;
     sf::Font font;
     sf::Text coinsLabel;
