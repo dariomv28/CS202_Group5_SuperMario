@@ -58,7 +58,6 @@ void GameEventMediator::resolveCollision(const float& dt) {
 
 void GameEventMediator::updateInput(const float& dt) {
 	player->handleInput(dt);
-
 }
 
 void GameEventMediator::updateAnimations(const float& dt) {

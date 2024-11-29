@@ -10,14 +10,7 @@ public:
     PlayerManager() {};
     virtual ~PlayerManager();
 
-<<<<<<< HEAD
-    // Initialization function
-    virtual void init();    
-    virtual void update(const float& dt);
-	virtual void render(sf::RenderTarget* target);
-=======
     //Setters and Getters
->>>>>>> GameEventMediator
     std::string getImagePath() const;
 
     // Initialization function
@@ -31,6 +24,6 @@ public:
     
 protected:
     std::string m_imagePath;
-    
+  
 };
 
