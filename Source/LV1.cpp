@@ -20,8 +20,8 @@ void LV1::loadLevel() {
 }
 
 void LV1::update(Mario*& Player) {
-	ConstantLeft = CurrentLeft + (SCREEN_WIDTH * 3.0) / 10.0;
-	ConstantRight = CurrentLeft + (SCREEN_WIDTH * 6.0) / 10.0;
+	ConstantLeft = CurrentLeft + (SCREEN_WIDTH * 5.0) / 10.0;
+	ConstantRight = CurrentLeft + (SCREEN_WIDTH * 5.0) / 10.0;
 
 	//cerr << (map_sketch.getSize().x - 1) * CELL_SIZE * 4 << endl;
 
