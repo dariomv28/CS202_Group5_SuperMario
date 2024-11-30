@@ -9,6 +9,10 @@ Brick::Brick(sf::Vector2f position, sf::Vector2f size, std::string name, int hid
 	: Block(position, size, name)
 {
 	this->hiddenObject = hiddenObject;
+	entitySprite.setTexture(entityTexture);
+	entitySprite.setTextureRect(spritesSheet[name]);
+	entitySprite.setPosition(position);
+	entitySprite.setScale(size.x / entitySprite.getGlobalBounds().width, size.y / entitySprite.getGlobalBounds().height);
 }
 
 Brick::~Brick()

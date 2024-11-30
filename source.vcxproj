@@ -133,6 +133,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Mushroom.cpp" />
+    <ClCompile Include="Source\Coin.cpp" />
     <ClCompile Include="Source\Brick.cpp" />
     <ClCompile Include="Source\Pipe.cpp" />
     <ClCompile Include="Source\CoinBlock.cpp" />
@@ -164,6 +166,8 @@
     <ClCompile Include="Source\State.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Headers\Mushroom.h" />
+    <ClInclude Include="Source\Headers\Coin.h" />
     <ClInclude Include="Source\Headers\Brick.h" />
     <ClInclude Include="Source\Headers\Pipe.h" />
     <ClInclude Include="Source\Headers\CoinBlock.h" />

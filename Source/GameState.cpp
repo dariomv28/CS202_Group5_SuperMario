@@ -59,14 +59,9 @@ void GameState::loadLevel(int level) {
 void GameState::initGameEventMediator() {
     player->setEventMediator(eventMediator);
     eventMediator->addPlayer(player);
-    for (auto& enemy : Enemies) {
-        enemy->setEventMediator(eventMediator);
-        eventMediator->addEnemy(enemy);
-    }
-    for (auto& Block : Blocks) {
-        Block->setEventMediator(eventMediator);
-        eventMediator->addBlock(Block);
-    }
+    eventMediator->addEnemy(Enemies);
+    eventMediator->addBlock(Blocks);
+    
     eventMediator->addPhysicsEngine(physicsEngine);
     physicsEngine->setEventMediator(eventMediator);
 
@@ -88,7 +83,7 @@ void GameState::update(const float& dt) {
     eventMediator->updateInput(dt);
     eventMediator->updateAnimations(dt);
     eventMediator->updateMovements(dt);
-    eventMediator->resolveCollision(dt);
+    eventMediator->updateEvents(dt);
     //resolveCollision(dt);
        
     // Update physics first

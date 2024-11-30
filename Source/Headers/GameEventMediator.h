@@ -11,18 +11,18 @@ class PhysicsEngine;
 class GameEventMediator
 {
 private:
+	//Pointers to the original objects
 	PhysicsEngine* physicsEngine;
 	PlayerManager* player;
-	std::vector<Block*> blocks;
-	std::vector<Enemy*> enemies;
-	//std::vector<LivingEntity*> livingEntities;
+	std::vector<Block*>* blocks;
+	std::vector<Enemy*>* enemies;
 public:
 	// Initialization function
 	GameEventMediator();
 	~GameEventMediator();
 	void addPlayer(PlayerManager* player);
-	void addBlock(Block* block);
-	void addEnemy(Enemy* enemy);
+	void addBlock(std::vector<Block*>& blocks);
+	void addEnemy(std::vector<Enemy*>& enemies);
 	void addPhysicsEngine(PhysicsEngine* physicsEngine);
 
 	// Physics Engine functions
@@ -33,6 +33,7 @@ public:
 	void updateInput(const float& dt);
 	void updateMovements(const float& dt);
 	void updateAnimations(const float& dt);
+	void updateEvents(const float& dt);
 
 	// Game Event functions
 };

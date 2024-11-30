@@ -29,6 +29,12 @@ void Block::initSpritesSheet()
 	spritesSheet["pipe_bottom_right"] = sf::IntRect(120, 69, 16, 16);
 	spritesSheet["pipe_top_left"] = sf::IntRect(103, 52, 16, 16);
 	spritesSheet["pipe_top_right"] = sf::IntRect(120, 52, 16, 16);
+
+	//Coin
+	spritesSheet["coin_1"] = sf::IntRect(52, 52, 16, 16);
+	spritesSheet["coin_2"] = sf::IntRect(69, 52, 16, 16);
+	spritesSheet["coin_3"] = sf::IntRect(86, 52, 16, 16);
+
 }
 
 Block::Block()
