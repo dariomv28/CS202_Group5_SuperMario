@@ -54,6 +54,10 @@ void GameState::loadLevel(int level) {
         //mapManager->loadMap("Level3_Map");
     }
     initGameEventMediator();
+
+    Enemies.push_back(new Goomba(sf::Vector2f(500.f, 500.f), sf::Vector2f(64.f, 64.f)));
+    Enemies.push_back(new Goomba(sf::Vector2f(900.f, 500.f), sf::Vector2f(64.f, 64.f)));
+    Enemies.push_back(new Goomba(sf::Vector2f(700.f, 500.f), sf::Vector2f(64.f, 64.f)));
 }
 
 void GameState::initGameEventMediator() {
@@ -64,7 +68,6 @@ void GameState::initGameEventMediator() {
     
     eventMediator->addPhysicsEngine(physicsEngine);
     physicsEngine->setEventMediator(eventMediator);
-
 }
 
 
@@ -82,7 +85,7 @@ void GameState::update(const float& dt) {
     */
     eventMediator->updateInput(dt);
     eventMediator->updateAnimations(dt);
-    eventMediator->updateMovements(dt);
+    eventMediator->updateMovements(dt, window->getView());
     eventMediator->updateEvents(dt);
     //resolveCollision(dt);
        
@@ -104,13 +107,16 @@ void GameState::render(sf::RenderTarget* target) {
     if (mapManager) {
         //mapManager->render();
     }
-    cerr << player->hitbox.getPosition().x << endl;
+    // cerr << player->hitbox.getPosition().x << endl;
     player->render(target);
 	
     levelGUI->render(target);
 
     for (auto& Block : Blocks) {
         Block->render(target);
+    }
+    for (auto& Enemy : Enemies) {
+        Enemy->render(target);
     }
 	//cerr << Blocks.size() << endl;
 }

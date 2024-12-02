@@ -8,6 +8,7 @@
 #include "stdafx.h"
 #include "LevelGUI.h"
 #include "GameEventMediator.h"
+#include "Goomba.h"
 
 class GameState : public State {
 private:
