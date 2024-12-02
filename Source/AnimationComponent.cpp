@@ -36,6 +36,35 @@ void AnimationComponent::setAnimation(const std::string& animationName, const st
     }*/
 }
 
+void AnimationComponent::setAnimationEnemies(const std::string& animationName, const std::unordered_map<std::string, sf::IntRect>& spritesSheet, float speed) {
+    if (currentAnimationName == animationName) {
+        //std::cout << "Animation already set: " << animationName << std::endl;
+        return;
+    }
+
+    currentAnimationFrames.clear();
+    currentAnimationName = animationName;
+    currentFrameIndex = 0;
+
+    for (const auto& pair : spritesSheet) {
+        if (pair.first.find(animationName) == 0) {
+            currentAnimationFrames.push_back(pair.second);
+        }
+    }
+
+    animationSpeed = speed;
+
+    elapsedTime = 0.0f;
+
+    if (!currentAnimationFrames.empty()) {
+        sprite.setTextureRect(currentAnimationFrames[0]);
+    }
+    /*
+    else {
+        std::cerr << "Animation '" << animationName << "' not found or empty in spritesSheet!" << std::endl;
+    }*/
+}
+
 
 void AnimationComponent::update(float deltaTime) {
     /*
