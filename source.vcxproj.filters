@@ -96,6 +96,12 @@
     <ClCompile Include="Source\Brick.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Mushroom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Coin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Headers\resource.h">
@@ -182,6 +188,12 @@
     <ClInclude Include="Source\Headers\Brick.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Headers\Mushroom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Headers\Coin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Source\Headers\source.rc">
@@ -199,6 +211,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Source\Resources\texture\Mario_Luigi.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Source\Resources\texture\LevelSketch2.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
