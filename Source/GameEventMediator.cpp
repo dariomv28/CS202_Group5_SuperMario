@@ -26,7 +26,7 @@ void GameEventMediator::addPhysicsEngine(PhysicsEngine* physicsEngine) {
 	this->physicsEngine = physicsEngine;
 }
 
-void GameEventMediator::updateMovements(const float& dt) {
+void GameEventMediator::updateMovements(const float& dt, const sf::View& view) {
 	// Update velocity of all entities
 	player->updateVelocity(dt);
 	for (auto& enemy : *enemies) {
@@ -37,7 +37,7 @@ void GameEventMediator::updateMovements(const float& dt) {
 	// Update position of all entities
 	player->move(dt);
 	for (auto& enemy : *enemies) {
-		enemy->move(dt);
+		enemy->moveWithView(dt, view);
 	}
 }
 

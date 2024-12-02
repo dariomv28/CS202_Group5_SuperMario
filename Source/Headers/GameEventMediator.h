@@ -31,7 +31,7 @@ public:
 	
 	// Update functions
 	void updateInput(const float& dt);
-	void updateMovements(const float& dt);
+	void updateMovements(const float& dt, const sf::View& view);
 	void updateAnimations(const float& dt);
 	void updateEvents(const float& dt);
 
