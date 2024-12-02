@@ -5,12 +5,10 @@ Enemy::Enemy(const Enemy& other) : LivingEntity(other) {
 
 }
 
-
-
-void Enemy::update() {
+Enemy::Enemy() {
 
 }
 
-Enemy::Enemy() {
+void Enemy::moveWithView(const float& dt, const sf::View& view) {
 
 }
