@@ -89,8 +89,8 @@ enum Cell
 	ActivatedQuestionBlock,
 	Brick,
 	Coin,
+	//Pipe,
 	Empty,
-	Pipe,
 	QuestionBlock,
 	Wall
 };

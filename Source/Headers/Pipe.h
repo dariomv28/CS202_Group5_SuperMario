@@ -11,7 +11,7 @@ private:
     int height;
 public:
     Pipe();
-	Pipe(sf::Vector2f position, sf::Vector2f size, std::string name, int height = 1);
+	Pipe(sf::Vector2f position, sf::Vector2f size, std::string name, int height);
 	virtual ~Pipe();
 
 	//Setters and Getters
