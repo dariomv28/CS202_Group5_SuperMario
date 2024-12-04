@@ -5,12 +5,18 @@ void Block::initSpritesSheet()
 	//Grounds
 	spritesSheet["ground_1_1"] = sf::IntRect(1, 1, 16, 16);
 	spritesSheet["underground_1_1"] = sf::IntRect(1, 18, 16, 16);
+	spritesSheet["ground_2_1"] = sf::IntRect(137, 1, 16, 16);
+	spritesSheet["underground_2_1"] = sf::IntRect(137, 18, 16, 16);
 
 	spritesSheet["ground_1_2"] = sf::IntRect(18, 1, 16, 16);
 	spritesSheet["underground_1_2"] = sf::IntRect(18, 18, 16, 16);
+	spritesSheet["ground_2_2"] = sf::IntRect(154, 1, 16, 16);
+	spritesSheet["underground_2_2"] = sf::IntRect(137, 18, 16, 16);
 
 	spritesSheet["ground_1_3"] = sf::IntRect(35, 1, 16, 16);
 	spritesSheet["underground_1_3"] = sf::IntRect(35, 18, 16, 16);
+	spritesSheet["ground_2_3"] = sf::IntRect(171, 1, 16, 16);
+	spritesSheet["underground_2_3"] = sf::IntRect(171, 18, 16, 16);
 
 	//Walls
 	spritesSheet["wall_1"] = sf::IntRect(1, 155, 16, 16);
