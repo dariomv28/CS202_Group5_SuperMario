@@ -6,7 +6,8 @@ LevelGUI::LevelGUI() {
     
     this->health = 100;
     this->coinsCollected = 0;
-
+    timeCount = 0;
+    level = 1;
     
     if (!this->font.loadFromFile("Source/Resources/font/Poppins-Medium.ttf")) {
         throw("ERROR::LEVELGUI::FAILED_TO_LOAD_FONT");
@@ -29,14 +30,21 @@ LevelGUI::LevelGUI() {
     this->levelCount.setFillColor(sf::Color::White);
     this->levelCount.setPosition(700.f, 10.f);
     this->levelCount.setString("Level: 1");
+
+    this->timer.setFont(this->font);
+    this->timer.setCharacterSize(40);
+    this->timer.setFillColor(sf::Color::White);
+    this->timer.setPosition(900.f, 10.f);
+    this->timer.setString("Time: 0");
 }
 
 LevelGUI::~LevelGUI() {}
 
-void LevelGUI::updateInfo(int playerHealth, int coins) {
+void LevelGUI::updateInfo(int playerHealth, int coins, int currentLevel) {
     this->health = playerHealth;
     this->coinsCollected = coins;
-    
+    this->level = currentLevel;
+
     this->healthBar.setSize(sf::Vector2f(400.f * float(playerHealth) / 100.f, 20.f));
     //this->healthBar.setSize(sf::Vector2f(static_cast<float>(health) * 4.f, 20.f));
     if (health > 50) {
@@ -54,12 +62,14 @@ void LevelGUI::updateInfo(int playerHealth, int coins) {
     }
     
     this->coinsLabel.setString("Coins: " + std::to_string(coins));
+    this->levelCount.setString("Level: " + std::to_string(level));
 }
 
 void LevelGUI::render(sf::RenderTarget* target) {
     target->draw(this->healthBar);
     target->draw(this->coinsLabel);
     target->draw(this->levelCount);
+    target->draw(this->timer);
 }
 
 void LevelGUI::updatePosition(const sf::View& view) {
@@ -74,4 +84,14 @@ void LevelGUI::updatePosition(const sf::View& view) {
     this->healthBar.setPosition(xOffset + 10.f, yOffset + 10.f);
     this->coinsLabel.setPosition(xOffset + 420.f, yOffset + 10.f);
     this->levelCount.setPosition(xOffset + 700.f, yOffset + 10.f);
+    this->timer.setPosition(xOffset + 900.f, yOffset + 10.f);
+}
+
+void LevelGUI::updateTime() {
+    sf::Time t = clock.getElapsedTime();
+    if (t.asSeconds() >= 1.f) {
+        timeCount++;
+        clock.restart();
+        timer.setString("Time: " + std::to_string(timeCount));
+    }
 }

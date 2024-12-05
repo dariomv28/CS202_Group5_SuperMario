@@ -93,9 +93,10 @@ void GameState::update(const float& dt) {
     // physicsEngine.playerUpdatePhysics(dt);
     // physicsEngine.objectUpdatePhysics(dt);
     
-    levelGUI->updateInfo(player->getHealth(), 10);  
+    levelGUI->updateInfo(player->getHealth(), 0, 1);  
     sf::View view = window->getView();
     levelGUI->updatePosition(view);
+    levelGUI->updateTime();
     // Then update all game objects
 }
   
