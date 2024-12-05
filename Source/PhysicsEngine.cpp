@@ -204,6 +204,9 @@ void PhysicsEngine::resolveCollisionEnemyBlock(std::vector<Enemy*>& enemies, std
 			if (enemy->isMoveRight() && checkCollideRight(enemy, block)) {
 				fixPosition(enemy, block, Collide_Right);
 				//enemy->reactToBlockCollison(Collide_Right);
+				enemy->setMoveRight(false);
+				enemy->setMoveLeft(true);
+
 				continue;
 			}
 
@@ -211,6 +214,9 @@ void PhysicsEngine::resolveCollisionEnemyBlock(std::vector<Enemy*>& enemies, std
 			if (enemy->isMoveLeft() && checkCollideLeft(enemy, block)) {
 				fixPosition(enemy, block, Collide_Left);
 				//enemy->reactToBlockCollison(Collide_Left);
+				enemy->setMoveLeft(false);
+				enemy->setMoveRight(true);
+
 				continue;
 			}
 
@@ -233,26 +239,55 @@ void PhysicsEngine::resolveCollisionEnemyBlock(std::vector<Enemy*>& enemies, std
 	}
 }
 
+void PhysicsEngine::resolveCollisionEnemyEnemy(std::vector<Enemy*>& enemies, const float& dt) {
+	for (size_t i = 0; i < enemies.size(); ++i) {
+		for (size_t j = i + 1; j < enemies.size(); ++j) {
+			Enemy* enemy1 = enemies[i];
+			Enemy* enemy2 = enemies[j];
+
+			// Skip if either enemy is not alive
+			if (!enemy1->getIsAlive() || !enemy2->getIsAlive()) {
+				continue;
+			}
+
+			//Resolve the right side
+			if (enemy1->isMoveRight() && checkCollideRight(enemy1, enemy2)) {
+				fixPosition(enemy1, enemy2, Collide_Right);
+				enemy1->setMoveRight(false);
+				enemy1->setMoveLeft(true);
+
+				enemy2->setMoveRight(true);
+				enemy2->setMoveLeft(false);
+				continue;
+			}
+
+			//Resolve the left side
+			if (enemy1->isMoveLeft() && checkCollideLeft(enemy1, enemy2)) {
+				fixPosition(enemy1, enemy2, Collide_Left);
+				enemy1->setMoveLeft(false);
+				enemy1->setMoveRight(true);
+
+				enemy2->setMoveRight(false);
+				enemy2->setMoveLeft(true);
+				continue;
+			}
+
+			//Resolve the ground
+			if (enemy1->getVelocity().y >= 0 && checkCollideDown(enemy1, enemy2)) {
+				fixPosition(enemy1, enemy2, Collide_Bottom);
+				continue;
+			}
+
+			//Resolve the ceiling
+			if (enemy1->getVelocity().y < 0 && checkCollideUp(enemy1, enemy2)) {
+				fixPosition(enemy1, enemy2, Collide_Top);
+				continue;
+			}
+		}
+	}
+}
+
 void PhysicsEngine::applyExternalForces(LivingEntity* entity, const float& dt) {
 	applyGravity(entity, dt);
 	applyFriction(entity, dt);
 }
-
-//void PhysicsEngine::updateMovement(LivingEntity* entity, const float& dt) {
-//	//Apply external forces
-//	applyExternalForces(entity, dt);
-//
-//	//Move the entity
-//	entity->setPosition(entity->getPosition() + entity->getVelocity() );
-//	
-//	//Resolve collisions
-//	resolveCollision(entity);
-//}
-
-//void PhysicsEngine::playerUpdatePhysics(const float& dt) {
-//	updateMovement(player, dt);
-//}
-//
-//void PhysicsEngine::objectUpdatePhysics(const float& dt) {
-//
-//}
