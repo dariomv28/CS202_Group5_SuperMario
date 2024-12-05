@@ -17,7 +17,7 @@ public:
 
 	void update(const float& dt) override;
 	void updateAnimation(const float& dt) override;
-	void moveWithView(const float& dt, const sf::View& view);
+	void move(const float& dt) override;
 
 	bool getIsAlive() const;
 	void setIsAlive(bool alive);
