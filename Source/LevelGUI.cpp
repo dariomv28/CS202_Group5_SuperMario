@@ -81,10 +81,10 @@ void LevelGUI::updatePosition(const sf::View& view) {
     float yOffset = viewCenter.y - viewSize.y / 2.0f;
 
     
-    this->healthBar.setPosition(xOffset + 10.f, yOffset + 10.f);
-    this->coinsLabel.setPosition(xOffset + 420.f, yOffset + 10.f);
-    this->levelCount.setPosition(xOffset + 700.f, yOffset + 10.f);
-    this->timer.setPosition(xOffset + 900.f, yOffset + 10.f);
+    this->healthBar.setPosition(xOffset + 20.f, yOffset + 25.f);
+    this->coinsLabel.setPosition(xOffset + 470.f, yOffset + 10.f);
+    this->levelCount.setPosition(xOffset + 825.f, yOffset + 10.f);
+    this->timer.setPosition(xOffset + 1200.f, yOffset + 10.f);
 }
 
 void LevelGUI::updateTime() {
