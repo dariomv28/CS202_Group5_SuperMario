@@ -11,6 +11,8 @@ public:
 	Enemy();
 	Enemy(const Enemy& other);
 	virtual void update(const float& dt) = 0;
-	virtual void moveWithView(const float& dt, const sf::View& view);
+
+	virtual bool getIsAlive() const = 0;
+	virtual void setIsAlive(bool alive) = 0;
 };
 

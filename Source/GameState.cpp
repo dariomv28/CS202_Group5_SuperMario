@@ -46,6 +46,24 @@ void GameState::loadLevel(int level) {
     mapManager = new MapManager();
     if (level == 1) {
         mapManager->loadMap("Level1_Map", player, Enemies, Blocks, window);
+        Enemies.push_back(new Goomba(sf::Vector2f(300.f, 500.f), sf::Vector2f(64.f, 64.f)));
+        Enemies.push_back(new Goomba(sf::Vector2f(700.f, 500.f), sf::Vector2f(64.f, 64.f)));
+        
+        Enemies.push_back(new Goomba(sf::Vector2f(2096.f, 500.f), sf::Vector2f(64.f, 64.f)));
+
+        Enemies.push_back(new Goomba(sf::Vector2f(2777.f, 500.f), sf::Vector2f(64.f, 64.f)));
+
+        Enemies.push_back(new Goomba(sf::Vector2f(3279.f, 500.f), sf::Vector2f(64.f, 64.f)));
+
+        Enemies.push_back(new Goomba(sf::Vector2f(9327.f, 500.f), sf::Vector2f(64.f, 64.f)));
+
+        Enemies.push_back(new Goomba(sf::Vector2f(10269.f, 500.f), sf::Vector2f(64.f, 64.f)));
+
+        Enemies.push_back(new Goomba(sf::Vector2f(10960.f, 500.f), sf::Vector2f(64.f, 64.f)));
+
+        Enemies.push_back(new Goomba(sf::Vector2f(12370.f, 500.f), sf::Vector2f(64.f, 64.f)));
+
+        Enemies.push_back(new Goomba(sf::Vector2f(13098.f, 500.f), sf::Vector2f(64.f, 64.f)));
     }
     else if (level == 2) {
         //mapManager->loadMap("Level2_Map");
@@ -54,10 +72,6 @@ void GameState::loadLevel(int level) {
         //mapManager->loadMap("Level3_Map");
     }
     initGameEventMediator();
-
-    Enemies.push_back(new Goomba(sf::Vector2f(500.f, 500.f), sf::Vector2f(64.f, 64.f)));
-    Enemies.push_back(new Goomba(sf::Vector2f(900.f, 500.f), sf::Vector2f(64.f, 64.f)));
-    Enemies.push_back(new Goomba(sf::Vector2f(700.f, 500.f), sf::Vector2f(64.f, 64.f)));
 }
 
 void GameState::initGameEventMediator() {
@@ -85,7 +99,7 @@ void GameState::update(const float& dt) {
     */
     eventMediator->updateInput(dt);
     eventMediator->updateAnimations(dt);
-    eventMediator->updateMovements(dt, window->getView());
+    eventMediator->updateMovements(dt);
     eventMediator->updateEvents(dt);
     //resolveCollision(dt);
        

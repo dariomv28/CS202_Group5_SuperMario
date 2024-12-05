@@ -42,41 +42,32 @@ void Goomba::initAnimations() {
 	};
 }
 
-void Goomba::moveWithView(const float& dt, const sf::View& view)
+void Goomba::move(const float& dt) 
 {
-	float leftMostX = view.getCenter().x - (view.getSize().x / 2.0f);
-	float rightMostX = view.getCenter().x + (view.getSize().x / 2.0f) - 20.0f;
-
 	this->position += this->movementComponent->velocity;
-	this->position.x = std::max<float>(this->position.x, leftMostX);
-	this->position.x = std::min<float>(this->position.x, rightMostX);
-	this->entitySprite.setPosition(this->position);
-	this->hitbox.setPosition(this->position);
 
-	if (this->position.x == leftMostX) {
+	if (this->position.x <= 30.0f) {
+		this->position.x = std::max<float>(this->position.x, 30.0f);
 		setMoveLeft(false);
 		setMoveRight(true);
 	}
-	else if (this->position.x == rightMostX) {
-		setMoveLeft(true);
+	
+	if (this->position.x >= 13416.f) {
+		this->position.x = std::min<float>(this->position.x, 13416.f);
 		setMoveRight(false);
+		setMoveLeft(true);
 	}
+	
+	this->entitySprite.setPosition(this->position);
+	this->hitbox.setPosition(this->position);
 }
 
+// No need but let's it here just in case
 void Goomba::update(const float& dt) {
 	if (!isAlive) return;
 	updateVelocity(dt);
 	updateAnimation(dt);
 	move(dt);
-
-	if (position.x <= 32.0f) {
-		setMoveLeft(false);
-		setMoveRight(true);
-	}
-	else if (position.x >= 800.0f) {  
-		setMoveLeft(true);
-		setMoveRight(false);
-	}
 }
 
 void Goomba::updateAnimation(const float& dt) {

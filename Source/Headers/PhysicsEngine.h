@@ -33,5 +33,6 @@ public:
 	void resolveCollisionPlayerEnemy(PlayerManager* entity, std::vector<Enemy*>& enemies, const float& dt);
 	void resolveCollisionEnemyBlock(std::vector<Enemy*>& enemies, std::vector<Block*>& blocks, const float& dt);
 	void applyExternalForces(LivingEntity* entity, const float& dt);
+	void resolveCollisionEnemyEnemy(std::vector<Enemy*>& enemies, const float& dt);
 };
 
