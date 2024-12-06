@@ -42,6 +42,7 @@ public:
 	// Game Event functions
 	void increaseCoins(int numCoins);
 	void increaseScore(int numScore);
+	void updateHealth(); // For LevelGUI
 	void defeatPlayer();
 	void deleteEnemy(Enemy* enemy);
 	void deleteBlock(Block* block);

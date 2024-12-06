@@ -65,6 +65,7 @@ void GameEventMediator::resolveCollision(const float& dt) {
 	physicsEngine->resolveCollisionEnemyEnemy(*enemies, dt);
 	// Resolve collision between player and enemies
 	physicsEngine->resolveCollisionPlayerEnemy(player, *enemies, dt);
+	updateHealth();
 }
 
 void GameEventMediator::updateInput(const float& dt) {
@@ -96,6 +97,10 @@ void GameEventMediator::increaseCoins(int numCoins) {
 
 void GameEventMediator::increaseScore(int numScore) {
 	levelGUI->increaseScore(numScore);
+}
+
+void GameEventMediator::updateHealth() {
+	levelGUI->updateHealth(player->getHealth()); // Just for testing
 }
 
 void GameEventMediator::defeatPlayer() {

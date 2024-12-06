@@ -36,6 +36,7 @@ void CoinBlock::reactToCollison(int collidedSide)
 		if (numCoins == 0) return;
 		this->eventMediator->increaseCoins(1);
 		this->eventMediator->increaseScore(100);
+
 		std::cerr << "Coin collected\n";
 		
 		//Decrease the number of coins in the block

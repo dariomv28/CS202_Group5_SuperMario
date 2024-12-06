@@ -61,25 +61,24 @@ void LevelGUI::setEventMediator(GameEventMediator* eventMediator) {
 
 void LevelGUI::updateInfo() {
 
-    
     this->healthBar.setSize(sf::Vector2f(400.f * float(health) / 100.f, 20.f));
-    //this->healthBar.setSize(sf::Vector2f(static_cast<float>(health) * 4.f, 20.f));
     if (health > 50) {
         this->healthBar.setFillColor(sf::Color::Green);
-        
+
     }
     else if (health > 20) {
         this->healthBar.setFillColor(sf::Color::Yellow);
-        
+
     }
     else {
 
         this->healthBar.setFillColor(sf::Color::Red);
-        
+
     }
+
     
     this->coinsLabel.setString("Coins: " + std::to_string(coinsCollected));
-
+    this->scoreLabel.setString("Score: " + std::to_string(score));
 }
 
 void LevelGUI::render(sf::RenderTarget* target) {
@@ -142,7 +141,7 @@ void LevelGUI::updateTime() {
 }
 
 void LevelGUI::update(const sf::View& view) {
-    updateInfo();
+    //updateInfo();
     updatePosition(view);
     updateTime();
 }
@@ -155,4 +154,23 @@ void LevelGUI::increaseCoins(int numCoins) {
 void LevelGUI::increaseScore(int numScore) {
 	score += numScore;
 	scoreLabel.setString("Score: " + std::to_string(score));
+}
+
+void LevelGUI::updateHealth(int playerHealth) {
+    if (playerHealth < 0) return;
+    health = playerHealth;
+    this->healthBar.setSize(sf::Vector2f(400.f * float(health) / 100.f, 20.f));
+    if (health > 50) {
+        this->healthBar.setFillColor(sf::Color::Green);
+
+    }
+    else if (health > 20) {
+        this->healthBar.setFillColor(sf::Color::Yellow);
+
+    }
+    else {
+
+        this->healthBar.setFillColor(sf::Color::Red);
+
+    }
 }

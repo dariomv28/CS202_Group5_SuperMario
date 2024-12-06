@@ -172,6 +172,8 @@ void PhysicsEngine::resolveCollisionPlayerEnemy(PlayerManager* entity, std::vect
 		if (entity->isMoveRight() && checkCollideRight(entity, obj)) {
 			fixPosition(entity, obj, Collide_Right);
 			//obj->reactToCollison(Collide_Left);
+			entity->setHealth(entity->getHealth() - 1); //Testing
+			
 			continue;
 		}
 
@@ -179,6 +181,8 @@ void PhysicsEngine::resolveCollisionPlayerEnemy(PlayerManager* entity, std::vect
 		if (entity->isMoveLeft() && checkCollideLeft(entity, obj)) {
 			fixPosition(entity, obj, Collide_Left);
 			//obj->reactToCollison(Collide_Right);
+			entity->setHealth(entity->getHealth() - 1); //Testing
+			
 			continue;
 		}
 
@@ -193,6 +197,8 @@ void PhysicsEngine::resolveCollisionPlayerEnemy(PlayerManager* entity, std::vect
 		if (entity->getVelocity().y < 0 && checkCollideUp(entity, obj)) {
 			fixPosition(entity, obj, Collide_Top);
 			//obj->reactToCollison(Collide_Bottom);
+			entity->setHealth(entity->getHealth() - 1); //Testing
+			
 			continue;
 		}
 	}
