@@ -92,12 +92,21 @@ void GameState::loadLevel(int level) {
 
 void GameState::initGameEventMediator() {
     player->setEventMediator(eventMediator);
+
+    for (auto& Block : Blocks) {
+		Block->setEventMediator(eventMediator);
+	}
+    for (auto& Enemy : Enemies) {
+        Enemy->setEventMediator(eventMediator);
+    }
+    levelGUI->setEventMediator(eventMediator);
+    physicsEngine->setEventMediator(eventMediator);
+
     eventMediator->addPlayer(player);
     eventMediator->addEnemy(Enemies);
-    eventMediator->addBlock(Blocks);
-    
+    eventMediator->addBlock(Blocks);    
     eventMediator->addPhysicsEngine(physicsEngine);
-    physicsEngine->setEventMediator(eventMediator);
+    eventMediator->addLevelGUI(levelGUI);
 }
 
 
@@ -117,16 +126,13 @@ void GameState::update(const float& dt) {
     eventMediator->updateAnimations(dt);
     eventMediator->updateMovements(dt);
     eventMediator->updateEvents(dt);
+    eventMediator->updateLevelGUI(window->getView());
     //resolveCollision(dt);
        
     // Update physics first
     // physicsEngine.playerUpdatePhysics(dt);
     // physicsEngine.objectUpdatePhysics(dt);
     
-    levelGUI->updateInfo(player->getHealth(), 0, 1, "Mario");
-    sf::View view = window->getView();
-    levelGUI->updatePosition(view);
-    levelGUI->updateTime();
     // Then update all game objects
 }
   

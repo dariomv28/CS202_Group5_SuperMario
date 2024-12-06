@@ -7,6 +7,7 @@ LevelGUI::LevelGUI() {
     this->health = 100;
     this->coinsCollected = 0;
     timeCount = 0;
+    this->score = 0;
     level = 1;
     
     if (!this->font.loadFromFile("Source/Resources/font/Poppins-Medium.ttf")) {
@@ -45,13 +46,14 @@ LevelGUI::LevelGUI() {
 
 LevelGUI::~LevelGUI() {}
 
-void LevelGUI::updateInfo(int playerHealth, int coins, int currentLevel, string characterName) {
-    this->health = playerHealth;
-    this->coinsCollected = coins;
-    this->level = currentLevel;
+void LevelGUI::setEventMediator(GameEventMediator* eventMediator) {
+	this->eventMediator = eventMediator;
+}
 
-    this->characterName.setString(characterName);
-    this->healthBar.setSize(sf::Vector2f(400.f * float(playerHealth) / 100.f, 20.f));
+void LevelGUI::updateInfo() {
+
+
+    this->healthBar.setSize(sf::Vector2f(400.f * float(health) / 100.f, 20.f));
     //this->healthBar.setSize(sf::Vector2f(static_cast<float>(health) * 4.f, 20.f));
     if (health > 50) {
         this->healthBar.setFillColor(sf::Color::Green);
@@ -67,8 +69,8 @@ void LevelGUI::updateInfo(int playerHealth, int coins, int currentLevel, string 
         
     }
     
-    this->coinsLabel.setString("Coins: " + std::to_string(coins));
-    this->levelCount.setString("Level: " + std::to_string(level));
+    this->coinsLabel.setString("Coins: " + std::to_string(coinsCollected));
+
 }
 
 void LevelGUI::render(sf::RenderTarget* target) {
@@ -103,6 +105,18 @@ void LevelGUI::updateTime() {
     }
 }
 
-void LevelGUI::updateCharacterName(string name) {
+void LevelGUI::update(const sf::View& view) {
+    updateInfo();
+    updatePosition(view);
+    updateTime();
+}
 
+void LevelGUI::increaseCoins(int numCoins) {
+	coinsCollected += numCoins;
+	coinsLabel.setString("Coins: " + std::to_string(coinsCollected));
+}
+
+void LevelGUI::increaseScore(int numScore) {
+	score += numScore;
+	scoreLabel.setString("Score: " + std::to_string(score));
 }
