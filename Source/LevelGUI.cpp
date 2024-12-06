@@ -14,10 +14,15 @@ LevelGUI::LevelGUI() {
         throw("ERROR::LEVELGUI::FAILED_TO_LOAD_FONT");
     }
 
+    this->characterName.setFont(font);
+    this->characterName.setCharacterSize(40);
+    this->characterName.setFillColor(sf::Color::White);
+    this->characterName.setPosition(10.f, 10.f);
+    this->characterName.setString("Mario");
     
     this->healthBar.setSize(sf::Vector2f(400.f, 20.f));
     this->healthBar.setFillColor(sf::Color::Green);
-    this->healthBar.setPosition(10.f, 10.f);
+    this->healthBar.setPosition(100.f, 20.f);
 
     
     this->coinsLabel.setFont(this->font);
@@ -69,6 +74,7 @@ void LevelGUI::updateInfo() {
 }
 
 void LevelGUI::render(sf::RenderTarget* target) {
+    target->draw(this->characterName);
     target->draw(this->healthBar);
     target->draw(this->coinsLabel);
     target->draw(this->levelCount);
@@ -83,11 +89,11 @@ void LevelGUI::updatePosition(const sf::View& view) {
     float xOffset = viewCenter.x - viewSize.x / 2.0f;
     float yOffset = viewCenter.y - viewSize.y / 2.0f;
 
-    
-    this->healthBar.setPosition(xOffset + 20.f, yOffset + 25.f);
-    this->coinsLabel.setPosition(xOffset + 470.f, yOffset + 10.f);
-    this->levelCount.setPosition(xOffset + 825.f, yOffset + 10.f);
-    this->timer.setPosition(xOffset + 1200.f, yOffset + 10.f);
+    this->characterName.setPosition(xOffset + 10.f, yOffset + 10.f);
+    this->healthBar.setPosition(xOffset + 100.f, yOffset + 20.f);
+    this->coinsLabel.setPosition(xOffset + 420.f, yOffset + 10.f);
+    this->levelCount.setPosition(xOffset + 700.f, yOffset + 10.f);
+    this->timer.setPosition(xOffset + 900.f, yOffset + 10.f);
 }
 
 void LevelGUI::updateTime() {

@@ -13,7 +13,7 @@ private:
     int level;
     int score;
 
-    sf::Text healthLabel;
+    sf::Text characterName;
     sf::RectangleShape healthBar;
     sf::Font font;
     sf::Text coinsLabel;
