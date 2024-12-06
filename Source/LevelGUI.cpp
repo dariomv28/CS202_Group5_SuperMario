@@ -1,4 +1,4 @@
-#include "Headers/LevelGUI.h"
+﻿#include "Headers/LevelGUI.h"
 
 
 
@@ -10,12 +10,12 @@ LevelGUI::LevelGUI() {
     this->score = 0;
     level = 1;
     
-    if (!this->font.loadFromFile("Source/Resources/font/Poppins-Medium.ttf")) {
+    if (!this->font.loadFromFile("Source/Resources/font/pixel-nes.otf")) {
         throw("ERROR::LEVELGUI::FAILED_TO_LOAD_FONT");
     }
 
     this->characterName.setFont(font);
-    this->characterName.setCharacterSize(40);
+    this->characterName.setCharacterSize(30);
     this->characterName.setFillColor(sf::Color::White);
     this->characterName.setPosition(10.f, 10.f);
     this->characterName.setString("Mario");
@@ -23,25 +23,34 @@ LevelGUI::LevelGUI() {
     this->healthBar.setSize(sf::Vector2f(400.f, 20.f));
     this->healthBar.setFillColor(sf::Color::Green);
     this->healthBar.setPosition(10.f, 60.f);
-
+    this->healthBarBorder.setSize(sf::Vector2f(healthBar.getSize().x + 4.f, healthBar.getSize().y + 4.f));
+    this->healthBarBorder.setFillColor(sf::Color::Transparent);
+    this->healthBarBorder.setOutlineColor(sf::Color::Red);
+    this->healthBarBorder.setOutlineThickness(2.f);
     
     this->coinsLabel.setFont(this->font);
-    this->coinsLabel.setCharacterSize(40);
+    this->coinsLabel.setCharacterSize(30);
     this->coinsLabel.setFillColor(sf::Color::White);
     this->coinsLabel.setPosition(420.f, 10.f);
     this->coinsLabel.setString("Coins: 0");
 
     this->levelCount.setFont(this->font);
-    this->levelCount.setCharacterSize(40);
+    this->levelCount.setCharacterSize(30);
     this->levelCount.setFillColor(sf::Color::White);
     this->levelCount.setPosition(700.f, 10.f);
     this->levelCount.setString("Level: 1");
 
     this->timer.setFont(this->font);
-    this->timer.setCharacterSize(40);
+    this->timer.setCharacterSize(30);
     this->timer.setFillColor(sf::Color::White);
     this->timer.setPosition(900.f, 10.f);
     this->timer.setString("Time: 0");
+
+    this->scoreLabel.setFont(font);
+    this->scoreLabel.setCharacterSize(30);
+    this->scoreLabel.setFillColor(sf::Color::White);
+    this->scoreLabel.setPosition(1200.f, 10.f);
+    this->scoreLabel.setString("Score: 0");
 }
 
 LevelGUI::~LevelGUI() {}
@@ -76,9 +85,11 @@ void LevelGUI::updateInfo() {
 void LevelGUI::render(sf::RenderTarget* target) {
     target->draw(this->characterName);
     target->draw(this->healthBar);
+    target->draw(this->healthBarBorder);
     target->draw(this->coinsLabel);
     target->draw(this->levelCount);
     target->draw(this->timer);
+    target->draw(this->scoreLabel);
 }
 
 void LevelGUI::updatePosition(const sf::View& view) {
@@ -89,11 +100,36 @@ void LevelGUI::updatePosition(const sf::View& view) {
     float xOffset = viewCenter.x - viewSize.x / 2.0f;
     float yOffset = viewCenter.y - viewSize.y / 2.0f;
 
-    this->characterName.setPosition(xOffset + 10.f, yOffset + 10.f);
+    float sectionWidth = viewSize.x / 5.0f;  
+    float centerYOffset = 20.f;  
+    float healthBarYOffset = 50.f;  
+
+
+    /*this->characterName.setPosition(xOffset + 10.f, yOffset + 10.f);
     this->healthBar.setPosition(xOffset + 10.f, yOffset + 60.f);
     this->coinsLabel.setPosition(xOffset + 420.f, yOffset + 10.f);
     this->levelCount.setPosition(xOffset + 700.f, yOffset + 10.f);
     this->timer.setPosition(xOffset + 900.f, yOffset + 10.f);
+    this->scoreLabel.setPosition(xOffset + 1200.f, yOffset + 10.f);*/
+
+    this->characterName.setPosition(xOffset + sectionWidth * 0.5f - characterName.getLocalBounds().width / 2.0f,
+        yOffset + centerYOffset);  
+
+    this->healthBar.setPosition(xOffset + sectionWidth * 0.5f - characterName.getLocalBounds().width / 2.0f,
+        yOffset + centerYOffset + healthBarYOffset);
+    this->healthBarBorder.setPosition((xOffset + sectionWidth * 0.5f - characterName.getLocalBounds().width / 2.0f) - 2.f,
+        (yOffset + centerYOffset + healthBarYOffset) - 2.f);
+    this->coinsLabel.setPosition(xOffset + sectionWidth * 1.5f - coinsLabel.getLocalBounds().width / 2.0f,
+        yOffset + centerYOffset); 
+
+    this->levelCount.setPosition(xOffset + sectionWidth * 2.5f - levelCount.getLocalBounds().width / 2.0f,
+        yOffset + centerYOffset); 
+
+    this->timer.setPosition(xOffset + sectionWidth * 3.5f - timer.getLocalBounds().width / 2.0f,
+        yOffset + centerYOffset); 
+
+    this->scoreLabel.setPosition(xOffset + sectionWidth * 4.5f - scoreLabel.getLocalBounds().width / 2.0f,
+        yOffset + centerYOffset); 
 }
 
 void LevelGUI::updateTime() {

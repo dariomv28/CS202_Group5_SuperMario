@@ -15,6 +15,7 @@ private:
 
     sf::Text characterName;
     sf::RectangleShape healthBar;
+    sf::RectangleShape healthBarBorder;
     sf::Font font;
     sf::Text coinsLabel;
     sf::Text scoreLabel;
