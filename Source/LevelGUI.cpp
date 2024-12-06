@@ -21,7 +21,7 @@ LevelGUI::LevelGUI() {
     
     this->healthBar.setSize(sf::Vector2f(400.f, 20.f));
     this->healthBar.setFillColor(sf::Color::Green);
-    this->healthBar.setPosition(100.f, 20.f);
+    this->healthBar.setPosition(10.f, 60.f);
 
     
     this->coinsLabel.setFont(this->font);
@@ -88,7 +88,7 @@ void LevelGUI::updatePosition(const sf::View& view) {
     float yOffset = viewCenter.y - viewSize.y / 2.0f;
 
     this->characterName.setPosition(xOffset + 10.f, yOffset + 10.f);
-    this->healthBar.setPosition(xOffset + 100.f, yOffset + 20.f);
+    this->healthBar.setPosition(xOffset + 10.f, yOffset + 60.f);
     this->coinsLabel.setPosition(xOffset + 420.f, yOffset + 10.f);
     this->levelCount.setPosition(xOffset + 700.f, yOffset + 10.f);
     this->timer.setPosition(xOffset + 900.f, yOffset + 10.f);
