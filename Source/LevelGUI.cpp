@@ -61,7 +61,7 @@ void LevelGUI::setEventMediator(GameEventMediator* eventMediator) {
 
 void LevelGUI::updateInfo() {
 
-
+    
     this->healthBar.setSize(sf::Vector2f(400.f * float(health) / 100.f, 20.f));
     //this->healthBar.setSize(sf::Vector2f(static_cast<float>(health) * 4.f, 20.f));
     if (health > 50) {
