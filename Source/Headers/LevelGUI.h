@@ -12,7 +12,7 @@ private:
     int timeCount;
     int level;
 
-    sf::Text healthLabel;
+    sf::Text characterName;
     sf::RectangleShape healthBar;
     sf::Font font;
     sf::Text coinsLabel;
@@ -24,8 +24,9 @@ public:
     LevelGUI();
     virtual ~LevelGUI();
 
-    void updateInfo(int playerHealth, int coins, int currentLevel);
+    void updateInfo(int playerHealth, int coins, int currentLevel, string characterName);
     void render(sf::RenderTarget* target);
     void updatePosition(const sf::View& view);
     void updateTime();
+    void updateCharacterName(string name);
 };

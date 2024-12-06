@@ -107,7 +107,7 @@ void GameState::update(const float& dt) {
     // physicsEngine.playerUpdatePhysics(dt);
     // physicsEngine.objectUpdatePhysics(dt);
     
-    levelGUI->updateInfo(player->getHealth(), 0, 1);  
+    levelGUI->updateInfo(player->getHealth(), 0, 1, "Mario");
     sf::View view = window->getView();
     levelGUI->updatePosition(view);
     levelGUI->updateTime();

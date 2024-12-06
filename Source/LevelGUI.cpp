@@ -13,10 +13,15 @@ LevelGUI::LevelGUI() {
         throw("ERROR::LEVELGUI::FAILED_TO_LOAD_FONT");
     }
 
+    this->characterName.setFont(font);
+    this->characterName.setCharacterSize(40);
+    this->characterName.setFillColor(sf::Color::White);
+    this->characterName.setPosition(10.f, 10.f);
+    this->characterName.setString("Mario");
     
     this->healthBar.setSize(sf::Vector2f(400.f, 20.f));
     this->healthBar.setFillColor(sf::Color::Green);
-    this->healthBar.setPosition(10.f, 10.f);
+    this->healthBar.setPosition(100.f, 20.f);
 
     
     this->coinsLabel.setFont(this->font);
@@ -40,11 +45,12 @@ LevelGUI::LevelGUI() {
 
 LevelGUI::~LevelGUI() {}
 
-void LevelGUI::updateInfo(int playerHealth, int coins, int currentLevel) {
+void LevelGUI::updateInfo(int playerHealth, int coins, int currentLevel, string characterName) {
     this->health = playerHealth;
     this->coinsCollected = coins;
     this->level = currentLevel;
 
+    this->characterName.setString(characterName);
     this->healthBar.setSize(sf::Vector2f(400.f * float(playerHealth) / 100.f, 20.f));
     //this->healthBar.setSize(sf::Vector2f(static_cast<float>(health) * 4.f, 20.f));
     if (health > 50) {
@@ -66,6 +72,7 @@ void LevelGUI::updateInfo(int playerHealth, int coins, int currentLevel) {
 }
 
 void LevelGUI::render(sf::RenderTarget* target) {
+    target->draw(this->characterName);
     target->draw(this->healthBar);
     target->draw(this->coinsLabel);
     target->draw(this->levelCount);
@@ -80,8 +87,8 @@ void LevelGUI::updatePosition(const sf::View& view) {
     float xOffset = viewCenter.x - viewSize.x / 2.0f;
     float yOffset = viewCenter.y - viewSize.y / 2.0f;
 
-    
-    this->healthBar.setPosition(xOffset + 10.f, yOffset + 10.f);
+    this->characterName.setPosition(xOffset + 10.f, yOffset + 10.f);
+    this->healthBar.setPosition(xOffset + 100.f, yOffset + 20.f);
     this->coinsLabel.setPosition(xOffset + 420.f, yOffset + 10.f);
     this->levelCount.setPosition(xOffset + 700.f, yOffset + 10.f);
     this->timer.setPosition(xOffset + 900.f, yOffset + 10.f);
@@ -94,4 +101,8 @@ void LevelGUI::updateTime() {
         clock.restart();
         timer.setString("Time: " + std::to_string(timeCount));
     }
+}
+
+void LevelGUI::updateCharacterName(string name) {
+
 }
