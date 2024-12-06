@@ -1,7 +1,7 @@
 #include "Headers/Goomba.h"
 
 Goomba::Goomba() : Enemy() {
-	walkSpeed = 30.0f;
+	walkSpeed = 16.0f;
 
 	isAlive = true;
 	setHealth(1);
@@ -19,7 +19,7 @@ Goomba::Goomba() : Enemy() {
 	this->animationComponent = new AnimationComponent(this->entitySprite);
 	initAnimations();
 
-	movementComponent = new MovementComponent(walkSpeed, 5.0f);
+	movementComponent = new MovementComponent(walkSpeed, 4.0f);
 
 	hitbox.setSize(sf::Vector2f(64.f, 64.f));
 	hitbox.setPosition(position);
@@ -28,9 +28,11 @@ Goomba::Goomba() : Enemy() {
 	hitbox.setOutlineThickness(1.f);
 }
 
-Goomba::Goomba(sf::Vector2f position, sf::Vector2f size) : Goomba() {
+Goomba::Goomba(sf::Vector2f position, sf::Vector2f size, float x_min, float x_max) : Goomba() {
 	this->position = position;
 	this->size = size;
+	this->x_min = x_min;
+	this->x_max = x_max;
 	setMoveLeft(true);
 }
 
@@ -46,14 +48,14 @@ void Goomba::move(const float& dt)
 {
 	this->position += this->movementComponent->velocity;
 
-	if (this->position.x <= 30.0f) {
-		this->position.x = std::max<float>(this->position.x, 30.0f);
+	if (this->position.x <= x_min) {
+		this->position.x = std::max<float>(this->position.x, x_min);
 		setMoveLeft(false);
 		setMoveRight(true);
 	}
 	
-	if (this->position.x >= 13416.f) {
-		this->position.x = std::min<float>(this->position.x, 13416.f);
+	if (this->position.x >= x_max) {
+		this->position.x = std::min<float>(this->position.x, x_max);
 		setMoveRight(false);
 		setMoveLeft(true);
 	}
