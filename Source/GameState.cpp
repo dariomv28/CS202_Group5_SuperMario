@@ -72,7 +72,7 @@ void GameState::loadLevel(int level) {
 
         Enemies.push_back(new Goomba(sf::Vector2f(5200.f, 195.f), sf::Vector2f(64.f, 64.f), 5100.f, 5600.f));
 
-        Enemies.push_back(new Goomba(sf::Vector2f(5945.f, 195.f), sf::Vector2f(64.f, 64.f), 5810.f, 6062.f));
+        Enemies.push_back(new Goomba(sf::Vector2f(5945.f, 195.f), sf::Vector2f(64.f, 64.f), 5800.f, 6050.f));
 
         Enemies.push_back(new Goomba(sf::Vector2f(5800.f, 500.f), sf::Vector2f(64.f, 64.f), 5739.f, 8511.f));
         Enemies.push_back(new Goomba(sf::Vector2f(7000.f, 500.f), sf::Vector2f(64.f, 64.f), 5739.f, 8511.f));
