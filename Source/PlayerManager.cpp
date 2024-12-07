@@ -26,6 +26,7 @@ void PlayerManager::updateAnimation(const float& dt) {
 }
 
 
+
 std::string PlayerManager::getImagePath() const {
     return m_imagePath;
 }

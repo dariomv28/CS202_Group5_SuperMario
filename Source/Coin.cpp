@@ -1,4 +1,5 @@
 #include "Headers/Coin.h"
+#include "Headers/GameEventMediator.h"
 
 Coin::Coin()
 {
@@ -26,9 +27,10 @@ void Coin::update(const float& dt)
 void Coin::reactToCollison(int collidedSide)
 {
 	//Increase coin or score
+	eventMediator->increaseCoins(1);
 
 	//Delete this block
-
+	eventMediator->deleteBlock(this);
 }
 
 void Coin::render(sf::RenderTarget* target)

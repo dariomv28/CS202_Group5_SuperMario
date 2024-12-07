@@ -25,10 +25,10 @@ void Block::initSpritesSheet()
 	spritesSheet["brick_1"] = sf::IntRect(1, 86, 16, 16);
 
 	//Coins Blocks
-	spritesSheet["empty_coin_block_1"] = sf::IntRect(1, 69, 16, 16);
-	spritesSheet["coin_block_1_1"] = sf::IntRect(1, 52, 16, 16);
-	spritesSheet["coin_block_1_2"] = sf::IntRect(18, 52, 33, 16);
-	spritesSheet["coin_block_1_3"] = sf::IntRect(35, 52, 50, 16);
+	spritesSheet["empty_coin_block"] = sf::IntRect(1, 69, 16, 16);
+	spritesSheet["coin_block_1"] = sf::IntRect(1, 52, 16, 16);
+	spritesSheet["coin_block_2"] = sf::IntRect(18, 52, 16, 16);
+	spritesSheet["coin_block_3"] = sf::IntRect(35, 52, 16, 16);
 
 	//Pipe
 	spritesSheet["pipe_bottom_left"] = sf::IntRect(103, 69, 16,16);
