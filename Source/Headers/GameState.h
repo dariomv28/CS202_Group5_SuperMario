@@ -9,6 +9,7 @@
 #include "LevelGUI.h"
 #include "GameEventMediator.h"
 #include "Goomba.h"
+#include "PowerUpObject.h"
 
 class GameState : public State {
 private:
@@ -18,6 +19,7 @@ private:
     Mario* player;
 	vector<Enemy*> Enemies;
 	vector<Block*> Blocks;
+   	vector<PowerUpObject*> PowerUps;
     LevelGUI* levelGUI;      
 public:
     GameState(StateData* stateData);

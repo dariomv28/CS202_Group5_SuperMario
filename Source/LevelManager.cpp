@@ -1,6 +1,7 @@
 #include "Headers/LevelManager.h"
 #include "Headers/SolidBlock.h"
 #include "Headers/Pipe.h"
+#include "Headers/CoinBlock.h"
 
 LevelManager::LevelManager() {
 	map_texture.loadFromFile("Source/Resources/texture/Map.png");
@@ -85,7 +86,7 @@ sf::Color LevelManager::get_map_sketch_pixel(const unsigned short i_x, const uns
 
 
 void convert_sketch(const unsigned char i_current_level, unsigned short& i_level_finish, 
-	vector<Enemy*>& i_enemies, vector<Block*> &Blocks, 
+	vector<Enemy*>& i_enemies, vector<Block*> &Blocks, vector<PowerUpObject*>& PowerUp,
 	sf::Color& i_background_color, LevelManager& i_level_manager, Mario& i_mario)
 {
 	unsigned short map_height;
@@ -127,7 +128,7 @@ void convert_sketch(const unsigned char i_current_level, unsigned short& i_level
 				else if (pixel == sf::Color(146, 73, 0))
 					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "brick_1"));
 				else if (pixel == sf::Color(146, 73, 50))
-					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "coin_block_1_1"));
+					Blocks.push_back(new CoinBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "coin_block"));
 				else if (pixel == sf::Color(0, 255, 0))
 					Blocks.push_back(new Pipe(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE * 2, CELL_SIZE * 3), "pipe", 3));
 				else if (pixel == sf::Color(0, 253, 0))

@@ -4,6 +4,7 @@
 #include "Headers/Block.h"
 #include "Headers/LivingEntity.h"
 #include "Headers/Enemy.h"
+#include "Headers/PowerUpObject.h"
 
 PhysicsEngine::PhysicsEngine() {
 	gravity = sf::Vector2f(0, 2.0f * PIXELS_PER_METER);
@@ -131,7 +132,7 @@ void PhysicsEngine::resolveCollisionPlayerBlock(PlayerManager* entity, std::vect
 	// Resolve on the ground
 	entity->setOnGround(false);
 
-	for (auto obj : blocks) {
+	for (auto& obj : blocks) {
 		//Resolve the right side
 
 		if (entity->isMoveRight() && checkCollideRight(entity, obj)) {
@@ -157,6 +158,7 @@ void PhysicsEngine::resolveCollisionPlayerBlock(PlayerManager* entity, std::vect
 		//Resolve the ceiling
 		if (entity->getVelocity().y < 0 && checkCollideUp(entity,obj)) {
 			fixPosition(entity, obj, Collide_Top);
+			std::cout << "Collide Up\n";
 			obj->reactToCollison(Collide_Bottom);
 			continue;
 		}
@@ -170,28 +172,32 @@ void PhysicsEngine::resolveCollisionPlayerEnemy(PlayerManager* entity, std::vect
 		//Resolve the right side
 		if (entity->isMoveRight() && checkCollideRight(entity, obj)) {
 			fixPosition(entity, obj, Collide_Right);
-			//obj->reactToCollison(Collide_Left);
+			obj->reactToPlayerCollision(Collide_Left);
+			 //Testing
+			
 			continue;
 		}
 
 		//Resolve the left side
 		if (entity->isMoveLeft() && checkCollideLeft(entity, obj)) {
 			fixPosition(entity, obj, Collide_Left);
-			//obj->reactToCollison(Collide_Right);
+			obj->reactToPlayerCollision(Collide_Right);
+			
 			continue;
 		}
 
 		//Resolve the ground
 		if (entity->getVelocity().y >= 0 && checkCollideDown(entity, obj)) {
 			fixPosition(entity, obj, Collide_Bottom);
-			//obj->reactToCollison(Collide_Top);
+			obj->reactToPlayerCollision(Collide_Top);
 			continue;
 		}
 
 		//Resolve the ceiling
 		if (entity->getVelocity().y < 0 && checkCollideUp(entity, obj)) {
 			fixPosition(entity, obj, Collide_Top);
-			//obj->reactToCollison(Collide_Bottom);
+			obj->reactToPlayerCollision(Collide_Bottom);
+			
 			continue;
 		}
 	}
@@ -235,6 +241,16 @@ void PhysicsEngine::resolveCollisionEnemyBlock(std::vector<Enemy*>& enemies, std
 
 				continue;
 			}
+		}
+	}
+}
+
+void PhysicsEngine::resolveCollisionPlayerPowerUp(PlayerManager* entity, std::vector<PowerUpObject*>& PowerUps, const float& dt) {
+	for (auto& obj : PowerUps) {
+		//If the player collides with the powerup, the power up applies
+		if (checkCollideRight(entity, obj)) {
+			obj->reactToCollison();
+			continue;
 		}
 	}
 }

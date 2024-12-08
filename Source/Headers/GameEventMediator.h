@@ -7,6 +7,8 @@ class Enemy;
 class Block;
 class GameObject;
 class PhysicsEngine;
+class LevelGUI;
+class PowerUpObject;
 
 class GameEventMediator
 {
@@ -16,6 +18,8 @@ private:
 	PlayerManager* player;
 	std::vector<Block*>* blocks;
 	std::vector<Enemy*>* enemies;
+	std::vector<PowerUpObject*>* PowerUps;
+	LevelGUI* levelGUI;
 public:
 	// Initialization function
 	GameEventMediator();
@@ -24,6 +28,8 @@ public:
 	void addBlock(std::vector<Block*>& blocks);
 	void addEnemy(std::vector<Enemy*>& enemies);
 	void addPhysicsEngine(PhysicsEngine* physicsEngine);
+	void addLevelGUI(LevelGUI* levelGUI);
+	void addPowerUp(std::vector<PowerUpObject*>& PowerUps);
 
 	// Physics Engine functions
 	void applyExternalForcesToEntities(const float& dt);
@@ -34,7 +40,24 @@ public:
 	void updateMovements(const float& dt);
 	void updateAnimations(const float& dt);
 	void updateEvents(const float& dt);
+	void updateLevelGUI(const sf::View& view);
 
-	// Game Event functions
+	// LevelGUI events
+	void increaseCoins(int numCoins);
+	void increaseScore(int numScore);
+	void updateHealth(); // For LevelGUI
+	
+	// Player events
+	void setPlayerBig(bool big);
+	void decreasePlayerHealth();
+
+	// PowerUp events
+	void spawnPowerUp(PowerUpObject* PowerUp);
+
+	// Object deletion functions
+	void defeatPlayer();
+	void deleteEnemy(Enemy* enemy);
+	void deleteBlock(Block* block);
+	void deletePowerUp(PowerUpObject* PowerUp);
 };
 

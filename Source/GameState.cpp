@@ -11,7 +11,7 @@ GameState::GameState(StateData* stateData) : State(stateData), mapManager(nullpt
         // Size
         sf::Vector2f(64.f, 64.f),   
         // Health
-        100,  
+        3,  
         // Speed
         16.0f                     
     );
@@ -36,6 +36,13 @@ GameState::~GameState() {
     for (auto& enemy : Enemies) {
 		delete enemy;
 	}
+    for (auto& block : Blocks) {
+		delete block;
+	}
+	for (auto& PowerUp : PowerUps) {
+		delete PowerUp;
+	}
+	delete levelGUI;
 }
 
 void GameState::loadLevel(int level) {
@@ -45,7 +52,7 @@ void GameState::loadLevel(int level) {
 
     mapManager = new MapManager();
     if (level == 1) {
-        mapManager->loadMap("Level1_Map", player, Enemies, Blocks, window);
+        mapManager->loadMap("Level1_Map", player, Enemies, Blocks, PowerUps, window);
 
         // Fixed boundaries
         Enemies.push_back(new Goomba(sf::Vector2f(300.f, 500.f), sf::Vector2f(64.f, 64.f)));
@@ -72,7 +79,7 @@ void GameState::loadLevel(int level) {
 
         Enemies.push_back(new Goomba(sf::Vector2f(5200.f, 195.f), sf::Vector2f(64.f, 64.f), 5100.f, 5600.f));
 
-        Enemies.push_back(new Goomba(sf::Vector2f(5945.f, 195.f), sf::Vector2f(64.f, 64.f), 5810.f, 6062.f));
+        Enemies.push_back(new Goomba(sf::Vector2f(5945.f, 195.f), sf::Vector2f(64.f, 64.f), 5800.f, 6050.f));
 
         Enemies.push_back(new Goomba(sf::Vector2f(5800.f, 500.f), sf::Vector2f(64.f, 64.f), 5739.f, 8511.f));
         Enemies.push_back(new Goomba(sf::Vector2f(7000.f, 500.f), sf::Vector2f(64.f, 64.f), 5739.f, 8511.f));
@@ -92,12 +99,25 @@ void GameState::loadLevel(int level) {
 
 void GameState::initGameEventMediator() {
     player->setEventMediator(eventMediator);
+
+    for (auto& Block : Blocks) {
+		Block->setEventMediator(eventMediator);
+	}
+    for (auto& Enemy : Enemies) {
+        Enemy->setEventMediator(eventMediator);
+    }
+    for (auto& PowerUp : PowerUps) {
+		PowerUp->setEventMediator(eventMediator);
+	}
+    levelGUI->setEventMediator(eventMediator);
+    physicsEngine->setEventMediator(eventMediator);
+
     eventMediator->addPlayer(player);
     eventMediator->addEnemy(Enemies);
-    eventMediator->addBlock(Blocks);
-    
+    eventMediator->addBlock(Blocks);    
     eventMediator->addPhysicsEngine(physicsEngine);
-    physicsEngine->setEventMediator(eventMediator);
+    eventMediator->addLevelGUI(levelGUI);
+    eventMediator->addPowerUp(PowerUps);
 }
 
 
@@ -117,16 +137,13 @@ void GameState::update(const float& dt) {
     eventMediator->updateAnimations(dt);
     eventMediator->updateMovements(dt);
     eventMediator->updateEvents(dt);
+    eventMediator->updateLevelGUI(window->getView());
     //resolveCollision(dt);
        
     // Update physics first
     // physicsEngine.playerUpdatePhysics(dt);
     // physicsEngine.objectUpdatePhysics(dt);
     
-    levelGUI->updateInfo(player->getHealth(), 0, 1);  
-    sf::View view = window->getView();
-    levelGUI->updatePosition(view);
-    levelGUI->updateTime();
     // Then update all game objects
 }
   
@@ -143,12 +160,28 @@ void GameState::render(sf::RenderTarget* target) {
 	
     levelGUI->render(target);
 
+    //Only render the blocks that are within the view
+    //Get the view bounds
+    sf::Vector2f viewCenter = target->getView().getCenter();
+    sf::Vector2f viewSize = target->getView().getSize();
+
+    sf::FloatRect viewBounds(viewCenter.x - viewSize.x / 2.f, viewCenter.y - viewSize.y / 2.f, viewSize.x, viewSize.y);
+
     for (auto& Block : Blocks) {
-        Block->render(target);
+        if (Block->hitbox.getGlobalBounds().intersects(viewBounds)) {
+			Block->render(target);
+		}
     }
     for (auto& Enemy : Enemies) {
-        Enemy->render(target);
+        if (Enemy->hitbox.getGlobalBounds().intersects(viewBounds)) 
+            Enemy->render(target);
     }
+
+    for (auto& PowerUp : PowerUps) {
+		if (PowerUp->hitbox.getGlobalBounds().intersects(viewBounds)) {
+            PowerUp->render(target);
+		}
+     }
 	//cerr << Blocks.size() << endl;
 }
 

@@ -1,13 +1,13 @@
 #include "Headers/LV1.h"
 #include <iostream>
 
-LV1::LV1(Mario* &Player, vector<Enemy*> &Enemies, vector<Block*>& Blocks, sf::RenderWindow *window) {
+LV1::LV1(Mario* &Player, vector<Enemy*> &Enemies, vector<Block*>& Blocks, vector<PowerUpObject*>& PowerUp, sf::RenderWindow *window) {
 	BackGroundColor = sf::Color::Black;
 	View = sf::View(sf::FloatRect(0, 0, 1560, 960));
 	view_x = 0;
 	this->window = window;
 	FinishLevel = 0;
-	convert_sketch(0, FinishLevel, Enemies, Blocks, BackGroundColor, *this, *Player);
+	convert_sketch(0, FinishLevel, Enemies, Blocks, PowerUp, BackGroundColor, *this, *Player);
 }
 
 LV1::~LV1() {

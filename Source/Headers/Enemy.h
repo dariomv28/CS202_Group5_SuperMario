@@ -14,5 +14,6 @@ public:
 
 	virtual bool getIsAlive() const = 0;
 	virtual void setIsAlive(bool alive) = 0;
+	virtual void reactToPlayerCollision(int collidedSide) = 0;
 };
 

@@ -6,6 +6,7 @@
 #include "Enemy.h"
 #include "Mario.h"
 #include "Block.h"
+#include "PowerUpObject.h"
 using namespace std;
 
 class LevelManager {
@@ -72,6 +73,6 @@ protected:
     
 };
 
-void convert_sketch(const unsigned char i_current_level, unsigned short& i_level_finish, vector<Enemy*>& i_enemies, vector<Block*>& Blocks, sf::Color& i_background_color, LevelManager& i_level_manager, Mario& i_mario);
+void convert_sketch(const unsigned char i_current_level, unsigned short& i_level_finish, vector<Enemy*>& i_enemies, vector<Block*>& Blocks, vector<PowerUpObject*>& PowerUp, sf::Color& i_background_color, LevelManager& i_level_manager, Mario& i_mario);
 
 #endif 

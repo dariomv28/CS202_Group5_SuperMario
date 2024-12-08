@@ -1,4 +1,5 @@
 #include "Headers/Goomba.h"
+#include "Headers/GameEventMediator.h"
 
 Goomba::Goomba() : Enemy() {
 	walkSpeed = 16.0f;
@@ -90,3 +91,13 @@ void Goomba::setIsAlive(bool alive) {
 	isAlive = alive;
 }
 
+void Goomba::reactToPlayerCollision(int collidedSide) {
+	if (collidedSide == Collide_Top) {
+		setIsAlive(false);
+		eventMediator->increaseScore(300);
+		eventMediator->deleteEnemy(this);
+	}
+	else {
+		eventMediator->decreasePlayerHealth();
+	}
+}

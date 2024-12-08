@@ -8,7 +8,6 @@
 class Mario : public PlayerManager {
 private:
     std::string m_name;
-    bool is_big;
     std::string currentAction;
     bool isAnimationInProgress;
     std::unordered_map<std::string, sf::IntRect> spritesSheet;
