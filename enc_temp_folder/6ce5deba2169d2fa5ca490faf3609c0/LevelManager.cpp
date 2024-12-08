@@ -63,16 +63,15 @@ void LevelManager::update_map_sketch(const unsigned char i_current_level)
 
 void LevelManager::update_background(const unsigned char i_current_level)
 {
-	std::string current_level = std::to_string(i_current_level);
-	texture_background_1.loadFromFile("Source/Resources/texture/background_level" + current_level + "_1.png");
+	texture_background_1.loadFromFile("Source/Resources/texture/background_level" + std::to_string(static_cast<unsigned short>(i_current_level)) + "_1.png");
 	background1.setTexture(texture_background_1);
-	texture_background_2.loadFromFile("Source/Resources/texture/background_level" + current_level + "_2.png");
+	texture_background_2.loadFromFile("Source/Resources/texture/background_level" + std::to_string(static_cast<unsigned short>(i_current_level)) + "_2.png");
 	background2.setTexture(texture_background_2);
 	background1.setPosition(0, 0);
 	background2.setPosition(0, 0);
 	/*i_level_manager.get_map_sketch_width()
 	i_level_manager.get_map_sketch_height() / 3.f*/
-	background1.setScale((get_map_sketch_width() * 64) / background1.getTexture()->getSize().x, (get_map_sketch_height() * 64 / 3.f) / background1.getTexture()->getSize().y);
+	background1.setScale((get_map_sketch_width() * 64) / background1.getTexture()->getSize().x, (get_map_sketch_height()*64 / 3.f) / background1.getTexture()->getSize().y);
 	background2.setScale((get_map_sketch_width() * 64) / background2.getTexture()->getSize().x, (get_map_sketch_height() * 64 / 3.f) / background2.getTexture()->getSize().y);
 }
 
