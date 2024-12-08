@@ -1,14 +1,14 @@
 #include "Headers/Brick.h"
-
+#include "Headers/GameEventMediator.h"
 
 Brick::Brick()
 {
 }
 
-Brick::Brick(sf::Vector2f position, sf::Vector2f size, std::string name, int hiddenObject)
+Brick::Brick(sf::Vector2f position, sf::Vector2f size, std::string name, bool breakable)
 	: Block(position, size, name)
 {
-	this->hiddenObject = hiddenObject;
+	this->breakable = breakable;
 	entitySprite.setTexture(entityTexture);
 	entitySprite.setTextureRect(spritesSheet[name]);
 	entitySprite.setPosition(position);
@@ -26,14 +26,10 @@ void Brick::update(const float& dt)
 void Brick::reactToCollison(int collidedSide)
 {
 	if (collidedSide == Collide_Bottom) {
-		if (hiddenObject == 0) return;
-		//Depend on the Hidden object, we will spawn different things
-		switch (hiddenObject)
-		{
-		default:
-			break;
+		if (breakable) {
+			eventMediator->increaseScore(50);
+			eventMediator->deleteBlock(this);
 		}
-		hiddenObject = 0;
 	}
 }
 

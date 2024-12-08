@@ -36,6 +36,13 @@ GameState::~GameState() {
     for (auto& enemy : Enemies) {
 		delete enemy;
 	}
+    for (auto& block : Blocks) {
+		delete block;
+	}
+	for (auto& PowerUp : PowerUps) {
+		delete PowerUp;
+	}
+	delete levelGUI;
 }
 
 void GameState::loadLevel(int level) {
@@ -159,9 +166,6 @@ void GameState::render(sf::RenderTarget* target) {
     sf::Vector2f viewSize = target->getView().getSize();
 
     sf::FloatRect viewBounds(viewCenter.x - viewSize.x / 2.f, viewCenter.y - viewSize.y / 2.f, viewSize.x, viewSize.y);
-
-    std::cout << viewBounds.left << " " << viewBounds.top << " " << viewBounds.width << " " << viewBounds.height << std::endl;
-
 
     for (auto& Block : Blocks) {
         if (Block->hitbox.getGlobalBounds().intersects(viewBounds)) {

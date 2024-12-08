@@ -42,12 +42,17 @@ public:
 	void updateEvents(const float& dt);
 	void updateLevelGUI(const sf::View& view);
 
-	// Game Event functions
+	// LevelGUI events
 	void increaseCoins(int numCoins);
 	void increaseScore(int numScore);
 	void updateHealth(); // For LevelGUI
+	
+	// Player events
 	void setPlayerBig(bool big);
 	void decreasePlayerHealth();
+
+	// PowerUp events
+	void spawnPowerUp(PowerUpObject* PowerUp);
 
 	// Object deletion functions
 	void defeatPlayer();
