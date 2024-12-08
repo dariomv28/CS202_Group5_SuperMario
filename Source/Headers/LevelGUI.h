@@ -22,6 +22,10 @@ private:
     sf::Text levelCount;
     sf::Text timer;
     sf::Clock clock;
+    sf::Texture heartTexture;
+    sf::Sprite heartSprite;
+    sf::Text livesText;
+
 
     GameEventMediator* eventMediator;
 public:
