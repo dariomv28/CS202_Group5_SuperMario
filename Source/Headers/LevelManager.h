@@ -31,6 +31,7 @@ public:
 	//void set_map_size(const unsigned short i_new_size);
 	//virtual void update();
 	void update_map_sketch(const unsigned char i_current_level);
+	void update_background(const unsigned char i_current_level);
 
 	//std::vector<unsigned char> map_collision(const std::vector<Cell>& i_check_cells, const sf::FloatRect& i_hitbox) const;
 	//std::vector<unsigned char> map_collision(const std::vector<Cell>& i_check_cells, std::vector<sf::Vector2i>& i_collision_cells, const sf::FloatRect& i_hitbox) const;
@@ -49,6 +50,9 @@ protected:
 	sf::Texture mapTexture;
 
 	sf::Image map_sketch;
+
+	sf::Texture texture_background_1, texture_background_2;
+	sf::Sprite background1, background2;
 
 	sf::Sprite cell_sprite;
 

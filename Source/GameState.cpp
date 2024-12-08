@@ -153,7 +153,7 @@ void GameState::render(sf::RenderTarget* target) {
     }
 
     if (mapManager) {
-        //mapManager->render();
+        mapManager->render();
     }
     // cerr << player->hitbox.getPosition().x << endl;
     player->render(target);
