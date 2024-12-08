@@ -29,12 +29,12 @@ MapManager::~MapManager() {
     delete levelManager;
 }
 
-void MapManager::loadMap(const std::string& mapName, Mario* &Player, vector<Enemy*>& Enemies, vector<Block*>& Blocks, sf::RenderWindow *window)
+void MapManager::loadMap(const std::string& mapName, Mario* &Player, vector<Enemy*>& Enemies, vector<Block*>& Blocks, vector<PowerUpObject*>& PowerUp, sf::RenderWindow *window)
 {
     std::cout << "Loading map: " << mapName << std::endl;
 
     if (mapName == "Level1_Map") {
-        levelManager = new LV1(Player, Enemies, Blocks, window);
+        levelManager = new LV1(Player, Enemies, Blocks, PowerUp, window);
     }
     else if (mapName == "Level2_Map") {
         levelManager = new LV2();  

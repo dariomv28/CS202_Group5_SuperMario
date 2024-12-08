@@ -11,7 +11,7 @@ GameState::GameState(StateData* stateData) : State(stateData), mapManager(nullpt
         // Size
         sf::Vector2f(64.f, 64.f),   
         // Health
-        100,  
+        3,  
         // Speed
         16.0f                     
     );
@@ -45,7 +45,7 @@ void GameState::loadLevel(int level) {
 
     mapManager = new MapManager();
     if (level == 1) {
-        mapManager->loadMap("Level1_Map", player, Enemies, Blocks, window);
+        mapManager->loadMap("Level1_Map", player, Enemies, Blocks, PowerUps, window);
 
         // Fixed boundaries
         Enemies.push_back(new Goomba(sf::Vector2f(300.f, 500.f), sf::Vector2f(64.f, 64.f)));
@@ -99,6 +99,9 @@ void GameState::initGameEventMediator() {
     for (auto& Enemy : Enemies) {
         Enemy->setEventMediator(eventMediator);
     }
+    for (auto& PowerUp : PowerUps) {
+		PowerUp->setEventMediator(eventMediator);
+	}
     levelGUI->setEventMediator(eventMediator);
     physicsEngine->setEventMediator(eventMediator);
 
@@ -107,6 +110,7 @@ void GameState::initGameEventMediator() {
     eventMediator->addBlock(Blocks);    
     eventMediator->addPhysicsEngine(physicsEngine);
     eventMediator->addLevelGUI(levelGUI);
+    eventMediator->addPowerUp(PowerUps);
 }
 
 
@@ -149,12 +153,31 @@ void GameState::render(sf::RenderTarget* target) {
 	
     levelGUI->render(target);
 
+    //Only render the blocks that are within the view
+    //Get the view bounds
+    sf::Vector2f viewCenter = target->getView().getCenter();
+    sf::Vector2f viewSize = target->getView().getSize();
+
+    sf::FloatRect viewBounds(viewCenter.x - viewSize.x / 2.f, viewCenter.y - viewSize.y / 2.f, viewSize.x, viewSize.y);
+
+    std::cout << viewBounds.left << " " << viewBounds.top << " " << viewBounds.width << " " << viewBounds.height << std::endl;
+
+
     for (auto& Block : Blocks) {
-        Block->render(target);
+        if (Block->hitbox.getGlobalBounds().intersects(viewBounds)) {
+			Block->render(target);
+		}
     }
     for (auto& Enemy : Enemies) {
-        Enemy->render(target);
+        if (Enemy->hitbox.getGlobalBounds().intersects(viewBounds)) 
+            Enemy->render(target);
     }
+
+    for (auto& PowerUp : PowerUps) {
+		if (PowerUp->hitbox.getGlobalBounds().intersects(viewBounds)) {
+            PowerUp->render(target);
+		}
+     }
 	//cerr << Blocks.size() << endl;
 }
 

@@ -25,4 +25,5 @@ public:
 	void setIsAlive(bool alive);
 
 	void move(const float& dt) override;
+	void reactToPlayerCollision(int collidedSide) override;
 };

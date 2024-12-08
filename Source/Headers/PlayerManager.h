@@ -23,9 +23,13 @@ public:
     virtual void update(const float& dt);
 	virtual void render(sf::RenderTarget* target);
 
+    // Setters and Getters
+    void setBig(bool big);
+    bool getBig() const;
     
 protected:
     std::string m_imagePath;
-  
+    bool is_big;
+
 };
 

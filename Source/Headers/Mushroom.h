@@ -1,9 +1,9 @@
 #pragma once
-#include "Block.h"
+#include "PowerUpObject.h"
 
 //Name = "mushroom"
 class Mushroom :
-    public Block
+    public PowerUpObject	
 {
 private:
     int type;
@@ -12,12 +12,11 @@ public:
 	~Mushroom();
 
 	//Setters and Getters
-	void setType(int type);
-	int getType();
+	//void setType(int type);
+	//int getType();
 
 	void update(const float& dt);
-	void render(sf::RenderTarget* target);
-	void reactToCollison(int collidedSide);
+	void reactToCollison();
 
 };
 

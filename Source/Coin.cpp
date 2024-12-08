@@ -10,7 +10,7 @@ Coin::~Coin()
 }
 
 Coin::Coin(sf::Vector2f position, sf::Vector2f size, std::string name)
-	: Block(position, size, name)
+	: PowerUpObject(position, size, name)
 {
 	entitySprite.setTexture(entityTexture);
 	entitySprite.setTextureRect(spritesSheet["coin_1"]);
@@ -24,13 +24,13 @@ void Coin::update(const float& dt)
 	//Update the animation
 }
 
-void Coin::reactToCollison(int collidedSide)
+void Coin::reactToCollison()
 {
 	//Increase coin or score
 	eventMediator->increaseCoins(1);
 
 	//Delete this block
-	eventMediator->deleteBlock(this);
+	eventMediator->deletePowerUp(this);
 }
 
 void Coin::render(sf::RenderTarget* target)

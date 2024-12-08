@@ -345,7 +345,7 @@ sf::Color LevelManager::get_map_sketch_pixel(const unsigned short i_x, const uns
 
 
 void convert_sketch(const unsigned char i_current_level, unsigned short& i_level_finish, 
-	vector<Enemy*>& i_enemies, vector<Block*> &Blocks, 
+	vector<Enemy*>& i_enemies, vector<Block*> &Blocks, vector<PowerUpObject*>& PowerUp,
 	sf::Color& i_background_color, LevelManager& i_level_manager, Mario& i_mario)
 {
 	unsigned short map_height;

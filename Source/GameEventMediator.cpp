@@ -31,6 +31,10 @@ void GameEventMediator::addLevelGUI(LevelGUI* levelGUI) {
 	this->levelGUI = levelGUI;
 }
 
+void GameEventMediator::addPowerUp(std::vector<PowerUpObject*>& PowerUps) {
+	this->PowerUps = &PowerUps;
+}
+
 void GameEventMediator::updateMovements(const float& dt) {
 	// Update velocity of all entities
 	player->updateVelocity(dt);
@@ -65,6 +69,8 @@ void GameEventMediator::resolveCollision(const float& dt) {
 	physicsEngine->resolveCollisionEnemyEnemy(*enemies, dt);
 	// Resolve collision between player and enemies
 	physicsEngine->resolveCollisionPlayerEnemy(player, *enemies, dt);
+	// Resolve collision between player and powerups
+	physicsEngine->resolveCollisionPlayerPowerUp(player, *PowerUps, dt);
 	updateHealth();
 }
 
@@ -103,6 +109,14 @@ void GameEventMediator::updateHealth() {
 	levelGUI->updateHealth(player->getHealth()); // Just for testing
 }
 
+void GameEventMediator::setPlayerBig(bool big) {
+	player->setBig(big);
+}
+
+void GameEventMediator::decreasePlayerHealth() {
+	player->setHealth(player->getHealth() - 1);
+}
+
 void GameEventMediator::defeatPlayer() {
 	//
 }
@@ -122,6 +136,16 @@ void GameEventMediator::deleteBlock(Block* block) {
 	for (auto it = blocks->begin(); it != blocks->end(); ++it) {
 		if (*it == block) {
 			blocks->erase(it);
+			break;
+		}
+	}
+}
+
+void GameEventMediator::deletePowerUp(PowerUpObject* PowerUp) {
+	// Delete PowerUp from PowerUps
+	for (auto it = PowerUps->begin(); it != PowerUps->end(); ++it) {
+		if (*it == PowerUp) {
+			PowerUps->erase(it);
 			break;
 		}
 	}
