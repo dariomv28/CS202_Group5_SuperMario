@@ -117,7 +117,7 @@ void LevelGUI::updatePosition(const sf::View& view) {
 
     float sectionWidth = viewSize.x / 5.0f;  
     float centerYOffset = 20.f;  
-    float healthBarYOffset = 50.f;  
+    float horizontalSpacing = 50.f;  
 
 
     /*this->characterName.setPosition(xOffset + 10.f, yOffset + 10.f);
@@ -127,7 +127,7 @@ void LevelGUI::updatePosition(const sf::View& view) {
     this->timer.setPosition(xOffset + 900.f, yOffset + 10.f);
     this->scoreLabel.setPosition(xOffset + 1200.f, yOffset + 10.f);*/
 
-    this->characterName.setPosition(xOffset + sectionWidth * 0.5f - characterName.getLocalBounds().width / 2.0f,
+    this->characterName.setPosition(xOffset + sectionWidth * 0.5f - characterName.getLocalBounds().width / 2.0f - horizontalSpacing,
         yOffset + centerYOffset);  
 
     //this->heartSprite.setPosition(xOffset + sectionWidth * 0.5f - characterName.getLocalBounds().width / 2.0f,
@@ -136,6 +136,7 @@ void LevelGUI::updatePosition(const sf::View& view) {
         this->characterName.getPosition().x + this->characterName.getLocalBounds().width + 10.f, // Cách một khoảng 10.f
         this->characterName.getPosition().y
     );
+
     //this->healthBarBorder.setPosition((xOffset + sectionWidth * 0.5f - characterName.getLocalBounds().width / 2.0f) - 2.f,
         //(yOffset + centerYOffset + healthBarYOffset) - 2.f);
     //this->livesText.setPosition(
@@ -147,16 +148,16 @@ void LevelGUI::updatePosition(const sf::View& view) {
         this->heartSprite.getPosition().y
     );
     this->coinsLabel.setPosition(xOffset + sectionWidth * 1.5f - coinsLabel.getLocalBounds().width / 2.0f,
-        yOffset + centerYOffset); 
+        yOffset + centerYOffset);
 
     this->levelCount.setPosition(xOffset + sectionWidth * 2.5f - levelCount.getLocalBounds().width / 2.0f,
-        yOffset + centerYOffset); 
+        yOffset + centerYOffset);
 
     this->timer.setPosition(xOffset + sectionWidth * 3.5f - timer.getLocalBounds().width / 2.0f,
-        yOffset + centerYOffset); 
+        yOffset + centerYOffset);
 
     this->scoreLabel.setPosition(xOffset + sectionWidth * 4.5f - scoreLabel.getLocalBounds().width / 2.0f,
-        yOffset + centerYOffset); 
+        yOffset + centerYOffset);
 }
 
 void LevelGUI::updateTime() {
