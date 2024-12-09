@@ -125,8 +125,11 @@ void Mario::handleInput(const float& dt) {
     bool isRunning = false;
 	bool isCrouching = false;
 
+   // std::cout << "Mario::handleInput" << std::endl;
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
         movementComponent->isMoveLeft = true;
+        std::cout << "KeyBoard::Left" << std::endl;
         entitySprite.setScale(-4.0f, 4.0f);
 		hitbox.setScale(-1.0f, 1.0f);
         isWalking = true;

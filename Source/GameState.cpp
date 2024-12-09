@@ -13,7 +13,7 @@ GameState::GameState(StateData* stateData) : State(stateData), mapManager(nullpt
         // Health
         3,  
         // Speed
-        16.0f                     
+        15.0f                     
     );
 	player->movementComponent->onGround = false;
     Enemies.clear();

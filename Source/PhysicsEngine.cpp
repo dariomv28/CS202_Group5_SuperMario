@@ -8,7 +8,7 @@
 
 PhysicsEngine::PhysicsEngine() {
 	gravity = sf::Vector2f(0, 2.0f * PIXELS_PER_METER);
-	friction = sf::Vector2f(15.0f * PIXELS_PER_METER, 0);
+	friction = sf::Vector2f(14.0f * PIXELS_PER_METER, 0);
 }
 
 void PhysicsEngine::setEventMediator(GameEventMediator* mediator) {
@@ -137,6 +137,7 @@ void PhysicsEngine::resolveCollisionPlayerBlock(PlayerManager* entity, std::vect
 
 		if (entity->isMoveRight() && checkCollideRight(entity, obj)) {
 			fixPosition(entity, obj, Collide_Right);
+			std::cout << "Mario Collide Right\n";
 			obj->reactToCollison(Collide_Left);
 			continue;
 		}
@@ -144,6 +145,8 @@ void PhysicsEngine::resolveCollisionPlayerBlock(PlayerManager* entity, std::vect
 		//Resolve the left side
 		if (entity->isMoveLeft() && checkCollideLeft(entity, obj)) {
 			fixPosition(entity, obj, Collide_Left);
+			std::cout << "Mario Collide Left\n";
+
 			obj->reactToCollison(Collide_Right);
 			continue;
 		}

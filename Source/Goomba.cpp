@@ -98,6 +98,8 @@ void Goomba::reactToPlayerCollision(int collidedSide) {
 		eventMediator->deleteEnemy(this);
 	}
 	else {
+		if (collidedSide == Collide_Left) eventMediator->pushPlayerLeft();
+		else eventMediator->pushPlayerRight();
 		eventMediator->decreasePlayerHealth();
 	}
 }

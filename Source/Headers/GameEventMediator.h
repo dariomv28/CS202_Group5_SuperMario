@@ -50,6 +50,8 @@ public:
 	// Player events
 	void setPlayerBig(bool big);
 	void decreasePlayerHealth();
+	void pushPlayerLeft();
+	void pushPlayerRight();
 
 	// PowerUp events
 	void spawnPowerUp(PowerUpObject* PowerUp);

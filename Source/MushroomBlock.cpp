@@ -9,7 +9,7 @@ MushroomBlock::MushroomBlock(sf::Vector2f position, sf::Vector2f size, std::stri
 	: Block(position, size, name)
 {
 	entitySprite.setTexture(entityTexture);
-	entitySprite.setTextureRect(spritesSheet[name]);
+	entitySprite.setTextureRect(spritesSheet["coin_block_1"]);
 
 	entitySprite.setScale(size.x / entitySprite.getGlobalBounds().width, size.y / entitySprite.getGlobalBounds().height);
 	entitySprite.setPosition(sf::Vector2f(position.x, position.y));
@@ -25,13 +25,15 @@ void MushroomBlock::update(const float& dt) {
 
 void MushroomBlock::reactToCollison(int collidedSide) {
 	//Spawn a mushroom
+	if (type == 0) return;
 	if (collidedSide == Collide_Bottom) {
 		//Spawn a mushroom
 		eventMediator->spawnPowerUp(new Mushroom(sf::Vector2f(entitySprite.getPosition().x, entitySprite.getPosition().y - CELL_SIZE), sf::Vector2f(CELL_SIZE, CELL_SIZE), "mushroom", type));
-		//Delete this block
-		eventMediator->deleteBlock(this);
+		
+		//Disable this block
+		type = 0;
+		entitySprite.setTextureRect(spritesSheet["empty_coin_block"]);
 	}
-	//Delete this block
 }
 
 void MushroomBlock::render(sf::RenderTarget* target) {
