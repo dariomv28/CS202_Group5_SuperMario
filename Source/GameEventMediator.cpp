@@ -69,7 +69,7 @@ void GameEventMediator::resolveCollision(const float& dt) {
 	physicsEngine->resolveCollisionEnemyEnemy(*enemies, dt);
 	// Resolve collision between player and enemies
 	physicsEngine->resolveCollisionPlayerEnemy(player, *enemies, dt);
-	// Resolve collision between player and powerups
+	// Resolve collision between player and powerups	
 	physicsEngine->resolveCollisionPlayerPowerUp(player, *PowerUps, dt);
 	updateHealth();
 }

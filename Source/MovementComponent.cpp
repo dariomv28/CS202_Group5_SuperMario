@@ -36,6 +36,9 @@ int MovementComponent::getJumpsRemaining() const {
 
 void MovementComponent::moveLeft(const float& dt) {
     if (!isMoveLeft) return;
+
+    std::cout << "Move Left\n";
+
     velocity.x -= acceleration * dt;
     if (velocity.x < -maxVelocity) {
         velocity.x = -maxVelocity;
@@ -44,6 +47,9 @@ void MovementComponent::moveLeft(const float& dt) {
 
 void MovementComponent::moveRight(const float& dt) {
     if (!isMoveRight) return;
+
+	std::cout << "Move Right\n";
+
     velocity.x += acceleration * dt;
     if (velocity.x > maxVelocity) {
         velocity.x = maxVelocity;
