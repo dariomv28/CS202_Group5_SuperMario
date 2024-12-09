@@ -68,19 +68,19 @@ void LevelManager::update_background(const unsigned char i_current_level)
 	background1.setTexture(texture_background_1);
 	texture_background_2.loadFromFile("Source/Resources/texture/background_level" + current_level + "_2.png");
 	background2.setTexture(texture_background_2);
-	background1.setPosition(0, 0);
-	background2.setPosition(0, 0);
 	/*i_level_manager.get_map_sketch_width()
 	i_level_manager.get_map_sketch_height() / 3.f*/
-	background1.setScale((get_map_sketch_width() * 64) / background1.getTexture()->getSize().x, (get_map_sketch_height() * 64 / 3.f) / background1.getTexture()->getSize().y);
-	background2.setScale((get_map_sketch_width() * 64) / background2.getTexture()->getSize().x, (get_map_sketch_height() * 64 / 3.f) / background2.getTexture()->getSize().y);
+	background1.setScale(float((get_map_sketch_width() * 64 * 1.0) / background1.getTexture()->getSize().x * 1.0), (get_map_sketch_height() * 64 / 3.f) / background1.getTexture()->getSize().y);
+	background2.setScale(float((get_map_sketch_width() * 64 * 1.0) / background2.getTexture()->getSize().x * 1.0), (get_map_sketch_height() * 64 / 3.f) / background2.getTexture()->getSize().y);
+	background1.setPosition(0, 0);
+	background2.setPosition(0, 0);
 }
 
 
 sf::Color LevelManager::get_map_sketch_pixel(const unsigned short i_x, const unsigned short i_y) const {
-	/*if (i_x >= map_sketch.getSize().x || i_y >= map_sketch.getSize().y) {
+	if (i_x >= map_sketch.getSize().x || i_y >= map_sketch.getSize().y) {
 		throw std::out_of_range("Pixel coordinates are out of bounds");
-	}*/
+	}
 	return map_sketch.getPixel(i_x, i_y);
 }
 
@@ -100,8 +100,8 @@ void convert_sketch(const unsigned char i_current_level, unsigned short& i_level
 
 
 	// get map_sketch's begining point on x-axis
-	unsigned short x = i_level_manager.get_map_sketch_width() - 1;
-	i_background_color = i_level_manager.get_map_sketch_pixel(0, i_level_manager.get_map_sketch_height() - 1);
+	//unsigned short x = i_level_manager.get_map_sketch_width() - 1;
+	//i_background_color = i_level_manager.get_map_sketch_pixel(0, i_level_manager.get_map_sketch_height() - 1);
 
 	for (unsigned short a = 0; a < i_level_manager.get_map_sketch_width(); a++)
 	{
@@ -134,42 +134,6 @@ void convert_sketch(const unsigned char i_current_level, unsigned short& i_level
 					Blocks.push_back(new Pipe(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE * 2, CELL_SIZE * 3), "pipe", 3));
 				else if (pixel == sf::Color(0, 253, 0))
 					Blocks.push_back(new Pipe(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE * 2, CELL_SIZE * 2), "pipe", 2));
-	
-				//if (sf::Color(182, 73, 0) == pixel)
-				//{
-				//	i_level_manager.set_map_cell(a, b, Cell::Brick);
-				//}
-				//else if (sf::Color(255, 255, 0) == pixel)
-				//{
-				//	i_level_manager.set_map_cell(a, b, Cell::Coin);
-				//}
-				//else if (sf::Color(0, 146, 0) == pixel || sf::Color(0, 182, 0) == pixel || sf::Color(0, 219, 0) == pixel)
-				//{
-				//	//Multiple colors, because we need to know which part of the pipe we need to draw.
-				//	i_level_manager.set_map_cell(a, b, Cell::Pipe);
-				//}
-				//else if (sf::Color(255, 73, 85) == pixel || sf::Color(255, 146, 85) == pixel)
-				//{
-				//	i_level_manager.set_map_cell(a, b, Cell::QuestionBlock);
-				//}
-				//else if (sf::Color(255, 200, 200) == pixel)
-				//{
-				//	Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "underground_1_2"));
-				//	//i_level_manager.set_map_cell(a, b, Cell::Wall);
-				//}
-				//else if ()
-				//{
-
-				//}
-				//else
-				//{
-				//	i_level_manager.set_map_cell(a, b, Cell::Empty);
-
-				//	if (sf::Color(0, 255, 255) == pixel)
-				//	{
-				//		i_level_finish = a;
-				//	}
-				//}
 			}
 			else
 			{
