@@ -34,13 +34,13 @@ LevelGUI::LevelGUI() {
     this->characterName.setPosition(10.f, 10.f);
     this->characterName.setString("Mario");
     
-    this->healthBar.setSize(sf::Vector2f(400.f, 20.f));
+    /*this->healthBar.setSize(sf::Vector2f(400.f, 20.f));
     this->healthBar.setFillColor(sf::Color::Green);
     this->healthBar.setPosition(10.f, 60.f);
     this->healthBarBorder.setSize(sf::Vector2f(healthBar.getSize().x + 4.f, healthBar.getSize().y + 4.f));
     this->healthBarBorder.setFillColor(sf::Color::Transparent);
     this->healthBarBorder.setOutlineColor(sf::Color::Red);
-    this->healthBarBorder.setOutlineThickness(2.f);
+    this->healthBarBorder.setOutlineThickness(2.f);*/
     
     this->coinsLabel.setFont(this->font);
     this->coinsLabel.setCharacterSize(30);
@@ -75,7 +75,7 @@ void LevelGUI::setEventMediator(GameEventMediator* eventMediator) {
 
 void LevelGUI::updateInfo() {
 
-    this->healthBar.setSize(sf::Vector2f(400.f * float(health) / 100.f, 20.f));
+    /*this->healthBar.setSize(sf::Vector2f(400.f * float(health) / 100.f, 20.f));
     if (health > 50) {
         this->healthBar.setFillColor(sf::Color::Green);
 
@@ -92,7 +92,7 @@ void LevelGUI::updateInfo() {
 
     
     this->coinsLabel.setString("Coins: " + std::to_string(coinsCollected));
-    this->scoreLabel.setString("Score: " + std::to_string(score));
+    this->scoreLabel.setString("Score: " + std::to_string(score));*/
 }
 
 void LevelGUI::render(sf::RenderTarget* target) {
@@ -117,7 +117,7 @@ void LevelGUI::updatePosition(const sf::View& view) {
 
     float sectionWidth = viewSize.x / 5.0f;  
     float centerYOffset = 20.f;  
-    float healthBarYOffset = 50.f;  
+    float horizontalSpacing = 50.f;  
 
 
     /*this->characterName.setPosition(xOffset + 10.f, yOffset + 10.f);
@@ -127,7 +127,7 @@ void LevelGUI::updatePosition(const sf::View& view) {
     this->timer.setPosition(xOffset + 900.f, yOffset + 10.f);
     this->scoreLabel.setPosition(xOffset + 1200.f, yOffset + 10.f);*/
 
-    this->characterName.setPosition(xOffset + sectionWidth * 0.5f - characterName.getLocalBounds().width / 2.0f,
+    this->characterName.setPosition(xOffset + sectionWidth * 0.5f - characterName.getLocalBounds().width / 2.0f - horizontalSpacing,
         yOffset + centerYOffset);  
 
     //this->heartSprite.setPosition(xOffset + sectionWidth * 0.5f - characterName.getLocalBounds().width / 2.0f,
@@ -136,6 +136,7 @@ void LevelGUI::updatePosition(const sf::View& view) {
         this->characterName.getPosition().x + this->characterName.getLocalBounds().width + 10.f, // Cách một khoảng 10.f
         this->characterName.getPosition().y
     );
+
     //this->healthBarBorder.setPosition((xOffset + sectionWidth * 0.5f - characterName.getLocalBounds().width / 2.0f) - 2.f,
         //(yOffset + centerYOffset + healthBarYOffset) - 2.f);
     //this->livesText.setPosition(
@@ -147,16 +148,16 @@ void LevelGUI::updatePosition(const sf::View& view) {
         this->heartSprite.getPosition().y
     );
     this->coinsLabel.setPosition(xOffset + sectionWidth * 1.5f - coinsLabel.getLocalBounds().width / 2.0f,
-        yOffset + centerYOffset); 
+        yOffset + centerYOffset);
 
     this->levelCount.setPosition(xOffset + sectionWidth * 2.5f - levelCount.getLocalBounds().width / 2.0f,
-        yOffset + centerYOffset); 
+        yOffset + centerYOffset);
 
     this->timer.setPosition(xOffset + sectionWidth * 3.5f - timer.getLocalBounds().width / 2.0f,
-        yOffset + centerYOffset); 
+        yOffset + centerYOffset);
 
     this->scoreLabel.setPosition(xOffset + sectionWidth * 4.5f - scoreLabel.getLocalBounds().width / 2.0f,
-        yOffset + centerYOffset); 
+        yOffset + centerYOffset);
 }
 
 void LevelGUI::updateTime() {
