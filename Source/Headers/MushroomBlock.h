@@ -1,16 +1,16 @@
 #pragma once
 #include "Block.h"
-class Brick :
+
+//Name = "mushroom_block" 
+class MushroomBlock :
     public Block
 {
 private:
-    bool breakable;
+    int type;
 public:
-    Brick();
-	Brick(sf::Vector2f position, sf::Vector2f size, std::string name, bool breakable = true);
-	virtual ~Brick();
-
-	//Setters and Getters
+    MushroomBlock();
+	MushroomBlock(sf::Vector2f position, sf::Vector2f size, std::string name, int type);
+	virtual ~MushroomBlock();
 	void update(const float& dt) override;
 	void reactToCollison(int collidedSide) override;
 	void render(sf::RenderTarget* target) override;

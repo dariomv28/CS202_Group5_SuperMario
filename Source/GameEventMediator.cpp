@@ -3,6 +3,7 @@
 #include "Headers/Block.h"
 #include "Headers/Enemy.h"
 #include "Headers/PhysicsEngine.h"
+#include "Headers/PowerUpObject.h"
 #include "Headers/LevelGUI.h"
 
 GameEventMediator::GameEventMediator() {
@@ -115,6 +116,10 @@ void GameEventMediator::setPlayerBig(bool big) {
 
 void GameEventMediator::decreasePlayerHealth() {
 	player->setHealth(player->getHealth() - 1);
+}
+
+void GameEventMediator::spawnPowerUp(PowerUpObject* PowerUp) {
+	this->PowerUps->push_back(PowerUp);
 }
 
 void GameEventMediator::defeatPlayer() {

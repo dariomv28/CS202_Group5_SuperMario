@@ -7,7 +7,7 @@ Mushroom::Mushroom(sf::Vector2f position, sf::Vector2f size, std::string name, i
 	//The mushroom has a different file texture
 	this->type = type;
 	entitySprite.setTexture(entityTexture);
-	entitySprite.setTextureRect(spritesSheet[name + std::to_string(type)]);
+	entitySprite.setTextureRect(spritesSheet[name + "_" + std::to_string(type)]);
 	entitySprite.setPosition(position);
 	entitySprite.setScale(size.x / entitySprite.getGlobalBounds().width, size.y / entitySprite.getGlobalBounds().height);
 }
