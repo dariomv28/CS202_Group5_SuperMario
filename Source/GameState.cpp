@@ -11,7 +11,7 @@ GameState::GameState(StateData* stateData) : State(stateData), mapManager(nullpt
         // Size
         sf::Vector2f(64.f, 64.f),   
         // Health
-        3,  
+        100,  
         // Speed
         15.0f                     
     );

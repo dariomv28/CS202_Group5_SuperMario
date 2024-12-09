@@ -34,13 +34,13 @@ LevelGUI::LevelGUI() {
     this->characterName.setPosition(10.f, 10.f);
     this->characterName.setString("Mario");
     
-    this->healthBar.setSize(sf::Vector2f(400.f, 20.f));
+    /*this->healthBar.setSize(sf::Vector2f(400.f, 20.f));
     this->healthBar.setFillColor(sf::Color::Green);
     this->healthBar.setPosition(10.f, 60.f);
     this->healthBarBorder.setSize(sf::Vector2f(healthBar.getSize().x + 4.f, healthBar.getSize().y + 4.f));
     this->healthBarBorder.setFillColor(sf::Color::Transparent);
     this->healthBarBorder.setOutlineColor(sf::Color::Red);
-    this->healthBarBorder.setOutlineThickness(2.f);
+    this->healthBarBorder.setOutlineThickness(2.f);*/
     
     this->coinsLabel.setFont(this->font);
     this->coinsLabel.setCharacterSize(30);
@@ -75,7 +75,7 @@ void LevelGUI::setEventMediator(GameEventMediator* eventMediator) {
 
 void LevelGUI::updateInfo() {
 
-    this->healthBar.setSize(sf::Vector2f(400.f * float(health) / 100.f, 20.f));
+    /*this->healthBar.setSize(sf::Vector2f(400.f * float(health) / 100.f, 20.f));
     if (health > 50) {
         this->healthBar.setFillColor(sf::Color::Green);
 
@@ -92,7 +92,7 @@ void LevelGUI::updateInfo() {
 
     
     this->coinsLabel.setString("Coins: " + std::to_string(coinsCollected));
-    this->scoreLabel.setString("Score: " + std::to_string(score));
+    this->scoreLabel.setString("Score: " + std::to_string(score));*/
 }
 
 void LevelGUI::render(sf::RenderTarget* target) {
