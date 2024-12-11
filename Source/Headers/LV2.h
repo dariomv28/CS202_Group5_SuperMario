@@ -6,12 +6,9 @@
 
 class LV2 : public LevelManager {
 public:
-    LV2();
+    LV2(PlayerManager* Player, vector<Enemy*>& Enemies, vector<Block*>& Blocks, vector<PowerUpObject*>& PowerUp, sf::RenderWindow* window);
     ~LV2();
 
-    void loadLevel() override;  
-    void update(float dt) override;
-    void render() override;
 };
 
 #endif

@@ -1,33 +1,57 @@
-#pragma once
+#pragma
 #ifndef MAPMANAGER_H
 #define MAPMANAGER_H
 
-#include "LevelManager.h"
 #include "stdafx.h"
 #include "Enemy.h"
 #include "Mario.h"
 #include "Block.h"
 #include "PowerUpObject.h"
+using namespace std;
 
 class MapManager {
 public:
-    MapManager();
-    ~MapManager();
+    MapManager(sf::RenderWindow* window);
+    virtual ~MapManager();
 
-    void loadMap(const std::string& mapName, Mario* &Player, vector<Enemy*>& Enemies, vector<Block*>& Blocks, vector<PowerUpObject*>& PowerUp, sf::RenderWindow *window);  
-    void update(float dt, Mario* Player); 
-    void render();  
+    virtual void update(float dt);
+	virtual void update(PlayerManager* Player, sf::RenderWindow* window);
+    virtual void render();  
 
-    void setLevelManager(LevelManager* levelManager); 
+    // Setters and Getters
+	unsigned short get_map_sketch_height() const;
+	unsigned short get_map_sketch_width() const;
 
+	void draw_map(sf::RenderWindow* i_window);
+	void get_map_sketch(const unsigned int i_current_level);
+	void update_background(const unsigned int i_current_level);
+	void convert_sketch(const unsigned int i_current_level, vector<Enemy*>& i_enemies, 
+		vector<Block*>& Blocks, vector<PowerUpObject*>& PowerUp, PlayerManager* i_mario);
 
-private:
-    LevelManager* levelManager; 
+	sf::Color get_map_sketch_pixel(const unsigned short i_x, const unsigned short i_y) const;
+
+protected:
+
+	sf::Image map_sketch;
+	sf::Texture backgroundTexture;
+	sf::Sprite backgroundSprite;
+	//sf::Sprite cell_sprite;
+
+	sf::View View;
+	sf::Texture map_texture;
+	//Animation coin_animation;
+	//Animation question_block_animation;
+	sf::RenderWindow* window;
+	float view_x;
+	//Map map;
+	
+	float CurrentLeft;
+	float CurrentRight;
+
+	float ConstantLeft;
+	float ConstantRight;
     
-
-
 };
-#pragma once
 
-//void draw_map(unsigned i_view_x, const sf::Image& i_map_sketch, sf::RenderWindow& i_window, const sf::Texture& i_map_texture, const Map& i_map);
-#endif // MAPMANAGER_H
+
+#endif 

@@ -1,6 +1,6 @@
 #pragma once
 #include "State.h"
-#include "MapManager.h"
+#include "LevelManager.h"
 #include "Mario.h"
 #include "Enemy.h"
 #include "PhysicsEngine.h"
@@ -15,7 +15,7 @@ class GameState : public State {
 private:
     GameEventMediator* eventMediator;
     PhysicsEngine* physicsEngine;
-    MapManager* mapManager;
+    LevelManager* levelManager;
     Mario* player;
 	vector<Enemy*> Enemies;
 	vector<Block*> Blocks;

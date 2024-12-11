@@ -1,21 +1,16 @@
 #include "Headers/LV2.h"
 
-LV2::LV2() {
-    
+LV2::LV2(PlayerManager* Player, vector<Enemy*>& Enemies, vector<Block*>& Blocks, vector<PowerUpObject*>& PowerUp, sf::RenderWindow* window) :
+	LevelManager(window)
+{
+	mapManager->convert_sketch(2, Enemies, Blocks, PowerUp, Player);
 }
+
 
 LV2::~LV2() {
-   
-}
-
-void LV2::loadLevel() {
-   
-}
-
-void LV2::update(float dt) {
 
 }
 
-void LV2::render() {
-    
-}
+
+
+

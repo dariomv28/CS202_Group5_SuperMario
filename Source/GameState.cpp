@@ -1,8 +1,9 @@
 #include "Headers/GameState.h"
+#include "Headers/LV1.h"
 
 using namespace std;
 
-GameState::GameState(StateData* stateData) : State(stateData), mapManager(nullptr) {
+GameState::GameState(StateData* stateData) : State(stateData), levelManager(nullptr) {
     eventMediator = new GameEventMediator();
     physicsEngine = new PhysicsEngine();
     player = new Mario(
@@ -29,7 +30,7 @@ GameState::GameState(StateData* stateData) : State(stateData), mapManager(nullpt
 GameState::~GameState() {
     // Clean up all game objects
  
-    delete mapManager;
+    delete levelManager;
     delete physicsEngine;
     delete eventMediator;
     delete player;
@@ -46,54 +47,48 @@ GameState::~GameState() {
 }
 
 void GameState::loadLevel(int level) {
-    if (mapManager) {
-        delete mapManager;
+    if (levelManager) {
+        delete levelManager;
     }
 
-    mapManager = new MapManager();
-    if (level == 1) {
-        mapManager->loadMap("Level1_Map", player, Enemies, Blocks, PowerUps, window);
+    switch (level) {
+        case 1:
+		    levelManager = new LV1(player, Enemies, Blocks, PowerUps, window);
+            Enemies.push_back(new Goomba(sf::Vector2f(300.f, 500.f), sf::Vector2f(64.f, 64.f)));
+            Enemies.push_back(new Goomba(sf::Vector2f(700.f, 500.f), sf::Vector2f(64.f, 64.f)));
 
-        // Fixed boundaries
-        Enemies.push_back(new Goomba(sf::Vector2f(300.f, 500.f), sf::Vector2f(64.f, 64.f)));
-        Enemies.push_back(new Goomba(sf::Vector2f(700.f, 500.f), sf::Vector2f(64.f, 64.f)));
-        
-        Enemies.push_back(new Goomba(sf::Vector2f(2096.f, 500.f), sf::Vector2f(64.f, 64.f)));
+            Enemies.push_back(new Goomba(sf::Vector2f(2096.f, 500.f), sf::Vector2f(64.f, 64.f)));
 
-        Enemies.push_back(new Goomba(sf::Vector2f(2777.f, 500.f), sf::Vector2f(64.f, 64.f)));
+            Enemies.push_back(new Goomba(sf::Vector2f(2777.f, 500.f), sf::Vector2f(64.f, 64.f)));
 
-        Enemies.push_back(new Goomba(sf::Vector2f(3279.f, 500.f), sf::Vector2f(64.f, 64.f)));
+            Enemies.push_back(new Goomba(sf::Vector2f(3279.f, 500.f), sf::Vector2f(64.f, 64.f)));
 
-        Enemies.push_back(new Goomba(sf::Vector2f(9327.f, 500.f), sf::Vector2f(64.f, 64.f)));
+            Enemies.push_back(new Goomba(sf::Vector2f(9327.f, 500.f), sf::Vector2f(64.f, 64.f)));
 
-        Enemies.push_back(new Goomba(sf::Vector2f(10269.f, 500.f), sf::Vector2f(64.f, 64.f)));
+            Enemies.push_back(new Goomba(sf::Vector2f(10269.f, 500.f), sf::Vector2f(64.f, 64.f)));
 
-        Enemies.push_back(new Goomba(sf::Vector2f(10960.f, 500.f), sf::Vector2f(64.f, 64.f)));
+            Enemies.push_back(new Goomba(sf::Vector2f(10960.f, 500.f), sf::Vector2f(64.f, 64.f)));
 
-        Enemies.push_back(new Goomba(sf::Vector2f(12370.f, 500.f), sf::Vector2f(64.f, 64.f)));
+            Enemies.push_back(new Goomba(sf::Vector2f(12370.f, 500.f), sf::Vector2f(64.f, 64.f)));
 
-        Enemies.push_back(new Goomba(sf::Vector2f(13098.f, 500.f), sf::Vector2f(64.f, 64.f)));
+            Enemies.push_back(new Goomba(sf::Vector2f(13098.f, 500.f), sf::Vector2f(64.f, 64.f)));
 
-        // Customized boundaries
-        Enemies.push_back(new Goomba(sf::Vector2f(4700.f, 500.f), sf::Vector2f(64.f, 64.f), 4528.f, 5432.f));
+            // Customized boundaries
+            Enemies.push_back(new Goomba(sf::Vector2f(4700.f, 500.f), sf::Vector2f(64.f, 64.f), 4528.f, 5432.f));
 
-        Enemies.push_back(new Goomba(sf::Vector2f(5200.f, 195.f), sf::Vector2f(64.f, 64.f), 5100.f, 5600.f));
+            Enemies.push_back(new Goomba(sf::Vector2f(5200.f, 195.f), sf::Vector2f(64.f, 64.f), 5100.f, 5600.f));
 
-        Enemies.push_back(new Goomba(sf::Vector2f(5945.f, 195.f), sf::Vector2f(64.f, 64.f), 5800.f, 6050.f));
+            Enemies.push_back(new Goomba(sf::Vector2f(5945.f, 195.f), sf::Vector2f(64.f, 64.f), 5800.f, 6050.f));
 
-        Enemies.push_back(new Goomba(sf::Vector2f(5800.f, 500.f), sf::Vector2f(64.f, 64.f), 5739.f, 8511.f));
-        Enemies.push_back(new Goomba(sf::Vector2f(7000.f, 500.f), sf::Vector2f(64.f, 64.f), 5739.f, 8511.f));
+            Enemies.push_back(new Goomba(sf::Vector2f(5800.f, 500.f), sf::Vector2f(64.f, 64.f), 5739.f, 8511.f));
+            Enemies.push_back(new Goomba(sf::Vector2f(7000.f, 500.f), sf::Vector2f(64.f, 64.f), 5739.f, 8511.f));
 
-        Enemies.push_back(new Goomba(sf::Vector2f(8348.f, 195.f), sf::Vector2f(64.f, 64.f), 8180.f, 8408.f));   
+            Enemies.push_back(new Goomba(sf::Vector2f(8348.f, 195.f), sf::Vector2f(64.f, 64.f), 8180.f, 8408.f));
 
-        Enemies.push_back(new Goomba(sf::Vector2f(10900.f, 450.f), sf::Vector2f(64.f, 64.f), 10718.f, 10978.f));
+            Enemies.push_back(new Goomba(sf::Vector2f(10900.f, 450.f), sf::Vector2f(64.f, 64.f), 10718.f, 10978.f));
+		    break;
     }
-    else if (level == 2) {
-        //mapManager->loadMap("Level2_Map");
-    }
-    else if (level == 3) {
-        //mapManager->loadMap("Level3_Map");
-    }
+ 
     initGameEventMediator();
 }
 
@@ -122,8 +117,8 @@ void GameState::initGameEventMediator() {
 
 
 void GameState::update(const float& dt) {
-    if (mapManager) {
-		mapManager->update(dt, player);
+    if (levelManager) {
+		levelManager->update(player,dt);
     }
     /*
     Process: 
@@ -152,8 +147,8 @@ void GameState::render(sf::RenderTarget* target) {
         target = window;
     }
 
-    if (mapManager) {
-        mapManager->render();
+    if (levelManager) {
+        levelManager->render();
     }
     // cerr << player->hitbox.getPosition().x << endl;
     player->render(target);

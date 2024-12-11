@@ -148,11 +148,11 @@
     <ClCompile Include="Source\LivingEntity.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\GameObject.cpp" />
-    <ClCompile Include="Source\LevelManager.cpp" />
+    <ClCompile Include="Source\MapManager.cpp" />
     <ClCompile Include="Source\LV1.cpp" />
     <ClCompile Include="Source\LV2.cpp" />
     <ClCompile Include="Source\LV3.cpp" />
-    <ClCompile Include="Source\MapManager.cpp" />
+    <ClCompile Include="Source\LevelManager.cpp" />
     <ClCompile Include="Source\PhysicsEngine.cpp" />
     <ClCompile Include="Source\AnimationComponent.cpp" />
     <ClCompile Include="Source\GameState.cpp" />
@@ -184,11 +184,11 @@
     <ClInclude Include="Source\Headers\LivingEntity.h" />
     <ClInclude Include="Source\Headers\Enemy.h" />
     <ClInclude Include="Source\Headers\GameObject.h" />
-    <ClInclude Include="Source\Headers\LevelManager.h" />
+    <ClInclude Include="Source\Headers\MapManager.h" />
     <ClInclude Include="Source\Headers\LV1.h" />
     <ClInclude Include="Source\Headers\LV2.h" />
     <ClInclude Include="Source\Headers\LV3.h" />
-    <ClInclude Include="Source\Headers\MapManager.h" />
+    <ClInclude Include="Source\Headers\LevelManager.h" />
     <ClInclude Include="Source\Headers\PhysicsEngine.h" />
     <ClInclude Include="Source\Headers\AnimationComponent.h" />
     <ClInclude Include="Source\Headers\GameState.h" />
