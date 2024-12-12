@@ -8,3 +8,7 @@ Enemy::Enemy(const Enemy& other) : LivingEntity(other) {
 Enemy::Enemy() {
 
 }
+
+void Enemy::setScaleSprite(std::string Name) {
+
+}

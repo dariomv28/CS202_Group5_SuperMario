@@ -34,7 +34,7 @@ Goomba::Goomba(sf::Vector2f position, sf::Vector2f size, float x_min, float x_ma
 	this->size = size;
 	this->x_min = x_min;
 	this->x_max = x_max;
-	setMoveLeft(true);
+	setMoveRight(true);
 }
 
 void Goomba::initAnimations() {
@@ -72,10 +72,6 @@ void Goomba::move(const float& dt)
 	this->hitbox.setPosition(this->position);
 
 	// std::cout << this->getVelocity().x << std::endl;
-}
-
-// No need but let's it here just in case
-void Goomba::update(const float& dt) {
 }
 
 void Goomba::updateAnimation(const float& dt) {

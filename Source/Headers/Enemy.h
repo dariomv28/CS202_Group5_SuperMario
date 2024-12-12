@@ -10,10 +10,11 @@ private:
 public:
 	Enemy();
 	Enemy(const Enemy& other);
-	virtual void update(const float& dt) = 0;
 
 	virtual bool getIsAlive() const = 0;
 	virtual void setIsAlive(bool alive) = 0;
 	virtual void reactToPlayerCollision(int collidedSide) = 0;
+
+	virtual void setScaleSprite(std::string name);
 };
 
