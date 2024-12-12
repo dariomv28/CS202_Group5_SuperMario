@@ -13,7 +13,7 @@ CoinBlock::CoinBlock(sf::Vector2f position, sf::Vector2f size, std::string name,
 	entitySprite.setTexture(entityTexture);
 	// Since the block has animation, we need to set the first frame of the animation by adding _1 to the name
 	std::string nameWithFrame = name + "_1";
-	std::cout << "CoinBlock name: " << nameWithFrame << std::endl;
+	// std::cout << "CoinBlock name: " << nameWithFrame << std::endl;
 	entitySprite.setTextureRect(spritesSheet[name + "_1"]); 
 	entitySprite.setPosition(position);
 	entitySprite.setScale(size.x / entitySprite.getGlobalBounds().width, size.y / entitySprite.getGlobalBounds().height);
@@ -31,7 +31,7 @@ void CoinBlock::update(const float& dt)
 void CoinBlock::reactToCollison(int collidedSide)
 {
 	// Update the bouncing effect latter (Or have another ancestor class to handle the bouncing effect for multiple blocks)
-	std::cout << "COINBLOCK COLLIDED " << collidedSide << std::endl;
+	// std::cout << "COINBLOCK COLLIDED " << collidedSide << std::endl;
 	if (collidedSide == Collide_Bottom) {
 		if (numCoins == 0) return;
 		this->eventMediator->increaseCoins(1);
