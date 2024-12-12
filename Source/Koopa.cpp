@@ -2,7 +2,7 @@
 #include "Headers/GameEventMediator.h"
 
 Koopa::Koopa() : Enemy() {
-    walkSpeed = 17.0f;  // Slightly faster than Goomba
+    walkSpeed = 260.f;  // Slightly faster than Goomba
 
     isAlive = true;
     setHealth(1);
@@ -17,7 +17,7 @@ Koopa::Koopa() : Enemy() {
     }
 
     entitySprite.setTexture(entityTexture);
-    entitySprite.setScale(4.0f, 2.6f);
+    entitySprite.setScale(4.0f, 4.0f);
 
 
     this->animationComponent = new AnimationComponent(this->entitySprite);
@@ -25,7 +25,7 @@ Koopa::Koopa() : Enemy() {
 
     movementComponent = new MovementComponent(walkSpeed, 5.0f);
 
-    hitbox.setSize(sf::Vector2f(64.f, 64.f));
+    hitbox.setSize(sf::Vector2f(64.f, 96.f));
     hitbox.setPosition(position);
     hitbox.setFillColor(sf::Color::Transparent);
     hitbox.setOutlineColor(sf::Color::Green);
@@ -44,7 +44,7 @@ void Koopa::initAnimations() {
     spritesSheet = {
         { "WALK-1", sf::IntRect(52, 37, 16, 24) },    // Green Koopa walking frame 1
         { "WALK-2", sf::IntRect(69, 38, 16, 23) },   // Green Koopa walking frame 2
-        { "SHELL", sf::IntRect(188, 45, 16, 14) },    // Koopa in shell
+        { "SHELL-STOP", sf::IntRect(188, 45, 16, 14) },    // Koopa in shell
 		{ "SHELL-MOVING-1", sf::IntRect(120, 45, 16, 14) }, // Koopa shell moving frame 1
 		{ "SHELL-MOVING-2", sf::IntRect(137, 45, 16, 14) },  // Koopa shell moving frame 2
 		{ "SHELL-MOVING-3", sf::IntRect(154, 45, 16, 14) },  // Koopa shell moving frame 3
@@ -55,46 +55,44 @@ void Koopa::initAnimations() {
 void Koopa::move(const float& dt)
 {
     // Handle shell state
-    if (isShelled) {
+    if (isAlive && isShelled) {
         shellTimer += dt;
         if (shellTimer >= 5.0f) {  // Exit shell state after 5 seconds
-			isShelled = false;
-			this->hitbox.setSize(sf::Vector2f(64.f, 64.f));
-			this->movementComponent->acceleration = 0;
+			this->hitbox.setSize(sf::Vector2f(64.f, 96.f));
+            this->movementComponent->acceleration = walkSpeed;
 			shellTimer = 0.0f;
+
+            setIsAlive(true);
+			setIsShelled(false);
         }
     }
 
-    if (!isAlive) {
-        shellTimer += dt;
-        this->movementComponent->acceleration = 2.0f;
-		this->hitbox.setSize(sf::Vector2f(64.f, 32.f));
-		if (shellTimer >= 1.5f) {
+	if (!isAlive) {
+        this->movementComponent->acceleration = walkSpeed;
+		disappearDelay += dt;
+		if (disappearDelay >= 1.0f) {
 			eventMediator->deleteEnemy(this);
 		}
+	}
+
+    this->position += this->movementComponent->velocity;
+
+    if (this->position.x <= x_min) {
+        this->position.x = std::max<float>(this->position.x, x_min);
+			
+		setScaleSprite("RIGHT");
+
+        setMoveLeft(false);
+        setMoveRight(true);
     }
 
-    // If not in shell, move normally like Goomba
-    if (!isShelled) {
-        this->position += this->movementComponent->velocity;
-
-        if (this->position.x <= x_min) {
-            this->position.x = std::max<float>(this->position.x, x_min);
-			
-			setScaleSprite("RIGHT");
-
-            setMoveLeft(false);
-            setMoveRight(true);
-        }
-
-        if (this->position.x >= x_max) {
-            this->position.x = std::min<float>(this->position.x, x_max);
+    if (this->position.x >= x_max) {
+        this->position.x = std::min<float>(this->position.x, x_max);
             
-            setScaleSprite("LEFT");
+        setScaleSprite("LEFT");
 
-            setMoveRight(false);
-            setMoveLeft(true);
-        }
+        setMoveRight(false);
+        setMoveLeft(true);
     }
 
     this->entitySprite.setPosition(this->position);
@@ -102,22 +100,23 @@ void Koopa::move(const float& dt)
 }
 
 void Koopa::updateAnimation(const float& dt) {
-    if (isAlive) {
-        if (!isShelled) {
-            // Normal walking animation
-            animationComponent->setAnimationEnemies("WALK-", spritesSheet, 0.2f);
+    if (!isAlive) {
+        animationComponent->setAnimationEnemies("SHELL-MOVING-", spritesSheet, 0.2f);
+    }
+    else if (isShelled) {
+        if (shellTimer > 0.0f) {
+            animationComponent->setAnimationEnemies("SHELL-STOP", spritesSheet, 0.2f);
         }
         else {
-            // In shell state
-            animationComponent->setAnimationEnemies("SHELL", spritesSheet, 0.2f);
+            animationComponent->setAnimationEnemies("SHELL-MOVING-", spritesSheet, 0.2f);
         }
     }
     else {
-		// Dead Koopa
-		animationComponent->setAnimationEnemies("SHELL-MOVING-", spritesSheet, 0.2f);
+        animationComponent->setAnimationEnemies("WALK-", spritesSheet, 0.2f);
     }
     animationComponent->update(dt);
 }
+
 
 bool Koopa::getIsAlive() const {
     return isAlive;
@@ -130,31 +129,18 @@ void Koopa::setIsAlive(bool alive) {
 void Koopa::reactToPlayerCollision(int collidedSide) {
     if (collidedSide == Collide_Top) {
         if (!isShelled) {
-            // First hit puts Koopa in shell
             isShelled = true;
-            this->hitbox.setSize(sf::Vector2f(64.f, 32.f));
+            shellTimer = 0.0f;
+            this->hitbox.setSize(sf::Vector2f(64.f, 56.f));
             this->movementComponent->acceleration = 0;
             eventMediator->increaseScore(200);
         }
-        else {
-            // Second hit kills the Koopa
-            shellTimer = 0;
-            setIsAlive(false);
+        else if (shellTimer > 3.0f) {
+            isAlive = false;
+            isShelled = false;
+            this->hitbox.setSize(sf::Vector2f(64.f, 56.f));
+
             eventMediator->increaseScore(400);
-        }
-    }
-    else {
-        // Side collision
-        if (isShelled) {
-            // Sliding shell can damage other enemies
-            walkSpeed = 64.0f;  // High-speed shell slide
-            // You might want to add logic to damage other enemies here
-        }
-        else {
-            // Normal Koopa side collision hurts player
-            if (collidedSide == Collide_Left) eventMediator->pushPlayerLeft();
-            else eventMediator->pushPlayerRight();
-            eventMediator->decreasePlayerHealth();
         }
     }
 }
@@ -164,14 +150,19 @@ bool Koopa::getIsShelled() const {
     return isShelled;
 }
 
+// Setter for shelled state
+void Koopa::setIsShelled(bool shelled) {
+	isShelled = shelled;
+}
+
 // Set the sprite scale based on the animation name
 void Koopa::setScaleSprite(std::string name) {
     if (name == "LEFT") {
-		entitySprite.setScale(-4.0f, 2.6f);
+		entitySprite.setScale(-4.0f, 4.0f);
 		hitbox.setScale(-1.0f, 1.0f);
 	}
     else if (name == "RIGHT") {
-        entitySprite.setScale(4.0f, 2.6f);
+        entitySprite.setScale(4.0f, 4.0f);
         hitbox.setScale(1.0f, 1.0f);
     }
 }
