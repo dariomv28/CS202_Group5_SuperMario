@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\AudioSystem.cpp" />
     <ClCompile Include="Source\MushroomBlock.cpp" />
     <ClCompile Include="Source\PowerUpObject.cpp" />
     <ClCompile Include="Source\Goomba.cpp" />
@@ -169,6 +170,7 @@
     <ClCompile Include="Source\State.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Headers\AudioSystem.h" />
     <ClInclude Include="Source\Headers\MushroomBlock.h" />
     <ClInclude Include="Source\Headers\PowerUpObject.h" />
     <ClInclude Include="Source\Headers\Goomba.h" />
