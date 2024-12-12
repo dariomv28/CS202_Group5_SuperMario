@@ -39,6 +39,7 @@ public:
     bool getIsAlive() const;
     void setIsAlive(bool alive);
     bool getIsShelled() const;
+	void setIsShelled(bool shelled);
 
     // Collision response
     void move(const float& dt) override;

@@ -2,7 +2,7 @@
 #include "Headers/GameEventMediator.h"
 
 Goomba::Goomba() : Enemy() {
-	walkSpeed = 16.0f;
+	walkSpeed = 256.0f;
 
 	isAlive = true;
 	setHealth(1);
