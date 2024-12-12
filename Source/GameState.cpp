@@ -41,6 +41,6 @@ void GameState::render(sf::RenderTarget* target) {
         levelManager->render();
     }
     // cerr << player->hitbox.getPosition().x << endl;
-	//cerr << Blocks.size() << endl;
+	// cerr << Blocks.size() << endl;
 }
 

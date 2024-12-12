@@ -7,6 +7,7 @@
 
 class LV1 : public LevelManager {
 public:
+    LV1();
     LV1(PlayerManager* player, sf::RenderWindow *window);
     ~LV1();
 

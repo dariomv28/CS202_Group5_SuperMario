@@ -1,5 +1,7 @@
 #include "Headers/LevelManager.h"
 
+// The level manager is responsible for managing the level, including the player, enemies, blocks, powerups, and the GUI
+
 LevelManager::LevelManager(PlayerManager* player, sf::RenderWindow* window) {
 	this->window = window;
     this->player = player;
@@ -18,7 +20,6 @@ LevelManager::~LevelManager() {
     delete levelGUI;
     delete eventMediator;
     delete physicsEngine;
-
 }
 
 void LevelManager::initGameEventMediator() {

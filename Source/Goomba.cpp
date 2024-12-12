@@ -41,12 +41,19 @@ void Goomba::initAnimations() {
 	spritesSheet = {
 		{ "WALK-1", sf::IntRect(1, 45, 16, 16) },
 		{ "WALK-2", sf::IntRect(18, 45, 16, 16) },
-		{ "SQUISH", sf::IntRect(35, 53, 8, 16) }
+		{ "SQUISH", sf::IntRect(35, 53, 16, 8) }
 	};
 }
 
 void Goomba::move(const float& dt) 
 {
+	if (!isAlive) {
+		disappearDelay += dt;
+		if (disappearDelay >= 1.5f) {
+			eventMediator->deleteEnemy(this);
+		}
+	}
+	
 	this->position += this->movementComponent->velocity;
 
 	if (this->position.x <= x_min) {
@@ -63,14 +70,12 @@ void Goomba::move(const float& dt)
 	
 	this->entitySprite.setPosition(this->position);
 	this->hitbox.setPosition(this->position);
+
+	// std::cout << this->getVelocity().x << std::endl;
 }
 
 // No need but let's it here just in case
 void Goomba::update(const float& dt) {
-	if (!isAlive) return;
-	updateVelocity(dt);
-	updateAnimation(dt);
-	move(dt);
 }
 
 void Goomba::updateAnimation(const float& dt) {
@@ -80,6 +85,7 @@ void Goomba::updateAnimation(const float& dt) {
 	}
 	else {
 		animationComponent->setAnimationEnemies("SQUISH", spritesSheet, 0.2f);
+		animationComponent->update(dt);
 	}
 }
 
@@ -95,7 +101,8 @@ void Goomba::reactToPlayerCollision(int collidedSide) {
 	if (collidedSide == Collide_Top) {
 		setIsAlive(false);
 		eventMediator->increaseScore(300);
-		eventMediator->deleteEnemy(this);
+		this->hitbox.setSize(sf::Vector2f(64.f, 32.f));
+		this->movementComponent->acceleration = 0;
 	}
 	else {
 		if (collidedSide == Collide_Left) eventMediator->pushPlayerLeft();

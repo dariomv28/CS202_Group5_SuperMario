@@ -13,6 +13,8 @@ private:
 	float x_min = 32.0f;
 	float x_max = 13416.0f;
 
+	float disappearDelay = 0.0f;
+
 	void initAnimations();
 public:
 	Goomba();
