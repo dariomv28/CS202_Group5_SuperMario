@@ -85,8 +85,10 @@ void LevelManager::render(sf::RenderTarget* target) {
             Enemy->render(target);
     }
 
+    std::cout << "PowerUps size: " << PowerUps.size() << "\n";
     for (auto& PowerUp : PowerUps) {
         if (PowerUp->hitbox.getGlobalBounds().intersects(viewBounds)) {
+            std::cout << "Rendering PowerUp\n";
             PowerUp->render(target);
         }
     }

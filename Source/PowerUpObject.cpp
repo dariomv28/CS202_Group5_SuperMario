@@ -6,11 +6,15 @@ PowerUpObject::PowerUpObject() : GameObject() {
 PowerUpObject::PowerUpObject(sf::Vector2f position, sf::Vector2f size, std::string name)
 	: GameObject(position, size)
 {
+	initSpritesSheet();
 	entityTexture.loadFromFile("Source/Resources/texture/Items_Blocks.png");
 	entitySprite.setTexture(entityTexture);
-
-	entitySprite.setScale(size.x / entitySprite.getGlobalBounds().width, size.y / entitySprite.getGlobalBounds().height);
-	entitySprite.setPosition(sf::Vector2f(position.x, position.y));
+	hitbox.setSize(size);
+	//hitbox.setOrigin(size.x / 2, size.y / 2);
+	hitbox.setPosition(sf::Vector2f(position.x, position.y));
+	hitbox.setFillColor(sf::Color::Transparent);
+	hitbox.setOutlineColor(sf::Color::Red);
+	hitbox.setOutlineThickness(1);
 }
 
 void PowerUpObject::initSpritesSheet() {

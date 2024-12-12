@@ -7,10 +7,15 @@
 #include "Mario.h"
 #include "Block.h"
 #include "PowerUpObject.h"
+#include "SolidBlock.h"
+#include "Pipe.h"
+#include "CoinBlock.h"
+#include "Coin.h"
 using namespace std;
 
 class MapManager {
 protected:
+	unordered_map<int, string> styles;
 
 	sf::Image map_sketch;
 	sf::Texture backgroundTexture;
@@ -29,6 +34,8 @@ protected:
 public:
     MapManager(sf::RenderWindow* window);
     virtual ~MapManager();
+
+	void initStyle();
 
     virtual void update(PlayerManager* player, float dt);
 	virtual void updateView(PlayerManager* Player);

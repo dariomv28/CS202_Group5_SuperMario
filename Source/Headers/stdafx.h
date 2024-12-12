@@ -86,13 +86,13 @@ constexpr std::chrono::microseconds FRAME_DURATION(16667);
 
 enum Cell
 {
-	ActivatedQuestionBlock,
-	Brick,
-	Coin,
+	//ActivatedQuestionBlock,
+	//Brick,
+	//Coin,
 	//Pipe,
-	Empty,
-	QuestionBlock,
-	Wall
+	////Empty,
+	//QuestionBlock,
+	//Wall
 };
 
 enum Side {
