@@ -14,7 +14,7 @@ private:
 
 
 public:
-    Mario(sf::Vector2f position, sf::Vector2f size, int health, int speed);
+    Mario(sf::Vector2f position, sf::Vector2f size, int health = 3, int speed = 15.0f);
     Mario();
     ~Mario();
 

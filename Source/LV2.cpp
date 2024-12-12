@@ -1,9 +1,9 @@
 #include "Headers/LV2.h"
 
-LV2::LV2(PlayerManager* Player, vector<Enemy*>& Enemies, vector<Block*>& Blocks, vector<PowerUpObject*>& PowerUp, sf::RenderWindow* window) :
-	LevelManager(window)
+LV2::LV2(PlayerManager* player, sf::RenderWindow* window) :
+	LevelManager(player, window)
 {
-	mapManager->convert_sketch(2, Enemies, Blocks, PowerUp, Player);
+	mapManager->convert_sketch(2, Enemies, Blocks, PowerUps, player);
 }
 
 

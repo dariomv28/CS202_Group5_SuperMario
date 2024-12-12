@@ -6,7 +6,7 @@
 
 class LV2 : public LevelManager {
 public:
-    LV2(PlayerManager* Player, vector<Enemy*>& Enemies, vector<Block*>& Blocks, vector<PowerUpObject*>& PowerUp, sf::RenderWindow* window);
+    LV2(PlayerManager* player, sf::RenderWindow* window);
     ~LV2();
 
 };

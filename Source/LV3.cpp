@@ -1,9 +1,9 @@
 #include "Headers/LV3.h"
 
-LV3::LV3(PlayerManager* Player, vector<Enemy*>& Enemies, vector<Block*>& Blocks, vector<PowerUpObject*>& PowerUp, sf::RenderWindow* window):
-	LevelManager(window) 
+LV3::LV3(PlayerManager* player, sf::RenderWindow* window):
+	LevelManager(player, window) 
 {
-	mapManager->convert_sketch(3, Enemies, Blocks, PowerUp, Player);
+	mapManager->convert_sketch(3, Enemies, Blocks, PowerUps, player);
 }
 
 LV3::~LV3() {

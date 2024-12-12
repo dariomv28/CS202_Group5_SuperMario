@@ -15,12 +15,12 @@ MapManager::~MapManager() {
     
 }
 
-void MapManager::update(float dt) {
-	
+void MapManager::update(PlayerManager* player, float dt) {
+	updateView(player);
   
 }
 
-void MapManager::update(PlayerManager* Player, sf::RenderWindow* window) {
+void MapManager::updateView(PlayerManager* Player) {
 	ConstantLeft = CurrentLeft + (SCREEN_WIDTH * 5.0) / 10.0;
 	ConstantRight = CurrentLeft + (SCREEN_WIDTH * 5.0) / 10.0;
 
@@ -46,10 +46,6 @@ void MapManager::update(PlayerManager* Player, sf::RenderWindow* window) {
 	window->setView(View);
 }
 
-void MapManager::render() {
-	
-}
-
 unsigned short MapManager::get_map_sketch_height() const
 {
 	return map_sketch.getSize().y;
@@ -60,9 +56,11 @@ unsigned short MapManager::get_map_sketch_width() const
 	return map_sketch.getSize().x;
 }
 
-void MapManager::draw_map(sf::RenderWindow* i_window)
+void MapManager::draw_map(sf::RenderTarget* target)
 {
-	i_window->draw(backgroundSprite);
+	if (!target)
+		target = window;
+	target->draw(backgroundSprite);
 }
 
 //void LevelManager::set_map_cell(const unsigned short i_x, const unsigned short i_y, const Cell& i_cell)
@@ -85,7 +83,7 @@ void MapManager::get_map_sketch(const unsigned int i_current_level)
 void MapManager::update_background(const unsigned int i_current_level)
 {
 	std::string current_level = std::to_string(i_current_level);
-	backgroundTexture.loadFromFile("Source/Resources/texture/background_level" + current_level + ".jpg");
+	backgroundTexture.loadFromFile("Source/Resources/texture/background_level" + current_level + ".png");
 	backgroundSprite.setTexture(backgroundTexture);
 	backgroundSprite.setScale(float((get_map_sketch_width() * 64 * 1.0) / backgroundSprite.getTexture()->getSize().x * 1.0), (get_map_sketch_height() * 64 / 3.f) / backgroundSprite.getTexture()->getSize().y);
 	backgroundSprite.setPosition(0, 0);

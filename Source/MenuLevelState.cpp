@@ -5,6 +5,7 @@ MenuLevelState::MenuLevelState(StateData* stateData) : MainMenuState(stateData)
 {
     // Reinitialize buttons with level-specific content
     this->initButtons();
+    player = new Mario(sf::Vector2f(0.f, 0.f), sf::Vector2f(64.f, 64.f));
 }
 
 MenuLevelState::~MenuLevelState()
@@ -68,19 +69,19 @@ void MenuLevelState::updateGUI()
     if (buttons[BTN_LEVEL1]->isPressed())
     {
         GameState* gameState = new GameState(this->stateData);
-        gameState->loadLevel(1);
+        gameState->loadLevel(player,1, 1);
         this->states->push(gameState);
     }
     else if (buttons[BTN_LEVEL2]->isPressed())
     {
         GameState* gameState = new GameState(this->stateData);
-        gameState->loadLevel(2);
+        gameState->loadLevel(player,1, 2);
         this->states->push(gameState);
     }
     else if (buttons[BTN_LEVEL3]->isPressed())
     {
         GameState* gameState = new GameState(this->stateData);
-        gameState->loadLevel(3);
+        gameState->loadLevel(player,1 , 3);
         this->states->push(gameState);
     }
     else if (buttons[BTN_BACK]->isPressed())

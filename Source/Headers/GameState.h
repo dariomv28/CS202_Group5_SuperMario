@@ -13,20 +13,12 @@
 
 class GameState : public State {
 private:
-    GameEventMediator* eventMediator;
-    PhysicsEngine* physicsEngine;
     LevelManager* levelManager;
-    Mario* player;
-	vector<Enemy*> Enemies;
-	vector<Block*> Blocks;
-   	vector<PowerUpObject*> PowerUps;
-    LevelGUI* levelGUI;      
 public:
     GameState(StateData* stateData);
     virtual ~GameState();
 
-    void initGameEventMediator();
-    void loadLevel(int levelID);
+    void loadLevel(PlayerManager* player, int worldID, int levelID);
     void update(const float& dt) override;
     void render(sf::RenderTarget* target = nullptr) override;
 };

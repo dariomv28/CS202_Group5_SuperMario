@@ -3,10 +3,11 @@
 #define LV1_H
 
 #include "LevelManager.h"
+#include "Goomba.h"
 
 class LV1 : public LevelManager {
 public:
-    LV1(PlayerManager* Player, vector<Enemy*>& Enemies, vector<Block*>& Blocks, vector<PowerUpObject*>& PowerUp, sf::RenderWindow *window);
+    LV1(PlayerManager* player, sf::RenderWindow *window);
     ~LV1();
 
 };
