@@ -133,7 +133,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Koopa.cpp" />
     <ClCompile Include="Source\MushroomBlock.cpp" />
     <ClCompile Include="Source\PowerUpObject.cpp" />
     <ClCompile Include="Source\Goomba.cpp" />
