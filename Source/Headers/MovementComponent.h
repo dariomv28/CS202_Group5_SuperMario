@@ -4,7 +4,6 @@
 class MovementComponent
 {
 private:
-	const float PIXELS_PER_METER = 16.0f;
 	int jumpsRemaining;
 	const int MAX_JUMPS = 2;
 public:
