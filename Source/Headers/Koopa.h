@@ -41,6 +41,9 @@ public:
     bool getIsShelled() const;
 	void setIsShelled(bool shelled);
 
+    // Update function
+    void update(const float& dt) override;
+
     // Collision response
     void move(const float& dt) override;
     void reactToPlayerCollision(int collidedSide) override;

@@ -111,8 +111,9 @@ void Mario::initAnimations() {
 }
 
 void Mario::update(const float& dt) {
-    handleInput(dt);
     updateAnimation(dt);
+    updateVelocity(dt);
+    eventMediator->applyExternalForce(this, dt);
     move(dt);
 }
 

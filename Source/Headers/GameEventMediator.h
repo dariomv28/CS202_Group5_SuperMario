@@ -32,13 +32,11 @@ public:
 	void addPowerUp(std::vector<PowerUpObject*>& PowerUps);
 
 	// Physics Engine functions
-	void applyExternalForcesToEntities(const float& dt);
+	void applyExternalForce(LivingEntity* entity, const float& dt);
 	void resolveCollision(const float& dt);
 	
 	// Update functions
 	void updateInput(const float& dt);
-	void updateMovements(const float& dt);
-	void updateAnimations(const float& dt);
 	void updateEvents(const float& dt);
 	void updateLevelGUI(const sf::View& view);
 

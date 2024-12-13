@@ -54,26 +54,6 @@ void Koopa::initAnimations() {
 
 void Koopa::move(const float& dt)
 {
-    // Handle shell state
-    if (isAlive && isShelled) {
-        shellTimer += dt;
-        if (shellTimer >= 5.0f) {  // Exit shell state after 5 seconds
-			this->hitbox.setSize(sf::Vector2f(64.f, 96.f));
-            this->movementComponent->acceleration = walkSpeed;
-			shellTimer = 0.0f;
-
-            setIsAlive(true);
-			setIsShelled(false);
-        }
-    }
-
-	if (!isAlive) {
-        this->movementComponent->acceleration = walkSpeed;
-		disappearDelay += dt;
-		if (disappearDelay >= 1.0f) {
-			eventMediator->deleteEnemy(this);
-		}
-	}
 
     this->position += this->movementComponent->velocity;
 
@@ -97,6 +77,33 @@ void Koopa::move(const float& dt)
 
     this->entitySprite.setPosition(this->position);
     this->hitbox.setPosition(this->position);
+}
+
+void Koopa::update(const float& dt) {
+    updateAnimation(dt);
+    updateVelocity(dt);
+    eventMediator->applyExternalForce(this, dt);
+
+    if (isAlive && isShelled) {
+        shellTimer += dt;
+        if (shellTimer >= 5.0f) {  // Exit shell state after 5 seconds
+            this->hitbox.setSize(sf::Vector2f(64.f, 96.f));
+            this->movementComponent->acceleration = walkSpeed;
+            shellTimer = 0.0f;
+
+            setIsAlive(true);
+            setIsShelled(false);
+        }
+    }
+
+    if (!isAlive) {
+        this->movementComponent->acceleration = walkSpeed;
+        disappearDelay += dt;
+        if (disappearDelay >= 1.0f) {
+            eventMediator->deleteEnemy(this);
+        }
+    }
+    move(dt);
 }
 
 void Koopa::updateAnimation(const float& dt) {
@@ -127,6 +134,7 @@ void Koopa::setIsAlive(bool alive) {
 }
 
 void Koopa::reactToPlayerCollision(int collidedSide) {
+ 
     if (collidedSide == Collide_Top) {
         if (!isShelled) {
             isShelled = true;

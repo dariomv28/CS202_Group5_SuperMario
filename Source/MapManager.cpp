@@ -165,7 +165,7 @@ void MapManager::convert_sketch(const unsigned int i_current_level, vector<Enemy
 				}
 				else if (sf::Color(182, 73, 0) == pixel)
 				{
-					//i_enemies.push_back(std::make_shared<Goomba>(sf::Color(0, 0, 85) == i_background_color, CELL_SIZE * a, CELL_SIZE * (b - map_height)));
+					i_enemies.push_back(new Goomba(sf::Vector2f(CELL_SIZE*a, CELL_SIZE * (b- map_height)), sf::Vector2f(CELL_SIZE, CELL_SIZE)));
 				}
 				else if (sf::Color(0, 219, 0) == pixel)
 				{

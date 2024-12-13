@@ -47,12 +47,6 @@ void Goomba::initAnimations() {
 
 void Goomba::move(const float& dt) 
 {
-	if (!isAlive) {
-		disappearDelay += dt;
-		if (disappearDelay >= 1.5f) {
-			eventMediator->deleteEnemy(this);
-		}
-	}
 	
 	this->position += this->movementComponent->velocity;
 
@@ -93,12 +87,27 @@ void Goomba::setIsAlive(bool alive) {
 	isAlive = alive;
 }
 
+void Goomba::update(const float& dt) {
+	updateAnimation(dt);
+	if (!isAlive) {
+		disappearDelay += dt;
+		if (disappearDelay >= 1.5f) {
+			eventMediator->deleteEnemy(this);
+		}
+		return;
+	}
+	updateVelocity(dt);
+	eventMediator->applyExternalForce(this, dt);
+	move(dt);
+}
+
 void Goomba::reactToPlayerCollision(int collidedSide) {
+	if (!isAlive) return;
 	if (collidedSide == Collide_Top) {
 		setIsAlive(false);
 		eventMediator->increaseScore(300);
 		this->hitbox.setSize(sf::Vector2f(64.f, 32.f));
-		this->movementComponent->acceleration = 0;
+		//this->movementComponent->acceleration = 0;
 	}
 	else {
 		if (collidedSide == Collide_Left) eventMediator->pushPlayerLeft();

@@ -48,12 +48,10 @@ void LevelManager::initGameEventMediator() {
 
 void LevelManager::update(const float& dt) {
 	if (mapManager) {
-		//levelManager->update(dt);
 		mapManager->update(player,dt);
 	}
+
     eventMediator->updateInput(dt);
-    eventMediator->updateAnimations(dt);
-    eventMediator->updateMovements(dt);
     eventMediator->updateEvents(dt);
     eventMediator->updateLevelGUI(window->getView());
 }

@@ -11,6 +11,8 @@
 #include "Pipe.h"
 #include "CoinBlock.h"
 #include "Coin.h"
+#include "Goomba.h"
+#include "Koopa.h"
 using namespace std;
 
 class MapManager {
