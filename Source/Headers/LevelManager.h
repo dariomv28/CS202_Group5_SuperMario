@@ -34,3 +34,4 @@ public:
 #pragma once
 
 #endif // MAPMANAGER_H
+ 
