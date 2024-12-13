@@ -166,11 +166,11 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Source\PlayerManager.cpp" />
+    <ClCompile Include="Source\Koopa.cpp" />
     <ClCompile Include="Source\SolidBlock.cpp" />
     <ClCompile Include="Source\State.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Headers\AudioSystem.h" />
     <ClInclude Include="Source\Headers\MushroomBlock.h" />
     <ClInclude Include="Source\Headers\PowerUpObject.h" />
     <ClInclude Include="Source\Headers\Goomba.h" />

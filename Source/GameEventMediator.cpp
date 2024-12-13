@@ -14,14 +14,21 @@ GameEventMediator::~GameEventMediator() {
 
 void GameEventMediator::addPlayer(PlayerManager* player) {
 	this->player = player;
+	player->setEventMediator(this);
 }
 
 void GameEventMediator::addBlock(std::vector<Block*>& blocks) {
 	this->blocks = &blocks;
+	for (auto& block : blocks) {
+		block->setEventMediator(this);
+	}
 }
 
 void GameEventMediator::addEnemy(std::vector<Enemy*>& enemies) {
 	this->enemies = &enemies;
+	for (auto& enemy : enemies) {
+		enemy->setEventMediator(this);
+	}
 }
 
 void GameEventMediator::addPhysicsEngine(PhysicsEngine* physicsEngine) {
@@ -34,31 +41,15 @@ void GameEventMediator::addLevelGUI(LevelGUI* levelGUI) {
 
 void GameEventMediator::addPowerUp(std::vector<PowerUpObject*>& PowerUps) {
 	this->PowerUps = &PowerUps;
-}
-
-void GameEventMediator::updateMovements(const float& dt) {
-	// Update velocity of all entities
-	player->updateVelocity(dt);
-	for (auto& enemy : *enemies) {
-		enemy->updateVelocity(dt);
-	}
-	//Apply external forces to all entities
-	applyExternalForcesToEntities(dt);
-	// Update position of all entities
-	player->move(dt);
-	//std::cerr << player->getPosition().x << " " << player->getPosition().y << "\n";
-	
-	for (auto& enemy : *enemies) {
-		enemy->move(dt);
+	for (auto& PowerUp : PowerUps) {
+		PowerUp->setEventMediator(this);
 	}
 }
 
-void GameEventMediator::applyExternalForcesToEntities(const float& dt) {
+
+void GameEventMediator::applyExternalForce(LivingEntity* entity, const float& dt) {
 	// Apply gravity to all entities
-	for (auto& enemy : *enemies) {
-		physicsEngine->applyExternalForces(enemy, dt);
-	}
-	physicsEngine->applyExternalForces(player, dt);
+	physicsEngine->applyExternalForces(entity, dt);
 }
 
 void GameEventMediator::resolveCollision(const float& dt) {
@@ -80,8 +71,19 @@ void GameEventMediator::updateInput(const float& dt) {
 }
 
 void GameEventMediator::updateEvents(const float& dt) {
-	// Update events from the map
+	// Update events of the objects by themselves
+	player->update(dt);
+	for (auto& enemy : *enemies) {
+		enemy->update(dt);
+	}
 
+	for (auto& block : *blocks) {
+		block->update(dt);
+	}
+
+	for (auto& PowerUp : *PowerUps) {
+		PowerUp->update(dt);
+	}
 	
 	// Update evetns from collisions
 	resolveCollision(dt);
@@ -89,13 +91,6 @@ void GameEventMediator::updateEvents(const float& dt) {
 
 void GameEventMediator::updateLevelGUI(const sf::View& view) {
 	levelGUI->update(view);
-}
-
-void GameEventMediator::updateAnimations(const float& dt) {
-	player->updateAnimation(dt);
-	for (auto& enemy : *enemies) {
-		enemy->updateAnimation(dt);
-	}
 }
 
 void GameEventMediator::increaseCoins(int numCoins) {
@@ -128,6 +123,7 @@ void GameEventMediator::pushPlayerRight() {
 
 void GameEventMediator::spawnPowerUp(PowerUpObject* PowerUp) {
 	this->PowerUps->push_back(PowerUp);
+	PowerUp->setEventMediator(this);
 }
 
 void GameEventMediator::defeatPlayer() {

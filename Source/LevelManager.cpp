@@ -1,4 +1,6 @@
 #include "Headers/LevelManager.h"
+#include "Headers/GameEventMediator.h"
+// The level manager is responsible for managing the level, including the player, enemies, blocks, powerups, and the GUI
 
 LevelManager::LevelManager(PlayerManager* player, sf::RenderWindow* window) {
 	this->window = window;
@@ -18,24 +20,9 @@ LevelManager::~LevelManager() {
     delete levelGUI;
     delete eventMediator;
     delete physicsEngine;
-
 }
 
 void LevelManager::initGameEventMediator() {
-    player->setEventMediator(eventMediator);
-
-    for (auto& Block : Blocks) {
-        Block->setEventMediator(eventMediator);
-    }
-    for (auto& Enemy : Enemies) {
-        Enemy->setEventMediator(eventMediator);
-    }
-    for (auto& PowerUp : PowerUps) {
-        PowerUp->setEventMediator(eventMediator);
-    }
-    levelGUI->setEventMediator(eventMediator);
-    physicsEngine->setEventMediator(eventMediator);
-
     eventMediator->addPlayer(player);
     eventMediator->addEnemy(Enemies);
     eventMediator->addBlock(Blocks);
@@ -47,12 +34,10 @@ void LevelManager::initGameEventMediator() {
 
 void LevelManager::update(const float& dt) {
 	if (mapManager) {
-		//levelManager->update(dt);
 		mapManager->update(player,dt);
 	}
+
     eventMediator->updateInput(dt);
-    eventMediator->updateAnimations(dt);
-    eventMediator->updateMovements(dt);
     eventMediator->updateEvents(dt);
     eventMediator->updateLevelGUI(window->getView());
 }

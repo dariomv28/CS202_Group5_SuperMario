@@ -5,7 +5,7 @@
 
 
 class Block :
-    public GameObject
+	public GameObject
 {
 protected:
 	std::string name;

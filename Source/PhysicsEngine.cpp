@@ -137,7 +137,7 @@ void PhysicsEngine::resolveCollisionPlayerBlock(PlayerManager* entity, std::vect
 
 		if (entity->isMoveRight() && checkCollideRight(entity, obj)) {
 			fixPosition(entity, obj, Collide_Right);
-			std::cout << "Mario Collide Right\n";
+			// std::cout << "Mario Collide Right\n";
 			obj->reactToCollison(Collide_Left);
 			continue;
 		}
@@ -145,7 +145,7 @@ void PhysicsEngine::resolveCollisionPlayerBlock(PlayerManager* entity, std::vect
 		//Resolve the left side
 		if (entity->isMoveLeft() && checkCollideLeft(entity, obj)) {
 			fixPosition(entity, obj, Collide_Left);
-			std::cout << "Mario Collide Left\n";
+			// std::cout << "Mario Collide Left\n";
 
 			obj->reactToCollison(Collide_Right);
 			continue;
@@ -161,7 +161,7 @@ void PhysicsEngine::resolveCollisionPlayerBlock(PlayerManager* entity, std::vect
 		//Resolve the ceiling
 		if (entity->getVelocity().y < 0 && checkCollideUp(entity,obj)) {
 			fixPosition(entity, obj, Collide_Top);
-			std::cout << "Collide Up\n";
+			// std::cout << "Collide Up\n";
 			obj->reactToCollison(Collide_Bottom);
 			continue;
 		}
@@ -216,6 +216,10 @@ void PhysicsEngine::resolveCollisionEnemyBlock(std::vector<Enemy*>& enemies, std
 				enemy->setMoveRight(false);
 				enemy->setMoveLeft(true);
 
+				
+				enemy->setScaleSprite("LEFT");
+
+
 				continue;
 			}
 
@@ -225,6 +229,8 @@ void PhysicsEngine::resolveCollisionEnemyBlock(std::vector<Enemy*>& enemies, std
 				//enemy->reactToBlockCollison(Collide_Left);
 				enemy->setMoveLeft(false);
 				enemy->setMoveRight(true);
+
+				enemy->setScaleSprite("RIGHT");
 
 				continue;
 			}
@@ -251,9 +257,8 @@ void PhysicsEngine::resolveCollisionEnemyBlock(std::vector<Enemy*>& enemies, std
 void PhysicsEngine::resolveCollisionPlayerPowerUp(PlayerManager* entity, std::vector<PowerUpObject*>& PowerUps, const float& dt) {
 	for (auto& obj : PowerUps) {
 		//If the player collides with the powerup, the power up applies
-		if (checkCollideRight(entity, obj)) {
+		if (checkCollision(entity, obj)) {
 			obj->reactToCollison();
-			continue;
 		}
 	}
 }
@@ -275,8 +280,13 @@ void PhysicsEngine::resolveCollisionEnemyEnemy(std::vector<Enemy*>& enemies, con
 				enemy1->setMoveRight(false);
 				enemy1->setMoveLeft(true);
 
+				enemy1->setScaleSprite("LEFT");
+
 				enemy2->setMoveRight(true);
 				enemy2->setMoveLeft(false);
+
+				enemy2->setScaleSprite("RIGHT");
+
 				continue;
 			}
 
@@ -286,8 +296,13 @@ void PhysicsEngine::resolveCollisionEnemyEnemy(std::vector<Enemy*>& enemies, con
 				enemy1->setMoveLeft(false);
 				enemy1->setMoveRight(true);
 
+				enemy1->setScaleSprite("RIGHT");
+
 				enemy2->setMoveRight(false);
 				enemy2->setMoveLeft(true);
+
+				enemy2->setScaleSprite("LEFT");
+
 				continue;
 			}
 
