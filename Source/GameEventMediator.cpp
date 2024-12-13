@@ -14,14 +14,21 @@ GameEventMediator::~GameEventMediator() {
 
 void GameEventMediator::addPlayer(PlayerManager* player) {
 	this->player = player;
+	player->setEventMediator(this);
 }
 
 void GameEventMediator::addBlock(std::vector<Block*>& blocks) {
 	this->blocks = &blocks;
+	for (auto& block : blocks) {
+		block->setEventMediator(this);
+	}
 }
 
 void GameEventMediator::addEnemy(std::vector<Enemy*>& enemies) {
 	this->enemies = &enemies;
+	for (auto& enemy : enemies) {
+		enemy->setEventMediator(this);
+	}
 }
 
 void GameEventMediator::addPhysicsEngine(PhysicsEngine* physicsEngine) {
@@ -34,6 +41,9 @@ void GameEventMediator::addLevelGUI(LevelGUI* levelGUI) {
 
 void GameEventMediator::addPowerUp(std::vector<PowerUpObject*>& PowerUps) {
 	this->PowerUps = &PowerUps;
+	for (auto& PowerUp : PowerUps) {
+		PowerUp->setEventMediator(this);
+	}
 }
 
 
@@ -113,6 +123,7 @@ void GameEventMediator::pushPlayerRight() {
 
 void GameEventMediator::spawnPowerUp(PowerUpObject* PowerUp) {
 	this->PowerUps->push_back(PowerUp);
+	PowerUp->setEventMediator(this);
 }
 
 void GameEventMediator::defeatPlayer() {

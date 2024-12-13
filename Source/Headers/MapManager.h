@@ -13,6 +13,8 @@
 #include "Coin.h"
 #include "Goomba.h"
 #include "Koopa.h"
+#include "Brick.h"
+#include "MushroomBlock.h"
 using namespace std;
 
 class MapManager {

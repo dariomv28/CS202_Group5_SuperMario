@@ -257,9 +257,8 @@ void PhysicsEngine::resolveCollisionEnemyBlock(std::vector<Enemy*>& enemies, std
 void PhysicsEngine::resolveCollisionPlayerPowerUp(PlayerManager* entity, std::vector<PowerUpObject*>& PowerUps, const float& dt) {
 	for (auto& obj : PowerUps) {
 		//If the player collides with the powerup, the power up applies
-		if (checkCollideRight(entity, obj)) {
+		if (checkCollision(entity, obj)) {
 			obj->reactToCollison();
-			continue;
 		}
 	}
 }

@@ -7,7 +7,7 @@ private:
     bool breakable;
 public:
     Brick();
-	Brick(sf::Vector2f position, sf::Vector2f size, std::string name, bool breakable = true);
+	Brick(sf::Vector2f position, sf::Vector2f size, std::string name, bool breakable = false);
 	virtual ~Brick();
 
 	//Setters and Getters

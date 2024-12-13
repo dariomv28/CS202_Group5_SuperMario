@@ -22,6 +22,7 @@ Coin::Coin(sf::Vector2f position, sf::Vector2f size, std::string name)
 void Coin::update(const float& dt)
 {
 	//Update the animation
+
 }
 
 void Coin::reactToCollison()

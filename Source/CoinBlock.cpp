@@ -11,10 +11,8 @@ CoinBlock::CoinBlock(sf::Vector2f position, sf::Vector2f size, std::string name,
 {
 	this->numCoins = numCoins;
 	entitySprite.setTexture(entityTexture);
-	// Since the block has animation, we need to set the first frame of the animation by adding _1 to the name
-	std::string nameWithFrame = name + "_1";
-	// std::cout << "CoinBlock name: " << nameWithFrame << std::endl;
-	entitySprite.setTextureRect(spritesSheet[name + "_1"]); 
+	
+	entitySprite.setTextureRect(spritesSheet["question_block_1"]); 
 	entitySprite.setPosition(position);
 	entitySprite.setScale(size.x / entitySprite.getGlobalBounds().width, size.y / entitySprite.getGlobalBounds().height);
 }
@@ -37,12 +35,12 @@ void CoinBlock::reactToCollison(int collidedSide)
 		this->eventMediator->increaseCoins(1);
 		this->eventMediator->increaseScore(100);
 
-		std::cerr << "Coin collected\n";
+		//std::cerr << "Coin collected\n";
 		
 		//Decrease the number of coins in the block
 		numCoins--;
 		if (numCoins == 0) {
-			entitySprite.setTextureRect(spritesSheet["empty_" + name]);
+			entitySprite.setTextureRect(spritesSheet["empty_question_block"]);
 		}
 	}
 }

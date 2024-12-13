@@ -124,7 +124,6 @@ void MapManager::convert_sketch(const unsigned int i_current_level, vector<Enemy
 
 			if (b < map_height)
 			{
-
 				if (pixel == sf::Color(255, 200, 200))
 					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE),
 						styles[i_current_level] + "_underground_mid"));
@@ -132,27 +131,33 @@ void MapManager::convert_sketch(const unsigned int i_current_level, vector<Enemy
 					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE),
 						styles[i_current_level] + "_ground_mid"));
 				else if (pixel == sf::Color(240, 240, 240))
-					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), 
+					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE),
 						styles[i_current_level] + "_ground_left"));
 				else if (pixel == sf::Color(255, 225, 225))
-					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), 
+					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE),
 						styles[i_current_level] + "_underground_left"));
 				else if (pixel == sf::Color(200, 200, 200))
-					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), 
+					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE),
 						styles[i_current_level] + "_ground_right"));
 				else if (pixel == sf::Color(255, 175, 175))
-					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), 
+					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE),
 						styles[i_current_level] + "_underground_right"));
 				else if (pixel == sf::Color(193, 113, 52))
 					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "wall_1"));
 				else if (pixel == sf::Color(146, 73, 0))
-					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "brick_1"));
-				else if (pixel == sf::Color(146, 73, 50))
+					Blocks.push_back(new Brick(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "brick_1", false));
+				else if (pixel == sf::Color(81, 34, 19))
+					Blocks.push_back(new Brick(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "brick_1", true));
+				else if (pixel == sf::Color(255, 146, 85))
 					Blocks.push_back(new CoinBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "coin_block"));
-				else if (pixel == sf::Color(0, 255, 0))
-					Blocks.push_back(new Pipe(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE * 2, CELL_SIZE * 3), "pipe", 3));
-				else if (pixel == sf::Color(0, 253, 0))
-					Blocks.push_back(new Pipe(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE * 2, CELL_SIZE * 2), "pipe", 2));
+				else if (pixel == sf::Color(246, 109, 109))
+					Blocks.push_back(new MushroomBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "mushroom_block",1));
+				else if (pixel == sf::Color(146, 73, 100))
+					Blocks.push_back(new MushroomBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "mushroom_block", 2));
+				else if (pixel == sf::Color(146, 73, 150))
+					Blocks.push_back(new MushroomBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "mushroom_block", 3));
+				else if (pixel.r == 0 && pixel.b == 0 && pixel.g >= 252)
+					Blocks.push_back(new Pipe(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE * 2, CELL_SIZE * (255 - pixel.g)), "pipe", 255 - pixel.g));
 				else if (pixel == sf::Color(255, 177, 13)) {
 					PowerUp.push_back(new Coin(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "coin"));
 				}
@@ -163,13 +168,13 @@ void MapManager::convert_sketch(const unsigned int i_current_level, vector<Enemy
 				{
 					i_mario->setPosition(CELL_SIZE * a, 250);
 				}
-				else if (sf::Color(182, 73, 0) == pixel)
+				else if (sf::Color(155, 0, 0) == pixel)
 				{
 					i_enemies.push_back(new Goomba(sf::Vector2f(CELL_SIZE*a, CELL_SIZE * (b- map_height)), sf::Vector2f(CELL_SIZE, CELL_SIZE)));
 				}
-				else if (sf::Color(0, 219, 0) == pixel)
+				else if (sf::Color(0, 125, 0) == pixel)
 				{
-					//i_enemies.push_back(std::make_shared<Koopa>(sf::Color(0, 0, 85) == i_background_color, CELL_SIZE * a, CELL_SIZE * (b - map_height)));
+					i_enemies.push_back(new Koopa(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * (b - map_height)), sf::Vector2f(CELL_SIZE, CELL_SIZE)));
 				}
 			}
 		}
