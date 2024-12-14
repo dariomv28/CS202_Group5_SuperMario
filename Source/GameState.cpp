@@ -1,6 +1,7 @@
 #include "Headers/GameState.h"
 #include "Headers/LV1.h"
 #include "Headers/LV2.h"
+#include "Headers/LV3.h"
 
 GameState::GameState(StateData* stateData) : State(stateData), levelManager(nullptr) {
     
@@ -23,6 +24,9 @@ void GameState::loadLevel(PlayerManager* player, int worldID, int level) {
 		    break;
         case 2:
             levelManager = new LV2(player, window);
+			break;
+        case 3:
+            levelManager = new LV3(player, window);
 			break;
     }
  

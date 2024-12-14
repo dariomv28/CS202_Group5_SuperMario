@@ -8,7 +8,8 @@ Brick::Brick(sf::Vector2f position, sf::Vector2f size, std::string name, bool br
 {
 	this->breakable = breakable;
 	this->isBreak = false;
-
+	this->name = name;
+	std::cout << name << std::endl;
 	this->animationComponent = new AnimationComponent(this->entitySprite);
 	initAnimations();
 	
@@ -64,17 +65,14 @@ void Brick::render(sf::RenderTarget* target) {
 };
 
 void Brick::initAnimations() {
-	spritesSheet = {
-		{"brick_1", sf::IntRect(1, 86, 16, 16)},
-		{"brick_break", sf::IntRect(1, 103, 17, 17)}
-	};
+	spritesSheet["brick_break"] = sf::IntRect(1, 103, 17, 17);
 }
 void Brick::updateAnimation(const float& dt) {
 	if (isBreak) {
 		animationComponent->setAnimationEnemies("brick_break", spritesSheet, 0.2f);
 	}
 	else {
-		animationComponent->setAnimationEnemies("brick_1", spritesSheet, 0.2f);
+		animationComponent->setAnimationEnemies(name, spritesSheet, 0.2f);
 	}
 	animationComponent->update(dt);
 }

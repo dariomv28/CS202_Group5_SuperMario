@@ -8,7 +8,6 @@ class Brick :
 private:
     bool breakable;
 	bool isBreak;
-	std::unordered_map<std::string, sf::IntRect> spritesSheet;
 	float timeDelay;
 
 	std::vector<BrickFragment> fragments;
