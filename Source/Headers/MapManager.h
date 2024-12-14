@@ -15,11 +15,13 @@
 #include "Koopa.h"
 #include "Brick.h"
 #include "MushroomBlock.h"
+#include "Lava.h"
 using namespace std;
 
 class MapManager {
 protected:
 	unordered_map<int, string> styles;
+	unordered_map<int, string> pipe_styles;
 
 	sf::Image map_sketch;
 	sf::Texture backgroundTexture;
