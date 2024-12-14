@@ -9,7 +9,7 @@ public:
 	SolidBlock();
 	SolidBlock(sf::Vector2f position, sf::Vector2f size, std::string name);
 	virtual ~SolidBlock();
-	//void initSpritesSheet();
+	void initSpritesSheet();
 
 	//Setters and Getters
 	void update(const float& dt) override;

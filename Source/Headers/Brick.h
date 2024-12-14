@@ -23,7 +23,7 @@ public:
 	void reactToCollison(int collidedSide) override;
 	void render(sf::RenderTarget* target) override;
 
-	void initAnimations() override;
+	void initSpritesSheet() override;
 	void updateAnimation(const float& dt) override;
 
 	void createBrickFragments();
