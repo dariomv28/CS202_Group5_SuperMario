@@ -37,6 +37,8 @@ namespace GUI
 
 		virtual void render(sf::RenderTarget* target) = 0;
 		virtual void update(const sf::Vector2i mousePos) = 0;
+
+		void highlight(bool isHighlighted);
 	};
 
 	//Classic Button with RectangleShape and Text
@@ -64,6 +66,7 @@ namespace GUI
 
 		void render(sf::RenderTarget* target);
 		void update(const sf::Vector2i mousePos);
+		
 	};
 
 	//Button with Texture and Text
