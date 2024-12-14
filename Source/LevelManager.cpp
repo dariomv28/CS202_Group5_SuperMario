@@ -13,6 +13,7 @@ LevelManager::LevelManager(PlayerManager* player, sf::RenderWindow* window) {
 	levelGUI = new LevelGUI();
 	eventMediator = new GameEventMediator();
 	physicsEngine = new PhysicsEngine();
+    //audio = new AudioSystem();
 }
 
 LevelManager::~LevelManager() {
@@ -20,6 +21,7 @@ LevelManager::~LevelManager() {
     delete levelGUI;
     delete eventMediator;
     delete physicsEngine;
+    //delete audio;
 }
 
 void LevelManager::initGameEventMediator() {
@@ -29,6 +31,7 @@ void LevelManager::initGameEventMediator() {
     eventMediator->addPhysicsEngine(physicsEngine);
     eventMediator->addLevelGUI(levelGUI);
     eventMediator->addPowerUp(PowerUps);
+    //eventMediator->addAudioSystem(audio);
 }
 
 

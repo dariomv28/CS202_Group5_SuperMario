@@ -3,12 +3,13 @@
 #include "MainMenuState.h"
 #include "GameState.h"
 #include "AudioSystem.h"
+
 class MyApp
 {
 private:
 	sf::RenderWindow* window;
 	sf::Event sfEvent;
-	
+	AudioSystem* audio;
 	sf::Clock dtClock;
 	float dt; 
 
@@ -19,6 +20,7 @@ private:
 	void initWindow();
 	void initStateData();
 	void initStates();
+	void initAudioSystem();
 
 public:
 	//Constructors & Destructors

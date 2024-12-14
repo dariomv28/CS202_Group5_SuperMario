@@ -8,9 +8,9 @@ AudioSystem::AudioSystem() {
 	if (!jumpSoundBuffer.loadFromFile("Source/Resources/audio/Jump.mp3")) {
 		throw("ERROR::AUDIOSYSTEM::CANNOT_LOAD_JUMP_SOUND_EFFECT");
 	}
-	if (!buttonSoundBuffer.loadFromFile("Source/Resources/audio/Button.mp3")) {
-		throw("ERROR::AUDIOSYSTEM::CANNOT_LOAD_JUMP_SOUND_EFFECT");
-	}
+	//if (!buttonSoundBuffer.loadFromFile("Source/Resources/audio/Button.mp3")) {
+		//throw("ERROR::AUDIOSYSTEM::CANNOT_LOAD_JUMP_SOUND_EFFECT");
+	//}
 	jumpSound.setBuffer(jumpSoundBuffer);
 	buttonSound.setBuffer(buttonSoundBuffer);
 }
