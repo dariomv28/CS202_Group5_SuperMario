@@ -14,8 +14,14 @@ MapManager::~MapManager() {
 }
 
 void MapManager::initStyle() {
+	//General styles
 	styles[1] = "basic";
 	styles[2] = "snow";
+	styles[3] = "gray";
+	// /Pipe styles
+	pipe_styles[1] = "basic";
+	pipe_styles[2] = "basic";
+	pipe_styles[3] = "gray";
 }
 
 void MapManager::update(PlayerManager* player, float dt) {
@@ -124,6 +130,7 @@ void MapManager::convert_sketch(const unsigned int i_current_level, vector<Enemy
 
 			if (b < map_height)
 			{
+				//Ground
 				if (pixel == sf::Color(255, 200, 200))
 					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE),
 						styles[i_current_level] + "_underground_mid"));
@@ -142,22 +149,35 @@ void MapManager::convert_sketch(const unsigned int i_current_level, vector<Enemy
 				else if (pixel == sf::Color(255, 175, 175))
 					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE),
 						styles[i_current_level] + "_underground_right"));
+				else if (pixel == sf::Color(117, 117, 117))
+					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE),
+						"gray_block1"));
+				else if (pixel == sf::Color(89, 89, 89))
+					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE),
+						"gray_block2"));
+				//Special blocks
 				else if (pixel == sf::Color(193, 113, 52))
-					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "wall_1"));
+					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), styles[i_current_level] + "_wall"));
 				else if (pixel == sf::Color(146, 73, 0))
-					Blocks.push_back(new Brick(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "brick_1", false));
+					Blocks.push_back(new Brick(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), styles[i_current_level] + "_brick", false));
 				else if (pixel == sf::Color(81, 34, 19))
-					Blocks.push_back(new Brick(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "brick_1", true));
+					Blocks.push_back(new Brick(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), styles[i_current_level] + "_brick", true));
 				else if (pixel == sf::Color(255, 146, 85))
 					Blocks.push_back(new CoinBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "coin_block"));
 				else if (pixel == sf::Color(246, 109, 109))
-					Blocks.push_back(new MushroomBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "mushroom_block",1));
+					Blocks.push_back(new MushroomBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "mushroom_block", 1));
 				else if (pixel == sf::Color(146, 73, 100))
 					Blocks.push_back(new MushroomBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "mushroom_block", 2));
 				else if (pixel == sf::Color(146, 73, 150))
 					Blocks.push_back(new MushroomBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "mushroom_block", 3));
-				else if (pixel.r == 0 && pixel.b == 0 && pixel.g >= 252)
-					Blocks.push_back(new Pipe(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE * 2, CELL_SIZE * (255 - pixel.g)), "pipe", 255 - pixel.g));
+				else if (pixel.r == 0 && pixel.b == 0 && pixel.g >= 250)
+					Blocks.push_back(new Pipe(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE * 2, CELL_SIZE * (255 - pixel.g)),
+						pipe_styles[i_current_level] + "_pipe", 255 - pixel.g));
+				else if (pixel == sf::Color(255, 77, 0))
+					PowerUp.push_back(new Lava(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "lava"));
+				else if (pixel == sf::Color(175, 55, 0))
+					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "lava_bottom"));
+				//Power Ups
 				else if (pixel == sf::Color(255, 177, 13)) {
 					PowerUp.push_back(new Coin(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "coin"));
 				}

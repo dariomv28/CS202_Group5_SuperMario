@@ -11,6 +11,8 @@ protected:
 	std::string name;
 	std::unordered_map<std::string, sf::IntRect> spritesSheet;
 
+	bool exist;
+
 public:
 
 	Block();
@@ -22,5 +24,13 @@ public:
 	virtual void update(const float& dt) = 0;
 	virtual void reactToCollison(int collidedSide) = 0;
 	virtual void render(sf::RenderTarget* target) = 0;
+
+	virtual void initAnimations();
+	virtual void updateAnimation(const float& dt);
+
+	virtual void setExist(bool exist);
+	virtual bool getExist();
+
+	AnimationComponent* animationComponent;
 };
 
