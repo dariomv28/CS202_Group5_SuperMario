@@ -56,6 +56,7 @@ Block::Block(sf::Vector2f position, sf::Vector2f size, std::string name)
 {	
 	initSpritesSheet();
 	this->name = name;
+	this->exist = true;
 	entityTexture.loadFromFile("Source/Resources/texture/Tileset.png");
 	hitbox.setSize(size);
 	//hitbox.setOrigin(size.x / 2, size.y / 2);
@@ -65,4 +66,17 @@ Block::Block(sf::Vector2f position, sf::Vector2f size, std::string name)
 	hitbox.setOutlineThickness(1);
 
 	//hitbox.setOrigin(size.x / 2, size.y / 2);
+}
+
+
+void Block::initAnimations() {};
+
+void Block::updateAnimation(const float& dt) {};
+
+bool Block::getExist() {
+	return exist;
+}
+
+void Block::setExist(bool exist) {
+	this->exist = exist;
 }
