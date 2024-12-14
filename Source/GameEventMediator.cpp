@@ -114,11 +114,11 @@ void GameEventMediator::decreasePlayerHealth() {
 }
 
 void GameEventMediator::pushPlayerLeft() {
-	player->setVelocity(sf::Vector2f(-25.0f, player->getVelocity().y));
+	player->setVelocity(sf::Vector2f(-10.0f, player->getVelocity().y));
 }
 
 void GameEventMediator::pushPlayerRight() {
-	player->setVelocity(sf::Vector2f(25.0f, player->getVelocity().y));
+	player->setVelocity(sf::Vector2f(10.0f, player->getVelocity().y));
 }
 
 void GameEventMediator::spawnPowerUp(PowerUpObject* PowerUp) {

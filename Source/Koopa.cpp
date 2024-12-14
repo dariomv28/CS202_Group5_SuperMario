@@ -2,7 +2,7 @@
 #include "Headers/GameEventMediator.h"
 
 Koopa::Koopa() : Enemy() {
-    walkSpeed = 260.f;  // Slightly faster than Goomba
+    walkSpeed = 20.f;
 
     isAlive = true;
     setHealth(1);
@@ -23,7 +23,7 @@ Koopa::Koopa() : Enemy() {
     this->animationComponent = new AnimationComponent(this->entitySprite);
     initAnimations();
 
-    movementComponent = new MovementComponent(walkSpeed, 5.0f);
+    movementComponent = new MovementComponent(walkSpeed, 3.0f);
 
     hitbox.setSize(sf::Vector2f(64.f, 96.f));
     hitbox.setPosition(position);
@@ -150,6 +150,11 @@ void Koopa::reactToPlayerCollision(int collidedSide) {
 
             eventMediator->increaseScore(400);
         }
+    }
+    else {
+        if (collidedSide == Collide_Left) eventMediator->pushPlayerLeft();
+        else eventMediator->pushPlayerRight();
+        eventMediator->decreasePlayerHealth();
     }
 }
 

@@ -8,7 +8,7 @@
 
 PhysicsEngine::PhysicsEngine() {
 	gravity = sf::Vector2f(0, 2.0f * PIXELS_PER_METER);
-	friction = sf::Vector2f(14.0f * PIXELS_PER_METER, 0);
+	friction = sf::Vector2f(1.0f * PIXELS_PER_METER, 0);
 }
 
 void PhysicsEngine::setEventMediator(GameEventMediator* mediator) {

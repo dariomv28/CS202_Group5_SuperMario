@@ -118,33 +118,35 @@ void Mario::update(const float& dt) {
 }
 
 void Mario::handleInput(const float& dt) {
+    // Reset movement flags
     movementComponent->isMoveLeft = false;
     movementComponent->isMoveRight = false;
     movementComponent->isJump = false;
 
     bool isWalking = false;
     bool isRunning = false;
-	bool isCrouching = false;
+    bool isCrouching = false;
 
-   // std::cout << "Mario::handleInput" << std::endl;
-
+    // Simultaneous movement and jump handling
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
         movementComponent->isMoveLeft = true;
         entitySprite.setScale(-4.0f, 4.0f);
-		hitbox.setScale(-1.0f, 1.0f);
+        hitbox.setScale(-1.0f, 1.0f);
         isWalking = true;
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         movementComponent->isMoveRight = true;
         entitySprite.setScale(4.0f, 4.0f);
         hitbox.setScale(1.0f, 1.0f);
         isWalking = true;
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
         if (is_big) {
             currentAction = "CROUCH";
             isAnimationInProgress = true;
-			isCrouching = true;
+            isCrouching = true;
         }
     }
 
@@ -152,26 +154,27 @@ void Mario::handleInput(const float& dt) {
         isRunning = true;
     }
 
+    // Improved jump handling
     static bool spaceWasPressed = false;
     bool spaceIsPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::Space) ||
         sf::Keyboard::isKeyPressed(sf::Keyboard::W) ||
         sf::Keyboard::isKeyPressed(sf::Keyboard::Up);
 
+    // Immediate jump request when space is first pressed
     if (spaceIsPressed && !spaceWasPressed) {
         movementComponent->isJump = true;
         currentAction = "JUMP-";
         isAnimationInProgress = true;
 
-        // Reset animation when starting a new jump (either first or second)
+        // Reset jump animation if needed
         if (!movementComponent->onGround && movementComponent->getJumpsRemaining() > 0) {
-            // Reset animation for double jump
             animationComponent->currentFrameIndex = 0;
             animationComponent->elapsedTime = 0;
         }
     }
     spaceWasPressed = spaceIsPressed;
 
-    // Only change animation if we're not already jumping
+    // Animation and action state management
     if (currentAction != "JUMP-") {
         if (isWalking && isRunning) {
             currentAction = "RUN-";
