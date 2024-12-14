@@ -55,6 +55,9 @@ void Block::initSpritesSheet()
 	spritesSheet["gray_pipe_top_right"] = sf::IntRect(205, 52, 16, 16);
 
 	
+	//Lava
+	spritesSheet["lava_bottom"] = sf::IntRect(273, 171, 16, 16);
+
 	//Trampoline
 
 }

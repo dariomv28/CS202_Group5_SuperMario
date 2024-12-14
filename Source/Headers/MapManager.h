@@ -15,6 +15,7 @@
 #include "Koopa.h"
 #include "Brick.h"
 #include "MushroomBlock.h"
+#include "Lava.h"
 using namespace std;
 
 class MapManager {

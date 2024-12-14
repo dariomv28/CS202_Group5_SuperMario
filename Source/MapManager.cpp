@@ -165,13 +165,18 @@ void MapManager::convert_sketch(const unsigned int i_current_level, vector<Enemy
 				else if (pixel == sf::Color(255, 146, 85))
 					Blocks.push_back(new CoinBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "coin_block"));
 				else if (pixel == sf::Color(246, 109, 109))
-					Blocks.push_back(new MushroomBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "mushroom_block",1));
+					Blocks.push_back(new MushroomBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "mushroom_block", 1));
 				else if (pixel == sf::Color(146, 73, 100))
 					Blocks.push_back(new MushroomBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "mushroom_block", 2));
 				else if (pixel == sf::Color(146, 73, 150))
 					Blocks.push_back(new MushroomBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "mushroom_block", 3));
 				else if (pixel.r == 0 && pixel.b == 0 && pixel.g >= 250)
-					Blocks.push_back(new Pipe(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE * 2, CELL_SIZE * (255 - pixel.g)), pipe_styles[i_current_level] + "_pipe", 255 - pixel.g));
+					Blocks.push_back(new Pipe(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE * 2, CELL_SIZE * (255 - pixel.g)),
+						pipe_styles[i_current_level] + "_pipe", 255 - pixel.g));
+				else if (pixel == sf::Color(255, 77, 0))
+					Blocks.push_back(new Lava(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "lava"));
+				else if (pixel == sf::Color(175, 55, 0))
+					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "lava_bottom"));
 				//Power Ups
 				else if (pixel == sf::Color(255, 177, 13)) {
 					PowerUp.push_back(new Coin(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "coin"));
