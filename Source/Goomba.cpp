@@ -2,7 +2,7 @@
 #include "Headers/GameEventMediator.h"
 
 Goomba::Goomba() : Enemy() {
-	walkSpeed = 256.0f;
+	walkSpeed = 20.0f;
 
 	isAlive = true;
 	setHealth(1);
@@ -20,7 +20,7 @@ Goomba::Goomba() : Enemy() {
 	this->animationComponent = new AnimationComponent(this->entitySprite);
 	initAnimations();
 
-	movementComponent = new MovementComponent(walkSpeed, 4.0f);
+	movementComponent = new MovementComponent(walkSpeed, 3.0f);
 
 	hitbox.setSize(sf::Vector2f(64.f, 64.f));
 	hitbox.setPosition(position);
@@ -116,5 +116,16 @@ void Goomba::reactToPlayerCollision(int collidedSide) {
 		if (collidedSide == Collide_Left) eventMediator->pushPlayerLeft();
 		else eventMediator->pushPlayerRight();
 		eventMediator->decreasePlayerHealth();
+	}
+}
+
+void Goomba::setScaleSprite(std::string name) {
+	if (name == "LEFT") {
+		entitySprite.setScale(-4.0f, 4.0f);
+		hitbox.setScale(-1.0f, 1.0f);
+	}
+	else if (name == "RIGHT") {
+		entitySprite.setScale(4.0f, 4.0f);
+		hitbox.setScale(1.0f, 1.0f);
 	}
 }

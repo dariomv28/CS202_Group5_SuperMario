@@ -18,8 +18,6 @@ LV1::LV1(PlayerManager* player, sf::RenderWindow *window):
 
     Enemies.push_back(new Goomba(sf::Vector2f(2777.f, 500.f), sf::Vector2f(64.f, 64.f)));
 
-    Enemies.push_back(new Koopa(sf::Vector2f(3279.f, 500.f), sf::Vector2f(64.f, 64.f)));
-
     Enemies.push_back(new Goomba(sf::Vector2f(9327.f, 500.f), sf::Vector2f(64.f, 64.f)));
 
     Enemies.push_back(new Koopa(sf::Vector2f(10269.f, 500.f), sf::Vector2f(64.f, 64.f)));
