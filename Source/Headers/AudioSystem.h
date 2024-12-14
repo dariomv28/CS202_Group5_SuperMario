@@ -11,7 +11,7 @@ private:
 public:
 	AudioSystem();
 	void playMusic();
-	void playSound();
+	void playJumpSound();
 	void playbuttonSound();
 };
 

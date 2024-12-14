@@ -20,6 +20,7 @@ private:
 	std::vector<Enemy*>* enemies;
 	std::vector<PowerUpObject*>* PowerUps;
 	LevelGUI* levelGUI;
+	//AudioSystem* audio;
 public:
 	// Initialization function
 	GameEventMediator();
@@ -30,6 +31,7 @@ public:
 	void addPhysicsEngine(PhysicsEngine* physicsEngine);
 	void addLevelGUI(LevelGUI* levelGUI);
 	void addPowerUp(std::vector<PowerUpObject*>& PowerUps);
+	//void addAudioSystem(AudioSystem* audio);
 
 	// Physics Engine functions
 	void applyExternalForce(LivingEntity* entity, const float& dt);
