@@ -9,9 +9,8 @@ Brick::Brick(sf::Vector2f position, sf::Vector2f size, std::string name, bool br
 	this->breakable = breakable;
 	this->isBreak = false;
 	this->name = name;
-	std::cout << name << std::endl;
 	this->animationComponent = new AnimationComponent(this->entitySprite);
-	initAnimations();
+	initSpritesSheet();
 	
 	entitySprite.setTexture(entityTexture);
 	entitySprite.setTextureRect(spritesSheet[name]);
@@ -64,9 +63,12 @@ void Brick::render(sf::RenderTarget* target) {
 	target->draw(hitbox);
 };
 
-void Brick::initAnimations() {
+void Brick::initSpritesSheet() {
+	spritesSheet["basic_brick"] = spritesSheet["snow_brick"] = sf::IntRect(1, 86, 16, 16);
+	spritesSheet["gray_brick"] = sf::IntRect(69, 86, 16, 16);
 	spritesSheet["brick_break"] = sf::IntRect(1, 103, 17, 17);
 }
+
 void Brick::updateAnimation(const float& dt) {
 	if (isBreak) {
 		animationComponent->setAnimationEnemies("brick_break", spritesSheet, 0.2f);

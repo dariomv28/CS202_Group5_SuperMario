@@ -18,7 +18,7 @@ public:
 	Block();
 	Block(sf::Vector2f position, sf::Vector2f size, std::string name);
 	virtual ~Block();
-	void initSpritesSheet();
+	virtual void initSpritesSheet() = 0;
 
 	//Setters and Getters
 	virtual void update(const float& dt) = 0;

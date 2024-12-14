@@ -14,6 +14,8 @@ public:
 	Pipe(sf::Vector2f position, sf::Vector2f size, std::string name, int height);
 	virtual ~Pipe();
 
+	void initSpritesSheet();
+
 	//Setters and Getters
 	void update(const float& dt) override;
 	void reactToCollison(int collidedSide) override;

@@ -8,6 +8,7 @@ MushroomBlock::MushroomBlock() : Block() {
 MushroomBlock::MushroomBlock(sf::Vector2f position, sf::Vector2f size, std::string name, int type)
 	: Block(position, size, name)
 {
+	initSpritesSheet();
 	entitySprite.setTexture(entityTexture);
 	entitySprite.setTextureRect(spritesSheet["question_block_1"]);
 
@@ -17,6 +18,13 @@ MushroomBlock::MushroomBlock(sf::Vector2f position, sf::Vector2f size, std::stri
 }
 
 MushroomBlock::~MushroomBlock() {
+}
+
+void MushroomBlock::initSpritesSheet() {
+	spritesSheet["empty_question_block"] = sf::IntRect(1, 69, 16, 16);
+	spritesSheet["question_block_1"] = sf::IntRect(1, 52, 16, 16);
+	spritesSheet["question_block_2"] = sf::IntRect(18, 52, 16, 16);
+	spritesSheet["question_block_3"] = sf::IntRect(35, 52, 16, 16);
 }
 
 void MushroomBlock::update(const float& dt) {

@@ -16,6 +16,9 @@
 #include "Brick.h"
 #include "MushroomBlock.h"
 #include "Lava.h"
+#include "Trampoline.h"
+#include "Cannon.h"
+
 using namespace std;
 
 class MapManager {

@@ -9,7 +9,7 @@ CoinBlock::CoinBlock()
 CoinBlock::CoinBlock(sf::Vector2f position, sf::Vector2f size, std::string name, int numCoins) :
 	Block(position, size, name) 
 {
-
+	initSpritesSheet();
 	this->numCoins = numCoins;
 	entitySprite.setTexture(entityTexture);
 	
@@ -22,6 +22,14 @@ CoinBlock::CoinBlock(sf::Vector2f position, sf::Vector2f size, std::string name,
 
 CoinBlock::~CoinBlock()
 {
+}
+
+void CoinBlock::initSpritesSheet()
+{
+	spritesSheet["empty_question_block"] = sf::IntRect(1, 69, 16, 16);
+	spritesSheet["question_block_1"] = sf::IntRect(1, 52, 16, 16);
+	spritesSheet["question_block_2"] = sf::IntRect(18, 52, 16, 16);
+	spritesSheet["question_block_3"] = sf::IntRect(35, 52, 16, 16);
 }
 
 void CoinBlock::update(const float& dt) {

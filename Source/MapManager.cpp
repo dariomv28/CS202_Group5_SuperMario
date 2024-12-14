@@ -177,6 +177,14 @@ void MapManager::convert_sketch(const unsigned int i_current_level, vector<Enemy
 					PowerUp.push_back(new Lava(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "lava"));
 				else if (pixel == sf::Color(175, 55, 0))
 					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "lava_bottom"));
+				else if (pixel == sf::Color(198, 60, 60))
+					Blocks.push_back(new Trampoline(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "trampoline"));
+				else if (pixel == sf::Color(67, 67, 67))
+					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "cannon_mid"));
+				else if (pixel == sf::Color(102, 102, 102))
+					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "cannon_bottom"));
+				else if (pixel == sf::Color(0,0,0))
+					Blocks.push_back(new Cannon(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "cannon"));
 				//Power Ups
 				else if (pixel == sf::Color(255, 177, 13)) {
 					PowerUp.push_back(new Coin(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "coin"));

@@ -6,6 +6,7 @@ Pipe::Pipe() : Block() {
 Pipe::Pipe(sf::Vector2f position, sf::Vector2f size, std::string name, int height)
 	: Block(position, size, name)
 {
+	initSpritesSheet();
 	int sizeY = size.y / height;
 	int sizeX = size.x / 2;
 	sprite_pipe.resize(2*height);
@@ -38,6 +39,18 @@ Pipe::Pipe(sf::Vector2f position, sf::Vector2f size, std::string name, int heigh
 }
 
 Pipe::~Pipe() {
+}
+
+void Pipe::initSpritesSheet() {
+	spritesSheet["basic_pipe_bottom_left"] = sf::IntRect(103, 69, 16, 16);
+	spritesSheet["basic_pipe_bottom_right"] = sf::IntRect(120, 69, 16, 16);
+	spritesSheet["basic_pipe_top_left"] = sf::IntRect(103, 52, 16, 16);
+	spritesSheet["basic_pipe_top_right"] = sf::IntRect(120, 52, 16, 16);
+
+	spritesSheet["gray_pipe_bottom_left"] = sf::IntRect(188, 69, 16, 16);
+	spritesSheet["gray_pipe_bottom_right"] = sf::IntRect(205, 69, 16, 16);
+	spritesSheet["gray_pipe_top_left"] = sf::IntRect(188, 52, 16, 16);
+	spritesSheet["gray_pipe_top_right"] = sf::IntRect(205, 52, 16, 16);
 }
 
 void Pipe::update(const float& dt) {
