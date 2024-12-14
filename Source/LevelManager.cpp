@@ -43,6 +43,8 @@ void LevelManager::update(const float& dt) {
     eventMediator->updateInput(dt);
     eventMediator->updateEvents(dt);
     eventMediator->updateLevelGUI(window->getView());
+
+
 }
 
 

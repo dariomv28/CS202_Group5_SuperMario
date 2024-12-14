@@ -163,3 +163,43 @@ void GameEventMediator::deletePowerUp(PowerUpObject* PowerUp) {
 		}
 	}
 }
+
+void GameEventMediator::playMenuMusic() {
+	audio->playMusic();
+}
+
+void GameEventMediator::playLevel1Music() {
+	audio->playLevel1Music();
+}
+
+void GameEventMediator::playLevel2Music() {
+	audio->playLevel2Music();
+}
+
+void GameEventMediator::playLevel3Music() {
+	audio->playLevel3Music();
+}
+
+void GameEventMediator::playLevelMusic(int level) {
+	if (level == 1) {
+		audio->playLevel1Music();
+	}
+	else if (level == 2) {
+		audio->playLevel2Music();
+	}
+	else if (level == 3) {
+		audio->playLevel3Music();
+	}
+}
+
+void GameEventMediator::playButtonSound() {
+	audio->playbuttonSound();
+}
+
+void GameEventMediator::playCoinSound() {
+	audio->playCoinSound();
+}
+
+void GameEventMediator::playJumpSound() {
+	audio->playJumpSound();
+}

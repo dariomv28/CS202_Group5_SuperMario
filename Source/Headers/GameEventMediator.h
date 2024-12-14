@@ -69,7 +69,7 @@ public:
 	void playLevel2Music();
 	void playLevel3Music();
 
-	void playButtonSound(bool isClicked);
+	void playButtonSound();
 	void playCoinSound();
 	void playJumpSound();
 };
