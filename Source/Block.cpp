@@ -45,8 +45,8 @@ void Block::initSpritesSheet()
 
 	//Pipe
 	spritesSheet["basic_pipe_bottom_left"] = sf::IntRect(103, 69, 16,16);
-	spritesSheet["baisc_pipe_bottom_right"] = sf::IntRect(120, 69, 16, 16);
-	spritesSheet["baisc_pipe_top_left"] = sf::IntRect(103, 52, 16, 16);
+	spritesSheet["basic_pipe_bottom_right"] = sf::IntRect(120, 69, 16, 16);
+	spritesSheet["basic_pipe_top_left"] = sf::IntRect(103, 52, 16, 16);
 	spritesSheet["basic_pipe_top_right"] = sf::IntRect(120, 52, 16, 16);
 	
 	spritesSheet["gray_pipe_bottom_left"] = sf::IntRect(188, 69, 16, 16);
