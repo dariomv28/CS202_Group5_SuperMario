@@ -107,7 +107,10 @@ void Goomba::reactToPlayerCollision(int collidedSide) {
 		setIsAlive(false);
 		eventMediator->increaseScore(300);
 		this->hitbox.setSize(sf::Vector2f(64.f, 32.f));
-		//this->movementComponent->acceleration = 0;
+
+		this->position.y += 32.0f; // Move down by the amount the height was reduced
+		this->entitySprite.setPosition(this->position);
+		this->hitbox.setPosition(this->position);
 	}
 	else {
 		if (collidedSide == Collide_Left) eventMediator->pushPlayerLeft();
