@@ -70,12 +70,7 @@ void Brick::initAnimations() {
 	};
 }
 void Brick::updateAnimation(const float& dt) {
-	if (isBreak) {
-		animationComponent->setAnimationEnemies("brick_break", spritesSheet, 0.2f);
-	}
-	else {
-		animationComponent->setAnimationEnemies("brick_1", spritesSheet, 0.2f);
-	}
+	animationComponent->setAnimationEnemies("brick_1", spritesSheet, 0.2f);
 	animationComponent->update(dt);
 }
 
