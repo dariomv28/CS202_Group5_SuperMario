@@ -174,7 +174,7 @@ void MapManager::convert_sketch(const unsigned int i_current_level, vector<Enemy
 					Blocks.push_back(new Pipe(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE * 2, CELL_SIZE * (255 - pixel.g)),
 						pipe_styles[i_current_level] + "_pipe", 255 - pixel.g));
 				else if (pixel == sf::Color(255, 77, 0))
-					Blocks.push_back(new Lava(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "lava"));
+					PowerUp.push_back(new Lava(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "lava"));
 				else if (pixel == sf::Color(175, 55, 0))
 					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "lava_bottom"));
 				//Power Ups

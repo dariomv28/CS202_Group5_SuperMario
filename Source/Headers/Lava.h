@@ -1,7 +1,7 @@
 #pragma once
-#include "Block.h"
+#include "PowerUpObject.h"
 class Lava :
-    public Block
+    public PowerUpObject
 {
 private:
 	std::unordered_map<std::string, sf::IntRect> spritesSheet;
@@ -12,6 +12,6 @@ private:
 	void initSpritesSheet();
 	void update(const float& dt) override;
 	void render(sf::RenderTarget* target) override;
-	void reactToCollison(int collidedSide) override;
+	void reactToCollison() override;
 };
 

@@ -1,8 +1,9 @@
 #include "Headers/Lava.h"
 
 Lava::Lava(sf::Vector2f position, sf::Vector2f size, std::string name) :
-	Block(position, size, name)
+	PowerUpObject(position, size, name)
 {
+	entityTexture.loadFromFile("Source/Resources/texture/tileset.png");
 	entitySprite.setTexture(entityTexture);
 	initSpritesSheet();
 	entitySprite.setTextureRect(spritesSheet["lava_1"]);
@@ -32,7 +33,7 @@ void Lava::initSpritesSheet() {
 void Lava::update(const float& dt) {
 }
 
-void Lava::reactToCollison(int collidedSide) {
+void Lava::reactToCollison() {
 	//Kill or damage the player
 }
 
