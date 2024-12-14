@@ -46,9 +46,9 @@ void GameEventMediator::addPowerUp(std::vector<PowerUpObject*>& PowerUps) {
 	}
 }
 
-//void GameEventMediator::addAudioSystem(AudioSystem* audio) {
-//	this->audio = audio;
-//}
+void GameEventMediator::addAudioSystem(AudioSystem* audio) {
+	this->audio = audio;
+}
 
 
 void GameEventMediator::applyExternalForce(LivingEntity* entity, const float& dt) {

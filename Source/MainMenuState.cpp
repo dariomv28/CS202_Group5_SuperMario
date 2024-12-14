@@ -98,6 +98,7 @@ void MainMenuState::updateGUI()
 
 	if (buttons[BTN_CONTINUE]->isPressed())
 	{
+		
 		std::cout << "Continue Pressed\n";
 		//this->states.push(new GameState(this->window));
 	}

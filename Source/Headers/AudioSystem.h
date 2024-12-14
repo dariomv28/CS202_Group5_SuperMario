@@ -9,8 +9,10 @@ private:
 	sf::Music level3Music;
 	sf::Sound jumpSound;
 	sf::Sound buttonSound;
+	sf::Sound coinSound;
 	sf::SoundBuffer jumpSoundBuffer;
 	sf::SoundBuffer buttonSoundBuffer;
+	sf::SoundBuffer coinSoundBuffer;
 public:
 	AudioSystem();
 	void playMusic();
@@ -25,5 +27,9 @@ public:
 	void stopJumpSound();
 	void playbuttonSound();
 	void stopButtonSound();
+	void playCoinSound();
+	void stopCoinSound();
+
+	void stopAllMusic();
 };
 
