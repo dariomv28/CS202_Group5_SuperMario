@@ -106,3 +106,7 @@ void AudioSystem::stopAllMusic() {
 		level3Music.stop();
 	}
 }
+
+void AudioSystem::setEventMediator(GameEventMediator* eventMediator) {
+	this->eventMediator = eventMediator;
+}

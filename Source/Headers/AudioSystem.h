@@ -1,5 +1,6 @@
 #pragma once
 #include "stdafx.h"
+#include "GameEventMediator.h"
 class AudioSystem
 {
 private:
@@ -13,6 +14,8 @@ private:
 	sf::SoundBuffer jumpSoundBuffer;
 	sf::SoundBuffer buttonSoundBuffer;
 	sf::SoundBuffer coinSoundBuffer;
+
+	GameEventMediator* eventMediator;
 public:
 	AudioSystem();
 	void playMusic();
@@ -31,5 +34,7 @@ public:
 	void stopCoinSound();
 
 	void stopAllMusic();
+
+	void setEventMediator(GameEventMediator* eventMediator);
 };
 

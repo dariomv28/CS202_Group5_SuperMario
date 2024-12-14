@@ -9,6 +9,7 @@ class GameObject;
 class PhysicsEngine;
 class LevelGUI;
 class PowerUpObject;
+class AudioSystem;
 
 class GameEventMediator
 {
