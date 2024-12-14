@@ -203,3 +203,7 @@ void GameEventMediator::playCoinSound() {
 void GameEventMediator::playJumpSound() {
 	audio->playJumpSound();
 }
+
+void GameEventMediator::playBrickDestroyedSound() {
+	audio->playBrickDestroyedSound();
+}

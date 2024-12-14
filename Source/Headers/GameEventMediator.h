@@ -63,6 +63,7 @@ public:
 	void deleteBlock(Block* block);
 	void deletePowerUp(PowerUpObject* PowerUp);
 
+	// Audio events
 	void playMenuMusic();
 	void playLevelMusic(int level);
 	void playLevel1Music();
@@ -72,5 +73,6 @@ public:
 	void playButtonSound();
 	void playCoinSound();
 	void playJumpSound();
+	void playBrickDestroyedSound();
 };
 

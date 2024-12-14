@@ -14,6 +14,9 @@ AudioSystem::AudioSystem() {
 	if (!coinSoundBuffer.loadFromFile("Source/Resources/audio/coin.wav")) {
 		throw("ERROR::AUDIOSYSTEM::CANNOT_LOAD_COIN_SOUND_EFFECT");
 	}
+	if (!brickSoundBuffer.loadFromFile("Source/Resources/audio/break brick.wav")) {
+		throw("ERROR::AUDIOSYSTEM::CANNOT_LOAD_BRICK_SOUND_EFFECT");
+	}
 	if (!level1Music.openFromFile("Source/Resources/audio/Level 1.mp3")) {
 		throw("ERROR::AUDIOSYSTEM::CANNOT_LOAD_LEVEL_1_MUSIC");
 	}
@@ -26,6 +29,7 @@ AudioSystem::AudioSystem() {
 	jumpSound.setBuffer(jumpSoundBuffer);
 	buttonSound.setBuffer(buttonSoundBuffer);
 	coinSound.setBuffer(coinSoundBuffer);
+	brickSound.setBuffer(brickSoundBuffer);
 }
 
 void AudioSystem::playMusic() {
@@ -109,4 +113,8 @@ void AudioSystem::stopAllMusic() {
 
 void AudioSystem::setEventMediator(GameEventMediator* eventMediator) {
 	this->eventMediator = eventMediator;
+}
+
+void AudioSystem::playBrickDestroyedSound() {
+	brickSound.play();
 }

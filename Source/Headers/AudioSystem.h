@@ -11,9 +11,11 @@ private:
 	sf::Sound jumpSound;
 	sf::Sound buttonSound;
 	sf::Sound coinSound;
+	sf::Sound brickSound;
 	sf::SoundBuffer jumpSoundBuffer;
 	sf::SoundBuffer buttonSoundBuffer;
 	sf::SoundBuffer coinSoundBuffer;
+	sf::SoundBuffer brickSoundBuffer;
 
 	GameEventMediator* eventMediator;
 public:
@@ -32,6 +34,7 @@ public:
 	void stopButtonSound();
 	void playCoinSound();
 	void stopCoinSound();
+	void playBrickDestroyedSound();
 
 	void stopAllMusic();
 

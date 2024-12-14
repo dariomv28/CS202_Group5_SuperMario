@@ -29,6 +29,7 @@ void Coin::reactToCollison()
 {
 	//Increase coin or score
 	eventMediator->increaseCoins(1);
+	eventMediator->playCoinSound();
 
 	//Delete this block
 	eventMediator->deletePowerUp(this);

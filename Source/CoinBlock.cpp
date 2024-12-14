@@ -56,6 +56,7 @@ void CoinBlock::reactToCollison(int collidedSide)
 			entitySprite.setTextureRect(spritesSheet["empty_question_block"]);
 		}
 	}
+	eventMediator->playCoinSound();
 }
 
 void CoinBlock::render(sf::RenderTarget* target)
