@@ -49,6 +49,13 @@ namespace GUI
 		this->text.setString(text);
 	}
 
+	void Button::highlight(bool isHighlighted) {
+		if (isHighlighted)
+		{
+			this->text.setFillColor(sf::Color::Blue); 
+		}
+	}
+
 	TextButton::TextButton(bool stickyAllowed, float x, float y, float width, float height,
 		sf::Font* font, std::string text, unsigned character_size,
 		sf::Color text_idle_color, sf::Color text_hover_color, sf::Color text_active_color,
