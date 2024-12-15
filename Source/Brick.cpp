@@ -45,6 +45,7 @@ void Brick::reactToCollison(int collidedSide) {
 		this->setExist(false); // Set the brick to be destroyed (not exist anymore)
 		isBreak = true;
 		createBrickFragments();
+		eventMediator->playBrickDestroyedSound();
 	}
 }
 

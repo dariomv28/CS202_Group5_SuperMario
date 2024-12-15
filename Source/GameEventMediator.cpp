@@ -33,10 +33,12 @@ void GameEventMediator::addEnemy(std::vector<Enemy*>& enemies) {
 
 void GameEventMediator::addPhysicsEngine(PhysicsEngine* physicsEngine) {
 	this->physicsEngine = physicsEngine;
+	physicsEngine->setEventMediator(this);
 }
 
 void GameEventMediator::addLevelGUI(LevelGUI* levelGUI) {
 	this->levelGUI = levelGUI;
+	levelGUI->setEventMediator(this);
 }
 
 void GameEventMediator::addPowerUp(std::vector<PowerUpObject*>& PowerUps) {
@@ -46,10 +48,20 @@ void GameEventMediator::addPowerUp(std::vector<PowerUpObject*>& PowerUps) {
 	}
 }
 
-//void GameEventMediator::addAudioSystem(AudioSystem* audio) {
-//	this->audio = audio;
-//}
+void GameEventMediator::addAudioSystem(AudioSystem* audio) {
+	this->audio = audio;
+	audio->setEventMediator(this);
+}
 
+/*void GameEventMediator::addLivingEntity(LivingEntity* livingEntity) {
+	this->livingEntity = livingEntity;
+	livingEntity->setEventMediator(this);
+}*/
+
+/*void GameEventMediator::addMovementComponent(MovementComponent* movementComponent) {
+	this->movementComponent = movementComponent;
+	movementComponent->setEventMediator(this);
+}*/
 
 void GameEventMediator::applyExternalForce(LivingEntity* entity, const float& dt) {
 	// Apply gravity to all entities
@@ -162,4 +174,48 @@ void GameEventMediator::deletePowerUp(PowerUpObject* PowerUp) {
 			break;
 		}
 	}
+}
+
+void GameEventMediator::playMenuMusic() {
+	audio->playMusic();
+}
+
+void GameEventMediator::playLevel1Music() {
+	audio->playLevel1Music();
+}
+
+void GameEventMediator::playLevel2Music() {
+	audio->playLevel2Music();
+}
+
+void GameEventMediator::playLevel3Music() {
+	audio->playLevel3Music();
+}
+
+void GameEventMediator::playLevelMusic(int level) {
+	if (level == 1) {
+		audio->playLevel1Music();
+	}
+	else if (level == 2) {
+		audio->playLevel2Music();
+	}
+	else if (level == 3) {
+		audio->playLevel3Music();
+	}
+}
+
+void GameEventMediator::playButtonSound() {
+	audio->playbuttonSound();
+}
+
+void GameEventMediator::playCoinSound() {
+	audio->playCoinSound();
+}
+
+void GameEventMediator::playJumpSound() {
+	audio->playJumpSound();
+}
+
+void GameEventMediator::playBrickDestroyedSound() {
+	audio->playBrickDestroyedSound();
 }

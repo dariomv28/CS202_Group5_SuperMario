@@ -11,7 +11,7 @@
 #include "LevelGUI.h"
 #include "GameEventMediator.h"
 #include "PhysicsEngine.h"
-//#include "AudioSystem.h"
+#include "AudioSystem.h"
 
 class LevelManager {
 protected:
@@ -24,7 +24,9 @@ protected:
     LevelGUI* levelGUI;
     GameEventMediator* eventMediator;
     PhysicsEngine* physicsEngine;
-    //AudioSystem* audio;
+    AudioSystem* audio;
+    //MovementComponent* movementComponent;
+    //LivingEntity* livingEntity;
 public:
     LevelManager(PlayerManager* player, sf::RenderWindow* window);
     virtual ~LevelManager();

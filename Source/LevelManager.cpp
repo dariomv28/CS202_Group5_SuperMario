@@ -13,7 +13,9 @@ LevelManager::LevelManager(PlayerManager* player, sf::RenderWindow* window) {
 	levelGUI = new LevelGUI();
 	eventMediator = new GameEventMediator();
 	physicsEngine = new PhysicsEngine();
-    //audio = new AudioSystem();
+    audio = new AudioSystem();
+    //movementComponent = new MovementComponent();
+    //livingEntity = new LivingEntity();
 }
 
 LevelManager::~LevelManager() {
@@ -21,7 +23,9 @@ LevelManager::~LevelManager() {
     delete levelGUI;
     delete eventMediator;
     delete physicsEngine;
-    //delete audio;
+    delete audio;
+    //delete livingEntity;
+    //delete movementComponent;
 }
 
 void LevelManager::initGameEventMediator() {
@@ -31,7 +35,9 @@ void LevelManager::initGameEventMediator() {
     eventMediator->addPhysicsEngine(physicsEngine);
     eventMediator->addLevelGUI(levelGUI);
     eventMediator->addPowerUp(PowerUps);
-    //eventMediator->addAudioSystem(audio);
+    eventMediator->addAudioSystem(audio);
+    //eventMediator->addMovementComponent(movementComponent);
+    //eventMediator->addLivingEntity(livingEntity);
 }
 
 
@@ -43,6 +49,8 @@ void LevelManager::update(const float& dt) {
     eventMediator->updateInput(dt);
     eventMediator->updateEvents(dt);
     eventMediator->updateLevelGUI(window->getView());
+
+
 }
 
 
