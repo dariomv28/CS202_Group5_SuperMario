@@ -22,7 +22,17 @@ Coin::Coin(sf::Vector2f position, sf::Vector2f size, std::string name)
 void Coin::update(const float& dt)
 {
 	//Update the animation
+	updateAnimation(dt);
+}
 
+void Coin::updateAnimation(const float& dt)
+{
+	coinAnimationTimer += dt;
+	if (coinAnimationTimer >= 0.1f) {
+		entitySprite.setTextureRect(spritesSheet["coin_" + std::to_string(coinAnimationCurrentFrame + 1)]);
+		coinAnimationCurrentFrame = (coinAnimationCurrentFrame + 1) % 3;
+		coinAnimationTimer = 0.0f;
+	}
 }
 
 void Coin::reactToCollison()

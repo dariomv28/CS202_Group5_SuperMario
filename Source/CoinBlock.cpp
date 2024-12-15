@@ -12,7 +12,6 @@ CoinBlock::CoinBlock(sf::Vector2f position, sf::Vector2f size, std::string name,
 	initSpritesSheet();
 	this->numCoins = numCoins;
 	entitySprite.setTexture(entityTexture);
-	
 	entitySprite.setTextureRect(spritesSheet["question_block_1"]); 
 	entitySprite.setPosition(position);
 	entitySprite.setScale(size.x / entitySprite.getGlobalBounds().width, size.y / entitySprite.getGlobalBounds().height);
@@ -33,14 +32,37 @@ void CoinBlock::initSpritesSheet()
 }
 
 void CoinBlock::update(const float& dt) {
-	// Update coin animations
+	// Existing coin animation update
 	updateAnimation(dt);
+
+	// Update block bounce animation
+	if (isBlockBouncing) {
+		blockBounceTimer += dt;
+
+		// Move up
+		if (blockBounceTimer < 0.1f) {
+			entitySprite.move(0, -bounceDistance);
+		}
+		// Move back down
+		else if (blockBounceTimer < 0.2f) {
+			entitySprite.move(0, +bounceDistance);
+		}
+		else {
+			entitySprite.setPosition(originalBlockPosition);
+			isBlockBouncing = false;
+			blockBounceTimer = 0.0f;
+		}
+	}
 }
 
 void CoinBlock::reactToCollison(int collidedSide)
 {
 	if (collidedSide == Collide_Bottom) {
 		if (numCoins == 0) return;
+
+		isBlockBouncing = true;
+		blockBounceTimer = 0.0f;
+		originalBlockPosition = entitySprite.getPosition();
 
 		isCoinAnimating = true;
 		coinAnimationTimer = 0.0f;
@@ -55,9 +77,9 @@ void CoinBlock::reactToCollison(int collidedSide)
 		if (numCoins == 0) {
 			entitySprite.setTextureRect(spritesSheet["empty_question_block"]);
 		}
+
 		eventMediator->playCoinSound();
 	}
-	
 }
 
 void CoinBlock::render(sf::RenderTarget* target)

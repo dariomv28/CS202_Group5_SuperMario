@@ -187,7 +187,7 @@ void MapManager::convert_sketch(const unsigned int i_current_level, vector<Enemy
 					Blocks.push_back(new Cannon(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "cannon"));
 				//Power Ups
 				else if (pixel == sf::Color(255, 177, 13)) {
-					PowerUp.push_back(new Coin(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "coin"));
+					PowerUp.push_back(new Coin(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE - 10, CELL_SIZE), "coin"));
 				}
 			}
 			else
