@@ -34,6 +34,7 @@ namespace GUI
 	const bool Button::isPressed() const
 	{
 		if (this->buttonState == BTN_ACTIVE) {
+			//eventMediator->playButtonSound();
 			return true;
 		}
 
@@ -55,6 +56,10 @@ namespace GUI
 		{
 			this->text.setFillColor(sf::Color::Blue); 
 		}
+	}
+
+	void Button::setEventMediator(GameEventMediator* eventMediator) {
+		this->eventMediator = eventMediator;
 	}
 
 	TextButton::TextButton(bool stickyAllowed, float x, float y, float width, float height,
