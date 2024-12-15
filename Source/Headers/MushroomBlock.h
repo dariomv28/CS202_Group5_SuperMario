@@ -8,6 +8,11 @@ class MushroomBlock :
 private:
     int type;
 
+	bool isBlockBouncing = false;
+	float blockBounceTimer = 0.0f;
+	sf::Vector2f originalBlockPosition;
+	float bounceDistance = 5.0f;
+
 	float mushroomBlockAnimationTimer = 0.0f;
 	int mushroomBlockAnimationCurrentFrame = 0;
 public:
