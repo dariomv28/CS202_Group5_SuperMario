@@ -34,25 +34,6 @@ void CoinBlock::initSpritesSheet()
 void CoinBlock::update(const float& dt) {
 	// Existing coin animation update
 	updateAnimation(dt);
-
-	// Update block bounce animation
-	if (isBlockBouncing) {
-		blockBounceTimer += dt;
-
-		// Move up
-		if (blockBounceTimer < 0.1f) {
-			entitySprite.move(0, -bounceDistance);
-		}
-		// Move back down
-		else if (blockBounceTimer < 0.2f) {
-			entitySprite.move(0, +bounceDistance);
-		}
-		else {
-			entitySprite.setPosition(originalBlockPosition);
-			isBlockBouncing = false;
-			blockBounceTimer = 0.0f;
-		}
-	}
 }
 
 void CoinBlock::reactToCollison(int collidedSide)
@@ -93,7 +74,6 @@ void CoinBlock::render(sf::RenderTarget* target)
 
 void CoinBlock::initAnimations()
 {
-
 	coinAnimationFrames = {
 		sf::IntRect(sf::IntRect(52, 52, 16, 16)),
 		sf::IntRect(sf::IntRect(69, 52, 16, 16)),
@@ -135,6 +115,34 @@ void CoinBlock::updateAnimation(const float& dt)
 			if (coinAnimationCurrentFrame == coinAnimationFrames.size() - 1) {
 				isCoinAnimating = false;
 			}
+		}
+	}
+
+	// Update block animation
+	blockCoinAnimationTimer += dt;
+	if (blockCoinAnimationTimer >= 0.2f) {
+		entitySprite.setTextureRect(spritesSheet["question_block_" + std::to_string(blockCoinAnimationCurrentFrame + 1)]);
+		blockCoinAnimationCurrentFrame = (blockCoinAnimationCurrentFrame + 1) % 3;
+		blockCoinAnimationTimer = 0.0f;
+	}
+
+
+	// Update block bounce animation
+	if (isBlockBouncing) {
+		blockBounceTimer += dt;
+
+		// Move up
+		if (blockBounceTimer < 0.1f) {
+			entitySprite.move(0, -bounceDistance);
+		}
+		// Move back down
+		else if (blockBounceTimer < 0.2f) {
+			entitySprite.move(0, +bounceDistance);
+		}
+		else {
+			entitySprite.setPosition(originalBlockPosition);
+			isBlockBouncing = false;
+			blockBounceTimer = 0.0f;
 		}
 	}
 }
