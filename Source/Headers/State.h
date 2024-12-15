@@ -1,6 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "GUI.h"
+#include "GameEventMediator.h"
 
 class State;
 
