@@ -18,24 +18,11 @@
 #include <cmath>
 #include <unordered_map>
 
-
-
 //SFML
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Audio.hpp>
-
-
-
-
-
-
-
-
-
-
-
 
 
 // map manager
