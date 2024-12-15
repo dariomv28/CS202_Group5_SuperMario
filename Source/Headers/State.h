@@ -1,7 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "GUI.h"
-#include "GameEventMediator.h"
+#include "AudioSystem.h"
 
 class State;
 
@@ -11,11 +11,13 @@ public:
 	StateData() {
 		window = nullptr;
 		states = nullptr;
+		audioSystem = nullptr;
 	}
 
 	//Variables
 	sf::RenderWindow* window;
 	std::stack<State*>* states;
+	AudioSystem* audioSystem;
 };
 
 class State
@@ -28,6 +30,7 @@ protected:
 	sf::Vector2i mousePosWindow;
 
 	bool quit;
+	AudioSystem* audioSystem;
 
 public:
 	State(StateData* stateData);
