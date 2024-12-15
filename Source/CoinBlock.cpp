@@ -14,6 +14,7 @@ CoinBlock::CoinBlock(sf::Vector2f position, sf::Vector2f size, std::string name,
 	entitySprite.setTexture(entityTexture);
 	entitySprite.setTextureRect(spritesSheet["question_block_1"]); 
 	entitySprite.setPosition(position);
+	originalBlockPosition = position;
 	entitySprite.setScale(size.x / entitySprite.getGlobalBounds().width, size.y / entitySprite.getGlobalBounds().height);
 
 	initAnimations();
@@ -34,25 +35,6 @@ void CoinBlock::initSpritesSheet()
 void CoinBlock::update(const float& dt) {
 	// Existing coin animation update
 	updateAnimation(dt);
-
-	// Update block bounce animation
-	if (isBlockBouncing) {
-		blockBounceTimer += dt;
-
-		// Move up
-		if (blockBounceTimer < 0.1f) {
-			entitySprite.move(0, -bounceDistance);
-		}
-		// Move back down
-		else if (blockBounceTimer < 0.2f) {
-			entitySprite.move(0, +bounceDistance);
-		}
-		else {
-			entitySprite.setPosition(originalBlockPosition);
-			isBlockBouncing = false;
-			blockBounceTimer = 0.0f;
-		}
-	}
 }
 
 void CoinBlock::reactToCollison(int collidedSide)
@@ -62,7 +44,6 @@ void CoinBlock::reactToCollison(int collidedSide)
 
 		isBlockBouncing = true;
 		blockBounceTimer = 0.0f;
-		originalBlockPosition = entitySprite.getPosition();
 
 		isCoinAnimating = true;
 		coinAnimationTimer = 0.0f;
@@ -93,7 +74,6 @@ void CoinBlock::render(sf::RenderTarget* target)
 
 void CoinBlock::initAnimations()
 {
-
 	coinAnimationFrames = {
 		sf::IntRect(sf::IntRect(52, 52, 16, 16)),
 		sf::IntRect(sf::IntRect(69, 52, 16, 16)),
@@ -136,6 +116,38 @@ void CoinBlock::updateAnimation(const float& dt)
 				isCoinAnimating = false;
 			}
 		}
+	}
+
+	// Update block animation
+	if (numCoins != 0) {
+		blockCoinAnimationTimer += dt;
+		if (blockCoinAnimationTimer >= 0.2f) {
+			entitySprite.setTextureRect(spritesSheet["question_block_" + std::to_string(blockCoinAnimationCurrentFrame + 1)]);
+			blockCoinAnimationCurrentFrame = (blockCoinAnimationCurrentFrame + 1) % 3;
+			blockCoinAnimationTimer = 0.0f;
+		}
+	}
+
+	// Update block bounce animation
+	if (isBlockBouncing) {
+		blockBounceTimer += dt;
+
+		// Move up
+		if (blockBounceTimer < 0.1f) {
+			entitySprite.move(0, -bounceDistance);
+		}
+		// Move back down
+		else if (blockBounceTimer < 0.2f) {
+			entitySprite.move(0, +bounceDistance);
+		}
+		else {
+			entitySprite.setPosition(originalBlockPosition);
+			isBlockBouncing = false;
+			blockBounceTimer = 0.0f;
+		}
+	}
+	else {
+		entitySprite.setPosition(originalBlockPosition);
 	}
 }
 

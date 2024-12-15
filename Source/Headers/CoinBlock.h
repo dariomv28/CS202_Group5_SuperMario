@@ -19,6 +19,9 @@ private:
 	sf::Vector2f originalBlockPosition;
 	float bounceDistance = 5.0f;
 
+	float blockCoinAnimationTimer = 0.0f;
+	int blockCoinAnimationCurrentFrame = 0;
+
 public:
 	CoinBlock();
 	CoinBlock(sf::Vector2f position, sf::Vector2f size, std::string name, int numCoins = 3);
