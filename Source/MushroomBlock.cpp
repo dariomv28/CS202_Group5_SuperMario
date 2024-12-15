@@ -28,7 +28,17 @@ void MushroomBlock::initSpritesSheet() {
 }
 
 void MushroomBlock::update(const float& dt) {
+	updateAnimation(dt);
+}
 
+void MushroomBlock::updateAnimation(const float& dt) {
+	// Update the animation
+	mushroomBlockAnimationTimer += dt;
+	if (mushroomBlockAnimationTimer >= 0.2) {
+		entitySprite.setTextureRect(spritesSheet["question_block_" + std::to_string(mushroomBlockAnimationCurrentFrame + 1)]);
+		mushroomBlockAnimationCurrentFrame = (mushroomBlockAnimationCurrentFrame + 1) % 3;
+		mushroomBlockAnimationTimer = 0.0f;
+	}
 }
 
 void MushroomBlock::reactToCollison(int collidedSide) {
