@@ -5,7 +5,7 @@
 Mario::Mario(sf::Vector2f position, sf::Vector2f size, int health, int speed)
     : PlayerManager(position, size, health, speed), currentAction("IDLE"), isAnimationInProgress(false) {
     animationComponent = nullptr;
-    movementComponent = new MovementComponent(speed, 5.0f);
+    movementComponent = new MovementComponent(speed, 4.0f);
     init();
 }
 
