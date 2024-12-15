@@ -7,6 +7,8 @@ class Mushroom :
 {
 private:
     int type;
+	float floatSpeed = 0.0f;
+	float floatTimer = 0.0f;
 public:
     Mushroom(sf::Vector2f position, sf::Vector2f size, std::string name, int type);
 	~Mushroom();
@@ -18,5 +20,6 @@ public:
 	void update(const float& dt);
 	void reactToCollison();
 
+	void setFloatSpeed(float speed);
 };
 

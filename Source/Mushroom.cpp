@@ -16,8 +16,20 @@ Mushroom::~Mushroom()
 {
 }
 
+void Mushroom::setFloatSpeed(float speed)
+{
+	floatSpeed = speed;
+}
+
 void Mushroom::update(const float& dt)
 {
+	floatTimer += dt;
+	entitySprite.move(0, -floatSpeed * dt);
+
+	// Reset position if it goes too high
+	if (floatTimer >= 0.45f) {
+		entitySprite.setPosition(entitySprite.getPosition().x, position.y);
+	}
 }
 
 void Mushroom::reactToCollison()

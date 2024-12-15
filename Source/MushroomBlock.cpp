@@ -72,7 +72,10 @@ void MushroomBlock::reactToCollison(int collidedSide) {
 		isBlockBouncing = true;
 		blockBounceTimer = 0.0f;
 		//Spawn a mushroom
-		eventMediator->spawnPowerUp(new Mushroom(sf::Vector2f(entitySprite.getPosition().x, entitySprite.getPosition().y - CELL_SIZE), sf::Vector2f(CELL_SIZE, CELL_SIZE), "mushroom", type));
+
+		Mushroom* mushroom = new Mushroom(sf::Vector2f(entitySprite.getPosition().x, entitySprite.getPosition().y - CELL_SIZE), sf::Vector2f(CELL_SIZE, CELL_SIZE), "mushroom", type);
+		mushroom->setFloatSpeed(50.0f); // Set the float speed
+		eventMediator->spawnPowerUp(mushroom);
 		
 		//Disable this block
 		type = 0;
