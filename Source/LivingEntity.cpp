@@ -114,8 +114,7 @@ void LivingEntity::updateVelocity(const float& dt)
 {
 	this->movementComponent->moveLeft(dt);
 	this->movementComponent->moveRight(dt);
-	this->movementComponent->jump(dt);
-
+	this->movementComponent->jump(dt, eventMediator);
 }
 
 void LivingEntity::move(const float& dt)

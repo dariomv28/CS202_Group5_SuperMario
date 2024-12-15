@@ -27,7 +27,7 @@ public:
 
 	void moveLeft(const float& dt);
 	void moveRight(const float& dt);
-	void jump(const float& dt);
+	void jump(const float& dt, GameEventMediator* eventMediator);
 
 	void resetJumps();
 	int getJumpsRemaining() const;

@@ -59,7 +59,7 @@ void MovementComponent::moveRight(const float& dt) {
     }
 }
 
-void MovementComponent::jump(const float& dt) {
+void MovementComponent::jump(const float& dt, GameEventMediator* eventMediator) {
     if (onGround && isJump) {
         velocity.y = -9.6f;
         onGround = false;
@@ -71,6 +71,6 @@ void MovementComponent::jump(const float& dt) {
         isJump = false;
         jumpsRemaining--;
     }
-    
+    //eventMediator->playJumpSound();
 }
 
