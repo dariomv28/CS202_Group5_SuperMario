@@ -13,6 +13,12 @@ private:
 	bool isCoinAnimating = false;
 	float coinAnimationTimer = 0.0f;
 	int coinAnimationCurrentFrame = 0;
+
+	bool isBlockBouncing = false;
+	float blockBounceTimer = 0.0f;
+	sf::Vector2f originalBlockPosition;
+	float bounceDistance = 5.0f;
+
 public:
 	CoinBlock();
 	CoinBlock(sf::Vector2f position, sf::Vector2f size, std::string name, int numCoins = 3);
