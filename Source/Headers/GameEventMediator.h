@@ -10,6 +10,7 @@ class PhysicsEngine;
 class LevelGUI;
 class PowerUpObject;
 class AudioSystem;
+class MovementComponent;
 
 class GameEventMediator
 {
@@ -22,6 +23,8 @@ private:
 	std::vector<PowerUpObject*>* PowerUps;
 	LevelGUI* levelGUI;
 	AudioSystem* audio;
+	//MovementComponent* movementComponent;
+	//LivingEntity* livingEntity;
 public:
 	// Initialization function
 	GameEventMediator();
@@ -33,6 +36,8 @@ public:
 	void addLevelGUI(LevelGUI* levelGUI);
 	void addPowerUp(std::vector<PowerUpObject*>& PowerUps);
 	void addAudioSystem(AudioSystem* audio);
+	//void addMovementComponent(MovementComponent* movementComponent);
+	//void addLivingEntity(LivingEntity* livingEntity);
 
 	// Physics Engine functions
 	void applyExternalForce(LivingEntity* entity, const float& dt);

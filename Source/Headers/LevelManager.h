@@ -25,6 +25,8 @@ protected:
     GameEventMediator* eventMediator;
     PhysicsEngine* physicsEngine;
     AudioSystem* audio;
+    //MovementComponent* movementComponent;
+    //LivingEntity* livingEntity;
 public:
     LevelManager(PlayerManager* player, sf::RenderWindow* window);
     virtual ~LevelManager();

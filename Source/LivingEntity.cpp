@@ -6,6 +6,7 @@ LivingEntity::LivingEntity()
 	this->health = 0;
 	this->speed = 0;
 	this->movementComponent = new MovementComponent(2, speed);
+	//this->movementComponent->setEventMediator(eventMediator);
 	//this->movementComponent->onGround = false;
 	//this->animationComponent = new AnimationComponent();
 }
@@ -17,6 +18,7 @@ LivingEntity::LivingEntity(sf::Vector2f position, sf::Vector2f size, int health,
 	this->speed = speed;
 	this->movementComponent = new MovementComponent();
 	this->movementComponent->onGround = false;
+	//this->movementComponent->setEventMediator(eventMediator);
 	//this->animationComponent = new AnimationComponent();
 }
 
@@ -113,6 +115,7 @@ void LivingEntity::updateVelocity(const float& dt)
 	this->movementComponent->moveLeft(dt);
 	this->movementComponent->moveRight(dt);
 	this->movementComponent->jump(dt);
+
 }
 
 void LivingEntity::move(const float& dt)

@@ -163,6 +163,9 @@ void Mario::handleInput(const float& dt) {
 
     // Immediate jump request when space is first pressed
     if (spaceIsPressed && !spaceWasPressed) {
+        if (movementComponent->getJumpsRemaining() > 0) {
+            eventMediator->playJumpSound();
+        }
         movementComponent->isJump = true;
         currentAction = "JUMP-";
         isAnimationInProgress = true;

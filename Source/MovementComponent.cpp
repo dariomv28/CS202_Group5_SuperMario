@@ -10,6 +10,7 @@ MovementComponent::MovementComponent() {
     hitCeiling = false;
     velocity = sf::Vector2f(0.0f, 0.0f);
     jumpsRemaining = MAX_JUMPS;  // Initialize jumps
+    //eventMediator = new GameEventMediator();
 }
 
 MovementComponent::MovementComponent(int a, int maxV) {
@@ -22,6 +23,7 @@ MovementComponent::MovementComponent(int a, int maxV) {
     hitCeiling = false;
     velocity = sf::Vector2f(0.0f, 0.0f);
     jumpsRemaining = MAX_JUMPS;  // Initialize jumps
+    //eventMediator = new GameEventMediator();
 }
 
 MovementComponent::~MovementComponent() {}
@@ -69,4 +71,6 @@ void MovementComponent::jump(const float& dt) {
         isJump = false;
         jumpsRemaining--;
     }
+    
 }
+

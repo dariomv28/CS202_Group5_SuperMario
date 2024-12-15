@@ -5,6 +5,7 @@ PlayerManager::PlayerManager(sf::Vector2f position, sf::Vector2f size, int healt
     : LivingEntity(position, size, health, speed) {
     init();
     is_big = false;
+    
 }
 
 PlayerManager::~PlayerManager() {

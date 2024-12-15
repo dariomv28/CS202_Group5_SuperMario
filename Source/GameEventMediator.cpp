@@ -33,10 +33,12 @@ void GameEventMediator::addEnemy(std::vector<Enemy*>& enemies) {
 
 void GameEventMediator::addPhysicsEngine(PhysicsEngine* physicsEngine) {
 	this->physicsEngine = physicsEngine;
+	physicsEngine->setEventMediator(this);
 }
 
 void GameEventMediator::addLevelGUI(LevelGUI* levelGUI) {
 	this->levelGUI = levelGUI;
+	levelGUI->setEventMediator(this);
 }
 
 void GameEventMediator::addPowerUp(std::vector<PowerUpObject*>& PowerUps) {
@@ -48,8 +50,18 @@ void GameEventMediator::addPowerUp(std::vector<PowerUpObject*>& PowerUps) {
 
 void GameEventMediator::addAudioSystem(AudioSystem* audio) {
 	this->audio = audio;
+	audio->setEventMediator(this);
 }
 
+/*void GameEventMediator::addLivingEntity(LivingEntity* livingEntity) {
+	this->livingEntity = livingEntity;
+	livingEntity->setEventMediator(this);
+}*/
+
+/*void GameEventMediator::addMovementComponent(MovementComponent* movementComponent) {
+	this->movementComponent = movementComponent;
+	movementComponent->setEventMediator(this);
+}*/
 
 void GameEventMediator::applyExternalForce(LivingEntity* entity, const float& dt) {
 	// Apply gravity to all entities
