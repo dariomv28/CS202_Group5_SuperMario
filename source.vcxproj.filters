@@ -57,13 +57,13 @@
     <ClCompile Include="Source\LevelManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\LV1.cpp">
+    <ClCompile Include="Source\W1_LV1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\LV2.cpp">
+    <ClCompile Include="Source\W2_LV1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\LV3.cpp">
+    <ClCompile Include="Source\W3_LV1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\MapManager.cpp">
@@ -179,13 +179,13 @@
     <ClInclude Include="Source\Headers\MapManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Headers\LV1.h">
+    <ClInclude Include="Source\Headers\W1_LV1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Headers\LV2.h">
+    <ClInclude Include="Source\Headers\W2_LV1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Headers\LV3.h">
+    <ClInclude Include="Source\Headers\W3_LV1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Headers\LivingEntity.h">
