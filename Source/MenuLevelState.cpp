@@ -5,7 +5,8 @@ MenuLevelState::MenuLevelState(StateData* stateData) : MainMenuState(stateData)
 {
     // Reinitialize buttons with level-specific content
     this->initButtons();
-    player = new Mario(sf::Vector2f(0.f, 0.f), sf::Vector2f(64.f, 64.f), 3.f, 40.f);
+    player = new Mario(sf::Vector2f(0.f, 0.f), sf::Vector2f(64.f, 64.f), 3.f, 50.f);
+	//std::cerr << "im here" << std::endl;
 }
 
 MenuLevelState::~MenuLevelState()

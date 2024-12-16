@@ -8,6 +8,7 @@ LivingEntity::LivingEntity()
 	this->movementComponent = new MovementComponent(2, speed);
 	//this->movementComponent->setEventMediator(eventMediator);
 	//this->movementComponent->onGround = false;
+	//this->movementComponent->onGround = true;
 	//this->animationComponent = new AnimationComponent();
 }
 
@@ -119,12 +120,16 @@ void LivingEntity::updateVelocity(const float& dt)
 
 void LivingEntity::move(const float& dt)
 {
-	this->position += this->movementComponent->velocity;
-	this->position.x = std::max<float>(this->position.x, 32.0);
+	std::cout << position.x << " " << position.y << std::endl;
+	this->position += this->movementComponent->velocity * dt;
+	std::cout << position.x << " " << position.y << std::endl;
+		this->position.x = std::max<float>(this->position.x, 32.0);
 	this->position.x = std::min<float>(this->position.x, 13416);
 	this->entitySprite.setPosition(this->position);
 	this->hitbox.setPosition(this->position);
 }
+
+
 
 void LivingEntity::update(const float& dt) {
 	updateVelocity(dt);

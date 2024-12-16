@@ -29,7 +29,7 @@ Koopa::Koopa() : Enemy() {
     hitbox.setPosition(position);
     hitbox.setFillColor(sf::Color::Transparent);
     hitbox.setOutlineColor(sf::Color::Green);
-    hitbox.setOutlineThickness(1.f);
+    hitbox.setOutlineThickness(-1.f);
 }
 
 Koopa::Koopa(sf::Vector2f position, sf::Vector2f size, float x_min, float x_max) : Koopa() {

@@ -14,7 +14,7 @@ PowerUpObject::PowerUpObject(sf::Vector2f position, sf::Vector2f size, std::stri
 	hitbox.setPosition(sf::Vector2f(position.x, position.y));
 	hitbox.setFillColor(sf::Color::Transparent);
 	hitbox.setOutlineColor(sf::Color::Red);
-	hitbox.setOutlineThickness(1);
+	hitbox.setOutlineThickness(-1.f);
 }
 
 void PowerUpObject::initSpritesSheet() {

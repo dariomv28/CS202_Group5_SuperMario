@@ -1,8 +1,8 @@
 #include "Headers/MovementComponent.h"
 
 MovementComponent::MovementComponent() {
-    acceleration = 15.0f;
-    maxVelocity = 5.0f;
+    acceleration = 500.f;
+    maxVelocity = 1000.0f;
     isMoveLeft = false;
     isMoveRight = false;
     isJump = false;
@@ -14,8 +14,8 @@ MovementComponent::MovementComponent() {
 }
 
 MovementComponent::MovementComponent(int a, int maxV) {
-    acceleration = static_cast<float>(a);
-    maxVelocity = static_cast<float>(maxV);
+    acceleration = static_cast<float>(a * 100);
+    maxVelocity = static_cast<float>(maxV * 100);
     isMoveLeft = false;
     isMoveRight = false;
     isJump = false;
@@ -58,16 +58,23 @@ void MovementComponent::moveRight(const float& dt) {
         velocity.x = maxVelocity;
     }
 }
+void MovementComponent::setmoveLeft(bool moveLeft) {
+	isMoveLeft = moveLeft;
+}
 
+void MovementComponent::setmoveRight(bool moveRight) {
+	isMoveRight = moveRight;
+}
 void MovementComponent::jump(const float& dt, GameEventMediator* eventMediator) {
+    
     if (onGround && isJump) {
-        velocity.y = -9.6f;
+        velocity.y = -500.f;
         onGround = false;
         isJump = false;
         jumpsRemaining = MAX_JUMPS - 1; 
     }
     else if (!onGround && isJump && jumpsRemaining > 0) {
-        velocity.y = -9.6f;
+        velocity.y = -500.f;
         isJump = false;
         jumpsRemaining--;
     }

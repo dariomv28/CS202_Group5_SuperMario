@@ -35,6 +35,7 @@ public:
 	bool isJump() const;
 	void setJump(bool jump);
 
+
 	//Functions
 	void updateVelocity(const float& dt);
 	virtual void move(const float& dt);

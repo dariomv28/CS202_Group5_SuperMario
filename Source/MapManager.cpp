@@ -25,31 +25,31 @@ void MapManager::initStyle() {
 }
 
 void MapManager::update(PlayerManager* player, float dt) {
-	updateView(player);
+	updateView(player, dt);
   
 }
 
 
-void MapManager::updateView(PlayerManager* Player) {
+void MapManager::updateView(PlayerManager* Player, float dt) {
 	ConstantLeft = CurrentLeft + (SCREEN_WIDTH * 5.0) / 10.0;
 	ConstantRight = CurrentLeft + (SCREEN_WIDTH * 5.0) / 10.0;
 
 	//cerr << (map_sketch.getSize().x - 1) * CELL_SIZE * 4 << endl;
 
-	if (Player->getVelocity().x < 0 && Player->getPosition().x < ConstantLeft && CurrentLeft - abs(Player->getVelocity().x) >= 0) {
-		view_x -= abs(Player->getVelocity().x);
-		View.move(-abs(Player->getVelocity().x), 0);
-		CurrentLeft -= abs(Player->getVelocity().x);
-		CurrentRight -= abs(Player->getVelocity().x);
+	if (Player->getVelocity().x * dt < 0 && Player->getPosition().x < ConstantLeft && CurrentLeft - abs(Player->getVelocity().x * dt) >= 0) {
+		view_x -= abs(Player->getVelocity().x * dt);
+		View.move(-abs(Player->getVelocity().x * dt), 0);
+		CurrentLeft -= abs(Player->getVelocity().x * dt);
+		CurrentRight -= abs(Player->getVelocity().x * dt);
 
 	}
-	else if (Player->getVelocity().x > 0 && Player->getPosition().x > ConstantRight
-		&& CurrentRight + abs(Player->getVelocity().x) <= (map_sketch.getSize().x - 1) * 64) {
-		view_x += abs(Player->getVelocity().x);
-		View.move(abs(Player->getVelocity().x), 0);
+	else if (Player->getVelocity().x * dt > 0 && Player->getPosition().x > ConstantRight
+		&& CurrentRight + abs(Player->getVelocity().x * dt) <= (map_sketch.getSize().x - 1) * 64) {
+		view_x += abs(Player->getVelocity().x * dt);
+		View.move(abs(Player->getVelocity().x * dt), 0);
 
-		CurrentLeft += abs(Player->getVelocity().x);
-		CurrentRight += abs(Player->getVelocity().x);
+		CurrentLeft += abs(Player->getVelocity().x * dt);
+		CurrentRight += abs(Player->getVelocity().x * dt);
 	}
 
 
@@ -194,7 +194,7 @@ void MapManager::convert_sketch(const unsigned int i_current_level, vector<Enemy
 			{
 				if (sf::Color(255, 0, 0) == pixel)
 				{
-					i_mario->setPosition(CELL_SIZE * a, 250);
+					i_mario->setPosition(CELL_SIZE * a, 200);
 				}
 				else if (sf::Color(155, 0, 0) == pixel)
 				{
