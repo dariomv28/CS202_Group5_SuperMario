@@ -89,7 +89,7 @@ MainMenuState::~MainMenuState()
 	}
 }
 
-void MainMenuState::updateGUI(AudioSystem* audio)
+void MainMenuState::updateGUI()
 {
     for (auto& it : buttons)
     {
@@ -187,10 +187,10 @@ void MainMenuState::updateGUI(AudioSystem* audio)
     }
 }
 
-void MainMenuState::update(const float& dt, AudioSystem* audio)
+void MainMenuState::update(const float& dt)
 {
 	updateMousePosition();
-	updateGUI(audio);
+	updateGUI();
 }
 
 void MainMenuState::resetGUI()

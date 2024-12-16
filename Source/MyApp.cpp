@@ -56,7 +56,7 @@ void MyApp::initStates()
 }
 
 void MyApp::initAudioSystem() {
-	audio = new AudioSystem();
+	audio = AudioSystem::getInstance();
 }
 
 // Constructors & Destructors	

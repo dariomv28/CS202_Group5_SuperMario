@@ -14,7 +14,7 @@ LevelManager::LevelManager(PlayerManager* player, sf::RenderWindow* window) {
 	levelGUI = new LevelGUI();
 	eventMediator = new GameEventMediator();
 	physicsEngine = new PhysicsEngine();
-    audio = new AudioSystem();
+    audio = AudioSystem::getInstance();
     //movementComponent = new MovementComponent();
     //livingEntity = new LivingEntity();
 }

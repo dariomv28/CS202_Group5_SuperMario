@@ -1,7 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "GUI.h"
-
+#include "AudioSystem.h"
 
 class State;
 
@@ -11,19 +11,21 @@ public:
 	StateData() {
 		window = nullptr;
 		states = nullptr;
+		audio = AudioSystem::getInstance();
 	}
 
 	//Variables
 	sf::RenderWindow* window;
 	std::stack<State*>* states;
-	
+
+	AudioSystem* audio;
 };
 
 class State
 {
 protected:
 	StateData* stateData;
-	
+
 	sf::RenderWindow* window;
 	std::stack<State*>* states;
 	sf::Vector2i mousePosWindow;

@@ -4,6 +4,7 @@
 class AudioSystem
 {
 private:
+	static  AudioSystem* instance;
 	sf::Music music;
 	sf::Music level1Music;
 	sf::Music level2Music;
@@ -39,5 +40,14 @@ public:
 	void stopAllMusic();
 
 	void setEventMediator(GameEventMediator* eventMediator);
+
+
+	static AudioSystem* getInstance() {
+		if (instance == nullptr) {
+			instance = new AudioSystem();
+		}
+		return instance;
+	}
 };
+
 
