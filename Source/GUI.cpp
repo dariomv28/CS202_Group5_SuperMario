@@ -25,6 +25,7 @@ namespace GUI
 		);
 
 		this->buttonState = BTN_IDLE;
+		audio = AudioSystem::getInstance();
 	}
 
 	Button::~Button()
@@ -34,7 +35,7 @@ namespace GUI
 	const bool Button::isPressed() const
 	{
 		if (this->buttonState == BTN_ACTIVE) {
-			//eventMediator->playButtonSound();
+			audio->playbuttonSound();
 			return true;
 		}
 
@@ -58,9 +59,7 @@ namespace GUI
 		}
 	}
 
-	void Button::setEventMediator(GameEventMediator* eventMediator) {
-		this->eventMediator = eventMediator;
-	}
+
 
 	TextButton::TextButton(bool stickyAllowed, float x, float y, float width, float height,
 		sf::Font* font, std::string text, unsigned character_size,
