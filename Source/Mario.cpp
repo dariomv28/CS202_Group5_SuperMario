@@ -33,7 +33,7 @@ void Mario::init() {
         hitbox.setPosition(position);
         hitbox.setFillColor(sf::Color::Transparent);
         hitbox.setOutlineColor(sf::Color::Red);
-        hitbox.setOutlineThickness(1.f);
+        hitbox.setOutlineThickness(-1.f);
 
         currentAction = "IDLE-";
         animationComponent->setAnimation("IDLE", spritesSheet, 0.2f, is_big);
@@ -44,7 +44,7 @@ void Mario::init() {
         hitbox.setPosition(position);
         hitbox.setFillColor(sf::Color::Transparent);
         hitbox.setOutlineColor(sf::Color::Red);
-        hitbox.setOutlineThickness(1.f);
+        hitbox.setOutlineThickness(-1.f);
 
         currentAction = "isBig_IDLE-";
         animationComponent->setAnimation("isBig_IDLE", spritesSheet, 0.2f, is_big);
@@ -111,9 +111,12 @@ void Mario::initAnimations() {
 }
 
 void Mario::update(const float& dt) {
-	std::cout << this->position.x << " " << this->position.y << std::endl;
+	/*std::cout << this->position.x << " " << this->position.y << std::endl;
+    sf::FloatRect cur = (this->hitbox.getGlobalBounds());
+    std::cerr << cur.getPosition().x << " " << cur.getPosition().y << "\n";*/
     updateAnimation(dt);
     updateVelocity(dt);
+    //std::cerr << this->getPosition().x << " "<< this->getPosition().y << std::endl;
     eventMediator->applyExternalForce(this, dt);
     move(dt);
 }
@@ -131,15 +134,15 @@ void Mario::handleInput(const float& dt) {
     // Simultaneous movement and jump handling
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
         movementComponent->isMoveLeft = true;
-        entitySprite.setScale(-4.0f, 4.0f);
-        hitbox.setScale(-1.0f, 1.0f);
+        entitySprite.setScale(4.0f, 4.0f);
+        //hitbox.setScale(1.0f, 1.0f);
         isWalking = true;
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         movementComponent->isMoveRight = true;
         entitySprite.setScale(4.0f, 4.0f);
-        hitbox.setScale(1.0f, 1.0f);
+        //hitbox.setScale(1.0f, 1.0f);
         isWalking = true;
     }
 

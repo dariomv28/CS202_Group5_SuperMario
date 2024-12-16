@@ -86,7 +86,8 @@ enum Side {
 	Collide_Top,
 	Collide_Bottom,
 	Collide_Left,
-	Collide_Right
+	Collide_Right,
+	Collide_None
 };
 
 //We use this for brick particles.

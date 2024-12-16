@@ -27,6 +27,8 @@ protected:
     AudioSystem* audio;
     //MovementComponent* movementComponent;
     //LivingEntity* livingEntity;
+	bool firstUpdate;
+    //AudioSystem* audio;
 public:
     LevelManager(PlayerManager* player, sf::RenderWindow* window);
     virtual ~LevelManager();

@@ -47,7 +47,7 @@ public:
 	void initStyle();
 
     virtual void update(PlayerManager* player, float dt);
-	virtual void updateView(PlayerManager* Player);
+	virtual void updateView(PlayerManager* Player, float dt);
 
     // Setters and Getters
 	unsigned short get_map_sketch_height() const;
