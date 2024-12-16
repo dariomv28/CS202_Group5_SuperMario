@@ -59,7 +59,7 @@ void MenuLevelState::initButtons()
     );
 }
 
-void MenuLevelState::updateGUI()
+void MenuLevelState::updateGUI(AudioSystem* audio)
 {
     for (auto& it : buttons)
     {
@@ -118,21 +118,21 @@ void MenuLevelState::updateGUI()
             GameState* gameState = new GameState(this->stateData);
             gameState->loadLevel(player, 1, 1);
             this->states->push(gameState);
-            
+            audio->playLevel1Music();
         }
         else if (currentButtonIndex == BTN_LEVEL2)
         {
             GameState* gameState = new GameState(this->stateData);
             gameState->loadLevel(player, 1, 2);
             this->states->push(gameState);
-           
+            audio->playLevel2Music();
         }
         else if (currentButtonIndex == BTN_LEVEL3)
         {
             GameState* gameState = new GameState(this->stateData);
             gameState->loadLevel(player, 1, 3);
             this->states->push(gameState);
-            
+            audio->playLevel3Music();
         }
         else if (currentButtonIndex == BTN_BACK)
         {
@@ -172,8 +172,8 @@ void MenuLevelState::updateGUI()
     }
 }
 
-void MenuLevelState::update(const float& dt)
+void MenuLevelState::update(const float& dt, AudioSystem* audio)
 {
     updateMousePosition();
-    updateGUI();
+    updateGUI(audio);
 }

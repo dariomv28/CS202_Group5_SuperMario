@@ -13,6 +13,6 @@ public:
     MenuLevelState(StateData* stateData);
     virtual ~MenuLevelState();
 
-    void updateGUI() override;
-    void update(const float& dt) override;
+    void updateGUI(AudioSystem* audio) override;
+    void update(const float& dt, AudioSystem* audio) override;
 };

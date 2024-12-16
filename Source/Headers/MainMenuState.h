@@ -29,8 +29,8 @@ public:
 	MainMenuState(StateData* stateData);
 	virtual ~MainMenuState();
 
-	virtual void updateGUI();
-	virtual void update(const float& dt);
+	virtual void updateGUI(AudioSystem* audio);
+	virtual void update(const float& dt, AudioSystem* audio);
 
 	void resetGUI();
 
