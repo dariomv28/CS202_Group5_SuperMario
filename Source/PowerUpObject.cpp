@@ -24,8 +24,10 @@ void PowerUpObject::initSpritesSheet() {
 	spritesSheet["coin_3"] = sf::IntRect(92, 38, 10, 14);
 	
 	//Mushrooms
-	spritesSheet["mushroom_1"] = sf::IntRect(2, 70, 16, 16);
+	spritesSheet["mushroom_1"] = sf::IntRect(2, 2, 16, 16);
 	spritesSheet["mushroom_2"] = sf::IntRect(19, 2, 16, 16);
+	spritesSheet["mushroom_3"] = sf::IntRect(35, 2, 16, 16);
+	spritesSheet["mushroom_4"] = sf::IntRect(53, 2, 16, 16);
 
 	//Bullet
 	spritesSheet["bullet_1"] = sf::IntRect(2, 70, 8, 8);

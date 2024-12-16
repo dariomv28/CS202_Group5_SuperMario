@@ -1,9 +1,8 @@
-#include "Headers/LV1.h"
-
+#include "Headers/W1_LV1.h"
 #include <iostream>
 
 
-LV1::LV1(PlayerManager* player, sf::RenderWindow *window):
+W1_LV1::W1_LV1(PlayerManager* player, sf::RenderWindow *window):
 	LevelManager(player, window)
 {
 	// Convert the sketch of World1 to the game
@@ -17,6 +16,6 @@ LV1::LV1(PlayerManager* player, sf::RenderWindow *window):
     initGameEventMediator();
 }
 
-LV1::~LV1() {
+W1_LV1::~W1_LV1() {
   
 }
