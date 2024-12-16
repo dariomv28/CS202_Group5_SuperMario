@@ -6,7 +6,6 @@ State::State(StateData* stateData)
 	this->states = stateData->states;
 	this->window = stateData->window;
 	this->quit = false;
-	this->audioSystem = stateData->audioSystem;
 }
 
 State::~State()

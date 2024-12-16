@@ -79,6 +79,7 @@ MainMenuState::MainMenuState(StateData* stateData)
 	this->initBackground();
 	this->initFonts();
 	this->initButtons();
+    this->stateData->audioSystem = new AudioSystem();
     this->stateData->audioSystem->playMusic();
 }
 

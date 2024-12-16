@@ -118,18 +118,21 @@ void MenuLevelState::updateGUI()
             GameState* gameState = new GameState(this->stateData);
             gameState->loadLevel(player, 1, 1);
             this->states->push(gameState);
+            this->stateData->audioSystem->playLevel1Music();
         }
         else if (currentButtonIndex == BTN_LEVEL2)
         {
             GameState* gameState = new GameState(this->stateData);
             gameState->loadLevel(player, 1, 2);
             this->states->push(gameState);
+            this->stateData->audioSystem->playLevel2Music();
         }
         else if (currentButtonIndex == BTN_LEVEL3)
         {
             GameState* gameState = new GameState(this->stateData);
             gameState->loadLevel(player, 1, 3);
             this->states->push(gameState);
+            this->stateData->audioSystem->playLevel3Music();
         }
         else if (currentButtonIndex == BTN_BACK)
         {
