@@ -137,7 +137,7 @@ void PhysicsEngine::resolveCollisionPlayerBlock(PlayerManager* entity, std::vect
 
 		//Resolve the right side
 
-		if (entity->isMoveRight() && checkCollideRight(entity, obj)) {
+		if (checkCollideRight(entity, obj)) {
 			fixPosition(entity, obj, Collide_Right);
 			// std::cout << "Mario Collide Right\n";
 			obj->reactToCollison(Collide_Left);
@@ -145,7 +145,7 @@ void PhysicsEngine::resolveCollisionPlayerBlock(PlayerManager* entity, std::vect
 		}
 
 		//Resolve the left side
-		if (entity->isMoveLeft() && checkCollideLeft(entity, obj)) {
+		if (checkCollideLeft(entity, obj)) {
 			fixPosition(entity, obj, Collide_Left);
 			// std::cout << "Mario Collide Left\n";
 
@@ -212,7 +212,7 @@ void PhysicsEngine::resolveCollisionEnemyBlock(std::vector<Enemy*>& enemies, std
 	for (auto &enemy : enemies) {
 		for (auto &block : blocks) {
 			//Resolve the right side
-			if (enemy->isMoveRight() && checkCollideRight(enemy, block)) {
+			if (checkCollideRight(enemy, block)) {
 				fixPosition(enemy, block, Collide_Right);
 				//enemy->reactToBlockCollison(Collide_Right);
 				enemy->setMoveRight(false);
@@ -226,7 +226,7 @@ void PhysicsEngine::resolveCollisionEnemyBlock(std::vector<Enemy*>& enemies, std
 			}
 
 			//Resolve the left side
-			if (enemy->isMoveLeft() && checkCollideLeft(enemy, block)) {
+			if (checkCollideLeft(enemy, block)) {
 				fixPosition(enemy, block, Collide_Left);
 				//enemy->reactToBlockCollison(Collide_Left);
 				enemy->setMoveLeft(false);

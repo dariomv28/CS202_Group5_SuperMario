@@ -133,6 +133,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Bullet.cpp" />
+    <ClCompile Include="Source\FireBuff.cpp" />
+    <ClCompile Include="Source\PlayerBuff.cpp" />
     <ClCompile Include="Source\Cannon.cpp" />
     <ClCompile Include="Source\Lava.cpp" />
     <ClCompile Include="Source\AudioSystem.cpp" />
@@ -175,6 +178,9 @@
     <ClCompile Include="Source\Trampoline.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Headers\Bullet.h" />
+    <ClInclude Include="Source\Headers\FireBuff.h" />
+    <ClInclude Include="Source\Headers\PlayerBuff.h" />
     <ClInclude Include="Source\Headers\Cannon.h" />
     <ClInclude Include="Source\Headers\Lava.h" />
     <ClInclude Include="Source\Headers\AudioSystem.h" />
