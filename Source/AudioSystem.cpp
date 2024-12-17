@@ -1,5 +1,6 @@
 #include "Headers/AudioSystem.h"
 
+AudioSystem* AudioSystem::instance = nullptr;
 
 AudioSystem::AudioSystem() {
 	if (!music.openFromFile("Source/Resources/audio/BackGround Music.mp3")) {
@@ -23,13 +24,21 @@ AudioSystem::AudioSystem() {
 	if (!level2Music.openFromFile("Source/Resources/audio/Level 2.mp3")) {
 		throw("ERROR::AUDIOSYSTEM::CANNOT_LOAD_LEVEL_2_MUSIC");
 	}
-	//if (!level3Music.openFromFile("Source/Resources/audio/Level 3.mp3")) {
-		//throw("ERROR::AUDIOSYSTEM::CANNOT_LOAD_LEVEL_3_MUSIC");
-	//}
+	if (!level3Music.openFromFile("Source/Resources/audio/Level 3.mp3")) {
+		throw("ERROR::AUDIOSYSTEM::CANNOT_LOAD_LEVEL_3_MUSIC");
+	}
+	music.setVolume(10.0f);
+	level1Music.setVolume(10.0f);
+	level2Music.setVolume(10.0f);
+	level3Music.setVolume(10.0f);
 	jumpSound.setBuffer(jumpSoundBuffer);
+	jumpSound.setVolume(200.0f);
 	buttonSound.setBuffer(buttonSoundBuffer);
+	buttonSound.setVolume(200.0f);
 	coinSound.setBuffer(coinSoundBuffer);
+	coinSound.setVolume(200.0f);
 	brickSound.setBuffer(brickSoundBuffer);
+	brickSound.setVolume(200.0f);
 }
 
 void AudioSystem::playMusic() {

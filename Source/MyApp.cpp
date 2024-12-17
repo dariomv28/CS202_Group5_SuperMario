@@ -55,9 +55,9 @@ void MyApp::initStates()
 	this->states.push(new MainMenuState(&this->stateData));
 }
 
-//void MyApp::initAudioSystem() {
-//	audio = new AudioSystem();
-//}
+void MyApp::initAudioSystem() {
+	audio = AudioSystem::getInstance();
+}
 
 // Constructors & Destructors	
 
@@ -67,7 +67,7 @@ MyApp::MyApp()
 	this->initWindow();
 	this->initStateData();
 	this->initStates();
-	//this->initAudioSystem();
+	this->initAudioSystem();
 }
 
 MyApp::~MyApp()
@@ -140,7 +140,7 @@ void MyApp::render()
 
 void MyApp::run()
 {
-	//audio->playMusic();
+	audio->playMusic();
 	while (this->window->isOpen())
 	{
 		this->updateDT();

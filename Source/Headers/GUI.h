@@ -1,6 +1,6 @@
 #pragma once
 #include "stdafx.h"
-#include "GameEventMediator.h"
+#include "AudioSystem.h"
 namespace GUI
 {
 	enum button_states { BTN_IDLE = 0, BTN_HOVER, BTN_ACTIVE };
@@ -22,7 +22,8 @@ namespace GUI
 
 		bool stickyAllowed;
 		bool unpressed;
-		GameEventMediator* eventMediator;
+		AudioSystem* audio;
+
 	public:
 		Button(bool stickyAllowed, float x, float y, float width, float height,
 			sf::Font* font, std::string text, unsigned charSize,
@@ -40,7 +41,6 @@ namespace GUI
 		virtual void update(const sf::Vector2i mousePos) = 0;
 
 		void highlight(bool isHighlighted);
-		void setEventMediator(GameEventMediator* eventMediator);
 		
 	};
 
