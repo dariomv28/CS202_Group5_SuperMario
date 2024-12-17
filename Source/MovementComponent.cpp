@@ -14,8 +14,8 @@ MovementComponent::MovementComponent() {
 }
 
 MovementComponent::MovementComponent(float a, float maxV) {
-    acceleration = static_cast<float>(a);
-    maxVelocity = static_cast<float>(maxV);
+    acceleration = static_cast<float>(a * 100);
+    maxVelocity = static_cast<float>(maxV * 100);
     isMoveLeft = false;
     isMoveRight = false;
     isJump = false;
