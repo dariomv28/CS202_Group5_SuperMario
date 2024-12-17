@@ -17,18 +17,37 @@ void GameState::loadLevel(PlayerManager* player, int worldID, int level) {
     if (levelManager) {
         delete levelManager;
     }
-
-    switch (level) {
-        case 1:
-		    levelManager = new W1_LV1(player, window);
-		    break;
-        case 2:
-            levelManager = new W2_LV1(player, window);
-			break;
-        case 3:
-            levelManager = new W3_LV1(player, window);
-			break;
+    std::string worldLevel = "W" + std::to_string(worldID) + "_LV" + std::to_string(level);
+    if (worldLevel == "W1_LV1") {
+		levelManager = new W1_LV1(player, window);
     }
+    else if (worldLevel == "W1_LV2") {
+    //    levelManager = new W1_LV2(player, window);
+    } 	
+    else if (worldLevel == "W1_LV3") {
+	//	levelManager = new W1_LV3(player, window);
+	}
+    else if (worldLevel == "W2_LV1") {
+		levelManager = new W2_LV1(player, window);
+    }
+    else if (worldLevel == "W2_LV2") {
+        //	levelManager = new W2_LV2(player, window);
+    }
+	else if (worldLevel == "W2_LV3") {
+        //	levelManager = new W2_LV3(player, window);
+    }
+    else if (worldLevel == "W3_LV1") {
+		levelManager = new W3_LV1(player, window);
+	}
+    else if (worldLevel == "W3_LV2") {
+		//	levelManager = new W3_LV2(player, window);
+	}
+	else if (worldLevel == "W3_LV3") {
+		//	levelManager = new W3_LV3(player, window);
+	}
+	else {
+		cerr << "Invalid level" << endl;
+	}
  
 }
 
