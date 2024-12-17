@@ -155,6 +155,30 @@ void MapManager::convert_sketch(const unsigned int i_current_level, vector<Enemy
 				else if (pixel == sf::Color(89, 89, 89))
 					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE),
 						"gray_block2"));
+				else if (pixel == sf::Color(180, 180, 180))
+					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE),
+						styles[i_current_level] + "_ground_single"));
+				else if (pixel == sf::Color(255, 150, 150))
+					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE),
+						styles[i_current_level] + "_underground_single"));
+				else if (pixel == sf::Color(74, 134, 232))
+					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), 
+						styles[i_current_level] + "_leafground_left"));
+				else if (pixel == sf::Color(0, 255, 255))
+					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), 
+						styles[i_current_level] + "_leafground_mid"));
+				else if (pixel == sf::Color(0, 0, 255))
+					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), 
+						styles[i_current_level] + "_leafground_right"));
+				else if (pixel == sf::Color(201, 218, 248))
+					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), 
+						"leafunderground_left"));
+				else if (pixel == sf::Color(208, 224, 227))
+					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), 
+						"leafunderground_mid"));
+				else if (pixel == sf::Color(207, 226, 243))
+					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), 
+						"leafunderground_right"));
 				//Special blocks
 				else if (pixel == sf::Color(193, 113, 52))
 					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), styles[i_current_level] + "_wall"));

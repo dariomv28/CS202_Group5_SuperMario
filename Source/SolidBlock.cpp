@@ -24,12 +24,16 @@ SolidBlock::~SolidBlock() {
 }
 
 void SolidBlock::initSpritesSheet() {
+	//Ground
 	spritesSheet["basic_ground_left"] = sf::IntRect(1, 1, 16, 16);
 	spritesSheet["basic_ground_mid"] = sf::IntRect(18, 1, 16, 16);
 	spritesSheet["basic_ground_right"] = sf::IntRect(35, 1, 16, 16);
 	spritesSheet["basic_underground_left"] = sf::IntRect(1, 18, 16, 16);
 	spritesSheet["basic_underground_mid"] = sf::IntRect(18, 18, 16, 16);
 	spritesSheet["basic_underground_right"] = sf::IntRect(35, 18, 16, 16);
+	spritesSheet["basic_ground_single"] = sf::IntRect(52, 1, 16, 16);
+	spritesSheet["basic_underground_single"] = sf::IntRect(52, 18, 16, 16);
+
 
 	spritesSheet["snow_ground_left"] = sf::IntRect(137, 1, 16, 16);
 	spritesSheet["snow_ground_mid"] = sf::IntRect(154, 1, 16, 16);
@@ -37,6 +41,21 @@ void SolidBlock::initSpritesSheet() {
 	spritesSheet["snow_underground_left"] = sf::IntRect(137, 18, 16, 16);
 	spritesSheet["snow_underground_mid"] = sf::IntRect(154, 18, 16, 16);
 	spritesSheet["snow_underground_right"] = sf::IntRect(171, 18, 16, 16);
+	spritesSheet["snow_ground_single"] = sf::IntRect(188, 1, 16, 16);
+	spritesSheet["snow_underground_single"] = sf::IntRect(188, 18, 16, 16);
+
+	spritesSheet["basic_leafground_left"] = sf::IntRect(103, 120, 16, 16);
+	spritesSheet["basic_leafground_mid"] = sf::IntRect(120, 120, 16, 16);
+	spritesSheet["basic_leafground_right"] = sf::IntRect(137, 120, 16, 16);
+
+	spritesSheet["snow_leafground_left"] = sf::IntRect(103, 137, 16, 16);
+	spritesSheet["snow_leafground_mid"] = sf::IntRect(120, 137, 16, 16);
+	spritesSheet["snow_leafground_right"] = sf::IntRect(137, 137, 16, 16);
+	
+	spritesSheet["leafunderground_left"] = sf::IntRect(103, 154, 16, 16);
+	spritesSheet["leafunderground_mid"] = sf::IntRect(120, 154, 16, 16);
+	spritesSheet["leafunderground_right"] = sf::IntRect(137, 154, 16, 16);
+
 
 	spritesSheet["gray_ground_left"] = sf::IntRect(290, 18, 16, 16);
 	spritesSheet["gray_ground_mid"] = sf::IntRect(307, 18, 16, 16);
