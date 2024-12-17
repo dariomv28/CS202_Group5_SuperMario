@@ -9,7 +9,7 @@ class MyApp
 private:
 	sf::RenderWindow* window;
 	sf::Event sfEvent;
-	//AudioSystem* audio;
+	AudioSystem* audio;  // For playing menu music and level music
 	sf::Clock dtClock;
 	float dt; 
 
@@ -20,7 +20,7 @@ private:
 	void initWindow();
 	void initStateData();
 	void initStates();
-	//void initAudioSystem();
+	void initAudioSystem();
 
 public:
 	//Constructors & Destructors

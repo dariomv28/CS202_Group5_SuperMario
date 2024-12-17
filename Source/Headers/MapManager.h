@@ -1,6 +1,4 @@
-#pragma
-#ifndef MAPMANAGER_H
-#define MAPMANAGER_H
+#pragma once 
 
 #include "stdafx.h"
 #include "Enemy.h"
@@ -63,4 +61,4 @@ public:
 };
 
 
-#endif 
+
