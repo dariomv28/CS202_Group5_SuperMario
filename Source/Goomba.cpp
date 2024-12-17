@@ -2,7 +2,7 @@
 #include "Headers/GameEventMediator.h"
 
 Goomba::Goomba() : Enemy() {
-	walkSpeed = 20.0f;
+	walkSpeed = 1000.0f;
 
 	isAlive = true;
 	setHealth(1);
@@ -20,7 +20,7 @@ Goomba::Goomba() : Enemy() {
 	this->animationComponent = new AnimationComponent(this->entitySprite);
 	initAnimations();
 
-	movementComponent = new MovementComponent(walkSpeed, 3.0f);
+	movementComponent = new MovementComponent(walkSpeed, walkSpeed);
 
 	hitbox.setSize(sf::Vector2f(64.f, 64.f));
 	hitbox.setPosition(position);
@@ -48,7 +48,7 @@ void Goomba::initAnimations() {
 void Goomba::move(const float& dt) 
 {
 	
-	this->position += this->movementComponent->velocity;
+	this->position += this->movementComponent->velocity * dt;
 
 	if (this->position.x <= x_min) {
 		this->position.x = std::max<float>(this->position.x, x_min);
@@ -108,7 +108,7 @@ void Goomba::reactToPlayerCollision(int collidedSide) {
 		eventMediator->increaseScore(300);
 		this->hitbox.setSize(sf::Vector2f(64.f, 32.f));
 
-		this->position.y += 32.0f; // Move down by the amount the height was reduced
+		this->position.y += 32; // Move down by the amount the height was reduced
 		this->entitySprite.setPosition(this->position);
 		this->hitbox.setPosition(this->position);
 	}
@@ -121,8 +121,8 @@ void Goomba::reactToPlayerCollision(int collidedSide) {
 
 void Goomba::setScaleSprite(std::string name) {
 	if (name == "LEFT") {
-		entitySprite.setScale(-4.0f, 4.0f);
-		hitbox.setScale(-1.0f, 1.0f);
+		entitySprite.setScale(4.0f, 4.0f);
+		hitbox.setScale(1.0f, 1.0f);
 	}
 	else if (name == "RIGHT") {
 		entitySprite.setScale(4.0f, 4.0f);
