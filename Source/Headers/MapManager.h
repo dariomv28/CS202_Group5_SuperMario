@@ -23,6 +23,7 @@ class MapManager {
 protected:
 	unordered_map<string, string> styles;
 	unordered_map<string, string> pipe_styles;
+	unordered_map<string, string> background_styles;
 
 	sf::Image map_sketch;
 	sf::Texture backgroundTexture;
