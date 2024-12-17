@@ -104,17 +104,24 @@ void MenuWorldState::updateGUI()
 	if (buttons[BTN_WORLD1]->isPressed())
 	{
 		states->push(new MenuLevelState(stateData, 1));
+		this->stateData->audio->playLevel1Music();
+
 	}
 	else if (buttons[BTN_WORLD2]->isPressed())
 	{
 		states->push(new MenuLevelState(stateData, 2));
+		this->stateData->audio->playLevel2Music();
+
 	}
 	else if (buttons[BTN_WORLD3]->isPressed())
 	{
 		states->push(new MenuLevelState(stateData, 3));
+		this->stateData->audio->playLevel3Music();
+
 	}
 	else if (buttons[BTN_BACKTOMAIN]->isPressed())
 	{
+		this->stateData->audio->playMusic();
 		endState();
 	}
 }

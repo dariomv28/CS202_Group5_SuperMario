@@ -42,6 +42,9 @@ AudioSystem::AudioSystem() {
 }
 
 void AudioSystem::playMusic() {
+	if (currentBackgroundMusic == "MainMenu")
+		return;
+	currentBackgroundMusic = "MainMenu";
 	stopAllMusic();
 	music.setLoop(true);
 	music.play();
@@ -52,6 +55,9 @@ void AudioSystem::stopMusic() {
 }
 
 void AudioSystem::playLevel1Music() {
+	if (currentBackgroundMusic == "World1")
+		return;
+	currentBackgroundMusic = "World1";
 	stopAllMusic();
 	level1Music.setLoop(true);
 	level1Music.play();
@@ -62,6 +68,9 @@ void AudioSystem::stopLevel1Music() {
 }
 
 void AudioSystem::playLevel2Music() {
+	if (currentBackgroundMusic == "World2")
+		return;
+	currentBackgroundMusic = "World2";
 	stopAllMusic();
 	level2Music.setLoop(true);
 	level2Music.play();
@@ -72,6 +81,9 @@ void AudioSystem::stopLevel2Music() {
 }
 
 void AudioSystem::playLevel3Music() {
+	if (currentBackgroundMusic == "World3")
+		return;
+	currentBackgroundMusic = "World3";
 	stopAllMusic();
 	level3Music.setLoop(true);
 	level3Music.play();

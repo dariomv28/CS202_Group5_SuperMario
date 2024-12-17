@@ -163,23 +163,20 @@ void MenuLevelState::updateGUI()
     if (buttons[BTN_LEVEL1]->isPressed())
     {
         GameState* gameState = new GameState(this->stateData);
-        gameState->loadLevel(player, 1, 1);
+        gameState->loadLevel(player, world, 1);
         this->states->push(gameState);
-        this->stateData->audio->playLevel1Music();
     }
     else if (buttons[BTN_LEVEL2]->isPressed())
     {
         GameState* gameState = new GameState(this->stateData);
-        gameState->loadLevel(player, 1, 2);
+        gameState->loadLevel(player, world, 2);
         this->states->push(gameState);
-        this->stateData->audio->playLevel2Music();
     }
     else if (buttons[BTN_LEVEL3]->isPressed())
     {
         GameState* gameState = new GameState(this->stateData);
-        gameState->loadLevel(player, 1, 3);
+        gameState->loadLevel(player, world, 3);
         this->states->push(gameState);
-        this->stateData->audio->playLevel3Music();
     }
     else if (buttons[BTN_BACK]->isPressed())
     {
