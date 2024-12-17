@@ -22,7 +22,7 @@ public:
 
 	sf::Vector2f velocity;
 	MovementComponent();
-	MovementComponent(int a, int maxV);
+	MovementComponent(float a, float maxV);
 	~MovementComponent();
 
 	void moveLeft(const float& dt);
