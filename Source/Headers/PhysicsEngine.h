@@ -21,14 +21,11 @@ public:
 	void setEventMediator(GameEventMediator* mediator);
 
 	//Colissions checking
-	bool checkCollision(GameObject* obj1, GameObject* obj2);
-	bool checkCollideDown(GameObject* obj1, GameObject* obj2);
-	bool checkCollideUp(GameObject* obj1, GameObject* obj2);
-	bool checkCollideLeft(GameObject* obj1, GameObject* obj2);
-	bool checkCollideRight(GameObject* obj1, GameObject* obj2);
+	Side CollisionType(GameObject* obj1, GameObject* obj2);
 
 	//Physics functions
-	void fixPosition(LivingEntity* entity, GameObject* obj, int collidedSide);
+	//void fixPosition(LivingEntity* entity, std::vector<Block*> Collided_Blocks[]);
+	void fixPosition(LivingEntity* entity, GameObject* obj, Side collidedSide);
 	void resolveCollisionPlayerBlock(PlayerManager* entity, std::vector<Block*>& blocks, const float& dt);
 	void resolveCollisionPlayerEnemy(PlayerManager* entity, std::vector<Enemy*>& enemies, const float& dt);
 	void resolveCollisionEnemyBlock(std::vector<Enemy*>& enemies, std::vector<Block*>& blocks, const float& dt);

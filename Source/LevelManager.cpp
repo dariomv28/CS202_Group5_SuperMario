@@ -8,6 +8,7 @@ LevelManager::LevelManager(PlayerManager* player, sf::RenderWindow* window) {
     if (player == nullptr) {
         std::cout << "BUGGED PLAYER\n";
     }
+	firstUpdate = true;
     mapManager = new MapManager(window);
    
 	levelGUI = new LevelGUI();
@@ -42,12 +43,18 @@ void LevelManager::initGameEventMediator() {
 
 
 void LevelManager::update(const float& dt) {
+	float cur_dt = dt;
+    if (firstUpdate)
+    {
+        cur_dt = 0;
+		firstUpdate = false;
+    }
 	if (mapManager) {
-		mapManager->update(player,dt);
+		mapManager->update(player, cur_dt);
 	}
 
-    eventMediator->updateInput(dt);
-    eventMediator->updateEvents(dt);
+    eventMediator->updateInput(cur_dt);
+    eventMediator->updateEvents(cur_dt);
     eventMediator->updateLevelGUI(window->getView());
 
 

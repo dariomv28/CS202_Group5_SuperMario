@@ -1,6 +1,6 @@
-#include "Headers/LV2.h"
+#include "Headers/W2_LV1.h"
 
-LV2::LV2(PlayerManager* player, sf::RenderWindow* window) :
+W2_LV1::W2_LV1(PlayerManager* player, sf::RenderWindow* window) :
 	LevelManager(player, window)
 {
 	mapManager->convert_sketch(2, Enemies, Blocks, PowerUps, player);
@@ -8,7 +8,7 @@ LV2::LV2(PlayerManager* player, sf::RenderWindow* window) :
 }
 
 
-LV2::~LV2() {
+W2_LV1::~W2_LV1() {
 
 }
 
