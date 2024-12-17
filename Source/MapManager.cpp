@@ -15,13 +15,29 @@ MapManager::~MapManager() {
 
 void MapManager::initStyle() {
 	//General styles
-	styles[1] = "basic";
-	styles[2] = "snow";
-	styles[3] = "gray";
+	styles["W1_LV1"] = "basic";
+	styles["W1_LV2"] = "basic";
+	styles["W1_LV3"] = "basic";
+	
+	styles["W2_LV1"] = "snow";
+	styles["W2_LV2"] = "snow";
+	styles["W2_LV3"] = "snow";
+
+	styles["W3_LV1"] = "gray";
+	styles["W3_LV2"] = "gray";
+	styles["W3_LV3"] = "gray";
 	// /Pipe styles
-	pipe_styles[1] = "basic";
-	pipe_styles[2] = "basic";
-	pipe_styles[3] = "gray";
+	pipe_styles["W1_LV1"] = "basic";
+	pipe_styles["W1_LV2"] = "basic";
+	pipe_styles["W1_LV3"] = "basic";
+
+	pipe_styles["W2_LV1"] = "basic";
+	pipe_styles["W2_LV2"] = "basic";
+	pipe_styles["W2_LV3"] = "basic";
+
+	pipe_styles["W3_LV1"] = "gray";
+	pipe_styles["W3_LV2"] = "gray";
+	pipe_styles["W3_LV3"] = "gray";
 }
 
 void MapManager::update(PlayerManager* player, float dt) {
@@ -84,16 +100,16 @@ void MapManager::draw_map(sf::RenderTarget* target)
 //	map.resize(i_new_size);
 //}
 
-void MapManager::get_map_sketch(const unsigned int i_current_level)
+void MapManager::get_map_sketch(const unsigned int world, const unsigned int level)
 {
-	map_sketch.loadFromFile("Source/Resources/texture/LevelSketch" + std::to_string(i_current_level) + ".png");
+	map_sketch.loadFromFile("Source/Resources/texture/LevelSketch_W" + std::to_string(world) + "_LV" + std::to_string(level) + ".png");
 	return;
 }
 
-void MapManager::update_background(const unsigned int i_current_level)
+void MapManager::update_background(const unsigned int world, const unsigned int level)
 {
-	std::string current_level = std::to_string(i_current_level);
-	backgroundTexture.loadFromFile("Source/Resources/texture/" + styles[i_current_level] + "_background.png");
+	std::string worldlevel = "W" + std::to_string(world) + "_LV" + std::to_string(level);
+	backgroundTexture.loadFromFile("Source/Resources/texture/" + styles[worldlevel] + "_background.png");
 	backgroundSprite.setTexture(backgroundTexture);
 	backgroundSprite.setScale(float((get_map_sketch_width() * 64 * 1.0) / backgroundSprite.getTexture()->getSize().x * 1.0), (get_map_sketch_height() * 64 / 3.f) / backgroundSprite.getTexture()->getSize().y);
 	backgroundSprite.setPosition(0, 0);
@@ -109,12 +125,13 @@ sf::Color MapManager::get_map_sketch_pixel(const unsigned short i_x, const unsig
 
 
 
-void MapManager::convert_sketch(const unsigned int i_current_level, vector<Enemy*>& i_enemies, 
+void MapManager::convert_sketch(const unsigned int world, const unsigned int level, vector<Enemy*>& i_enemies, 
 	vector<Block*> &Blocks, vector<PowerUpObject*>& PowerUp , PlayerManager* i_mario)
 {
-	get_map_sketch(i_current_level);
-	update_background(i_current_level);
+	get_map_sketch(world, level);
+	update_background(world, level);
 
+	string worldlevel = "W" + std::to_string(world) + "_LV" + std::to_string(level);
 	int map_width = get_map_sketch_width();
 	int map_height = floor(get_map_sketch_height() / 3.f);
 
@@ -133,35 +150,59 @@ void MapManager::convert_sketch(const unsigned int i_current_level, vector<Enemy
 				//Ground
 				if (pixel == sf::Color(255, 200, 200))
 					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE),
-						styles[i_current_level] + "_underground_mid"));
+						styles[worldlevel] + "_underground_mid"));
 				else if (pixel == sf::Color(220, 220, 220))
 					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE),
-						styles[i_current_level] + "_ground_mid"));
+						styles[worldlevel] + "_ground_mid"));
 				else if (pixel == sf::Color(240, 240, 240))
 					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE),
-						styles[i_current_level] + "_ground_left"));
+						styles[worldlevel] + "_ground_left"));
 				else if (pixel == sf::Color(255, 225, 225))
 					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE),
-						styles[i_current_level] + "_underground_left"));
+						styles[worldlevel] + "_underground_left"));
 				else if (pixel == sf::Color(200, 200, 200))
 					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE),
-						styles[i_current_level] + "_ground_right"));
+						styles[worldlevel] + "_ground_right"));
 				else if (pixel == sf::Color(255, 175, 175))
 					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE),
-						styles[i_current_level] + "_underground_right"));
+						styles[worldlevel] + "_underground_right"));
 				else if (pixel == sf::Color(117, 117, 117))
 					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE),
 						"gray_block1"));
 				else if (pixel == sf::Color(89, 89, 89))
 					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE),
 						"gray_block2"));
+				else if (pixel == sf::Color(180, 180, 180))
+					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE),
+						styles[worldlevel] + "_ground_single"));
+				else if (pixel == sf::Color(255, 150, 150))
+					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE),
+						styles[worldlevel] + "_underground_single"));
+				else if (pixel == sf::Color(74, 134, 232))
+					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), 
+						styles[worldlevel] + "_leafground_left"));
+				else if (pixel == sf::Color(0, 255, 255))
+					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), 
+						styles[worldlevel] + "_leafground_mid"));
+				else if (pixel == sf::Color(0, 0, 255))
+					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), 
+						styles[worldlevel] + "_leafground_right"));
+				else if (pixel == sf::Color(201, 218, 248))
+					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), 
+						"leafunderground_left"));
+				else if (pixel == sf::Color(208, 224, 227))
+					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), 
+						"leafunderground_mid"));
+				else if (pixel == sf::Color(207, 226, 243))
+					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), 
+						"leafunderground_right"));
 				//Special blocks
 				else if (pixel == sf::Color(193, 113, 52))
-					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), styles[i_current_level] + "_wall"));
+					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), styles[worldlevel] + "_wall"));
 				else if (pixel == sf::Color(146, 73, 0))
-					Blocks.push_back(new Brick(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), styles[i_current_level] + "_brick", false));
+					Blocks.push_back(new Brick(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), styles[worldlevel] + "_brick", false));
 				else if (pixel == sf::Color(81, 34, 19))
-					Blocks.push_back(new Brick(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), styles[i_current_level] + "_brick", true));
+					Blocks.push_back(new Brick(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), styles[worldlevel] + "_brick", true));
 				else if (pixel == sf::Color(255, 146, 85))
 					Blocks.push_back(new CoinBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "coin_block"));
 				else if (pixel == sf::Color(246, 109, 109))
@@ -172,7 +213,7 @@ void MapManager::convert_sketch(const unsigned int i_current_level, vector<Enemy
 					Blocks.push_back(new MushroomBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "mushroom_block", 3));
 				else if (pixel.r == 0 && pixel.b == 0 && pixel.g >= 250)
 					Blocks.push_back(new Pipe(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE * 2, CELL_SIZE * (255 - pixel.g)),
-						pipe_styles[i_current_level] + "_pipe", 255 - pixel.g));
+						pipe_styles[worldlevel] + "_pipe", 255 - pixel.g));
 				else if (pixel == sf::Color(255, 77, 0))
 					PowerUp.push_back(new Lava(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "lava"));
 				else if (pixel == sf::Color(175, 55, 0))

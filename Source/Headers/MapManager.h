@@ -1,6 +1,4 @@
-#pragma
-#ifndef MAPMANAGER_H
-#define MAPMANAGER_H
+#pragma once 
 
 #include "stdafx.h"
 #include "Enemy.h"
@@ -23,8 +21,8 @@ using namespace std;
 
 class MapManager {
 protected:
-	unordered_map<int, string> styles;
-	unordered_map<int, string> pipe_styles;
+	unordered_map<string, string> styles;
+	unordered_map<string, string> pipe_styles;
 
 	sf::Image map_sketch;
 	sf::Texture backgroundTexture;
@@ -54,13 +52,13 @@ public:
 	unsigned short get_map_sketch_width() const;
 
 	void draw_map(sf::RenderTarget* target);
-	void get_map_sketch(const unsigned int i_current_level);
-	void update_background(const unsigned int i_current_level);
-	void convert_sketch(const unsigned int i_current_level, vector<Enemy*>& i_enemies, 
+	void get_map_sketch(const unsigned int world, const unsigned int level);
+	void update_background(const unsigned int world, const unsigned int level);
+	void convert_sketch(const unsigned int world, const unsigned int level, vector<Enemy*>& i_enemies, 
 		vector<Block*>& Blocks, vector<PowerUpObject*>& PowerUp, PlayerManager* i_mario);
 
 	sf::Color get_map_sketch_pixel(const unsigned short i_x, const unsigned short i_y) const;
 };
 
 
-#endif 
+

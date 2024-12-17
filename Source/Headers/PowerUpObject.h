@@ -14,6 +14,7 @@ public:
 	virtual ~PowerUpObject();
 	void update(const float& dt) override;
 	virtual void reactToCollison() = 0;
+	virtual void reactToEnemyCollision(Enemy* enemy);
 	void render(sf::RenderTarget* target) override;
 };
 

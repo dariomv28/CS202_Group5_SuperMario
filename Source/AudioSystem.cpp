@@ -1,5 +1,6 @@
 #include "Headers/AudioSystem.h"
 
+AudioSystem* AudioSystem::instance = nullptr;
 
 AudioSystem::AudioSystem() {
 	if (!music.openFromFile("Source/Resources/audio/BackGround Music.mp3")) {
@@ -23,16 +24,27 @@ AudioSystem::AudioSystem() {
 	if (!level2Music.openFromFile("Source/Resources/audio/Level 2.mp3")) {
 		throw("ERROR::AUDIOSYSTEM::CANNOT_LOAD_LEVEL_2_MUSIC");
 	}
-	//if (!level3Music.openFromFile("Source/Resources/audio/Level 3.mp3")) {
-		//throw("ERROR::AUDIOSYSTEM::CANNOT_LOAD_LEVEL_3_MUSIC");
-	//}
+	if (!level3Music.openFromFile("Source/Resources/audio/Level 3.mp3")) {
+		throw("ERROR::AUDIOSYSTEM::CANNOT_LOAD_LEVEL_3_MUSIC");
+	}
+	music.setVolume(10.0f);
+	level1Music.setVolume(10.0f);
+	level2Music.setVolume(10.0f);
+	level3Music.setVolume(10.0f);
 	jumpSound.setBuffer(jumpSoundBuffer);
+	jumpSound.setVolume(200.0f);
 	buttonSound.setBuffer(buttonSoundBuffer);
+	buttonSound.setVolume(200.0f);
 	coinSound.setBuffer(coinSoundBuffer);
+	coinSound.setVolume(200.0f);
 	brickSound.setBuffer(brickSoundBuffer);
+	brickSound.setVolume(200.0f);
 }
 
 void AudioSystem::playMusic() {
+	if (currentBackgroundMusic == "MainMenu")
+		return;
+	currentBackgroundMusic = "MainMenu";
 	stopAllMusic();
 	music.setLoop(true);
 	music.play();
@@ -43,6 +55,9 @@ void AudioSystem::stopMusic() {
 }
 
 void AudioSystem::playLevel1Music() {
+	if (currentBackgroundMusic == "World1")
+		return;
+	currentBackgroundMusic = "World1";
 	stopAllMusic();
 	level1Music.setLoop(true);
 	level1Music.play();
@@ -53,6 +68,9 @@ void AudioSystem::stopLevel1Music() {
 }
 
 void AudioSystem::playLevel2Music() {
+	if (currentBackgroundMusic == "World2")
+		return;
+	currentBackgroundMusic = "World2";
 	stopAllMusic();
 	level2Music.setLoop(true);
 	level2Music.play();
@@ -63,6 +81,9 @@ void AudioSystem::stopLevel2Music() {
 }
 
 void AudioSystem::playLevel3Music() {
+	if (currentBackgroundMusic == "World3")
+		return;
+	currentBackgroundMusic = "World3";
 	stopAllMusic();
 	level3Music.setLoop(true);
 	level3Music.play();

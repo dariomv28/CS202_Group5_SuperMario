@@ -4,6 +4,7 @@
 class AudioSystem
 {
 private:
+	static  AudioSystem* instance;
 	sf::Music music;
 	sf::Music level1Music;
 	sf::Music level2Music;
@@ -16,6 +17,7 @@ private:
 	sf::SoundBuffer buttonSoundBuffer;
 	sf::SoundBuffer coinSoundBuffer;
 	sf::SoundBuffer brickSoundBuffer;
+	std::string currentBackgroundMusic;
 
 	GameEventMediator* eventMediator;
 public:
@@ -39,5 +41,14 @@ public:
 	void stopAllMusic();
 
 	void setEventMediator(GameEventMediator* eventMediator);
+
+
+	static AudioSystem* getInstance() {
+		if (instance == nullptr) {
+			instance = new AudioSystem();
+		}
+		return instance;
+	}
 };
+
 

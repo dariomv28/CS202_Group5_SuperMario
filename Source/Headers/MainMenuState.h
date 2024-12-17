@@ -35,6 +35,6 @@ public:
 	void resetGUI();
 
 	void renderGUI();
-	void render(sf::RenderTarget* target);
+	virtual void render(sf::RenderTarget* target);
 };
 

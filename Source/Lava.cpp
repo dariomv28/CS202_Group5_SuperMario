@@ -41,3 +41,4 @@ void Lava::render(sf::RenderTarget* target) {
 	target->draw(entitySprite);
 }
 
+
