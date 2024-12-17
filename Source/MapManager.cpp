@@ -38,6 +38,19 @@ void MapManager::initStyle() {
 	pipe_styles["W3_LV1"] = "gray";
 	pipe_styles["W3_LV2"] = "gray";
 	pipe_styles["W3_LV3"] = "gray";
+
+	// Background styles
+	background_styles["W1_LV1"] = "basic";
+	background_styles["W1_LV2"] = "basicnight";
+	background_styles["W1_LV3"] = "basic";
+
+	background_styles["W2_LV1"] = "snow";
+	background_styles["W2_LV2"] = "basicnight";
+	background_styles["W2_LV3"] = "snow";
+
+	background_styles["W3_LV1"] = "gray";
+	background_styles["W3_LV2"] = "gray";
+	background_styles["W3_LV3"] = "gray";
 }
 
 void MapManager::update(PlayerManager* player, float dt) {
@@ -109,7 +122,7 @@ void MapManager::get_map_sketch(const unsigned int world, const unsigned int lev
 void MapManager::update_background(const unsigned int world, const unsigned int level)
 {
 	std::string worldlevel = "W" + std::to_string(world) + "_LV" + std::to_string(level);
-	backgroundTexture.loadFromFile("Source/Resources/texture/" + styles[worldlevel] + "_background.png");
+	backgroundTexture.loadFromFile("Source/Resources/texture/" + background_styles[worldlevel] + "_background.png");
 	backgroundSprite.setTexture(backgroundTexture);
 	backgroundSprite.setScale(float((get_map_sketch_width() * 64 * 1.0) / backgroundSprite.getTexture()->getSize().x * 1.0), (get_map_sketch_height() * 64 / 3.f) / backgroundSprite.getTexture()->getSize().y);
 	backgroundSprite.setPosition(0, 0);

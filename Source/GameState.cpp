@@ -3,6 +3,9 @@
 #include "Headers/W2_LV1.h"
 #include "Headers/W3_LV1.h"
 #include "Headers/W1_LV2.h"
+#include "Headers/W1_LV3.h"
+#include "Headers/W2_LV2.h"
+#include "Headers/W2_LV3.h"
 
 GameState::GameState(StateData* stateData) : State(stateData), levelManager(nullptr) {
     
@@ -26,16 +29,16 @@ void GameState::loadLevel(PlayerManager* player, int worldID, int level) {
         levelManager = new W1_LV2(player, window);
     } 	
     else if (worldLevel == "W1_LV3") {
-	//	levelManager = new W1_LV3(player, window);
+		levelManager = new W1_LV3(player, window);
 	}
     else if (worldLevel == "W2_LV1") {
 		levelManager = new W2_LV1(player, window);
     }
     else if (worldLevel == "W2_LV2") {
-        //	levelManager = new W2_LV2(player, window);
+        levelManager = new W2_LV2(player, window);
     }
 	else if (worldLevel == "W2_LV3") {
-        //	levelManager = new W2_LV3(player, window);
+        levelManager = new W2_LV3(player, window);
     }
     else if (worldLevel == "W3_LV1") {
 		levelManager = new W3_LV1(player, window);
