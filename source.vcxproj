@@ -177,6 +177,7 @@
     <ClCompile Include="Source\SolidBlock.cpp" />
     <ClCompile Include="Source\State.cpp" />
     <ClCompile Include="Source\Trampoline.cpp" />
+    <ClCompile Include="Source\W1_LV2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Headers\MenuWorldState.h" />
@@ -222,6 +223,7 @@
     <ClInclude Include="Source\Headers\stdafx.h" />
     <ClInclude Include="Source\Headers\State.h" />
     <ClInclude Include="Source\Headers\Trampoline.h" />
+    <ClInclude Include="Source\Headers\W1_LV2.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Source\Headers\source.rc" />
