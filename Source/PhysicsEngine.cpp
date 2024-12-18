@@ -202,63 +202,63 @@ void PhysicsEngine::resolveCollisionPlayerPowerUp(PlayerManager* entity, std::ve
 }
 
 void PhysicsEngine::resolveCollisionEnemyEnemy(std::vector<Enemy*>& enemies, const float& dt) {
-	//for (size_t i = 0; i < enemies.size(); ++i) {
-	//	for (size_t j = i + 1; j < enemies.size(); ++j) {
-	//		Enemy* enemy1 = enemies[i];
-	//		Enemy* enemy2 = enemies[j];
+	for (size_t i = 0; i < enemies.size(); ++i) {
+		for (size_t j = i + 1; j < enemies.size(); ++j) {
+			Enemy* enemy1 = enemies[i];
+			Enemy* enemy2 = enemies[j];
 
-	//		Side Type = CollisionType(enemy1, enemy2);
+			Side Type = CollisionType(enemy1, enemy2);
 
-	//		// Skip if either enemy is not alive
-	//		if (!enemy1->getIsAlive() || !enemy2->getIsAlive()) {
-	//			continue;
-	//		}
+			// Skip if either enemy is not alive
+			if (!enemy1->getIsAlive() || !enemy2->getIsAlive()) {
+				continue;
+			}
 
-	//		//Resolve the right side
-	//		if (enemy1->isMoveRight() && Type == Collide_Right) {
-	//			fixPosition(enemy1, enemy2, Collide_Right);
-	//			enemy1->setMoveRight(false);
-	//			enemy1->setMoveLeft(true);
+			//Resolve the right side
+			if (enemy1->isMoveRight() && Type == Collide_Right) {
+				fixPosition(enemy1, enemy2, Collide_Right);
+				enemy1->setMoveRight(false);
+				enemy1->setMoveLeft(true);
 
-	//			enemy1->setScaleSprite("LEFT");
+				enemy1->setScaleSprite("LEFT");
 
-	//			enemy2->setMoveRight(true);
-	//			enemy2->setMoveLeft(false);
+				enemy2->setMoveRight(true);
+				enemy2->setMoveLeft(false);
 
-	//			enemy2->setScaleSprite("RIGHT");
+				enemy2->setScaleSprite("RIGHT");
 
-	//			continue;
-	//		}
+				continue;
+			}
 
-	//		//Resolve the left side
-	//		if (enemy1->isMoveLeft() && Type == Collide_Left) {
-	//			fixPosition(enemy1, enemy2, Collide_Left);
-	//			enemy1->setMoveLeft(false);
-	//			enemy1->setMoveRight(true);
+			//Resolve the left side
+			if (enemy1->isMoveLeft() && Type == Collide_Left) {
+				fixPosition(enemy1, enemy2, Collide_Left);
+				enemy1->setMoveLeft(false);
+				enemy1->setMoveRight(true);
 
-	//			enemy1->setScaleSprite("RIGHT");
+				enemy1->setScaleSprite("RIGHT");
 
-	//			enemy2->setMoveRight(false);
-	//			enemy2->setMoveLeft(true);
+				enemy2->setMoveRight(false);
+				enemy2->setMoveLeft(true);
 
-	//			enemy2->setScaleSprite("LEFT");
+				enemy2->setScaleSprite("LEFT");
 
-	//			continue;
-	//		}
+				continue;
+			}
 
-	//		//Resolve the ground
-	//		if (enemy1->getVelocity().y >= 0 && Type == Collide_Bottom) {
-	//			fixPosition(enemy1, enemy2, Collide_Bottom);
-	//			continue;
-	//		}
+			//Resolve the ground
+			if (enemy1->getVelocity().y >= 0 && Type == Collide_Bottom) {
+				fixPosition(enemy1, enemy2, Collide_Bottom);
+				continue;
+			}
 
-	//		//Resolve the ceiling
-	//		if (enemy1->getVelocity().y < 0 && Type == Collide_Top) {
-	//			fixPosition(enemy1, enemy2, Collide_Top);
-	//			continue;
-	//		}
-	//	}
-	//}
+			//Resolve the ceiling
+			if (enemy1->getVelocity().y < 0 && Type == Collide_Top) {
+				fixPosition(enemy1, enemy2, Collide_Top);
+				continue;
+			}
+		}
+	}
 }
 
 void PhysicsEngine::applyExternalForces(LivingEntity* entity, const float& dt) {
