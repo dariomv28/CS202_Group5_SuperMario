@@ -32,7 +32,6 @@ public:
 
 	void setmoveLeft(bool moveLeft);
 	void setmoveRight(bool moveRight);
-	void jump(const float& dt);
 
 	void resetJumps();
 	int getJumpsRemaining() const;

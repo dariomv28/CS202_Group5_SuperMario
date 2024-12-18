@@ -55,7 +55,7 @@ void Koopa::initAnimations() {
 void Koopa::move(const float& dt)
 {
 
-    this->position += this->movementComponent->velocity;
+    this->position += this->movementComponent->velocity * dt;
 
     if (this->position.x <= x_min) {
         this->position.x = std::max<float>(this->position.x, x_min);
@@ -172,10 +172,8 @@ void Koopa::setIsShelled(bool shelled) {
 void Koopa::setScaleSprite(std::string name) {
     if (name == "LEFT") {
 		entitySprite.setScale(-4.0f, 4.0f);
-		hitbox.setScale(-1.0f, 1.0f);
 	}
     else if (name == "RIGHT") {
         entitySprite.setScale(4.0f, 4.0f);
-        hitbox.setScale(1.0f, 1.0f);
     }
 }

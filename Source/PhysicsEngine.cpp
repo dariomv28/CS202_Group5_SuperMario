@@ -158,18 +158,22 @@ void PhysicsEngine::resolveCollisionEnemyBlock(std::vector<Enemy*>& enemies, std
 			case (Collide_Right):
 				fixPosition(enemy, block, Collide_Right);
 				//enemy->reactToBlockCollison(Collide_Right);
+
 				enemy->setMoveRight(false);
 				enemy->setMoveLeft(true);
 				enemy->setScaleSprite("LEFT");
+
 				continue;
 
 				//Resolve the left side
 			case (Collide_Left):
 				fixPosition(enemy, block, Collide_Left);
 				//enemy->reactToBlockCollison(Collide_Left);
+
 				enemy->setMoveLeft(false);
 				enemy->setMoveRight(true);
 				enemy->setScaleSprite("RIGHT");
+
 				continue;
 
 				//Resolve the ground
@@ -190,8 +194,6 @@ void PhysicsEngine::resolveCollisionEnemyBlock(std::vector<Enemy*>& enemies, std
 
 void PhysicsEngine::resolveCollisionPlayerPowerUp(PlayerManager* entity, std::vector<PowerUpObject*>& PowerUps, const float& dt) {
 	for (auto& obj : PowerUps) {
-		//If the player collides with the powerup, the power up applies
-//<<<<<<< HEAD
 		Side Type = CollisionType(entity, obj);
 		if (Type != Collide_None) {
 			obj->reactToCollison();

@@ -2,7 +2,7 @@
 #include "Headers/GameEventMediator.h"
 
 Goomba::Goomba() : Enemy() {
-	walkSpeed = 1000.0f;
+	walkSpeed = 20.0f;
 
 	isAlive = true;
 	setHealth(1);
@@ -20,7 +20,7 @@ Goomba::Goomba() : Enemy() {
 	this->animationComponent = new AnimationComponent(this->entitySprite);
 	initAnimations();
 
-	movementComponent = new MovementComponent(walkSpeed, walkSpeed);
+	movementComponent = new MovementComponent(walkSpeed, 5.0f);
 
 	hitbox.setSize(sf::Vector2f(64.f, 64.f));
 	hitbox.setPosition(position);
@@ -47,7 +47,6 @@ void Goomba::initAnimations() {
 
 void Goomba::move(const float& dt) 
 {
-	
 	this->position += this->movementComponent->velocity * dt;
 
 	if (this->position.x <= x_min) {
