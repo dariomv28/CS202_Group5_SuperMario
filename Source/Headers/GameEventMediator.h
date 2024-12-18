@@ -25,6 +25,7 @@ private:
 	AudioSystem* audio;
 	//MovementComponent* movementComponent;
 	//LivingEntity* livingEntity;
+
 public:
 	// Initialization function
 	GameEventMediator();
@@ -79,5 +80,6 @@ public:
 	void playCoinSound();
 	void playJumpSound();
 	void playBrickDestroyedSound();
+
 };
 

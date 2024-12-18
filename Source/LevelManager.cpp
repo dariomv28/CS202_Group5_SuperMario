@@ -1,5 +1,5 @@
 #include "Headers/LevelManager.h"
-#include "Headers/GameEventMediator.h"
+
 // The level manager is responsible for managing the level, including the player, enemies, blocks, powerups, and the GUI
 
 LevelManager::LevelManager(PlayerManager* player, sf::RenderWindow* window) {
@@ -15,6 +15,8 @@ LevelManager::LevelManager(PlayerManager* player, sf::RenderWindow* window) {
 	eventMediator = new GameEventMediator();
 	physicsEngine = new PhysicsEngine();
     audio = AudioSystem::getInstance();
+
+    initializeChatSystem();
     //movementComponent = new MovementComponent();
     //livingEntity = new LivingEntity();
 }
@@ -25,6 +27,8 @@ LevelManager::~LevelManager() {
     delete eventMediator;
     delete physicsEngine;
     delete audio;
+	delete chatComponent;
+	delete llmService;
     //delete livingEntity;
     //delete movementComponent;
 }
@@ -43,21 +47,33 @@ void LevelManager::initGameEventMediator() {
 
 
 void LevelManager::update(const float& dt) {
-	float cur_dt = dt;
-    if (firstUpdate)
-    {
-        cur_dt = 0;
-		firstUpdate = false;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Tab)) {
+        static sf::Clock keyTimer;
+        if (keyTimer.getElapsedTime().asMilliseconds() > 300)
+		{
+			keyTimer.restart();
+			chatBot = !chatBot;
+        }
     }
-	if (mapManager) {
-		mapManager->update(player, cur_dt);
-	}
 
-    eventMediator->updateInput(cur_dt);
-    eventMediator->updateEvents(cur_dt);
-    eventMediator->updateLevelGUI(window->getView());
+    if (chatBot) {
+        chatUI->update(window->getView());
+    }
+    else {
+        float cur_dt = dt;
+        if (firstUpdate)
+        {
+            cur_dt = 0;
+            firstUpdate = false;
+        }
+        if (mapManager) {
+            mapManager->update(player, cur_dt);
+        }
 
-
+        eventMediator->updateInput(cur_dt);
+        eventMediator->updateEvents(cur_dt);
+        eventMediator->updateLevelGUI(window->getView());
+    }
 }
 
 
@@ -93,9 +109,18 @@ void LevelManager::render(sf::RenderTarget* target) {
         }
     }
 	//this->draw_map(false, false, view_x, *window);
+
+	if (chatBot) {
+		chatUI->render(target);
+	}
 }
 
-//MapManager::MapManager() : levelManager(nullptr) {
-//    // Constructor
-//}
+void LevelManager::initializeChatSystem() {
+    // Create LLM service
+	LLMService* llmService = new OllamaLLMService();
 
+    // Create chat component
+    chatComponent = new ChatComponent(llmService);
+
+    chatUI = new ChatUI(chatComponent, this->window);
+}

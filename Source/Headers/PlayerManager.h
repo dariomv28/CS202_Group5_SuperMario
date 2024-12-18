@@ -1,6 +1,5 @@
 #pragma once
 #include "LivingEntity.h"
-//#include "LevelManager.h"
 
 class PlayerManager : 
     public LivingEntity {
