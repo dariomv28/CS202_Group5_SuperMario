@@ -11,8 +11,7 @@
 #include "PhysicsEngine.h"
 #include "AudioSystem.h"
 #include "ChatUI.h"
-#include "OllamaLLMService.h"
-#include "LLMService.h"
+#include "OllamaService.h"
 
 class LevelManager {
 protected:
