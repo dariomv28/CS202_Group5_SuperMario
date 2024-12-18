@@ -83,7 +83,14 @@ void PhysicsEngine::resolveCollisionPlayerBlock(PlayerManager* entity, std::vect
 	1 is Top
 	2 is Left
 	3 is Right*/
-
+	//Make reaction of the blocks first
+	for (auto& obj : blocks) {
+		if (obj->getExist() == false) continue;
+		Side Type = CollisionType(entity, obj);
+		if (Type != Collide_None) {
+			obj->reactToCollison(Type ^ 1);
+		}
+	}
 	for (auto& obj : blocks)
 	{
 		if (obj->getExist() == false) continue;
@@ -138,6 +145,7 @@ void PhysicsEngine::resolveCollisionPlayerEnemy(PlayerManager* entity, std::vect
 			continue;
 
 		case Collide_Bottom:
+			entity->movementComponent->resetJumps();
 			obj->reactToPlayerCollision(Collide_Top);
 			continue;
 
@@ -156,45 +164,29 @@ void PhysicsEngine::resolveCollisionEnemyBlock(std::vector<Enemy*>& enemies, std
 			
 			switch (Type) {
 			case (Collide_Right):
-				//if (enemy->isMoveRight()) {
-					fixPosition(enemy, block, Collide_Right);
-					//enemy->reactToBlockCollison(Collide_Right);
-
-					enemy->setMoveRight(false);
-					enemy->setMoveLeft(true);
-					enemy->setScaleSprite("LEFT");
-				//}
-
-				continue;
+				fixPosition(enemy, block, Collide_Right);
+				enemy->reactToBlockCollision(Collide_Right);
+				break;
 
 				//Resolve the left side
 			case (Collide_Left):
-				//if (enemy->isMoveLeft()) {
-					fixPosition(enemy, block, Collide_Left);
-					//enemy->reactToBlockCollison(Collide_Left);
-
-					std::cerr << enemy->getPosition().x << " " << enemy->getPosition().y << std::endl;
-					std::cerr << block->getPosition().x << " " << block->getPosition().y << std::endl;
-
-					enemy->setMoveLeft(false);
-					enemy->setMoveRight(true);
-					enemy->setScaleSprite("RIGHT");
-				//}
-
-				continue;
+				fixPosition(enemy, block, Collide_Left);
+				enemy->reactToBlockCollision(Collide_Left);
+				enemy->setScaleSprite("RIGHT");
+				break;
 
 				//Resolve the ground
 			case (Collide_Bottom):
 				fixPosition(enemy, block, Collide_Bottom);
 				enemy->setVelocity(sf::Vector2f(enemy->getVelocity().x, 0));
-				//enemy->reactToBlockCollison(Collide_Bottom);
-				continue;
+				enemy->reactToBlockCollision(Collide_Bottom);
+				break;
 
 				//Resolve the ceiling
 			case (Collide_Top):
 				fixPosition(enemy, block, Collide_Top);
-				//enemy->reactToBlockCollison(Collide_Top);
-				continue;
+				enemy->reactToBlockCollision(Collide_Top);
+				break;
 			}
 		}
 	}

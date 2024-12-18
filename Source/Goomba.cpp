@@ -107,13 +107,24 @@ void Goomba::reactToPlayerCollision(int collidedSide) {
 		eventMediator->increaseScore(300);
 		this->hitbox.setSize(sf::Vector2f(64.f, 32.f));
 
-		this->entitySprite.setPosition(this->position);
-		this->hitbox.setPosition(this->position);
+		this->entitySprite.setPosition(this->position + sf::Vector2f(0,32));
+		this->hitbox.setPosition(this->position + sf::Vector2f(0, 32));
 	}
 	else {
 		if (collidedSide == Collide_Left) eventMediator->pushPlayerLeft();
 		else eventMediator->pushPlayerRight();
 		eventMediator->decreasePlayerHealth();
+	}
+}
+
+void Goomba::reactToBlockCollision(int collidedSide) {
+	if (collidedSide == Collide_Left) {
+		setMoveLeft(false);
+		setMoveRight(true);
+	}
+	else if (collidedSide == Collide_Right) {
+		setMoveRight(false);
+		setMoveLeft(true);
 	}
 }
 

@@ -35,5 +35,6 @@ public:
 	// Collision response
 	void move(const float& dt) override;
 	void reactToPlayerCollision(int collidedSide) override;
+	void reactToBlockCollision(int collidedSide) override;
 	void setScaleSprite(std::string name) override;
 };
