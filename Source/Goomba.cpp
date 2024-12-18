@@ -20,7 +20,7 @@ Goomba::Goomba() : Enemy() {
 	this->animationComponent = new AnimationComponent(this->entitySprite);
 	initAnimations();
 
-	movementComponent = new MovementComponent(walkSpeed, 5.0f);
+	movementComponent = new MovementComponent(walkSpeed, 3.0f);
 
 	hitbox.setSize(sf::Vector2f(64.f, 64.f));
 	hitbox.setPosition(position);
@@ -34,7 +34,7 @@ Goomba::Goomba(sf::Vector2f position, sf::Vector2f size, float x_min, float x_ma
 	this->size = size;
 	this->x_min = x_min;
 	this->x_max = x_max;
-	setMoveRight(true);
+	setMoveLeft(true);
 }
 
 void Goomba::initAnimations() {
@@ -107,7 +107,6 @@ void Goomba::reactToPlayerCollision(int collidedSide) {
 		eventMediator->increaseScore(300);
 		this->hitbox.setSize(sf::Vector2f(64.f, 32.f));
 
-		this->position.y += 32; // Move down by the amount the height was reduced
 		this->entitySprite.setPosition(this->position);
 		this->hitbox.setPosition(this->position);
 	}
@@ -119,12 +118,5 @@ void Goomba::reactToPlayerCollision(int collidedSide) {
 }
 
 void Goomba::setScaleSprite(std::string name) {
-	if (name == "LEFT") {
-		entitySprite.setScale(4.0f, 4.0f);
-		hitbox.setScale(1.0f, 1.0f);
-	}
-	else if (name == "RIGHT") {
-		entitySprite.setScale(4.0f, 4.0f);
-		hitbox.setScale(1.0f, 1.0f);
-	}
+
 }
