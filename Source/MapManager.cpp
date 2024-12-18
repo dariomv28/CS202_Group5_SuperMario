@@ -248,7 +248,7 @@ void MapManager::convert_sketch(const unsigned int world, const unsigned int lev
 			{
 				if (sf::Color(255, 0, 0) == pixel)
 				{
-					i_mario->setPosition(CELL_SIZE * a, 200);
+					i_mario->setPosition(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * (b - map_height)));
 				}
 				else if (sf::Color(155, 0, 0) == pixel)
 				{

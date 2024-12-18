@@ -117,6 +117,17 @@ void Goomba::reactToPlayerCollision(int collidedSide) {
 	}
 }
 
+void Goomba::reactToBlockCollision(int collidedSide) {
+	if (collidedSide == Collide_Left) {
+		setMoveLeft(false);
+		setMoveRight(true);
+	}
+	else if (collidedSide == Collide_Right) {
+		setMoveRight(false);
+		setMoveLeft(true);
+	}
+}
+
 void Goomba::setScaleSprite(std::string name) {
 
 }

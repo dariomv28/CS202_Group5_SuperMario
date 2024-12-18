@@ -106,6 +106,17 @@ void Koopa::update(const float& dt) {
     move(dt);
 }
 
+void Koopa::reactToBlockCollision(int collidedSide) {
+	if (collidedSide == Collide_Left) {
+		setMoveLeft(false);
+		setMoveRight(true);
+	}
+	else if (collidedSide == Collide_Right) {
+		setMoveRight(false);
+		setMoveLeft(true);
+	}
+}
+
 void Koopa::updateAnimation(const float& dt) {
     if (!isAlive) {
         animationComponent->setAnimationEnemies("SHELL-MOVING-", spritesSheet, 0.2f);
