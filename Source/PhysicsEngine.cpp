@@ -7,7 +7,7 @@
 #include "Headers/PowerUpObject.h"
 
 PhysicsEngine::PhysicsEngine() {
-	gravity = sf::Vector2f(0, 1000.f);
+	gravity = sf::Vector2f(0, 1500.f);
 	friction = sf::Vector2f(1500.f, 0);
 }
 
