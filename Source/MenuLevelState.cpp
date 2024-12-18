@@ -120,34 +120,42 @@ void MenuLevelState::updateGUI()
         sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) &&
         enterReleased)
     {
-        // Reset the enter released flag
-        enterReleased = false;
+        static sf::Clock keyTimer;
+        if (keyTimer.getElapsedTime().asMilliseconds() > 150)
+        {
+            // Reset the enter released flag
+            enterReleased = false;
 
-        // Simulate button press for the currently selected button
-        if (currentButtonIndex == BTN_LEVEL1)
-        {
-            GameState* gameState = new GameState(this->stateData);
-            gameState->loadLevel(player, world, 1);
-            this->states->push(gameState);
-           
-        }
-        else if (currentButtonIndex == BTN_LEVEL2)
-        {
-            GameState* gameState = new GameState(this->stateData);
-            gameState->loadLevel(player, world, 2);
-            this->states->push(gameState);
-         
-        }
-        else if (currentButtonIndex == BTN_LEVEL3)
-        {
-            GameState* gameState = new GameState(this->stateData);
-            gameState->loadLevel(player, world, 3);
-            this->states->push(gameState);
-           
-        }
-        else if (currentButtonIndex == BTN_BACK)
-        {
-            endState();
+            // Simulate button press for the currently selected button
+            if (currentButtonIndex == BTN_LEVEL1)
+            {
+                this->stateData->audio->playbuttonSound();
+                GameState* gameState = new GameState(this->stateData);
+                gameState->loadLevel(player, world, 1);
+                this->states->push(gameState);
+
+            }
+            else if (currentButtonIndex == BTN_LEVEL2)
+            {
+                this->stateData->audio->playbuttonSound();
+                GameState* gameState = new GameState(this->stateData);
+                gameState->loadLevel(player, world, 2);
+                this->states->push(gameState);
+
+            }
+            else if (currentButtonIndex == BTN_LEVEL3)
+            {
+                this->stateData->audio->playbuttonSound();
+                GameState* gameState = new GameState(this->stateData);
+                gameState->loadLevel(player, world, 3);
+                this->states->push(gameState);
+
+            }
+            else if (currentButtonIndex == BTN_BACK)
+            {
+                this->stateData->audio->playbuttonSound();
+                endState();
+            }
         }
     }
 
