@@ -5,9 +5,7 @@
 LevelManager::LevelManager(PlayerManager* player, sf::RenderWindow* window) {
 	this->window = window;
     this->player = player;
-    if (player == nullptr) {
-        std::cout << "BUGGED PLAYER\n";
-    }
+
 	firstUpdate = true;
     mapManager = new MapManager(window);
    
@@ -85,8 +83,6 @@ void LevelManager::render(sf::RenderTarget* target) {
 	mapManager->draw_map(target);
     player->render(target);
 
-    levelGUI->render(target);
-
     //Only render the blocks that are within the view
     //Get the view bounds
     sf::Vector2f viewCenter = target->getView().getCenter();
@@ -114,6 +110,8 @@ void LevelManager::render(sf::RenderTarget* target) {
 	if (chatBot) {
 		chatUI->render(target);
 	}
+    levelGUI->render(target);
+
 }
 
 void LevelManager::initializeChatSystem() {
