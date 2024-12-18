@@ -62,16 +62,16 @@ void PhysicsEngine::fixPosition(LivingEntity* entity, GameObject* obj, Side coll
 	//std::cerr << "velocity: " << entity->getVelocity().x << " " << entity->getVelocity().y << "\n";
 	switch (collidedSide) {
 	case Collide_Top:
-		entity->setPosition(sf::Vector2f(entity->getPosition().x, obj->getPosition().y + obj->getSize().y));
+		entity->setPosition(sf::Vector2f(entity->hitbox.getPosition().x, obj->hitbox.getPosition().y + obj->hitbox.getSize().y));
 		break;
 	case Collide_Bottom:
-		entity->setPosition(sf::Vector2f(entity->getPosition().x, obj->getPosition().y - entity->getSize().y));
+		entity->setPosition(sf::Vector2f(entity->hitbox.getPosition().x, obj->hitbox.getPosition().y - entity->hitbox.getSize().y));
 		break;
 	case Collide_Left:
-		entity->setPosition(sf::Vector2f(obj->getPosition().x + obj->getSize().x,entity->getPosition().y));
+		entity->setPosition(sf::Vector2f(obj->hitbox.getPosition().x + obj->hitbox.getSize().x,entity->hitbox.getPosition().y));
 		break;
 	case Collide_Right:
-		entity->setPosition(sf::Vector2f(obj->getPosition().x - entity->getSize().x, entity->getPosition().y));
+		entity->setPosition(sf::Vector2f(obj->hitbox.getPosition().x - entity->hitbox.getSize().x, entity->hitbox.getPosition().y));
 		break;
 	}
 }
@@ -167,8 +167,12 @@ void PhysicsEngine::resolveCollisionEnemyBlock(std::vector<Enemy*>& enemies, std
 
 				//Resolve the left side
 			case (Collide_Left):
+			
 				fixPosition(enemy, block, Collide_Left);
 				//enemy->reactToBlockCollison(Collide_Left);
+
+				std::cerr << enemy->getPosition().x << " " << enemy->getPosition().y << std::endl;
+				std::cerr << block->getPosition().x << " " << block->getPosition().y << std::endl;
 
 				enemy->setMoveLeft(false);
 				enemy->setMoveRight(true);
