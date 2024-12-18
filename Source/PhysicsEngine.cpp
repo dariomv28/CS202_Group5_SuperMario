@@ -76,69 +76,9 @@ void PhysicsEngine::fixPosition(LivingEntity* entity, GameObject* obj, Side coll
 	}
 }
 
-
-//void PhysicsEngine::fixPosition(LivingEntity* entity, std::vector<Block*> Collided_Blocks[]) {
-//
-//		float top = entity->getPosition().y, bottom = entity->getPosition().y + entity->getSize().y,
-//		left = entity->getPosition().x, right = entity->getPosition().x + entity->getSize().x;// Bottom
-//	
-//	//std::cerr << "Before: " << top << " " << bottom << " " << left << " " << right << std::endl;
-//	for (auto& obj : Collided_Blocks[0])
-//	{
-//		bottom = std::min(bottom, obj->getPosition().y);
-//	}
-//
-//	// top
-//	for (auto& obj : Collided_Blocks[1])
-//	{
-//		top = std::max(top, obj->getPosition().y + obj->getSize().y);
-//	}
-//
-//	// Left
-//	for (auto& obj : Collided_Blocks[2])
-//	{
-//		left = std::max(left, obj->getPosition().x + obj->getSize().x);
-//	}
-//
-//	// Right
-//	for (auto& obj : Collided_Blocks[3])
-//	{
-//		right = std::min(right, obj->getPosition().x);
-//	}
-//	
-//	// resolve
-//	if (Collided_Blocks[1].size() != 0)
-//	{
-//		entity->setPosition(entity->getPosition().x, top);
-//		if (Collided_Blocks[2].size() != 0)
-//		{
-//			entity->setPosition(left, top);
-//		}
-//		else if (Collided_Blocks[3].size() != 0)
-//		{
-//			entity->setPosition(right - entity->getSize().x, top);
-//		}
-//	}
-//	else if (Collided_Blocks[0].size() != 0)
-//	{
-//		//std::cerr << "Fixing: " << entity->getPosition().x << " " << left << std::endl;
-//		entity->setPosition(entity->getPosition().x, bottom - entity->getSize().y);
-//		if (Collided_Blocks[2].size() != 0)
-//		{
-//			entity->setPosition(left, bottom - entity->getSize().y);
-//		}
-//		else if (Collided_Blocks[3].size() != 0)
-//		{
-//			entity->setPosition(right - entity->getSize().x, bottom - entity->getSize().y);
-//		}
-//	}
-//}
-
-
 void PhysicsEngine::resolveCollisionPlayerBlock(PlayerManager* entity, std::vector<Block*>& blocks, const float& dt) {
 	// Resolve on the ground
 	entity->setOnGround(false);
-	std::vector<Block*> Blocks_Collide[4]; 
 	/*0 is Bottom
 	1 is Top
 	2 is Left
@@ -153,7 +93,6 @@ void PhysicsEngine::resolveCollisionPlayerBlock(PlayerManager* entity, std::vect
 		if (Type != Collide_None) fixPosition(entity, obj, Type);
 		switch (Type) {
 		case (Collide_Bottom):
-			Blocks_Collide[0].push_back(obj);
 			//fixPosition(entity, obj, Collide_Bottom);
 			entity->setOnGround(true);
 			entity->setVelocity(sf::Vector2f(entity->getVelocity().x, 0));
@@ -161,19 +100,16 @@ void PhysicsEngine::resolveCollisionPlayerBlock(PlayerManager* entity, std::vect
 			//std::cerr << "Collide Bottom\n";
 			continue;
 		case (Collide_Top):
-			Blocks_Collide[1].push_back(obj);
 			entity->setVelocity(sf::Vector2f(entity->getVelocity().x, 0));
 			//std::cerr << "Collide Top\n";
 			continue;
 
 		case (Collide_Right):
-			Blocks_Collide[3].push_back(obj);
 			entity->setVelocity(sf::Vector2f(0, entity->getVelocity().y));
 			entity->setMoveRight(false);
 			//std::cerr << "Collide Right\n";
 			continue;
 		case (Collide_Left):
-			Blocks_Collide[2].push_back(obj);
  			entity->setVelocity(sf::Vector2f(0, entity->getVelocity().y));
 			entity->setMoveLeft(false);
 			//std::cerr << "Collide Left\n";
@@ -188,92 +124,68 @@ void PhysicsEngine::resolveCollisionPlayerBlock(PlayerManager* entity, std::vect
 }
 
 void PhysicsEngine::resolveCollisionPlayerEnemy(PlayerManager* entity, std::vector<Enemy*>& enemies, const float& dt) {
-	//for (auto& obj : enemies) {
-	//	//Resolve the right side
-	//	Side Type = CollisionType(entity, obj);
+	for (auto& obj : enemies) {
+		//Resolve the right side
+		Side Type = CollisionType(entity, obj);
+		if (Type != Collide_None) fixPosition(entity, obj, Type);
+		switch (Type) {
+		case Collide_Right:
+			obj->reactToPlayerCollision(Collide_Left);
+			continue;
 
-	//	if (entity->isMoveRight() && Type == Collide_Right) {
-	//		fixPosition(entity, obj, Collide_Right);
-	//		obj->reactToPlayerCollision(Collide_Left);
-	//		//Testing
+		case Collide_Left:
+			obj->reactToPlayerCollision(Collide_Right);
+			continue;
 
+		case Collide_Bottom:
+			obj->reactToPlayerCollision(Collide_Top);
+			continue;
 
-	//		continue;
-	//	}
-
-	//	//Resolve the left side
-	//	if (entity->isMoveLeft() && Type == Collide_Left) {
-	//		fixPosition(entity, obj, Collide_Left);
-	//		obj->reactToPlayerCollision(Collide_Right);
-
-	//		continue;
-	//	}
-
-	//	//Resolve the ground
-	//	if (entity->getVelocity().y >= 0 && Type == Collide_Bottom) {
-	//		fixPosition(entity, obj, Collide_Bottom);
-	//		obj->reactToPlayerCollision(Collide_Top);
-	//		continue;
-	//	}
-
-	//	//Resolve the ceiling
-	//	if (entity->getVelocity().y < 0 && Type == Collide_Top) {
-	//		fixPosition(entity, obj, Collide_Top);
-	//		obj->reactToPlayerCollision(Collide_Bottom);
-
-	//		continue;
-	//	}
-	//}
+		case Collide_Top:
+			obj->reactToPlayerCollision(Collide_Bottom);
+			continue;
+		}
+	}
 }
 
 void PhysicsEngine::resolveCollisionEnemyBlock(std::vector<Enemy*>& enemies, std::vector<Block*>& blocks, const float& dt) {
-	//for (auto& enemy : enemies) {
-	//	for (auto& block : blocks) {
-	//		//Resolve the right side
-	//		Side Type = CollisionType(enemy, block);
+	for (auto& enemy : enemies) {
+		for (auto& block : blocks) {
+			//Resolve the right side
+			Side Type = CollisionType(enemy, block);
+			
+			switch (Type) {
+			case (Collide_Right):
+				fixPosition(enemy, block, Collide_Right);
+				//enemy->reactToBlockCollison(Collide_Right);
+				enemy->setMoveRight(false);
+				enemy->setMoveLeft(true);
+				enemy->setScaleSprite("LEFT");
+				continue;
 
-	//		if (enemy->isMoveRight() && Type == Collide_Right) {
-	//			fixPosition(enemy, block, Collide_Right);
-	//			//enemy->reactToBlockCollison(Collide_Right);
-	//			enemy->setMoveRight(false);
-	//			enemy->setMoveLeft(true);
+				//Resolve the left side
+			case (Collide_Left):
+				fixPosition(enemy, block, Collide_Left);
+				//enemy->reactToBlockCollison(Collide_Left);
+				enemy->setMoveLeft(false);
+				enemy->setMoveRight(true);
+				enemy->setScaleSprite("RIGHT");
+				continue;
 
+				//Resolve the ground
+			case (Collide_Bottom):
+				fixPosition(enemy, block, Collide_Bottom);
+				//enemy->reactToBlockCollison(Collide_Bottom);
+				continue;
 
-	//			enemy->setScaleSprite("LEFT");
-
-
-	//			continue;
-	//		}
-
-	//		//Resolve the left side
-	//		if (enemy->isMoveLeft() && Type == Collide_Left) {
-	//			fixPosition(enemy, block, Collide_Left);
-	//			//enemy->reactToBlockCollison(Collide_Left);
-	//			enemy->setMoveLeft(false);
-	//			enemy->setMoveRight(true);
-
-	//			enemy->setScaleSprite("RIGHT");
-
-	//			continue;
-	//		}
-
-	//		//Resolve the ground
-	//		if (enemy->getVelocity().y >= 0 && Type == Collide_Bottom) {
-	//			fixPosition(enemy, block, Collide_Bottom);
-	//			//enemy->reactToBlockCollison(Collide_Bottom);
-
-	//			continue;
-	//		}
-
-	//		//Resolve the ceiling
-	//		if (enemy->getVelocity().y < 0 && Type == Collide_Top) {
-	//			fixPosition(enemy, block, Collide_Top);
-	//			//enemy->reactToBlockCollison(Collide_Top);
-
-	//			continue;
-	//		}
-	//	}
-	//}
+				//Resolve the ceiling
+			case (Collide_Top):
+				fixPosition(enemy, block, Collide_Top);
+				//enemy->reactToBlockCollison(Collide_Top);
+				continue;
+			}
+		}
+	}
 }
 
 void PhysicsEngine::resolveCollisionPlayerPowerUp(PlayerManager* entity, std::vector<PowerUpObject*>& PowerUps, const float& dt) {

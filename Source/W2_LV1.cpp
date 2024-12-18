@@ -3,7 +3,7 @@
 W2_LV1::W2_LV1(PlayerManager* player, sf::RenderWindow* window) :
 	LevelManager(player, window)
 {
-	mapManager->convert_sketch(2, Enemies, Blocks, PowerUps, player);
+	mapManager->convert_sketch(2,1, Enemies, Blocks, PowerUps, player);
 	initGameEventMediator();
 }
 

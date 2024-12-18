@@ -3,6 +3,12 @@
 
 class PlayerManager : 
     public LivingEntity {
+protected:
+    std::string m_imagePath;
+    bool is_big;
+    bool buffed_fire;
+    bool is_fire;
+
 public:
 
     PlayerManager(sf::Vector2f position, sf::Vector2f size, 
@@ -25,10 +31,5 @@ public:
     // Setters and Getters
     void setBig(bool big);
     bool getBig() const;
-    
-protected:
-    std::string m_imagePath;
-    bool is_big;
-
 };
 

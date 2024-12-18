@@ -1,5 +1,5 @@
 #include "Headers/MainMenuState.h"
-#include "Headers/MenuLevelState.h"
+#include "Headers/MenuWorldState.h"
 
 void MainMenuState::initVariables()
 {
@@ -149,7 +149,7 @@ void MainMenuState::updateGUI()
         }
         else if (currentButtonIndex == BTN_NEWGAME)
         {
-            this->states->push(new MenuLevelState(this->stateData));
+            this->states->push(new MenuWorldState(this->stateData));
         }
         else if (currentButtonIndex == BTN_LEADER)
         {
@@ -175,7 +175,7 @@ void MainMenuState::updateGUI()
     }
     if (buttons[BTN_NEWGAME]->isPressed())
     {
-        this->states->push(new MenuLevelState(this->stateData));
+        this->states->push(new MenuWorldState(this->stateData));
     }
     if (buttons[BTN_LEADER]->isPressed())
     {

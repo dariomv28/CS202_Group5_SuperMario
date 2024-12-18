@@ -17,6 +17,7 @@ private:
 	sf::SoundBuffer buttonSoundBuffer;
 	sf::SoundBuffer coinSoundBuffer;
 	sf::SoundBuffer brickSoundBuffer;
+	std::string currentBackgroundMusic;
 
 	GameEventMediator* eventMediator;
 public:

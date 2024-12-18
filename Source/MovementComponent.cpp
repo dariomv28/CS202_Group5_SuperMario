@@ -13,7 +13,7 @@ MovementComponent::MovementComponent() {
     //eventMediator = new GameEventMediator();
 }
 
-MovementComponent::MovementComponent(int a, int maxV) {
+MovementComponent::MovementComponent(float a, float maxV) {
     acceleration = static_cast<float>(a * 100);
     maxVelocity = static_cast<float>(maxV * 100);
     isMoveLeft = false;
@@ -39,9 +39,8 @@ int MovementComponent::getJumpsRemaining() const {
 void MovementComponent::moveLeft(const float& dt) {
     if (!isMoveLeft) return;
 
-    // std::cout << "Acceleration: " << acceleration << " Dt: " << dt << std::endl;
-
     velocity.x -= acceleration * dt;
+
     if (velocity.x < -maxVelocity) {
         velocity.x = -maxVelocity;
     }
@@ -51,8 +50,6 @@ void MovementComponent::moveRight(const float& dt) {
     if (!isMoveRight) return;
 
     velocity.x += acceleration * dt;
-
-	// std::cout << "Acceleration: " << acceleration << " Dt: " << dt << std::endl;
 
     if (velocity.x > maxVelocity) {
         velocity.x = maxVelocity;
@@ -68,13 +65,13 @@ void MovementComponent::setmoveRight(bool moveRight) {
 void MovementComponent::jump(const float& dt, GameEventMediator* eventMediator) {
     
     if (onGround && isJump) {
-        velocity.y = -500.f;
+        velocity.y = -600.f;
         onGround = false;
         isJump = false;
         jumpsRemaining = MAX_JUMPS - 1; 
     }
     else if (!onGround && isJump && jumpsRemaining > 0) {
-        velocity.y = -500.f;
+        velocity.y = -600.f;
         isJump = false;
         jumpsRemaining--;
     }
