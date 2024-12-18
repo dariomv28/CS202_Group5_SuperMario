@@ -138,16 +138,15 @@
     <ClCompile Include="Source\MenuWorldState.cpp" />
     <ClCompile Include="Source\Bullet.cpp" />
     <ClCompile Include="Source\FireBuff.cpp" />
+    <ClCompile Include="Source\OllamaService.cpp" />
     <ClCompile Include="Source\PlayerBuff.cpp" />
     <ClCompile Include="Source\Cannon.cpp" />
     <ClCompile Include="Source\ChatComponent.cpp" />
     <ClCompile Include="Source\ChatUI.cpp" />
-    <ClCompile Include="Source\Headers\OllamaLLMService.h" />
     <ClCompile Include="Source\Lava.cpp" />
     <ClCompile Include="Source\AudioSystem.cpp" />
     <ClCompile Include="Source\BrickFragment.cpp" />
     <ClCompile Include="Source\MushroomBlock.cpp" />
-    <ClCompile Include="Source\OllamaLLMService.cpp" />
     <ClCompile Include="Source\PowerUpObject.cpp" />
     <ClCompile Include="Source\Goomba.cpp" />
     <ClCompile Include="Source\Mushroom.cpp" />
@@ -192,6 +191,7 @@
     <ClInclude Include="Source\Headers\MenuWorldState.h" />
     <ClInclude Include="Source\Headers\Bullet.h" />
     <ClInclude Include="Source\Headers\FireBuff.h" />
+    <ClInclude Include="Source\Headers\OllamaService.h" />
     <ClInclude Include="Source\Headers\PlayerBuff.h" />
     <ClInclude Include="Source\Headers\Cannon.h" />
     <ClInclude Include="Source\Headers\ChatComponent.h" />

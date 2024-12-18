@@ -34,7 +34,7 @@ Goomba::Goomba(sf::Vector2f position, sf::Vector2f size, float x_min, float x_ma
 	this->size = size;
 	this->x_min = x_min;
 	this->x_max = x_max;
-	setMoveLeft(true);
+	setMoveRight(true);
 }
 
 void Goomba::initAnimations() {
