@@ -29,6 +29,7 @@ LevelManager::~LevelManager() {
     delete audio;
 	delete chatComponent;
 	delete llmService;
+    delete chatUI;
     //delete livingEntity;
     //delete movementComponent;
 }
