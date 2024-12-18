@@ -171,7 +171,7 @@ void Koopa::setIsShelled(bool shelled) {
 // Set the sprite scale based on the animation name
 void Koopa::setScaleSprite(std::string name) {
     if (name == "LEFT") {
-		entitySprite.setScale(-4.0f, 4.0f);
+		entitySprite.setScale(4.0f, 4.0f);
 	}
     else if (name == "RIGHT") {
         entitySprite.setScale(4.0f, 4.0f);
