@@ -256,7 +256,7 @@ void MapManager::convert_sketch(const unsigned int world, const unsigned int lev
 				}
 				else if (sf::Color(0, 125, 0) == pixel)
 				{
-					//i_enemies.push_back(new Koopa(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * (b - map_height)), sf::Vector2f(CELL_SIZE, CELL_SIZE)));
+					i_enemies.push_back(new Koopa(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * (b - map_height)), sf::Vector2f(CELL_SIZE, CELL_SIZE)));
 				}
 			}
 		}
