@@ -55,4 +55,7 @@ void W3_LV2::render(sf::RenderTarget* target) {
     target->draw(blindFold);
     levelGUI->render(target);
 
+    if (chatBot) {
+        chatUI->render(target);
+    }
 }

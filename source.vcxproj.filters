@@ -153,7 +153,16 @@
     <ClCompile Include="Source\W2_LV3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\W3_LV2.cpp">
+    <ClCompile Include="Source\ChatComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ChatUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Headers\OllamaLLMService.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\OllamaLLMService.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -275,16 +284,25 @@
     <ClInclude Include="Source\Headers\Cannon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Headers\PlayerBuff.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Headers\FireBuff.h">
+    <ClInclude Include="Source\Headers\MenuWorldState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Headers\Bullet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Headers\MenuWorldState.h">
+    <ClInclude Include="Source\Headers\FireBuff.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Headers\PlayerBuff.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Headers\ChatComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Headers\ChatUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Headers\LLMService.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Headers\W1_LV2.h">
@@ -297,9 +315,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Headers\W2_LV3.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Headers\W3_LV2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

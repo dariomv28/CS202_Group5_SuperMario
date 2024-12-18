@@ -29,6 +29,7 @@ LevelManager::~LevelManager() {
     delete audio;
 	delete chatComponent;
 	delete llmService;
+    delete chatUI;
     //delete livingEntity;
     //delete movementComponent;
 }
@@ -116,11 +117,11 @@ void LevelManager::render(sf::RenderTarget* target) {
 }
 
 void LevelManager::initializeChatSystem() {
-    // Create LLM service
-	LLMService* llmService = new OllamaLLMService();
+ //   // Create LLM service
+	//LLMService* llmService = new OllamaLLMService();
 
-    // Create chat component
-    chatComponent = new ChatComponent(llmService);
+ //   // Create chat component
+ //   chatComponent = new ChatComponent(llmService);
 
-    chatUI = new ChatUI(chatComponent, this->window);
+ //   chatUI = new ChatUI(chatComponent, this->window);
 }
