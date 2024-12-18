@@ -325,6 +325,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Config\WindowIni.txt" />
+    <Text Include="Config\docs.txt" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Source\Resources\texture\menu_background.png">

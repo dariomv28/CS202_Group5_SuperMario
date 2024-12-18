@@ -244,6 +244,7 @@
     <ResourceCompile Include="Source\Headers\source.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Config\docs.txt" />
     <Text Include="Config\WindowIni.txt" />
   </ItemGroup>
   <ItemGroup>

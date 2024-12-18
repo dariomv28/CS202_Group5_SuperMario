@@ -1,5 +1,27 @@
 #include "Headers/OllamaService.h"
 
+OllamaService::OllamaService() {
+    std::ifstream file("Config/docs.txt");
+    if (!file) {
+        std::cerr << "Error: Unable to open file.\n";
+    }
+
+    std::string line;
+    while (std::getline(file, line)) {
+        std::istringstream iss(line);
+        std::string key, value;
+
+        std::getline(iss, key, '|');
+        std::getline(iss, value);
+
+        if (!key.empty() && !value.empty()) {
+            responses[key] = value;
+        }
+    }
+
+    file.close();
+}
+
 // Static callback function implementation
 size_t OllamaService::WriteCallback(void* contents, size_t size, size_t nmemb, std::string* s) {
     size_t newLength = size * nmemb;
@@ -79,70 +101,37 @@ std::string OllamaService::generateResponse(const std::string& playerMessage) {
     //    }
     //}
 
+    std::vector<std::string> playerVectorMessage;
 
-    std::string msg = playerMessage;
+	std::stringstream ss(playerMessage);
 
-    if (msg.find("hello") != std::string::npos || msg.find("hi") != std::string::npos) {
-        return "Hi there! Ready to save the princess?";
+    std::string token;
+
+    while (ss >> token) {
+		playerVectorMessage.push_back(token);
     }
 
-    if (msg.find("how to play") != std::string::npos || msg.find("controls") != std::string::npos) {
-        return "Use arrow keys to move and space to jump. Good luck!";
+	std::string ans = "Sorry, I don't understand that.";
+    int mx = 0;
+
+    for (const auto& res : responses) {
+		std::string keyword = res.first;
+		std::string response = res.second;
+
+		int cnt = 0;
+
+        for (std::string word : playerVectorMessage) {
+			if (keyword.find(word) != std::string::npos) {
+                ++cnt;
+			}
+        }
+
+		if (cnt > mx) {
+			mx = cnt;
+			ans = response;
+		}
     }
 
-    if (msg.find("where") != std::string::npos) {
-        return "You are in the Mushroom Kingdom, home to Mario and Luigi!";
-    }
-
-    if (msg.find("what should i do") != std::string::npos || msg.find("objective") != std::string::npos) {
-        return "Your goal is to rescue Princess Peach and defeat Bowser!";
-    }
-
-    if (msg.find("how to jump") != std::string::npos) {
-        return "Press the SPACE bar to jump over obstacles.";
-    }
-
-    if (msg.find("how to attack") != std::string::npos || msg.find("enemies") != std::string::npos) {
-        return "Jump on the enemies to defeat them, or use power-ups like fireballs!";
-    }
-
-    if (msg.find("how to get power up") != std::string::npos) {
-        return "Collect mushrooms and flowers from '?' blocks to get power-ups.";
-    }
-
-    if (msg.find("princess") != std::string::npos) {
-        return "Reach the end of the castle and defeat Bowser to save Princess Peach.";
-    }
-
-    if (msg.find("what are coins for") != std::string::npos || msg.find("coins") != std::string::npos) {
-        return "Collect 100 coins to get an extra life!";
-    }
-
-    if (msg.find("how to sprint") != std::string::npos || msg.find("run faster") != std::string::npos) {
-        return "Hold down the SHIFT key while moving to sprint.";
-    }
-
-    if (msg.find("extra life") != std::string::npos) {
-        return "Collect green 1-Up mushrooms or 100 coins to gain an bonus powers, not extra life!";
-    }
-
-    if (msg.find("boss") != std::string::npos) {
-        return "Boss is waiting for you while playing the game. Be prepared!";
-    }
-
-    if (msg.find("game over") != std::string::npos) {
-        return "Don't worry! Restart the level and try again. You can do it!";
-    }
-
-    if (msg.find("save progress") != std::string::npos) {
-        return "Your progress is saved automatically after completing a level.";
-    }
-
-    if (msg.find("how are you") != std::string::npos) {
-        return "Im doing great, thanks for asking. Its been a productive day, and Im happy to take a break and chat with you. I see you re in the middle of a game and it must be fun. Its always interesting to hear about the gameplay and the moments that keep you on the edge, especially when there s a lot going on.";
-    }
-
-
-    return "Sorry, I don't understand that.";
+    return ans;
 }
 
