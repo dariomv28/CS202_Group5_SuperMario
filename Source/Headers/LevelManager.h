@@ -1,6 +1,4 @@
 #pragma once
-#ifndef LEVELMANAGER_H
-#define LEVELMANAGER_H
 
 #include "MapManager.h"
 #include "stdafx.h"
@@ -12,6 +10,9 @@
 #include "GameEventMediator.h"
 #include "PhysicsEngine.h"
 #include "AudioSystem.h"
+#include "ChatUI.h"
+#include "OllamaLLMService.h"
+#include "LLMService.h"
 
 class LevelManager {
 protected:
@@ -25,10 +26,14 @@ protected:
     GameEventMediator* eventMediator;
     PhysicsEngine* physicsEngine;
     AudioSystem* audio;
-    //MovementComponent* movementComponent;
-    //LivingEntity* livingEntity;
-	bool firstUpdate;
-    //AudioSystem* audio;
+    bool firstUpdate;
+
+    ChatComponent* chatComponent = nullptr;
+	LLMService* llmService = nullptr;
+    ChatUI* chatUI = nullptr;
+
+    bool chatBot = false;
+
 public:
     LevelManager(PlayerManager* player, sf::RenderWindow* window);
     virtual ~LevelManager();
@@ -36,8 +41,8 @@ public:
     virtual void update(const float& dt);
     virtual void render(sf::RenderTarget* target = nullptr);
 
-};
-#pragma once
 
-#endif // MAPMANAGER_H
+    void initializeChatSystem();
+};
+
  

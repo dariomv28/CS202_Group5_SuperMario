@@ -1,6 +1,5 @@
 #pragma once 
 
-#include "stdafx.h"
 #include "Enemy.h"
 #include "Mario.h"
 #include "Block.h"
