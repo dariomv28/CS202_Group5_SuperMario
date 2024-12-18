@@ -159,10 +159,7 @@
     <ClCompile Include="Source\ChatUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Headers\OllamaLLMService.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\OllamaLLMService.cpp">
+    <ClCompile Include="Source\OllamaService.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -315,6 +312,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Headers\W2_LV3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Headers\OllamaService.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

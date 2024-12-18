@@ -117,7 +117,7 @@ void Mario::update(const float& dt) {
     updateAnimation(dt);
     updateVelocity(dt);
     //std::cerr << this->getPosition().x << " "<< this->getPosition().y << std::endl;
-    eventMediator->applyExternalForce(this, dt);
+	eventMediator->applyExternalForce(this, dt);
     move(dt);
 }
 

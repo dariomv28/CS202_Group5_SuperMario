@@ -1,4 +1,4 @@
 SuperPowerMario
-1560 960
+1560 850
 120
 0

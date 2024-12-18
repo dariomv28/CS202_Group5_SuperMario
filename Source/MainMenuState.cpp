@@ -104,7 +104,7 @@ void MainMenuState::updateGUI()
     {
         // Prevent multiple rapid changes
         static sf::Clock keyTimer;
-        if (keyTimer.getElapsedTime().asMilliseconds() > 150)
+        if (keyTimer.getElapsedTime().asMilliseconds() > 100)
         {
             currentButtonIndex = (currentButtonIndex - 1 + buttons.size()) % buttons.size();
             keyTimer.restart();
@@ -116,7 +116,7 @@ void MainMenuState::updateGUI()
     {
         // Prevent multiple rapid changes
         static sf::Clock keyTimer;
-        if (keyTimer.getElapsedTime().asMilliseconds() > 150)
+        if (keyTimer.getElapsedTime().asMilliseconds() > 100)
         {
             currentButtonIndex = (currentButtonIndex + 1) % buttons.size();
             keyTimer.restart();
@@ -139,25 +139,33 @@ void MainMenuState::updateGUI()
         sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) &&
         enterReleased)
     {
-        // Reset the enter released flag
-        enterReleased = false;
+        static sf::Clock keyTimer;
+        if (keyTimer.getElapsedTime().asMilliseconds() > 150)
+        {
+            // Reset the enter released flag
+            enterReleased = false;
 
-        // Simulate button press for the currently selected button
-        if (currentButtonIndex == BTN_CONTINUE)
-        {
-            std::cout << "Continue Pressed\n";
-        }
-        else if (currentButtonIndex == BTN_NEWGAME)
-        {
-            this->states->push(new MenuWorldState(this->stateData));
-        }
-        else if (currentButtonIndex == BTN_LEADER)
-        {
-            std::cout << "Leader Board Pressed\n";
-        }
-        else if (currentButtonIndex == BTN_EXIT)
-        {
-            endState();
+            // Simulate button press for the currently selected button
+            if (currentButtonIndex == BTN_CONTINUE)
+            {
+                std::cout << "Continue Pressed\n";
+                this->stateData->audio->playbuttonSound();
+            }
+            else if (currentButtonIndex == BTN_NEWGAME)
+            {
+                this->states->push(new MenuWorldState(this->stateData));
+                this->stateData->audio->playbuttonSound();
+            }
+            else if (currentButtonIndex == BTN_LEADER)
+            {
+                std::cout << "Leader Board Pressed\n";
+                this->stateData->audio->playbuttonSound();
+            }
+            else if (currentButtonIndex == BTN_EXIT)
+            {
+                this->stateData->audio->playbuttonSound();
+                endState();
+            }
         }
     }
 
