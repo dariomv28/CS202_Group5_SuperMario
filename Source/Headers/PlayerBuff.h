@@ -4,6 +4,7 @@
 class PlayerBuff
 {
 public:
-	virtual void applyBuff(PlayerManager* player) = 0;
+	//PlayerBuff();
+	virtual void applyBuff(PlayerManager* player, GameEventMediator* eventMediator) = 0;
 };
 

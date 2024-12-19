@@ -27,6 +27,13 @@ void PlayerManager::handleInput(const float& dt) {
 void PlayerManager::updateAnimation(const float& dt) {
 }
 
+void PlayerManager::addBuff(PlayerBuff* buff) {
+	buffs.push_back(buff);
+}
+
+void PlayerManager::removeBuff(PlayerBuff* buff) {
+	buffs.erase(std::remove(buffs.begin(), buffs.end(), buff), buffs.end());
+}
 
 
 std::string PlayerManager::getImagePath() const {

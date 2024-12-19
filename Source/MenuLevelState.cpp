@@ -1,5 +1,6 @@
 #include "Headers/MenuLevelState.h"
 #include "Headers/GameState.h"
+#include "Headers/FireBuff.h"
 
 MenuLevelState::MenuLevelState(StateData* stateData, int world) : MainMenuState(stateData)
 {
@@ -7,6 +8,7 @@ MenuLevelState::MenuLevelState(StateData* stateData, int world) : MainMenuState(
     this->world = world;
     this->initButtons();
     player = new Mario(sf::Vector2f(0.f, 0.f), sf::Vector2f(64.f, 64.f), 3.f, 30.f);
+    player->addBuff(new FireBuff());
 }
 
 MenuLevelState::~MenuLevelState()

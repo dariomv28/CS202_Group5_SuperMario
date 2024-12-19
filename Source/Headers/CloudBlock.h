@@ -9,7 +9,7 @@ class CloudBlock :
 private:
     float curTime;
     const float appearTime = 4.f;
-    const float disappearTime = 4.f;
+    const float disappearTime = 2.5f;
 public:
     CloudBlock(sf::Vector2f position, sf::Vector2f size, std::string name, float initTime);
 	~CloudBlock();

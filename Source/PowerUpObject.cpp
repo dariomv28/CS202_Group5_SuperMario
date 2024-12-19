@@ -41,6 +41,9 @@ void PowerUpObject::update(const float& dt) {
 void PowerUpObject::reactToEnemyCollision(Enemy* enemy) {
 }
 
+void PowerUpObject::reactToBlockCollision(Block* block) {
+}
+
 void PowerUpObject::render(sf::RenderTarget* target) {
 	target->draw(entitySprite);
 	target->draw(hitbox);

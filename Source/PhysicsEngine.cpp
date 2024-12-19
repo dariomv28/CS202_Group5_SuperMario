@@ -70,7 +70,7 @@ Side PhysicsEngine::CollisionType(GameObject* obj1, GameObject* obj2)
 	else return Side::Collide_None;
 }
 
-void PhysicsEngine::fixPosition(LivingEntity* entity, GameObject* obj, Side collidedSide) {
+void PhysicsEngine::fixPosition(GameObject* entity, GameObject* obj, Side collidedSide) {
 	if (collidedSide == Collide_None) return;
 	//std::cerr << "velocity: " << entity->getVelocity().x << " " << entity->getVelocity().y << "\n";
 	switch (collidedSide) {
@@ -338,6 +338,30 @@ void PhysicsEngine::resolveCollisionEnemyEnemy(std::vector<Enemy*>& enemies, con
 		}
 	}
 }
+
+void PhysicsEngine::resolveCollisionPowerUpBlock(std::vector<PowerUpObject*>& PowerUps, std::vector<Block*>& blocks, const float& dt) {
+	for (auto& powerUp : PowerUps) {
+		for (auto& block : blocks) {
+			Side Type = CollisionType(powerUp, block);
+			if (Type != Collide_None) {
+				powerUp->reactToBlockCollision(block);
+			}
+		}
+	}
+}
+
+
+void PhysicsEngine::resolveCollisionPowerUpEnemy(std::vector<PowerUpObject*>& PowerUps, std::vector<Enemy*>& enemies, const float& dt) {
+	for (auto& powerUp : PowerUps) {
+		for (auto& enemy : enemies) {
+			Side Type = CollisionType(powerUp, enemy);
+			if (Type != Collide_None) {
+				powerUp->reactToEnemyCollision(enemy);
+			}
+		}
+	}
+}
+
 
 void PhysicsEngine::applyExternalForces(LivingEntity* entity, const float& dt) {
 	applyGravity(entity, dt);
