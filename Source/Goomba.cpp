@@ -100,15 +100,20 @@ void Goomba::update(const float& dt) {
 	move(dt);
 }
 
+void Goomba::getDamaged() {
+	if (!isAlive) return;
+	setIsAlive(false);
+	eventMediator->increaseScore(300);
+	this->hitbox.setSize(sf::Vector2f(64.f, 32.f));
+
+	this->entitySprite.setPosition(this->position + sf::Vector2f(0, 32));
+	this->hitbox.setPosition(this->position + sf::Vector2f(0, 32));
+}
+
 void Goomba::reactToPlayerCollision(int collidedSide) {
 	if (!isAlive) return;
 	if (collidedSide == Collide_Top) {
-		setIsAlive(false);
-		eventMediator->increaseScore(300);
-		this->hitbox.setSize(sf::Vector2f(64.f, 32.f));
-
-		this->entitySprite.setPosition(this->position + sf::Vector2f(0,32));
-		this->hitbox.setPosition(this->position + sf::Vector2f(0, 32));
+		getDamaged();
 	}
 	else {
 		if (collidedSide == Collide_Left) eventMediator->pushPlayerLeft();

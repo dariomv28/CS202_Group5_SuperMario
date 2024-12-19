@@ -1,4 +1,5 @@
 #include "Headers/Bullet.h"
+#include "Headers/Enemy.h"
 
 
 Bullet::Bullet(sf::Vector2f position, sf::Vector2f size, std::string name, std::string sender, sf::Vector2f velocity) :
@@ -46,7 +47,8 @@ void Bullet::reactToCollison()
 
 void Bullet::reactToEnemyCollision(Enemy* enemy)
 {
-	this->eventMediator->deleteEnemy(enemy);
+	enemy->getDamaged();
+	eventMediator->deletePowerUp(this);
 }
 
 void Bullet::reactToBlockCollision(Block* block)
