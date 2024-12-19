@@ -7,6 +7,7 @@ public:
     W2_LV1(PlayerManager* player, sf::RenderWindow* window);
     ~W2_LV1();
 
+    void update(const float& dt) override;
 };
 
 

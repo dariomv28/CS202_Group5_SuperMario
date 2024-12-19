@@ -239,6 +239,9 @@ void MapManager::convert_sketch(const unsigned int world, const unsigned int lev
 					Blocks.push_back(new SolidBlock(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "cannon_bottom"));
 				else if (pixel == sf::Color(0,0,0))
 					Blocks.push_back(new Cannon(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "cannon"));
+				else if (pixel.r == 255 && pixel.g == 255 && pixel.b < 40) {
+					Blocks.push_back(new CloudBlock(sf::Vector2f(CELL_SIZE*a, CELL_SIZE*b), sf::Vector2f(CELL_SIZE*4, CELL_SIZE), "cloudblock", (float) pixel.b/10));
+				}
 				//Power Ups
 				else if (pixel == sf::Color(255, 177, 13)) {
 					PowerUp.push_back(new Coin(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE - 10, CELL_SIZE), "coin"));
@@ -248,7 +251,7 @@ void MapManager::convert_sketch(const unsigned int world, const unsigned int lev
 			{
 				if (sf::Color(255, 0, 0) == pixel)
 				{
-					i_mario->setPosition(CELL_SIZE * a, 200);
+					i_mario->setPosition(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * (b - map_height)));
 				}
 				else if (sf::Color(155, 0, 0) == pixel)
 				{
@@ -261,5 +264,6 @@ void MapManager::convert_sketch(const unsigned int world, const unsigned int lev
 			}
 		}
 	}
+	i_enemies.push_back(new Koopa(sf::Vector2f(500, 500), sf::Vector2f(CELL_SIZE, CELL_SIZE)));
 }
 

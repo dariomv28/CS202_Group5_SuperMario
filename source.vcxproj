@@ -135,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\CloudBlock.cpp" />
     <ClCompile Include="Source\MenuWorldState.cpp" />
     <ClCompile Include="Source\Bullet.cpp" />
     <ClCompile Include="Source\FireBuff.cpp" />
@@ -186,8 +187,10 @@
     <ClCompile Include="Source\W1_LV3.cpp" />
     <ClCompile Include="Source\W2_LV2.cpp" />
     <ClCompile Include="Source\W2_LV3.cpp" />
+    <ClCompile Include="Source\W3_LV2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Headers\CloudBlock.h" />
     <ClInclude Include="Source\Headers\MenuWorldState.h" />
     <ClInclude Include="Source\Headers\Bullet.h" />
     <ClInclude Include="Source\Headers\FireBuff.h" />
@@ -239,11 +242,13 @@
     <ClInclude Include="Source\Headers\W1_LV3.h" />
     <ClInclude Include="Source\Headers\W2_LV2.h" />
     <ClInclude Include="Source\Headers\W2_LV3.h" />
+    <ClInclude Include="Source\Headers\W3_LV2.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Source\Headers\source.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Config\docs.txt" />
     <Text Include="Config\WindowIni.txt" />
   </ItemGroup>
   <ItemGroup>
