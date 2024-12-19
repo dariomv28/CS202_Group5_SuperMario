@@ -226,50 +226,6 @@ void PhysicsEngine::resolveCollisionPlayerEnemy(PlayerManager* entity, std::vect
 	}
 }
 
-void PhysicsEngine::resolveCollisionPlayerEnemy2(PlayerManager* entity, std::vector<Enemy*>& enemies, std::vector<Block*>& blocks, const float& dt) {
-	// Store original position
-	sf::Vector2f originalPosition = entity->getPosition();
-
-	for (auto& obj : enemies) {
-		Side Type = CollisionType(entity, obj);
-		if (Type != Collide_None) {
-			// When pushed by enemy, don't modify Mario's position if it would cause block penetration
-			sf::Vector2f proposedPosition = entity->getPosition();
-			fixPosition(entity, obj, Type);
-
-			// Check if new position would cause block penetration
-			bool willPenetrate = false;
-			for (auto& block : blocks) { 
-				if (CollisionType(entity, block) != Collide_None) {
-					willPenetrate = true;
-					break;
-				}
-			}
-
-			if (willPenetrate) {
-				entity->setPosition(proposedPosition);
-				entity->setVelocity(sf::Vector2f(0, entity->getVelocity().y));
-			}
-
-			switch (Type) {
-			case Collide_Right:
-				obj->reactToPlayerCollision(Collide_Left);
-				break;
-			case Collide_Left:
-				obj->reactToPlayerCollision(Collide_Right);
-				break;
-			case Collide_Bottom:
-				entity->movementComponent->resetJumps();
-				obj->reactToPlayerCollision(Collide_Top);
-				break;
-			case Collide_Top:
-				obj->reactToPlayerCollision(Collide_Bottom);
-				break;
-			}
-		}
-	}
-}
-
 void PhysicsEngine::resolveCollisionEnemyBlock(std::vector<Enemy*>& enemies, std::vector<Block*>& blocks, const float& dt) {
 	for (auto& enemy : enemies) {
 		for (auto& block : blocks) {
@@ -292,7 +248,7 @@ void PhysicsEngine::resolveCollisionEnemyBlock(std::vector<Enemy*>& enemies, std
 				//Resolve the ground
 			case (Collide_Bottom):
 				fixPosition(enemy, block, Collide_Bottom);
-				enemy->setVelocity(sf::Vector2f(enemy->getVelocity().x, -10.0f));
+				enemy->setVelocity(sf::Vector2f(enemy->getVelocity().x, -20.0f));
 				enemy->reactToBlockCollision(Collide_Bottom);
 				break;
 
