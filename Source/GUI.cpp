@@ -145,6 +145,15 @@ namespace GUI
 		}
 	}
 
+	void TextButton::setPosition(float x, float y)
+	{
+		this->shape.setPosition(x, y);
+		this->text.setPosition(
+			x + (this->shape.getSize().x / 2.f) - this->text.getGlobalBounds().width / 2.f,
+			y + (this->shape.getSize().y / 2.f) - this->text.getGlobalBounds().height / 2.f
+		);
+	}
+
 	void TextButton::render(sf::RenderTarget* target)
 	{
 		target->draw(this->shape);
@@ -221,6 +230,15 @@ namespace GUI
 		default:
 			break;
 		}
+	}
+
+	void TextureButton::setPosition(float x, float y)
+	{
+		this->sprite.setPosition(x, y);
+		this->text.setPosition(
+			x + (this->sprite.getGlobalBounds().width / 2.f) - this->text.getGlobalBounds().width / 2.f,
+			y + (this->sprite.getGlobalBounds().height / 2.f) - this->text.getGlobalBounds().height / 2.f
+		);
 	}
 
 	void TextureButton::render(sf::RenderTarget* target)

@@ -136,10 +136,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\CloudBlock.cpp" />
+    <ClCompile Include="Source\DeathMenuState.cpp" />
     <ClCompile Include="Source\MenuWorldState.cpp" />
     <ClCompile Include="Source\Bullet.cpp" />
     <ClCompile Include="Source\FireBuff.cpp" />
     <ClCompile Include="Source\OllamaService.cpp" />
+    <ClCompile Include="Source\PauseMenuState.cpp" />
     <ClCompile Include="Source\PlayerBuff.cpp" />
     <ClCompile Include="Source\Cannon.cpp" />
     <ClCompile Include="Source\ChatComponent.cpp" />
@@ -191,10 +193,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Headers\CloudBlock.h" />
+    <ClInclude Include="Source\Headers\DeathMenuState.h" />
     <ClInclude Include="Source\Headers\MenuWorldState.h" />
     <ClInclude Include="Source\Headers\Bullet.h" />
     <ClInclude Include="Source\Headers\FireBuff.h" />
     <ClInclude Include="Source\Headers\OllamaService.h" />
+    <ClInclude Include="Source\Headers\PauseMenuState.h" />
     <ClInclude Include="Source\Headers\PlayerBuff.h" />
     <ClInclude Include="Source\Headers\Cannon.h" />
     <ClInclude Include="Source\Headers\ChatComponent.h" />
