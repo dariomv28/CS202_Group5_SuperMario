@@ -163,8 +163,18 @@ void Koopa::reactToPlayerCollision(int collidedSide) {
         }
     }
     else {
-        if (collidedSide == Collide_Left) eventMediator->pushPlayerLeft();
-        else eventMediator->pushPlayerRight();
+        if (collidedSide == Collide_Left)
+        {
+            this->setMoveLeft(false);
+            this->setMoveRight(true);
+            eventMediator->pushPlayerLeft();
+        }
+        else
+        {
+            this->setMoveRight(false);
+            this->setMoveLeft(true);
+            eventMediator->pushPlayerRight();
+        }
         eventMediator->decreasePlayerHealth();
     }
 }

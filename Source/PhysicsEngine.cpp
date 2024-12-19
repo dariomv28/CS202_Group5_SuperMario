@@ -71,6 +71,7 @@ Side PhysicsEngine::CollisionType(GameObject* obj1, GameObject* obj2)
 }
 
 void PhysicsEngine::fixPosition(LivingEntity* entity, GameObject* obj, Side collidedSide) {
+	if (collidedSide == Collide_None) return;
 	//std::cerr << "velocity: " << entity->getVelocity().x << " " << entity->getVelocity().y << "\n";
 	switch (collidedSide) {
 	case Collide_Top:	
@@ -209,9 +210,10 @@ void PhysicsEngine::resolveCollisionPlayerEnemy(PlayerManager* entity, std::vect
 	for (auto& obj : enemies) {
 		//Resolve the right side
 		Side Type = CollisionType(entity, obj);
-		if (Type != Collide_None) fixPosition(entity, obj, Type);
+		fixPosition(entity, obj, Type);
 		switch (Type) {
 		case Collide_Right:
+
 			obj->reactToPlayerCollision(Collide_Left);
 			continue;
 
@@ -220,8 +222,9 @@ void PhysicsEngine::resolveCollisionPlayerEnemy(PlayerManager* entity, std::vect
 			continue;
 
 		case Collide_Bottom:
-			entity->movementComponent->resetJumps();
 			obj->reactToPlayerCollision(Collide_Top);
+			entity->setOnGround(true);
+			entity->movementComponent->resetJumps();
 			continue;
 
 		case Collide_Top:
@@ -253,7 +256,7 @@ void PhysicsEngine::resolveCollisionEnemyBlock(std::vector<Enemy*>& enemies, std
 				//Resolve the ground
 			case (Collide_Bottom):
 				fixPosition(enemy, block, Collide_Bottom);
-				enemy->setVelocity(sf::Vector2f(enemy->getVelocity().x, -20.0f));
+				enemy->setVelocity(sf::Vector2f(enemy->getVelocity().x, -40.0f));
 				enemy->reactToBlockCollision(Collide_Bottom);
 				break;
 

@@ -264,6 +264,5 @@ void MapManager::convert_sketch(const unsigned int world, const unsigned int lev
 			}
 		}
 	}
-	i_enemies.push_back(new Koopa(sf::Vector2f(500, 500), sf::Vector2f(CELL_SIZE, CELL_SIZE)));
 }
 
