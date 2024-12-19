@@ -65,13 +65,13 @@ void MovementComponent::setmoveRight(bool moveRight) {
 void MovementComponent::jump(const float& dt, GameEventMediator* eventMediator) {
     
     if (onGround && isJump) {
-        velocity.y = -600.f;
+        velocity.y = JUMP_FORCE;
         onGround = false;
         isJump = false;
         jumpsRemaining = MAX_JUMPS - 1; 
     }
     else if (!onGround && isJump && jumpsRemaining > 0) {
-        velocity.y = -600.f;
+        velocity.y = JUMP_FORCE;
         isJump = false;
         jumpsRemaining--;
     }

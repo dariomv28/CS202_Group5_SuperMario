@@ -32,5 +32,7 @@ public:
 	void resolveCollisionPlayerPowerUp(PlayerManager* entity, std::vector<PowerUpObject*>& PowerUps, const float& dt);
 	void applyExternalForces(LivingEntity* entity, const float& dt);
 	void resolveCollisionEnemyEnemy(std::vector<Enemy*>& enemies, const float& dt);
+
+	void resolveCollisionPlayerEnemy2(PlayerManager* entity, std::vector<Enemy*>& enemies, std::vector<Block*>& blocks, const float& dt);
 };
 
