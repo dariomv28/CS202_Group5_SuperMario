@@ -331,6 +331,30 @@ void PhysicsEngine::resolveCollisionEnemyEnemy(std::vector<Enemy*>& enemies, con
 	}
 }
 
+void PhysicsEngine::resolveCollisionPowerUpBlock(std::vector<PowerUpObject*>& PowerUps, std::vector<Block*>& blocks, const float& dt) {
+	for (auto& powerUp : PowerUps) {
+		for (auto& block : blocks) {
+			Side Type = CollisionType(powerUp, block);
+			if (Type != Collide_None) {
+				powerUp->reactToBlockCollision(block);
+			}
+		}
+	}
+}
+
+
+void PhysicsEngine::resolveCollisionPowerUpEnemy(std::vector<PowerUpObject*>& PowerUps, std::vector<Enemy*>& enemies, const float& dt) {
+	for (auto& powerUp : PowerUps) {
+		for (auto& enemy : enemies) {
+			Side Type = CollisionType(powerUp, enemy);
+			if (Type != Collide_None) {
+				powerUp->reactToEnemyCollision(enemy);
+			}
+		}
+	}
+}
+
+
 void PhysicsEngine::applyExternalForces(LivingEntity* entity, const float& dt) {
 	applyGravity(entity, dt);
 	applyFriction(entity, dt);

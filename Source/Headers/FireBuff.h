@@ -11,6 +11,6 @@ public:
     FireBuff();
 	virtual ~FireBuff();
 
-	void applyBuff(PlayerManager* player) override;
+	void applyBuff(PlayerManager* player, GameEventMediator* eventMediator) override;
 };
 
