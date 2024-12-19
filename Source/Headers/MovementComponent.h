@@ -1,6 +1,6 @@
 #pragma once
-#include "stdafx.h"
 
+#include "stdafx.h"
 #include "GameEventMediator.h"
 
 class MovementComponent
@@ -8,10 +8,10 @@ class MovementComponent
 private:
 	int jumpsRemaining;
 	const int MAX_JUMPS = 2;
-	//GameEventMediator* eventMediator;
-	
 public:
-	
+	const float JUMP_FORCE = -900.f;
+	const float MAX_FALL_SPEED = 1000.f;
+
 	int acceleration;
 	int maxVelocity;
 	bool isMoveLeft;
@@ -35,5 +35,4 @@ public:
 
 	void resetJumps();
 	int getJumpsRemaining() const;
-	//void setEventMediator(GameEventMediator* eventMediator);
 };

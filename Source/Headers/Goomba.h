@@ -31,6 +31,7 @@ public:
 
 	//update function
 	void update(const float& dt) override;
+	void getDamaged() override;
 
 	// Collision response
 	void move(const float& dt) override;

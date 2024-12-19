@@ -15,6 +15,7 @@ public:
 	void update(const float& dt) override;
 	virtual void reactToCollison() = 0;
 	virtual void reactToEnemyCollision(Enemy* enemy);
+	virtual void reactToBlockCollision(Block* block);
 	void render(sf::RenderTarget* target) override;
 };
 

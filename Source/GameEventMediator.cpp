@@ -79,7 +79,13 @@ void GameEventMediator::resolveCollision(const float& dt) {
 	physicsEngine->resolveCollisionPlayerEnemy(player, *enemies, dt);
 	// Resolve collision between player and powerups	
 	physicsEngine->resolveCollisionPlayerPowerUp(player, *PowerUps, dt);
-	updateHealth();
+
+	// Resolve collision between powerups and blocks
+	physicsEngine->resolveCollisionPowerUpBlock(*PowerUps, *blocks, dt);
+
+	// Resolve collision between powerups and enemies
+
+	physicsEngine->resolveCollisionPowerUpEnemy(*PowerUps, *enemies, dt);
 }
 
 void GameEventMediator::updateInput(const float& dt) {
@@ -106,6 +112,7 @@ void GameEventMediator::updateEvents(const float& dt) {
 }
 
 void GameEventMediator::updateLevelGUI(const sf::View& view) {
+	levelGUI->updateHealth(player->getHealth());
 	levelGUI->update(view);
 }
 
@@ -117,10 +124,6 @@ void GameEventMediator::increaseScore(int numScore) {
 	levelGUI->increaseScore(numScore);
 }
 
-void GameEventMediator::updateHealth() {
-	levelGUI->updateHealth(player->getHealth()); // Just for testing
-}
-
 void GameEventMediator::setPlayerBig(bool big) {
 	player->setBig(big);
 }
@@ -130,11 +133,11 @@ void GameEventMediator::decreasePlayerHealth() {
 }
 
 void GameEventMediator::pushPlayerLeft() {
-	player->setVelocity(sf::Vector2f(-10.0f, player->getVelocity().y));
+	player->setVelocity(sf::Vector2f(-500.0f, player->getVelocity().y));
 }
 
 void GameEventMediator::pushPlayerRight() {
-	player->setVelocity(sf::Vector2f(10.0f, player->getVelocity().y));
+	player->setVelocity(sf::Vector2f(500.0f, player->getVelocity().y));
 }
 
 void GameEventMediator::spawnPowerUp(PowerUpObject* PowerUp) {

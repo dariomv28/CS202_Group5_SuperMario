@@ -26,7 +26,7 @@ void PowerUpObject::initSpritesSheet() {
 	//Mushrooms
 	spritesSheet["mushroom_1"] = sf::IntRect(2, 2, 16, 16);
 	spritesSheet["mushroom_2"] = sf::IntRect(19, 2, 16, 16);
-	spritesSheet["mushroom_3"] = sf::IntRect(35, 2, 16, 16);
+	spritesSheet["mushroom_3"] = sf::IntRect(36, 2, 16, 16);
 	spritesSheet["mushroom_4"] = sf::IntRect(53, 2, 16, 16);
 
 	//Bullet
@@ -39,6 +39,9 @@ void PowerUpObject::update(const float& dt) {
 }
 
 void PowerUpObject::reactToEnemyCollision(Enemy* enemy) {
+}
+
+void PowerUpObject::reactToBlockCollision(Block* block) {
 }
 
 void PowerUpObject::render(sf::RenderTarget* target) {

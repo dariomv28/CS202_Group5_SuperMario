@@ -119,6 +119,10 @@ void Mario::update(const float& dt) {
     //std::cerr << this->getPosition().x << " "<< this->getPosition().y << std::endl;
 	eventMediator->applyExternalForce(this, dt);
     move(dt);
+    //apply buffs
+    for (auto& buff : buffs) {
+		buff->applyBuff(this, this->eventMediator);
+	}
 }
 
 void Mario::handleInput(const float& dt) {

@@ -25,12 +25,14 @@ public:
 
 	//Physics functions
 	//void fixPosition(LivingEntity* entity, std::vector<Block*> Collided_Blocks[]);
-	void fixPosition(LivingEntity* entity, GameObject* obj, Side collidedSide);
+	void fixPosition(GameObject* entity, GameObject* obj, Side collidedSide);
 	void resolveCollisionPlayerBlock(PlayerManager* entity, std::vector<Block*>& blocks, const float& dt);
 	void resolveCollisionPlayerEnemy(PlayerManager* entity, std::vector<Enemy*>& enemies, const float& dt);
 	void resolveCollisionEnemyBlock(std::vector<Enemy*>& enemies, std::vector<Block*>& blocks, const float& dt);
 	void resolveCollisionPlayerPowerUp(PlayerManager* entity, std::vector<PowerUpObject*>& PowerUps, const float& dt);
 	void applyExternalForces(LivingEntity* entity, const float& dt);
 	void resolveCollisionEnemyEnemy(std::vector<Enemy*>& enemies, const float& dt);
+	void resolveCollisionPowerUpBlock(std::vector<PowerUpObject*>& PowerUps, std::vector<Block*>& blocks, const float& dt);
+	void resolveCollisionPowerUpEnemy(std::vector<PowerUpObject*>& PowerUps, std::vector<Enemy*>& enemies, const float& dt);
 };
 

@@ -106,6 +106,23 @@ void Koopa::update(const float& dt) {
     move(dt);
 }
 
+void Koopa::getDamaged() {
+    if (!isShelled) {
+        isShelled = true;
+        shellTimer = 0.0f;
+        this->hitbox.setSize(sf::Vector2f(64.f, 56.f));
+        this->movementComponent->acceleration = 0;
+        eventMediator->increaseScore(200);
+    }
+    else if (shellTimer > 3.0f) {
+        isAlive = false;
+        isShelled = false;
+        this->hitbox.setSize(sf::Vector2f(64.f, 56.f));
+
+        eventMediator->increaseScore(400);
+    }
+}
+
 void Koopa::reactToBlockCollision(int collidedSide) {
 	if (collidedSide == Collide_Left) {
 		setMoveLeft(false);
@@ -147,24 +164,21 @@ void Koopa::setIsAlive(bool alive) {
 void Koopa::reactToPlayerCollision(int collidedSide) {
  
     if (collidedSide == Collide_Top) {
-        if (!isShelled) {
-            isShelled = true;
-            shellTimer = 0.0f;
-            this->hitbox.setSize(sf::Vector2f(64.f, 56.f));
-            this->movementComponent->acceleration = 0;
-            eventMediator->increaseScore(200);
-        }
-        else if (shellTimer > 3.0f) {
-            isAlive = false;
-            isShelled = false;
-            this->hitbox.setSize(sf::Vector2f(64.f, 56.f));
-
-            eventMediator->increaseScore(400);
-        }
+        getDamaged();
     }
     else {
-        if (collidedSide == Collide_Left) eventMediator->pushPlayerLeft();
-        else eventMediator->pushPlayerRight();
+        if (collidedSide == Collide_Left)
+        {
+            this->setMoveLeft(false);
+            this->setMoveRight(true);
+            eventMediator->pushPlayerLeft();
+        }
+        else
+        {
+            this->setMoveRight(false);
+            this->setMoveLeft(true);
+            eventMediator->pushPlayerRight();
+        }
         eventMediator->decreasePlayerHealth();
     }
 }
