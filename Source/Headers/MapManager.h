@@ -15,6 +15,7 @@
 #include "Lava.h"
 #include "Trampoline.h"
 #include "Cannon.h"
+#include "CloudBlock.h"
 
 using namespace std;
 
