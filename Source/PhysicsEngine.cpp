@@ -248,7 +248,7 @@ void PhysicsEngine::resolveCollisionEnemyBlock(std::vector<Enemy*>& enemies, std
 				//Resolve the ground
 			case (Collide_Bottom):
 				fixPosition(enemy, block, Collide_Bottom);
-				enemy->setVelocity(sf::Vector2f(enemy->getVelocity().x, -20.0f));
+				enemy->setVelocity(sf::Vector2f(enemy->getVelocity().x, -40.0f));
 				enemy->reactToBlockCollision(Collide_Bottom);
 				break;
 
