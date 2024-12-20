@@ -63,26 +63,17 @@ void MovementComponent::setmoveRight(bool moveRight) {
 	isMoveRight = moveRight;
 }
 void MovementComponent::jump(const float& dt, GameEventMediator* eventMediator) {
-    
     if (onGround && isJump) {
-//<<<<<<< HEAD
-//        velocity.y = -700.f;
-//=======
         velocity.y = JUMP_FORCE;
-//>>>>>>> 1808eb3341cb58b223903281233a2c5afdcb8c1d
         onGround = false;
         isJump = false;
         jumpsRemaining = MAX_JUMPS - 1; 
     }
     else if (!onGround && isJump && jumpsRemaining > 0) {
-//<<<<<<< HEAD
-//        velocity.y = -700.f;
-//=======
         velocity.y = JUMP_FORCE;
-//>>>>>>> 1808eb3341cb58b223903281233a2c5afdcb8c1d
         isJump = false;
         jumpsRemaining--;
     }
-    //eventMediator->playJumpSound();
+    // eventMediator->playJumpSound();
 }
 
