@@ -39,7 +39,6 @@ void Lava::update(const float& dt) {
     // Update animation timer
     animationTimer += dt;
 
-    // Check if it's time to update the frame
     if (animationTimer >= animationSpeed) {
         animationTimer = 0.f;
 
