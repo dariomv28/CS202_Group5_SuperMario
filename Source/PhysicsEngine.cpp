@@ -282,6 +282,7 @@ void PhysicsEngine::resolveCollisionPlayerPowerUp(PlayerManager* entity, std::ve
 void PhysicsEngine::resolveCollisionEnemyEnemy(std::vector<Enemy*>& enemies, const float& dt) {
 	for (size_t i = 0; i < enemies.size(); ++i) {
 		for (size_t j = i + 1; j < enemies.size(); ++j) {
+			
 			Enemy* enemy1 = enemies[i];
 			Enemy* enemy2 = enemies[j];
 
