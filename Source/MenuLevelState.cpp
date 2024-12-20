@@ -97,7 +97,6 @@ void MenuLevelState::updateGUI()
     else if (buttons[BTN_LEVEL3]->isPressed())
     {
         GameState* gameState = new GameState(this->stateData, this);
-
         this->setLevel(3);
         gameState->loadLevel(player, world, level);
         this->states->push(gameState);

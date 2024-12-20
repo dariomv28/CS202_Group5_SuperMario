@@ -48,8 +48,6 @@ void AudioSystem::init() {
 	brickSound.setVolume(200.0f);
 }
 
-
-
 void AudioSystem::playMusic() {
 	if (currentBackgroundMusic == "MainMenu")
 		return;
@@ -71,9 +69,6 @@ void AudioSystem::playLevel1Music() {
 	stopAllMusic();
 	level1Music.setLoop(true);
 	level1Music.play();
-	if (!level1Music.openFromFile("Source/Resources/audio/Level1Music.wav")) {
-		std::cerr << "Failed to load Level1Music.wav" << std::endl;
-	}
 }
 
 void AudioSystem::stopLevel1Music() {
