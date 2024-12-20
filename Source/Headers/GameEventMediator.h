@@ -52,13 +52,14 @@ public:
 	// LevelGUI events
 	void increaseCoins(int numCoins);
 	void increaseScore(int numScore);
-	void updateHealth(); // For LevelGUI
+	/*void updateHealth(); */
 	
 	// Player events
 	void setPlayerBig(bool big);
 	void decreasePlayerHealth();
 	void pushPlayerLeft();
 	void pushPlayerRight();
+	void pushPlayerUpExtra();
 
 	// PowerUp events
 	void spawnPowerUp(PowerUpObject* PowerUp);
@@ -81,5 +82,6 @@ public:
 	void playJumpSound();
 	void playBrickDestroyedSound();
 
+	PlayerManager*& getPlayer() { return player; }
 };
 

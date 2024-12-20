@@ -3,7 +3,7 @@
 #include <stdexcept>
 
 Mario::Mario(sf::Vector2f position, sf::Vector2f size, int health, int speed)
-    : PlayerManager(position, size, health, speed), currentAction("IDLE"), isAnimationInProgress(false) {
+    : PlayerManager(position, size, health, speed), currentAction("IDLE-"), isAnimationInProgress(false) {
     animationComponent = nullptr;
     movementComponent = new MovementComponent(speed, 4.0f);
     init();
@@ -27,99 +27,246 @@ void Mario::init() {
     this->animationComponent = new AnimationComponent(this->entitySprite);
     initAnimations();
 
-    if (!is_big) {
-        hitbox.setSize(sf::Vector2f(64.f, 64.f));
-        //hitbox.setOrigin(32.f, 32.f);
-        hitbox.setPosition(position);
-        hitbox.setFillColor(sf::Color::Transparent);
-        hitbox.setOutlineColor(sf::Color::Red);
-        hitbox.setOutlineThickness(-1.f);
+    hitbox.setPosition(position);
+    hitbox.setFillColor(sf::Color::Transparent);
+    hitbox.setOutlineColor(sf::Color::Red);
+    hitbox.setOutlineThickness(-1.f);
+    updateHitboxSize();
 
-        currentAction = "IDLE-";
-        animationComponent->setAnimation("IDLE", spritesSheet, 0.2f, is_big);
-    }
-    else {
-        hitbox.setSize(sf::Vector2f(64.f, 125.f));
-        //hitbox.setOrigin(32.f, 64.f);  
-        hitbox.setPosition(position);
-        hitbox.setFillColor(sf::Color::Transparent);
-        hitbox.setOutlineColor(sf::Color::Red);
-        hitbox.setOutlineThickness(-1.f);
-
-        currentAction = "isBig_IDLE-";
-        animationComponent->setAnimation("isBig_IDLE", spritesSheet, 0.2f, is_big);
-    }
+    currentAction = "IDLE-";
+    isMovingLeft = false;  // Initialize direction
 }
 
 void Mario::initAnimations() {
-    spritesSheet = {
-        { "IDLE", sf::IntRect(1, 17, 16, 16) },
+    // Right
 
-        { "WALK-1", sf::IntRect(17, 17, 16, 16) },
-        { "WALK-2", sf::IntRect(37, 17, 16, 16) },
-        { "WALK-3", sf::IntRect(17, 17, 16, 16) },
-        { "WALK-4", sf::IntRect(1, 17, 16, 16) },
+	std::unordered_map<std::string, sf::IntRect> idle = {
+		{"IDLE-", allSpritesMario["IDLE-"]},
+	};
 
-        { "RUN-1", sf::IntRect(53, 17, 16, 16) },
-        //{ "RUN-2", sf::IntRect(69, 0, 16, 32) },
-        { "RUN-2", sf::IntRect(17, 17, 16, 16) },
-        { "RUN-3", sf::IntRect(37, 17, 16, 16) },
-        { "RUN-4", sf::IntRect(17, 17, 16, 16) },
-        { "RUN-5", sf::IntRect(1, 17, 16, 16) },
-
-        { "JUMP-1", sf::IntRect(86, 17, 16, 16) },
-        { "JUMP-2", sf::IntRect(103, 17, 16, 16) },
-        { "JUMP-3", sf::IntRect(120, 17, 16, 16) },
-
-        { "CLIMB-1", sf::IntRect(139, 17, 16, 16) },
-        { "CLIMB-2", sf::IntRect(156, 17, 16, 16) },
-
-        { "VICTORY-1", sf::IntRect(171, 17, 16, 16) },
-        { "VICTORY-2", sf::IntRect(189, 17, 16, 16) },
-        { "VICTORY-3", sf::IntRect(205, 17, 16, 16) },
-
-        { "BECOME_BIG", sf::IntRect(224, 3, 16, 32) },
-
-        { "isBig_IDLE", sf::IntRect(241, 3, 16, 32) },
-
-        { "isBig_WALK-1", sf::IntRect(256, 3, 16, 32) },
-        { "isBig_WALK-2", sf::IntRect(273, 3, 16, 32) },
-        { "isBig_WALK-3", sf::IntRect(256, 3, 16, 32) },
-        { "isBig_WALK-4", sf::IntRect(241, 3, 16, 32) },
-
-        { "isBig_RUN-1", sf::IntRect(290, 3, 16, 32) },
-        //{ "isBig_RUN-2", sf::IntRect(307, 0, 16, 32) },
-        { "isBig_RUN-2", sf::IntRect(256, 3, 16, 32) },
-        { "isBig_RUN-3", sf::IntRect(273, 3, 16, 32) },
-        { "isBig_RUN-4", sf::IntRect(256, 3, 16, 32) },
-        { "isBig_RUN-5", sf::IntRect(241, 3, 16, 32) },
-
-        { "isBig_JUMP-1", sf::IntRect(328, 3, 20, 32) },
-        { "isBig_JUMP-2", sf::IntRect(354, 3, 20, 32) },
-        { "isBig_JUMP-3", sf::IntRect(378, 3, 20, 32) },
-
-        { "isBig_CLIMB-1", sf::IntRect(401, 3, 16, 32) },
-        { "isBig_CLIMN-2", sf::IntRect(418, 3, 16, 32) },
-
-        { "isBig_CROUCH", sf::IntRect(433, 3, 16, 32) },
-
-        { "isBig_VICTORY-1", sf::IntRect(450, 3, 16, 32) },
-        { "isBig_VICTORY-2", sf::IntRect(467, 3, 16, 32) },
-        { "isBig_VICTORY-3", sf::IntRect(484, 3, 16, 32) },
-        { "isBig_VICTORY-4", sf::IntRect(501, 3, 16, 32) },
+    std::unordered_map<std::string, sf::IntRect> walk1 = {
+        {"WALK-1", allSpritesMario["WALK-1"]},
+        {"WALK-2", allSpritesMario["WALK-2"]},
+		{"WALK-3", allSpritesMario["WALK-1"]},
+		{"WALK-4", allSpritesMario["IDLE-"]},
     };
+
+    std::unordered_map<std::string, sf::IntRect> stop = {
+        {"STOP-", allSpritesMario["STOP-"]},
+    };
+
+    std::unordered_map<std::string, sf::IntRect> run1 = {
+        {"RUN-1", allSpritesMario["RUN-1"] },
+		{"RUN-2", allSpritesMario["WALK-1"] },
+		{"RUN-3", allSpritesMario["WALK-2"] },
+        {"RUN-4", allSpritesMario["WALK-1"] },
+		{"RUN-5", allSpritesMario["IDLE-"] },
+	};
+
+	std::unordered_map<std::string, sf::IntRect> jump = {
+		{"JUMP-1", allSpritesMario["JUMP-1"]},
+		{"JUMP-2", allSpritesMario["JUMP-2"]},
+		{"JUMP-3", allSpritesMario["JUMP-3"]},
+	};
+
+	std::unordered_map<std::string, sf::IntRect> climb = {
+		{"CLIMB-1", allSpritesMario["CLIMB-1"]},
+		{"CLIMB-2", allSpritesMario["CLIMB-2"]},
+	};
+
+	std::unordered_map<std::string, sf::IntRect> victory = {
+		{"VICTORY-1", allSpritesMario["VICTORY-1"]},
+		{"VICTORY-2", allSpritesMario["VICTORY-2"]},
+		{"VICTORY-3", allSpritesMario["VICTORY-3"]},
+	};
+
+    std::unordered_map<std::string, sf::IntRect> becomeBig = {
+        {"BECOME_BIG-", allSpritesMario["BECOME_BIG-"]},
+    };
+
+	std::unordered_map<std::string, sf::IntRect> isBigIdle = {
+		{"isBig_IDLE-", allSpritesMario["isBig_IDLE-"]},
+	};
+
+	std::unordered_map<std::string, sf::IntRect> isBigWalk1 = {
+		{"isBig_WALK-1", allSpritesMario["isBig_WALK-1"]},
+		{"isBig_WALK-2", allSpritesMario["isBig_WALK-2"]},
+		{"isBig_WALK-3", allSpritesMario["isBig_WALK-1"]},
+		{"isBig_WALK-4", allSpritesMario["isBig_IDLE-"]},
+	};
+
+	std::unordered_map<std::string, sf::IntRect> isBigStop = {
+		{"isBig_STOP-", allSpritesMario["isBig_STOP-"]},
+	};
+
+	std::unordered_map<std::string, sf::IntRect> isBigRun1 = {
+		{"isBig_RUN-1", allSpritesMario["isBig_RUN-1"]},
+        {"isBig_RUN-2", allSpritesMario["isBig_WALK-1"]},
+        {"isBig_RUN-3", allSpritesMario["isBig_WALK-2"]},
+		{"isBig_RUN-4", allSpritesMario["isBig_WALK-1"]},
+		{"isBig_RUN-5", allSpritesMario["isBig_IDLE-"]},
+	};
+
+	std::unordered_map<std::string, sf::IntRect> isBigJump = {
+		{"isBig_JUMP-1", allSpritesMario["isBig_JUMP-1"]},
+		{"isBig_JUMP-2", allSpritesMario["isBig_JUMP-2"]},
+		{"isBig_JUMP-3", allSpritesMario["isBig_JUMP-3"]},
+	};
+
+	std::unordered_map<std::string, sf::IntRect> isBigClimb = {
+		{"isBig_CLIMB-1", allSpritesMario["isBig_CLIMB-1"]},
+		{"isBig_CLIMB-2", allSpritesMario["isBig_CLIMB-2"]},
+	};
+
+	std::unordered_map<std::string, sf::IntRect> isBigCrouch = {
+		{"isBig_CROUCH-", allSpritesMario["isBig_CROUCH-"]},
+	};
+
+	std::unordered_map<std::string, sf::IntRect> isBigVictory = {
+		{"isBig_VICTORY-1", allSpritesMario["isBig_VICTORY-1"]},
+		{"isBig_VICTORY-2", allSpritesMario["isBig_VICTORY-2"]},
+		{"isBig_VICTORY-3", allSpritesMario["isBig_VICTORY-3"]},
+		{"isBig_VICTORY-4", allSpritesMario["isBig_VICTORY-4"]},
+	};
+
+    // Left
+
+    std::unordered_map<std::string, sf::IntRect> idleR = {
+        {"IDLER-", allSpritesMario["IDLER-"]},
+    };
+
+    std::unordered_map<std::string, sf::IntRect> walk1R = {
+        {"WALKR-1", allSpritesMario["WALKR-1"]},
+        {"WALKR-2", allSpritesMario["WALKR-2"]},
+        {"WALKR-3", allSpritesMario["WALKR-1"]},
+        {"WALKR-4", allSpritesMario["IDLER-"]},
+    };
+
+    std::unordered_map<std::string, sf::IntRect> stopR = {
+        {"STOPR-", allSpritesMario["STOPR-"]},
+    };
+
+    std::unordered_map<std::string, sf::IntRect> run1R = {
+        {"RUNR-1", allSpritesMario["RUNR-1"] },
+        {"RUNR-2", allSpritesMario["WALKR-1"] },
+        {"RUNR-3", allSpritesMario["WALKR-2"] },
+        {"RUNR-4", allSpritesMario["WALKR-1"] },
+        {"RUNR-5", allSpritesMario["IDLER-"] },
+    };
+
+    std::unordered_map<std::string, sf::IntRect> jumpR = {
+        {"JUMPR-1", allSpritesMario["JUMPR-1"]},
+        {"JUMPR-2", allSpritesMario["JUMPR-2"]},
+        {"JUMPR-3", allSpritesMario["JUMPR-3"]},
+    };
+
+    std::unordered_map<std::string, sf::IntRect> climbR = {
+        {"CLIMBR-1", allSpritesMario["CLIMBR-1"]},
+        {"CLIMBR-2", allSpritesMario["CLIMBR-2"]},
+    };
+
+    std::unordered_map<std::string, sf::IntRect> victoryR = {
+        {"VICTORYR-1", allSpritesMario["VICTORYR-1"]},
+        {"VICTORYR-2", allSpritesMario["VICTORYR-2"]},
+        {"VICTORYR-3", allSpritesMario["VICTORYR-3"]},
+    };
+
+    std::unordered_map<std::string, sf::IntRect> becomeBigR = {
+        {"BECOME_BIGR-", allSpritesMario["BECOME_BIGR-"]},
+    };
+
+    std::unordered_map<std::string, sf::IntRect> isBigIdleR = {
+        {"isBig_IDLER-", allSpritesMario["isBig_IDLER-"]},
+    };
+
+    std::unordered_map<std::string, sf::IntRect> isBigWalk1R = {
+        {"isBig_WALKR-1", allSpritesMario["isBig_WALKR-1"]},
+        {"isBig_WALKR-2", allSpritesMario["isBig_WALKR-2"]},
+        {"isBig_WALKR-3", allSpritesMario["isBig_WALKR-1"]},
+        {"isBig_WALKR-4", allSpritesMario["isBig_IDLER-"]},
+    };
+
+    std::unordered_map<std::string, sf::IntRect> isBigStopR = {
+        {"isBig_STOPR-", allSpritesMario["isBig_STOPR-"]},
+    };
+
+    std::unordered_map<std::string, sf::IntRect> isBigRun1R = {
+        {"isBig_RUNR-1", allSpritesMario["isBig_RUNR-1"]},
+        {"isBig_RUNR-2", allSpritesMario["isBig_WALKR-1"]},
+        {"isBig_RUNR-3", allSpritesMario["isBig_WALKR-2"]},
+        {"isBig_RUNR-4", allSpritesMario["isBig_WALKR-1"]},
+        {"isBig_RUNR-5", allSpritesMario["isBig_IDLER-"]},
+    };
+
+    std::unordered_map<std::string, sf::IntRect> isBigJumpR = {
+        {"isBig_JUMPR-1", allSpritesMario["isBig_JUMPR-1"]},
+        {"isBig_JUMPR-2", allSpritesMario["isBig_JUMPR-2"]},
+        {"isBig_JUMPR-3", allSpritesMario["isBig_JUMPR-3"]},
+    };
+
+    std::unordered_map<std::string, sf::IntRect> isBigClimbR = {
+        {"isBig_CLIMBR-1", allSpritesMario["isBig_CLIMBR-1"]},
+        {"isBig_CLIMBR-2", allSpritesMario["isBig_CLIMBR-2"]},
+    };
+
+    std::unordered_map<std::string, sf::IntRect> isBigCrouchR = {
+        {"isBig_CROUCHR-", allSpritesMario["isBig_CROUCHR-"]},
+    };
+
+    std::unordered_map<std::string, sf::IntRect> isBigVictoryR = {
+        {"isBig_VICTORYR-1", allSpritesMario["isBig_VICTORYR-1"]},
+        {"isBig_VICTORYR-2", allSpritesMario["isBig_VICTORYR-2"]},
+        {"isBig_VICTORYR-3", allSpritesMario["isBig_VICTORYR-3"]},
+        {"isBig_VICTORYR-4", allSpritesMario["isBig_VICTORYR-4"]},
+    };
+
+    // Add right
+	
+	spritesSheet.insert(idle.begin(), idle.end());
+	spritesSheet.insert(walk1.begin(), walk1.end());
+	spritesSheet.insert(stop.begin(), stop.end());
+	spritesSheet.insert(run1.begin(), run1.end());
+	spritesSheet.insert(jump.begin(), jump.end());
+	spritesSheet.insert(climb.begin(), climb.end());
+	spritesSheet.insert(victory.begin(), victory.end());
+	spritesSheet.insert(becomeBig.begin(), becomeBig.end());
+
+    spritesSheet.insert(isBigIdle.begin(), isBigIdle.end());
+    spritesSheet.insert(isBigWalk1.begin(), isBigWalk1.end());
+    spritesSheet.insert(isBigStop.begin(), isBigStop.end());
+    spritesSheet.insert(isBigRun1.begin(), isBigRun1.end());
+    spritesSheet.insert(isBigJump.begin(), isBigJump.end());
+    spritesSheet.insert(isBigClimb.begin(), isBigClimb.end());
+    spritesSheet.insert(isBigCrouch.begin(), isBigCrouch.end());
+    spritesSheet.insert(isBigVictory.begin(), isBigVictory.end());
+
+	// Add left
+
+	spritesSheet.insert(idleR.begin(), idleR.end());
+	spritesSheet.insert(walk1R.begin(), walk1R.end());
+	spritesSheet.insert(stopR.begin(), stopR.end());
+	spritesSheet.insert(run1R.begin(), run1R.end());
+	spritesSheet.insert(jumpR.begin(), jumpR.end());
+	spritesSheet.insert(climbR.begin(), climbR.end());
+	spritesSheet.insert(victoryR.begin(), victoryR.end());
+	spritesSheet.insert(becomeBigR.begin(), becomeBigR.end());
+
+	spritesSheet.insert(isBigIdleR.begin(), isBigIdleR.end());
+	spritesSheet.insert(isBigWalk1R.begin(), isBigWalk1R.end());
+	spritesSheet.insert(isBigStopR.begin(), isBigStopR.end());
+	spritesSheet.insert(isBigRun1R.begin(), isBigRun1R.end());
+	spritesSheet.insert(isBigJumpR.begin(), isBigJumpR.end());
+	spritesSheet.insert(isBigClimbR.begin(), isBigClimbR.end());
+	spritesSheet.insert(isBigCrouchR.begin(), isBigCrouchR.end());
+	spritesSheet.insert(isBigVictoryR.begin(), isBigVictoryR.end());
 }
 
 void Mario::update(const float& dt) {
-	/*std::cout << this->position.x << " " << this->position.y << std::endl;
-    sf::FloatRect cur = (this->hitbox.getGlobalBounds());
-    std::cerr << cur.getPosition().x << " " << cur.getPosition().y << "\n";*/
     updateAnimation(dt);
+	updateHitboxSize();
     updateVelocity(dt);
-    //std::cerr << this->getPosition().x << " "<< this->getPosition().y << std::endl;
 	eventMediator->applyExternalForce(this, dt);
     move(dt);
-    //apply buffs
     for (auto& buff : buffs) {
 		buff->applyBuff(this, this->eventMediator);
 	}
@@ -140,14 +287,15 @@ void Mario::handleInput(const float& dt) {
         movementComponent->isMoveLeft = true;
         entitySprite.setScale(4.0f, 4.0f);
         //hitbox.setScale(1.0f, 1.0f);
+        isMovingLeft = true;
         isWalking = true;
     }
-
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         movementComponent->isMoveRight = true;
         entitySprite.setScale(4.0f, 4.0f);
         //hitbox.setScale(1.0f, 1.0f);
         isWalking = true;
+        isMovingLeft = false;
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
@@ -160,6 +308,13 @@ void Mario::handleInput(const float& dt) {
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) {
         isRunning = true;
+    }
+
+    if (isRunning) {
+		movementComponent->maxVelocity = 4.0f * 100 + 150.0f;
+    }
+    else {
+		movementComponent->maxVelocity = 4.0f * 100;
     }
 
     // Improved jump handling
@@ -194,12 +349,44 @@ void Mario::handleInput(const float& dt) {
             currentAction = "WALK-";
         }
         else if (isCrouching) {
-            currentAction = "CROUCH";
+            currentAction = "CROUCH-";
         }
         else {
-            currentAction = "IDLE";
+            currentAction = "IDLE-";
         }
     }
+}
+
+void Mario::setBig(bool big) {
+    if (is_big != big) {  
+        is_big = big;
+        updateHitboxSize();
+
+        if (isMovingLeft) {
+            currentAction = "IDLER-";
+        }
+        else {
+			currentAction = "IDLE-";
+        }
+    }
+}
+
+void Mario::updateHitboxSize() {
+	if (is_big) {
+		if (currentAction == "JUMP-") {
+			hitbox.setSize(sf::Vector2f(80.f, 128.f));
+		}
+		else if (currentAction == "CROUCH-") {
+			hitbox.setSize(sf::Vector2f(64.f, 120.f));
+		}
+        else {
+            hitbox.setSize(sf::Vector2f(64.f, 122.f));
+        }
+	}
+	else {
+        hitbox.setSize(sf::Vector2f(64.f, 64.f));
+	}
+	hitbox.setPosition(position);
 }
 
 void Mario::updateAnimation(const float& dt) {
@@ -208,30 +395,65 @@ void Mario::updateAnimation(const float& dt) {
 
     if (currentAction == "JUMP-") {
         // Use a faster animation speed to make sure we see the jump frames
-        animationComponent->setAnimation(prefix + "JUMP-", spritesSheet, 0.2f, is_big);
-        animationSet = true;
+        if (isMovingLeft) {
+            animationComponent->setAnimation(prefix + "JUMPR-", spritesSheet, 0.2f, is_big);
+            animationSet = true;
 
-        // If the jump animation has completed and we're on the ground
-        if (animationComponent->currentFrameIndex == animationComponent->currentAnimationFrames.size() - 1
-            && movementComponent->onGround) {
-            currentAction = "IDLE";
+            // If the jump animation has completed and we're on the ground
+            if (animationComponent->currentFrameIndex == animationComponent->currentAnimationFrames.size() - 1
+                && movementComponent->onGround) {
+                currentAction = "IDLER-";
+            }
+        }
+        else {
+            animationComponent->setAnimation(prefix + "JUMP-", spritesSheet, 0.2f, is_big);
+            animationSet = true;
+
+            // If the jump animation has completed and we're on the ground
+            if (animationComponent->currentFrameIndex == animationComponent->currentAnimationFrames.size() - 1
+                && movementComponent->onGround) {
+                currentAction = "IDLE-";
+            }
         }
     }
     else if (currentAction == "RUN-") {
-        animationComponent->setAnimation(prefix + "RUN-", spritesSheet, 0.15f, is_big);
-        animationSet = true;
+        if (isMovingLeft) {
+            animationComponent->setAnimation(prefix + "RUNR-", spritesSheet, 0.15f, is_big);
+            animationSet = true;
+        }
+        else {
+            animationComponent->setAnimation(prefix + "RUN-", spritesSheet, 0.15f, is_big);
+            animationSet = true;
+        }
     }
     else if (currentAction == "WALK-") {
-        animationComponent->setAnimation(prefix + "WALK-", spritesSheet, 0.2f, is_big);
-        animationSet = true;
+        if (isMovingLeft) {
+            animationComponent->setAnimation(prefix + "WALKR-", spritesSheet, 0.2f, is_big);
+            animationSet = true;
+        }
+        else {
+            animationComponent->setAnimation(prefix + "WALK-", spritesSheet, 0.2f, is_big);
+            animationSet = true;
+        }
     }
-    else if (currentAction == "CROUCH") {
-        animationComponent->setAnimation(prefix + "CROUCH", spritesSheet, 0.2f, is_big);
-        animationSet = true;
+    else if (currentAction == "CROUCH-") {
+        if (isMovingLeft) {
+            animationComponent->setAnimation(prefix + "CROUCHR-", spritesSheet, 0.2f, is_big);
+            animationSet = true;
+        }
+        else {
+            animationComponent->setAnimation(prefix + "CROUCH-", spritesSheet, 0.2f, is_big);
+            animationSet = true;
+        }
     }
 
     if (!animationSet) {
-        animationComponent->setAnimation(prefix + "IDLE", spritesSheet, 0.5f, is_big);
+        if (isMovingLeft) {
+            animationComponent->setAnimation(prefix + "IDLER-", spritesSheet, 0.5f, is_big);
+        }
+        else {
+            animationComponent->setAnimation(prefix + "IDLE-", spritesSheet, 0.5f, is_big);
+        }
     }
 
     animationComponent->update(0.016f);

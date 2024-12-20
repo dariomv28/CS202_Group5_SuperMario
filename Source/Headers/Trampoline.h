@@ -1,9 +1,10 @@
 #pragma once
 #include "Block.h"
+
 class Trampoline :
     public Block
 {
-    public:
+public:
 	Trampoline();
 	Trampoline(sf::Vector2f position, sf::Vector2f size, std::string name);
 	~Trampoline();
@@ -12,5 +13,10 @@ class Trampoline :
 	void update(const float& dt);
 	void reactToCollison(int collidedSide);
 	void render(sf::RenderTarget* target);
+
+	void updateAnimation(const float& dt);
+
+private:
+	bool isCompressed = false;
 };
 

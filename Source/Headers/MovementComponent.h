@@ -10,7 +10,7 @@ private:
 	const int MAX_JUMPS = 2;
 public:
 	const float JUMP_FORCE = -900.f;
-	const float MAX_FALL_SPEED = 1000.f;
+	const float MAX_FALL_SPEED = 1400.f;
 
 	int acceleration;
 	int maxVelocity;

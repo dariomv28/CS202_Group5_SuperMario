@@ -1,17 +1,31 @@
-#pragma once
-#include "PowerUpObject.h"
-class Lava :
-    public PowerUpObject
-{
-private:
-	std::unordered_map<std::string, sf::IntRect> spritesSheet;
- public:
-	Lava(sf::Vector2f position, sf::Vector2f size, std::string name);
-	virtual ~Lava();
+#ifndef LAVA_H
+#define LAVA_H
 
-	void initSpritesSheet();
-	void update(const float& dt) override;
-	void render(sf::RenderTarget* target) override;
-	void reactToCollison() override;
+#include "PowerUpObject.h"
+#include <SFML/Graphics.hpp>
+#include <map>
+#include <string>
+
+class Lava : public PowerUpObject {
+private:
+    int currentFrame;
+    float animationTimer;
+    float animationSpeed;
+    bool isAnimatingForward;
+
+    std::map<std::string, sf::IntRect> spritesSheet;
+
+    void initSpritesSheet();
+
+public:
+
+    Lava(sf::Vector2f position, sf::Vector2f size, std::string name);
+    virtual ~Lava();
+
+
+    virtual void update(const float& dt);
+    virtual void render(sf::RenderTarget* target);
+    virtual void reactToCollison();
 };
 
+#endif 
