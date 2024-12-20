@@ -5,6 +5,7 @@
 #include "Headers/LivingEntity.h"
 #include "Headers/Enemy.h"
 #include "Headers/PowerUpObject.h"
+#include "Headers/Trampoline.h"
 
 PhysicsEngine::PhysicsEngine() {
 	gravity = sf::Vector2f(0, 2500.f);
@@ -127,9 +128,19 @@ void PhysicsEngine::resolveCollisionPlayerBlock(PlayerManager* entity, std::vect
 	}
 
 	if (hasBottomCollision) {
-		entity->setOnGround(true);
-		entity->setVelocity(sf::Vector2f(entity->getVelocity().x, -10.0f));
-		entity->movementComponent->resetJumps();
+		bool collidedWithTrampoline = false;
+		for (auto& block : blocks) {
+			if (dynamic_cast<Trampoline*>(block) && CollisionType(entity, block) == Collide_Bottom) {
+				collidedWithTrampoline = true;
+				break;
+			}
+		}
+
+		if (!collidedWithTrampoline) {
+			entity->setOnGround(true);
+			entity->setVelocity(sf::Vector2f(entity->getVelocity().x, -10.0f));
+			entity->movementComponent->resetJumps();
+		}
 	}
 
 	if (hasTopCollision) {

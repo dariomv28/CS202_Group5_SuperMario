@@ -15,8 +15,12 @@ public:
 	void render(sf::RenderTarget* target);
 
 	void updateAnimation(const float& dt);
-
+	void startBounceAnimation();
+	void initVariables();
 private:
 	bool isCompressed = false;
+	bool shouldBounce = false;
+	int currentFrame;
+	float animationTimer;	
 };
 
