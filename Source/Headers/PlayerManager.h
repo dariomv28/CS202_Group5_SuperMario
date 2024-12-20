@@ -13,11 +13,11 @@ protected:
     bool is_fire;
     std::vector<PlayerBuff*> buffs;
 
+    std::unordered_map<std::string, sf::IntRect> allSpritesMario;
+    std::unordered_map<std::string, sf::IntRect> allSpritesLuigi;
 public:
 
-    PlayerManager(sf::Vector2f position, sf::Vector2f size, 
-		int health, int speed);
-    PlayerManager() {};
+    PlayerManager(sf::Vector2f position, sf::Vector2f size, int health, int speed);
     virtual ~PlayerManager();
 
     //Setters and Getters
