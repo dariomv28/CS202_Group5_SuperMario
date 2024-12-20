@@ -17,7 +17,7 @@ void AudioSystem::init() {
 	if (!buttonSoundBuffer.loadFromFile("Source/Resources/audio/buttonSound.wav")) {
 		throw("ERROR::AUDIOSYSTEM::CANNOT_LOAD_BUTTON_SOUND_EFFECT");
 	}
-	if (!coinSoundBuffer.loadFromFile("Source/Resources/audio/coin.wav")) {
+	if (!coinSoundBuffer.loadFromFile("Source/Resources/audio/coin.mp3")) {
 		throw("ERROR::AUDIOSYSTEM::CANNOT_LOAD_COIN_SOUND_EFFECT");
 	}
 	if (!brickSoundBuffer.loadFromFile("Source/Resources/audio/break brick.wav")) {
