@@ -32,6 +32,7 @@ void GameObject::setPosition(const sf::Vector2f& pos) {
 void GameObject::setSize(const sf::Vector2f& newSize) {
     size = newSize;
     // Update hitbox size
+	entitySprite.setScale(size.x / entitySprite.getGlobalBounds().width, size.y / entitySprite.getGlobalBounds().height);
     hitbox.setSize(size);
 }
 

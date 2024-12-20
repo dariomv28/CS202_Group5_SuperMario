@@ -1,5 +1,6 @@
 #include "Headers/PlayerManager.h"
 #include "Headers/GameEventMediator.h"
+#include "Headers/PlayerBuff.h"
 
 PlayerManager::PlayerManager(sf::Vector2f position, sf::Vector2f size, int health, int speed)
     : LivingEntity(position, size, health, speed) {
@@ -28,6 +29,12 @@ void PlayerManager::updateAnimation(const float& dt) {
 }
 
 void PlayerManager::addBuff(PlayerBuff* buff) {
+    // Check if the buff is already applied
+    for (auto b : buffs) {
+		if (b->getType() == buff->getType()) {
+			return;
+		}
+	}
 	buffs.push_back(buff);
 }
 
@@ -41,7 +48,17 @@ std::string PlayerManager::getImagePath() const {
 }
 
 void PlayerManager::setBig(bool big) {
-	is_big = big;
+	//Change the size of the player
+	if (big) {
+		is_big = true;
+		setSize(sf::Vector2f(CELL_SIZE, 2*CELL_SIZE));
+		setPosition(getPosition().x, getPosition().y - CELL_SIZE);
+	}
+	else {
+		is_big = false;
+		setSize(sf::Vector2f(CELL_SIZE,CELL_SIZE));
+		setPosition(getPosition().x, getPosition().y + CELL_SIZE);
+	}
 }
 
 bool PlayerManager::getBig() const {

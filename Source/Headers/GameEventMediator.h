@@ -52,11 +52,11 @@ public:
 	// LevelGUI events
 	void increaseCoins(int numCoins);
 	void increaseScore(int numScore);
-	void updateHealth(); // For LevelGUI
 	
 	// Player events
-	void setPlayerBig(bool big);
+	void player2ndBuff();
 	void decreasePlayerHealth();
+	void increasePlayerHealth();
 	void pushPlayerLeft();
 	void pushPlayerRight();
 

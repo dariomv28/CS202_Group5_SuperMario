@@ -2,6 +2,7 @@
 #include "Headers/Bullet.h"
 
 FireBuff::FireBuff() {
+	type = "fire";
 }
 
 FireBuff::~FireBuff() {

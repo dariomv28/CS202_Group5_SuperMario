@@ -5,6 +5,7 @@
 #include "Headers/PhysicsEngine.h"
 #include "Headers/PowerUpObject.h"
 #include "Headers/LevelGUI.h"
+#include "Headers/FireBuff.h"
 
 GameEventMediator::GameEventMediator() {
 }
@@ -124,12 +125,22 @@ void GameEventMediator::increaseScore(int numScore) {
 	levelGUI->increaseScore(numScore);
 }
 
-void GameEventMediator::setPlayerBig(bool big) {
-	player->setBig(big);
+void GameEventMediator::player2ndBuff() {
+	if (!player->getBig()) {
+		player->setBig(true);
+	}
+	else {
+		PlayerBuff* fireBuff = new FireBuff();
+		player->addBuff(fireBuff);
+	}
 }
 
 void GameEventMediator::decreasePlayerHealth() {
 	player->setHealth(player->getHealth() - 1);
+}
+
+void GameEventMediator::increasePlayerHealth() {
+	player->setHealth(player->getHealth() + 1);
 }
 
 void GameEventMediator::pushPlayerLeft() {

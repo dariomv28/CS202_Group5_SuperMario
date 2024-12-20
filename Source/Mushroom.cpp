@@ -38,11 +38,13 @@ void Mushroom::reactToCollison()
 	switch (type)
 	{
 	case 1:
-		// Grow big mushroom
-		eventMediator->setPlayerBig(true);
+		// Healing mushroom
+		eventMediator->increasePlayerHealth();
 		break;
 	case 2:
-		//Fire mushroom
+		//Grow big mushroom
+		eventMediator->player2ndBuff();
+
 		break;
 	}
 	//Delete this block
