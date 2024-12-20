@@ -88,7 +88,7 @@ void Koopa::update(const float& dt) {
         shellTimer += dt;
         if (shellTimer >= 5.0f) {  // Exit shell state after 5 seconds
             this->hitbox.setSize(sf::Vector2f(64.f, 96.f));
-            this->movementComponent->acceleration = walkSpeed;
+            this->movementComponent->acceleration = walkSpeed * 100;
             shellTimer = 0.0f;
 
             setIsAlive(true);
@@ -97,7 +97,7 @@ void Koopa::update(const float& dt) {
     }
 
     if (!isAlive) {
-        this->movementComponent->acceleration = walkSpeed;
+        this->movementComponent->acceleration = walkSpeed * 100;
         disappearDelay += dt;
         if (disappearDelay >= 1.0f) {
             eventMediator->deleteEnemy(this);
@@ -167,8 +167,18 @@ void Koopa::reactToPlayerCollision(int collidedSide) {
         getDamaged();
     }
     else {
-        if (collidedSide == Collide_Left) eventMediator->pushPlayerLeft();
-        else eventMediator->pushPlayerRight();
+        if (collidedSide == Collide_Left)
+        {
+            this->setMoveLeft(false);
+            this->setMoveRight(true);
+            eventMediator->pushPlayerLeft();
+        }
+        else
+        {
+            this->setMoveRight(false);
+            this->setMoveLeft(true);
+            eventMediator->pushPlayerRight();
+        }
         eventMediator->decreasePlayerHealth();
     }
 }

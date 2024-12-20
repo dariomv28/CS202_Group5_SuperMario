@@ -7,8 +7,13 @@
 #include "Headers/PowerUpObject.h"
 
 PhysicsEngine::PhysicsEngine() {
+//<<<<<<< HEAD
+//	gravity = sf::Vector2f(0, 1500.f);
+//	friction = sf::Vector2f(1500.f, 0);
+//=======
 	gravity = sf::Vector2f(0, 2500.f);
 	friction = sf::Vector2f(1000.f, 0);
+//>>>>>>> 1808eb3341cb58b223903281233a2c5afdcb8c1d
 }
 
 void PhysicsEngine::setEventMediator(GameEventMediator* mediator) {
@@ -65,7 +70,8 @@ Side PhysicsEngine::CollisionType(GameObject* obj1, GameObject* obj2)
 	else return Side::Collide_None;
 }
 
-void PhysicsEngine::fixPosition(LivingEntity* entity, GameObject* obj, Side collidedSide) {
+void PhysicsEngine::fixPosition(GameObject* entity, GameObject* obj, Side collidedSide) {
+	if (collidedSide == Collide_None) return;
 	//std::cerr << "velocity: " << entity->getVelocity().x << " " << entity->getVelocity().y << "\n";
 	switch (collidedSide) {
 	case Collide_Top:	
@@ -204,9 +210,10 @@ void PhysicsEngine::resolveCollisionPlayerEnemy(PlayerManager* entity, std::vect
 	for (auto& obj : enemies) {
 		//Resolve the right side
 		Side Type = CollisionType(entity, obj);
-		if (Type != Collide_None) fixPosition(entity, obj, Type);
+		fixPosition(entity, obj, Type);
 		switch (Type) {
 		case Collide_Right:
+
 			obj->reactToPlayerCollision(Collide_Left);
 			continue;
 
@@ -215,8 +222,9 @@ void PhysicsEngine::resolveCollisionPlayerEnemy(PlayerManager* entity, std::vect
 			continue;
 
 		case Collide_Bottom:
-			entity->movementComponent->resetJumps();
 			obj->reactToPlayerCollision(Collide_Top);
+			entity->setOnGround(true);
+			entity->movementComponent->resetJumps();
 			continue;
 
 		case Collide_Top:
@@ -274,6 +282,7 @@ void PhysicsEngine::resolveCollisionPlayerPowerUp(PlayerManager* entity, std::ve
 void PhysicsEngine::resolveCollisionEnemyEnemy(std::vector<Enemy*>& enemies, const float& dt) {
 	for (size_t i = 0; i < enemies.size(); ++i) {
 		for (size_t j = i + 1; j < enemies.size(); ++j) {
+			
 			Enemy* enemy1 = enemies[i];
 			Enemy* enemy2 = enemies[j];
 
@@ -301,7 +310,7 @@ void PhysicsEngine::resolveCollisionEnemyEnemy(std::vector<Enemy*>& enemies, con
 			}
 
 			//Resolve the left side
-			if (enemy1->isMoveLeft() && Type == Collide_Left) {
+			else if (enemy1->isMoveLeft() && Type == Collide_Left) {
 				fixPosition(enemy1, enemy2, Collide_Left);
 				enemy1->setMoveLeft(false);
 				enemy1->setMoveRight(true);
@@ -317,13 +326,13 @@ void PhysicsEngine::resolveCollisionEnemyEnemy(std::vector<Enemy*>& enemies, con
 			}
 
 			//Resolve the ground
-			if (enemy1->getVelocity().y >= 0 && Type == Collide_Bottom) {
+			else if (enemy1->getVelocity().y >= 0 && Type == Collide_Bottom) {
 				fixPosition(enemy1, enemy2, Collide_Bottom);
 				continue;
 			}
 
 			//Resolve the ceiling
-			if (enemy1->getVelocity().y < 0 && Type == Collide_Top) {
+			else if (enemy1->getVelocity().y < 0 && Type == Collide_Top) {
 				fixPosition(enemy1, enemy2, Collide_Top);
 				continue;
 			}

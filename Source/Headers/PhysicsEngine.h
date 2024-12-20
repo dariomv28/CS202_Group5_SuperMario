@@ -25,7 +25,7 @@ public:
 
 	//Physics functions
 	//void fixPosition(LivingEntity* entity, std::vector<Block*> Collided_Blocks[]);
-	void fixPosition(LivingEntity* entity, GameObject* obj, Side collidedSide);
+	void fixPosition(GameObject* entity, GameObject* obj, Side collidedSide);
 	void resolveCollisionPlayerBlock(PlayerManager* entity, std::vector<Block*>& blocks, const float& dt);
 	void resolveCollisionPlayerEnemy(PlayerManager* entity, std::vector<Enemy*>& enemies, const float& dt);
 	void resolveCollisionEnemyBlock(std::vector<Enemy*>& enemies, std::vector<Block*>& blocks, const float& dt);

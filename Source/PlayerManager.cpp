@@ -64,3 +64,13 @@ void PlayerManager::setBig(bool big) {
 bool PlayerManager::getBig() const {
 	return is_big;
 }
+
+int PlayerManager::getHealth() const {
+    return this->health;
+}
+
+void PlayerManager::setHealth(int health) {
+    if (health >= 0) {
+        this->health = health;
+    }
+}
