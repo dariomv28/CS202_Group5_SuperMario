@@ -9,8 +9,7 @@ private:
     std::string currentAction;
     bool isAnimationInProgress;
     std::unordered_map<std::string, sf::IntRect> spritesSheet;
-   
-
+    bool isMovingLeft;
 public:
     Mario(sf::Vector2f position, sf::Vector2f size, int health = 3, int speed = 15.0f);
     ~Mario();
