@@ -8,7 +8,7 @@ AudioSystem::AudioSystem() {
 
 
 void AudioSystem::init() {
-	if (!music.openFromFile("Source/Resources/audio/BackGround Music.mp3")) {
+	if (!music.openFromFile("Source/Resources/audio/BackGround Music.wav")) {
 		throw("ERROR::AUDIOSYSTEM::CANNOT_LOAD_BACKGROUND_MUSIC");
 	}
 	if (!jumpSoundBuffer.loadFromFile("Source/Resources/audio/Jump.wav")) {
