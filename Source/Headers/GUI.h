@@ -41,6 +41,7 @@ namespace GUI
 		virtual void update(const sf::Vector2i mousePos) = 0;
 
 		void highlight(bool isHighlighted);
+		virtual void setPosition(float x, float y) = 0;
 		
 	};
 
@@ -67,6 +68,7 @@ namespace GUI
 			sf::Color outline_idle_color = sf::Color::Transparent, sf::Color outline_hover_color = sf::Color::Transparent);
 		~TextButton();
 
+		void setPosition(float x, float y);
 		void render(sf::RenderTarget* target);
 		void update(const sf::Vector2i mousePos);
 		
@@ -88,6 +90,7 @@ namespace GUI
 			std::string idleDirec, std::string hoverDirec, std::string activeDirec);
 		~TextureButton();
 
+		void setPosition(float x, float y);
 		void render(sf::RenderTarget* target);
 		void update(const sf::Vector2i mousePos);
 	};

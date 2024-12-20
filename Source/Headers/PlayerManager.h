@@ -39,5 +39,7 @@ public:
     // Setters and Getters
     void setBig(bool big);
     bool getBig() const;
+    int getHealth() const;
+    void setHealth(int health);
 };
 

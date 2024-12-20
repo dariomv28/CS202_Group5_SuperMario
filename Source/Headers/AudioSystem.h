@@ -19,9 +19,13 @@ private:
 	sf::SoundBuffer brickSoundBuffer;
 	std::string currentBackgroundMusic;
 
+	bool isInitialized = false;
+	bool isStopped = false;
+
 	GameEventMediator* eventMediator;
 public:
 	AudioSystem();
+	void init();
 	void playMusic();
 	void stopMusic();
 	void playLevel1Music();
@@ -38,6 +42,15 @@ public:
 	void stopCoinSound();
 	void playBrickDestroyedSound();
 
+	sf::SoundBuffer& getJumpSoundBuffer();
+	sf::SoundBuffer& getButtonSoundBuffer();
+	sf::SoundBuffer& getCoinSoundBuffer();
+	sf::SoundBuffer& getBrickSoundBuffer();
+	sf::Sound& getJumpSound();
+
+	void stop();
+	void resume();
+
 	void stopAllMusic();
 
 	void setEventMediator(GameEventMediator* eventMediator);
@@ -45,6 +58,7 @@ public:
 
 	static AudioSystem* getInstance() {
 		if (instance == nullptr) {
+			std::cout << "Creating AudioSystem instance..." << std::endl;
 			instance = new AudioSystem();
 		}
 		return instance;

@@ -3,6 +3,7 @@
 #include "GUI.h"
 #include "AudioSystem.h"
 
+
 class State;
 
 class StateData
@@ -19,6 +20,7 @@ public:
 	std::stack<State*>* states;
 
 	AudioSystem* audio;
+	
 };
 
 class State

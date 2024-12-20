@@ -2,7 +2,7 @@
 #include "Headers/GameState.h"
 #include "Headers/FireBuff.h"
 
-MenuLevelState::MenuLevelState(StateData* stateData, int world) : MainMenuState(stateData)
+MenuLevelState::MenuLevelState(StateData* stateData, int world) : MainMenuState(stateData),level(0)
 {
     // Reinitialize buttons with level-specific content
     this->world = world;
@@ -132,24 +132,27 @@ void MenuLevelState::updateGUI()
             if (currentButtonIndex == BTN_LEVEL1)
             {
                 this->stateData->audio->playbuttonSound();
-                GameState* gameState = new GameState(this->stateData);
-                gameState->loadLevel(player, world, 1);
+                GameState* gameState = new GameState(this->stateData, this);
+                this->setLevel(1);
+                gameState->loadLevel(player, world, level);
                 this->states->push(gameState);
 
             }
             else if (currentButtonIndex == BTN_LEVEL2)
             {
                 this->stateData->audio->playbuttonSound();
-                GameState* gameState = new GameState(this->stateData);
-                gameState->loadLevel(player, world, 2);
+                GameState* gameState = new GameState(this->stateData, this);
+                this->setLevel(2);
+                gameState->loadLevel(player, world, level);
                 this->states->push(gameState);
 
             }
             else if (currentButtonIndex == BTN_LEVEL3)
             {
                 this->stateData->audio->playbuttonSound();
-                GameState* gameState = new GameState(this->stateData);
-                gameState->loadLevel(player, world, 3);
+                GameState* gameState = new GameState(this->stateData, this);
+                this->setLevel(3);
+                gameState->loadLevel(player, world, level);
                 this->states->push(gameState);
 
             }
@@ -171,20 +174,24 @@ void MenuLevelState::updateGUI()
     // Existing mouse press handlers
     if (buttons[BTN_LEVEL1]->isPressed())
     {
-        GameState* gameState = new GameState(this->stateData);
-        gameState->loadLevel(player, world, 1);
+        GameState* gameState = new GameState(this->stateData, this);
+        this->setLevel(1);
+        gameState->loadLevel(player, world, level);
         this->states->push(gameState);
     }
     else if (buttons[BTN_LEVEL2]->isPressed())
     {
-        GameState* gameState = new GameState(this->stateData);
-        gameState->loadLevel(player, world, 2);
+        GameState* gameState = new GameState(this->stateData, this);
+        this->setLevel(2);
+        gameState->loadLevel(player, world, level);
         this->states->push(gameState);
     }
     else if (buttons[BTN_LEVEL3]->isPressed())
     {
-        GameState* gameState = new GameState(this->stateData);
-        gameState->loadLevel(player, world, 3);
+        GameState* gameState = new GameState(this->stateData, this);
+
+        this->setLevel(3);
+        gameState->loadLevel(player, world, level);
         this->states->push(gameState);
     }
     else if (buttons[BTN_BACK]->isPressed())
@@ -211,4 +218,41 @@ void MenuLevelState::render(sf::RenderTarget* target)
 	{
 		it->render(target);
 	}
+}
+
+
+int MenuLevelState::getWorld() const {
+    std::cout << "World value: " << world << ", address = " << this << std::endl;
+    return this->world;
+}
+
+void MenuLevelState::setWorld(int newWorld) {
+    this->world = newWorld;
+    std::cout << "setWorld called: world = " << this->world << ", address = " << this << std::endl;
+}
+
+int MenuLevelState::getLevel() const {
+    std::cout << "Level value: " << level << ", address = " << this << std::endl;
+    return this->level;
+}
+
+void MenuLevelState::setLevel(int newLevel) {
+    this->level = newLevel;
+    std::cout << "setLevel called: level = " << this->level << ", address = " << this << std::endl;
+}
+
+PlayerManager* MenuLevelState::getPlayer() const {
+    std::cout << "Player address MenuLevelState: " << player << std::endl;
+    return this->player;
+}
+
+int MenuLevelState::getHealth() {
+    return player->getHealth();
+
+}
+
+void MenuLevelState::setPlayerHealth(int newHealth) {
+    if (player) {
+        player->setHealth(newHealth);
+    }
 }
