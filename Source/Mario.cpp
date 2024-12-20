@@ -7,8 +7,6 @@ Mario::Mario(sf::Vector2f position, sf::Vector2f size, int health, int speed)
     animationComponent = nullptr;
     movementComponent = new MovementComponent(speed, 4.0f);
     init();
-
-    setBig(true);
 }
 
 Mario::~Mario() {

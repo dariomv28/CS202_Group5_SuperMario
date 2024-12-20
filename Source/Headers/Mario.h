@@ -29,5 +29,5 @@ public:
 
     void updateHitboxSize();
 
-    void setBig(bool big);
+    void setBig(bool big) override;
 };

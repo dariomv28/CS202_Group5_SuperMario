@@ -142,7 +142,3 @@ void Goomba::reactToBlockCollision(int collidedSide) {
 		setMoveLeft(true);
 	}
 }
-
-void Goomba::setScaleSprite(std::string name) {
-
-}

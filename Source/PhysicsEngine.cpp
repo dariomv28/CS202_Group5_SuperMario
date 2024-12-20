@@ -250,7 +250,6 @@ void PhysicsEngine::resolveCollisionEnemyBlock(std::vector<Enemy*>& enemies, std
 			case (Collide_Left):
 				fixPosition(enemy, block, Collide_Left);
 				enemy->reactToBlockCollision(Collide_Left);
-				enemy->setScaleSprite("RIGHT");
 				break;
 
 				//Resolve the ground
@@ -299,12 +298,8 @@ void PhysicsEngine::resolveCollisionEnemyEnemy(std::vector<Enemy*>& enemies, con
 				enemy1->setMoveRight(false);
 				enemy1->setMoveLeft(true);
 
-				enemy1->setScaleSprite("LEFT");
-
 				enemy2->setMoveRight(true);
 				enemy2->setMoveLeft(false);
-
-				enemy2->setScaleSprite("RIGHT");
 
 				continue;
 			}
@@ -315,12 +310,8 @@ void PhysicsEngine::resolveCollisionEnemyEnemy(std::vector<Enemy*>& enemies, con
 				enemy1->setMoveLeft(false);
 				enemy1->setMoveRight(true);
 
-				enemy1->setScaleSprite("RIGHT");
-
 				enemy2->setMoveRight(false);
 				enemy2->setMoveLeft(true);
-
-				enemy2->setScaleSprite("LEFT");
 
 				continue;
 			}

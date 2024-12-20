@@ -16,6 +16,5 @@ public:
 	virtual void getDamaged() = 0;
 	virtual void reactToPlayerCollision(int collidedSide) = 0;
 	virtual void reactToBlockCollision(int collidedSide) = 0;
-	virtual void setScaleSprite(std::string name);
 };
 

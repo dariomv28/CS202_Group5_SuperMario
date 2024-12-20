@@ -37,7 +37,7 @@ public:
     virtual void removeBuff(PlayerBuff* buff);
 
     // Setters and Getters
-    void setBig(bool big);
+    virtual void setBig(bool big);
     bool getBig() const;
     int getHealth() const;
     void setHealth(int health);
