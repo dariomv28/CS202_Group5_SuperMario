@@ -25,8 +25,8 @@ void MenuLevelState::initButtons()
     // Init World text
     worldText.setFont(font);
     worldText.setString("world " + std::to_string(world));
-    worldText.setCharacterSize(30);
-    worldText.setFillColor(sf::Color::Black);
+    worldText.setCharacterSize(50);
+    worldText.setFillColor(sf::Color::Cyan);
     worldText.setPosition(SCREEN_WIDTH/2 - worldText.getGlobalBounds().width/2, y - worldText.getGlobalBounds().height*2);
 
     //y += btn_Height * 1.5;

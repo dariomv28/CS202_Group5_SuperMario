@@ -39,13 +39,13 @@ void AudioSystem::init() {
 	level2Music.setVolume(10.0f);
 	level3Music.setVolume(10.0f);
 	jumpSound.setBuffer(jumpSoundBuffer);
-	jumpSound.setVolume(200.0f);
+	jumpSound.setVolume(100.0f);
 	buttonSound.setBuffer(buttonSoundBuffer);
-	buttonSound.setVolume(200.0f);
+	buttonSound.setVolume(100.0f);
 	coinSound.setBuffer(coinSoundBuffer);
-	coinSound.setVolume(200.0f);
+	coinSound.setVolume(100.0f);
 	brickSound.setBuffer(brickSoundBuffer);
-	brickSound.setVolume(200.0f);
+	brickSound.setVolume(100.0f);
 }
 
 void AudioSystem::playMusic() {
