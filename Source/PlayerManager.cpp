@@ -102,25 +102,25 @@ PlayerManager::PlayerManager(sf::Vector2f position, sf::Vector2f size, int healt
 	};
 
 	allSpritesLuigi = {
-		{ "IDLE-", sf::IntRect(1, 49, 16, 16) },
+		{ "IDLE-", sf::IntRect(1, 50, 16, 16) },
 
-		{ "WALK-1", sf::IntRect(17, 49, 16, 16) },
-		{ "WALK-2", sf::IntRect(35, 49, 16, 16) },
+		{ "WALK-1", sf::IntRect(17, 50, 16, 16) },
+		{ "WALK-2", sf::IntRect(35, 50, 16, 16) },
 
-		{ "STOP-", sf::IntRect(52, 49, 16, 16) },
+		{ "STOP-", sf::IntRect(52, 50, 16, 16) },
 
-		{ "RUN-1",  sf::IntRect(69, 49, 16, 16) },
+		{ "RUN-1",  sf::IntRect(69, 50, 16, 16) },
 
-		{ "JUMP-1",  sf::IntRect(86, 49, 16, 16) },
-		{ "JUMP-2",  sf::IntRect(103, 49, 16, 16) },
-		{ "JUMP-3",  sf::IntRect(120, 49, 16, 16) },
+		{ "JUMP-1",  sf::IntRect(86, 50, 16, 16) },
+		{ "JUMP-2",  sf::IntRect(103, 50, 16, 16) },
+		{ "JUMP-3",  sf::IntRect(120, 50, 16, 16) },
 
-		{ "CLIMB-1",  sf::IntRect(138, 49, 16, 16) },
-		{ "CLIMB-2",  sf::IntRect(154, 49, 16, 16) },
+		{ "CLIMB-1",  sf::IntRect(138, 50, 16, 16) },
+		{ "CLIMB-2",  sf::IntRect(154, 50, 16, 16) },
 
-		{ "VICTORY-1",  sf::IntRect(171, 49, 16, 16) },
-		{ "VICTORY-2",  sf::IntRect(188, 49, 16, 16) },
-		{ "VICTORY-3",  sf::IntRect(205, 49, 16, 16) },
+		{ "VICTORY-1",  sf::IntRect(171, 50, 16, 16) },
+		{ "VICTORY-2",  sf::IntRect(188, 50, 16, 16) },
+		{ "VICTORY-3",  sf::IntRect(205, 50, 16, 16) },
 
 		{ "BECOME_BIG-",  sf::IntRect(224, 35, 16, 30) },
 
@@ -131,7 +131,7 @@ PlayerManager::PlayerManager(sf::Vector2f position, sf::Vector2f size, int healt
 
 		{ "isBig_STOP-" ,  sf::IntRect(290, 34, 16, 32) },
 
-		{ "isBig_RUN-1",  sf::IntRect(307, 34, 16, 32) },
+		{ "isBig_RUN-1",  sf::IntRect(307, 35, 16, 32) },
 
 		{ "isBig_JUMP-1",  sf::IntRect(328, 35, 20, 30) },
 		{ "isBig_JUMP-2",  sf::IntRect(354, 35, 20, 30) },
@@ -147,25 +147,25 @@ PlayerManager::PlayerManager(sf::Vector2f position, sf::Vector2f size, int healt
 		{ "isBig_VICTORY-3",  sf::IntRect(484, 35, 16, 30) },
 		{ "isBig_VICTORY-4",  sf::IntRect(501, 35, 16, 30) },
 
-		{ "IDLER-", sf::IntRect(1056, 49, 16, 16) },
+		{ "IDLER-", sf::IntRect(1056, 50, 16, 16) },
 
-		{ "WALKR-1", sf::IntRect(1039, 49, 16, 16) },
-		{ "WALKR-2", sf::IntRect(1022, 49, 16, 16) },
+		{ "WALKR-1", sf::IntRect(1039, 50, 16, 16) },
+		{ "WALKR-2", sf::IntRect(1022, 50, 16, 16) },
 
-		{ "STOPR-", sf::IntRect(1006, 49, 16, 16) },
+		{ "STOPR-", sf::IntRect(1006, 50, 16, 16) },
 
-		{ "RUNR-1",  sf::IntRect(988, 49, 16, 16) },
+		{ "RUNR-1",  sf::IntRect(988, 50, 16, 16) },
 
-		{ "JUMPR-1",  sf::IntRect(971, 49, 16, 16) },
-		{ "JUMPR-2",  sf::IntRect(955, 49, 16, 16) },
-		{ "JUMPR-3",  sf::IntRect(938, 49, 16, 16) },
+		{ "JUMPR-1",  sf::IntRect(971, 50, 16, 16) },
+		{ "JUMPR-2",  sf::IntRect(955, 50, 16, 16) },
+		{ "JUMPR-3",  sf::IntRect(938, 50, 16, 16) },
 
-		{ "CLIMBR-1",  sf::IntRect(920, 49, 16, 16) },
-		{ "CLIMBR-2",  sf::IntRect(903, 49, 16, 16) },
+		{ "CLIMBR-1",  sf::IntRect(920, 50, 16, 16) },
+		{ "CLIMBR-2",  sf::IntRect(903, 50, 16, 16) },
 
-		{ "VICTORYR-1",  sf::IntRect(886, 49, 16, 16) },
-		{ "VICTORYR-2",  sf::IntRect(869, 49, 16, 16) },
-		{ "VICTORYR-3",  sf::IntRect(852, 49, 16, 16) },
+		{ "VICTORYR-1",  sf::IntRect(886, 50, 16, 16) },
+		{ "VICTORYR-2",  sf::IntRect(869, 50, 16, 16) },
+		{ "VICTORYR-3",  sf::IntRect(852, 50, 16, 16) },
 
 		{ "BECOME_BIGR-",  sf::IntRect(834, 35, 16, 30) },
 
@@ -176,7 +176,7 @@ PlayerManager::PlayerManager(sf::Vector2f position, sf::Vector2f size, int healt
 
 		{ "isBig_STOPR-" ,  sf::IntRect(767, 34, 16, 32) },
 
-		{ "isBig_RUNR-1",  sf::IntRect(750, 34, 16, 32) },
+		{ "isBig_RUNR-1",  sf::IntRect(750, 35, 16, 32) },
 
 		{ "isBig_JUMPR-1",  sf::IntRect(725, 35, 20, 30) },
 		{ "isBig_JUMPR-2",  sf::IntRect(699, 35, 20, 30) },

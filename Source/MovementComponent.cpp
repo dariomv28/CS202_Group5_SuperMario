@@ -13,7 +13,9 @@ MovementComponent::MovementComponent() {
     //eventMediator = new GameEventMediator();
 }
 
-MovementComponent::MovementComponent(float a, float maxV) {
+MovementComponent::MovementComponent(float a, float maxV, int MAX_JUMPS, float JUMP_FORCE) {
+	this->MAX_JUMPS = MAX_JUMPS;
+	this->JUMP_FORCE = JUMP_FORCE;
     acceleration = static_cast<float>(a * 100);
     maxVelocity = static_cast<float>(maxV * 100);
     isMoveLeft = false;
