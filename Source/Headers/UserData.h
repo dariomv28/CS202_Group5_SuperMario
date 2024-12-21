@@ -31,5 +31,6 @@ public:
 	void setCompleted(int world, int level);
 	void setNameCharacter(const std::string& name);
 	void createPlayer();
+	
 };
 

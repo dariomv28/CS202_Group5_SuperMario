@@ -1,24 +1,17 @@
 #include "Headers/UserData.h"
 #include "Headers/Mario.h"
 #include "Headers/Character.h"
-#include "Headers/MenuCharacterSelectionState.h"
+
 
 UserData::UserData()
 {
 	player.assign(4, nullptr);
-	player[1] = Character::createPlayer("Luigi", sf::Vector2f(0.f, 0.f), sf::Vector2f(64.f, 64.f), 3, 30);
-	player[2] = Character::createPlayer("Luigi", sf::Vector2f(0.f, 0.f), sf::Vector2f(64.f, 64.f), 3, 30);
-	player[3] = Character::createPlayer("Luigi", sf::Vector2f(0.f, 0.f), sf::Vector2f(64.f, 64.f), 3, 30);
 }
 
 UserData::~UserData()
 {
 }
-void UserData::createPlayer() {
-	player[1] = Character::createPlayer(nameCharacter, sf::Vector2f(0.f, 0.f), sf::Vector2f(64.f, 64.f), 3, 30);
-	player[2] = Character::createPlayer(nameCharacter, sf::Vector2f(0.f, 0.f), sf::Vector2f(64.f, 64.f), 3, 30);
-	player[3] = Character::createPlayer(nameCharacter, sf::Vector2f(0.f, 0.f), sf::Vector2f(64.f, 64.f), 3, 30);
-}
+
 
 void UserData::setName(std::string name)
 {
@@ -30,10 +23,20 @@ std::string UserData::getName()
 	return name;
 }
 
+void UserData::createPlayer() {
+	player[1] = Character::createPlayer(nameCharacter);
+	player[2] = Character::createPlayer(nameCharacter);
+	player[3] = Character::createPlayer(nameCharacter);
+}
+
+
 void UserData::resetPlayer(int world)
 {
 	player[world] = nullptr;
-	player[world] = Character::createPlayer("Luigi", sf::Vector2f(0.f, 0.f), sf::Vector2f(64.f, 64.f), 3, 30);
+
+	player[1] = Character::createPlayer(nameCharacter);
+	player[world] = Character::createPlayer(nameCharacter);
+
 }
 
 void UserData::setPlayer(int world, PlayerManager* player)
