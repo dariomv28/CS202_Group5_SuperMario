@@ -7,10 +7,10 @@ class MovementComponent
 {
 private:
 	int jumpsRemaining;
-	const int MAX_JUMPS = 2;
 public:
-	const float JUMP_FORCE = -900.f;
+	float JUMP_FORCE;
 	const float MAX_FALL_SPEED = 1400.f;
+	int MAX_JUMPS;
 
 	int acceleration;
 	int maxVelocity;
@@ -22,7 +22,7 @@ public:
 
 	sf::Vector2f velocity;
 	MovementComponent();
-	MovementComponent(float a, float maxV);
+	MovementComponent(float a, float maxV, int MAX_JUMPS=2, float JUMP_FORCE=-900.f);
 	~MovementComponent();
 
 	void moveLeft(const float& dt);
