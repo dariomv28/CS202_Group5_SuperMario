@@ -1,6 +1,7 @@
 #include "Headers/PlayerManager.h"
 #include "Headers/GameEventMediator.h"
 #include "Headers/PlayerBuff.h"
+#include "Headers/FireBuff.h"
 
 PlayerManager::PlayerManager(sf::Vector2f position, sf::Vector2f size, int health, int speed)
     : LivingEntity(position, size, health, speed) {
@@ -223,8 +224,13 @@ void PlayerManager::addBuff(PlayerBuff* buff) {
 	buffs.push_back(buff);
 }
 
-void PlayerManager::removeBuff(PlayerBuff* buff) {
-	buffs.erase(std::remove(buffs.begin(), buffs.end(), buff), buffs.end());
+void PlayerManager::removeBuff(std::string type) {
+	for (int i = 0; i < buffs.size(); i++) {
+		if (buffs[i]->getType() == type) {
+			buffs.erase(buffs.begin() + i);
+			return;
+		}
+	}
 }
 
 
@@ -234,13 +240,16 @@ std::string PlayerManager::getImagePath() const {
 
 void PlayerManager::setBig(bool big) {
 	//Change the size of the player
+	if (big == is_big) return;
 	if (big) {
 		is_big = true;
+		addBuff(new FireBuff());
 		setSize(sf::Vector2f(CELL_SIZE, 2*CELL_SIZE));
 		setPosition(getPosition().x, getPosition().y - CELL_SIZE);
 	}
 	else {
 		is_big = false;
+		removeBuff("fire");
 		setSize(sf::Vector2f(CELL_SIZE,CELL_SIZE));
 		setPosition(getPosition().x, getPosition().y + CELL_SIZE);
 	}

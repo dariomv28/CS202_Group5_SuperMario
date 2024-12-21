@@ -128,7 +128,7 @@ void Goomba::reactToPlayerCollision(int collidedSide) {
 			this->setMoveLeft(true);
 			eventMediator->pushPlayerRight();
 		}
-		eventMediator->decreasePlayerHealth();
+		eventMediator->addPlayerHealth(-1);
 	}
 }
 
