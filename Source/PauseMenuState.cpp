@@ -83,9 +83,7 @@ void PauseMenuState::updateGUI()
     }
     if (buttons[PauseMenu::BTN_MAINMENU]->isPressed())
     {
-        window->setView(window->getDefaultView());
-        this->stateData->audio->playMusic();
-        this->states->push(new MainMenuState(this->stateData));
+        this->gameState->endState();   
         this->endState();
         
     }
