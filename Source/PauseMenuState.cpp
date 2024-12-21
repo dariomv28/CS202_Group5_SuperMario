@@ -41,9 +41,9 @@ void PauseMenuState::initButtons()
     );
 
     y += btn_Height * 1.5;
-    buttons[PauseMenu::BTN_MAINMENU] = new GUI::TextureButton(false,
+    buttons[PauseMenu::BTN_LEVELMENU] = new GUI::TextureButton(false,
         x, y, btn_Width, btn_Height,
-        &font, "Main Menu", btn_CharSize,
+        &font, "Level Menu", btn_CharSize,
         sf::Color::Black, sf::Color::White, sf::Color::White,
         "Source/Resources/texture/menu_button.png",
         "Source/Resources/texture/menu_button.png",
@@ -81,7 +81,7 @@ void PauseMenuState::updateGUI()
     {
         endState();
     }
-    if (buttons[PauseMenu::BTN_MAINMENU]->isPressed())
+    if (buttons[PauseMenu::BTN_LEVELMENU]->isPressed())
     {
         this->gameState->endState();   
         this->endState();
@@ -131,7 +131,7 @@ void PauseMenuState::updateButtonPositions() {
     float y = viewCenter.y - viewSize.y / 4;
 
     buttons[PauseMenu::BTN_CONTINUE]->setPosition(x, y);
-    buttons[PauseMenu::BTN_MAINMENU]->setPosition(x, y + btn_Height * 1.5);
+    buttons[PauseMenu::BTN_LEVELMENU]->setPosition(x, y + btn_Height * 1.5);
 }
 
 void PauseMenuState::updateBackground()

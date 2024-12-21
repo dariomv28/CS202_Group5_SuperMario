@@ -2,7 +2,7 @@
 #include "State.h"
 
 namespace PauseMenu {
-    enum Options { BTN_CONTINUE = 0, BTN_MAINMENU };
+    enum Options { BTN_CONTINUE = 0, BTN_LEVELMENU };
 }
 
 class GameState;
