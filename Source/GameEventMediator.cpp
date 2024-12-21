@@ -125,23 +125,21 @@ void GameEventMediator::increaseScore(int numScore) {
 	levelGUI->increaseScore(numScore);
 }
 
-void GameEventMediator::player2ndBuff() {
-	if (!player->getBig()) {
-		player->setBig(true);
-	}
-	else {
-		PlayerBuff* fireBuff = new FireBuff();
-		player->addBuff(fireBuff);
-	}
+void GameEventMediator::setPlayerBig(bool isBig) {
+	player->setBig(isBig);
 }
 
-void GameEventMediator::decreasePlayerHealth() {
-	player->setHealth(player->getHealth() - 1);
+void GameEventMediator::addPlayerHealth(int health) {
+	if (health < 0) {
+		if (player->getBig()) {
+			player->setBig(false);
+			return;
+		}
+	}
+
+	player->setHealth(player->getHealth() + health);
 }
 
-void GameEventMediator::increasePlayerHealth() {
-	player->setHealth(player->getHealth() + 1);
-}
 
 void GameEventMediator::pushPlayerLeft() {
 	player->setVelocity(sf::Vector2f(-500.0f, player->getVelocity().y));

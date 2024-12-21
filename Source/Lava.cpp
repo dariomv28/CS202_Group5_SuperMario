@@ -64,7 +64,7 @@ void Lava::update(const float& dt) {
 
 void Lava::reactToCollison() {
     // Kill or damage the player
-    eventMediator->decreasePlayerHealth();
+    eventMediator->addPlayerHealth(-1);
 }
 
 void Lava::render(sf::RenderTarget* target) {
