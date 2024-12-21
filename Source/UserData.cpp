@@ -1,12 +1,13 @@
 #include "Headers/UserData.h"
 #include "Headers/Mario.h"
+#include "Headers/Character.h"
 
 UserData::UserData()
 {
 	player.assign(4, nullptr);
-	player[1] = new Mario();
-	player[2] = new Mario();
-	player[3] = new Mario();
+	player[1] = Character::createPlayer("Luigi", sf::Vector2f(0.f, 0.f), sf::Vector2f(64.f, 64.f), 3, 30);
+	player[2] = Character::createPlayer("Luigi", sf::Vector2f(0.f, 0.f), sf::Vector2f(64.f, 64.f), 3, 30);
+	player[3] = Character::createPlayer("Luigi", sf::Vector2f(0.f, 0.f), sf::Vector2f(64.f, 64.f), 3, 30);
 }
 
 UserData::~UserData()
@@ -26,7 +27,7 @@ std::string UserData::getName()
 void UserData::resetPlayer(int world)
 {
 	player[world] = nullptr;
-	player[world] = new Mario();
+	player[world] = Character::createPlayer("Luigi", sf::Vector2f(0.f, 0.f), sf::Vector2f(64.f, 64.f), 3, 30);
 }
 
 void UserData::setPlayer(int world, PlayerManager* player)
