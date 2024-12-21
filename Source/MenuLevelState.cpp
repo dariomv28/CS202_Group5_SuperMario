@@ -23,8 +23,8 @@ void MenuLevelState::initButtons()
     // Init World text
     worldText.setFont(font);
     worldText.setString("world " + std::to_string(world));
-    worldText.setCharacterSize(30);
-    worldText.setFillColor(sf::Color::Black);
+    worldText.setCharacterSize(50);
+    worldText.setFillColor(sf::Color::Cyan);
     worldText.setPosition(SCREEN_WIDTH/2 - worldText.getGlobalBounds().width/2, y - worldText.getGlobalBounds().height*2);
 
     //y += btn_Height * 1.5;
@@ -77,95 +77,6 @@ void MenuLevelState::updateGUI()
         it->update(mousePosWindow);
     }
 
-    //// Keyboard navigation
-    //static int currentButtonIndex = 0;
-
-    //// Move selection up
-    //if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-    //{
-    //    // Prevent multiple rapid changes
-    //    static sf::Clock keyTimer;
-    //    if (keyTimer.getElapsedTime().asMilliseconds() > 150)
-    //    {
-    //        currentButtonIndex = (currentButtonIndex - 1 + buttons.size()) % buttons.size();
-    //        keyTimer.restart();
-    //    }
-    //}
-
-    //// Move selection down
-    //if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-    //{
-    //    // Prevent multiple rapid changes
-    //    static sf::Clock keyTimer;
-    //    if (keyTimer.getElapsedTime().asMilliseconds() > 150)
-    //    {
-    //        currentButtonIndex = (currentButtonIndex + 1) % buttons.size();
-    //        keyTimer.restart();
-    //    }
-    //}
-
-    //for (size_t i = 0; i < buttons.size(); ++i)
-    //{
-    //    if (i == currentButtonIndex)
-    //    {
-    //        buttons[i]->highlight(true);
-    //    }
-    //}
-
-    //// Add a static flag to track key state
-    //static bool enterReleased = false;
-
-    //// Select button with Enter or Space
-    //if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) ||
-    //    sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) &&
-    //    enterReleased)
-    //{
-    //    static sf::Clock keyTimer;
-    //    if (keyTimer.getElapsedTime().asMilliseconds() > 150)
-    //    {
-    //        // Reset the enter released flag
-    //        enterReleased = false;
-
-    //        // Simulate button press for the currently selected button
-    //        if (currentButtonIndex == BTN_LEVEL1)
-    //        {
-    //            this->stateData->audio->playbuttonSound();
-    //            GameState* gameState = new GameState(this->stateData, world, 1);
-    //            gameState->reloadLevel();
-    //            this->states->push(gameState);
-
-    //        }
-    //        else if (currentButtonIndex == BTN_LEVEL2)
-    //        {
-    //            this->stateData->audio->playbuttonSound();
-    //            GameState* gameState = new GameState(this->stateData, world, 2);
-    //            gameState->reloadLevel();
-    //            this->states->push(gameState);
-
-    //        }
-    //        else if (currentButtonIndex == BTN_LEVEL3)
-    //        {
-    //            this->stateData->audio->playbuttonSound();
-    //            GameState* gameState = new GameState(this->stateData, world, 3);
-    //            gameState->reloadLevel();
-    //            this->states->push(gameState);
-
-    //        }
-    //        else if (currentButtonIndex == BTN_BACK)
-    //        {
-    //            this->stateData->audio->playbuttonSound();
-    //            endState();
-    //        }
-    //    }
-    //}
-
-    //// Reset the flag when the key is released
-    //if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) &&
-    //    !sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-    //{
-    //    enterReleased = true;
-    //}
-
     // Existing mouse press handlers
     if (buttons[BTN_LEVEL1]->isPressed())
     {
@@ -179,8 +90,7 @@ void MenuLevelState::updateGUI()
         gameState->reloadLevel();
         this->states->push(gameState);
     }
-    else if (buttons[BTN_LEVEL3]->isPressed())
-    {
+    else if (buttons[BTN_LEVEL3]->isPressed()) {
         GameState* gameState = new GameState(this->stateData, world, 3);
         gameState->reloadLevel();
         this->states->push(gameState);
@@ -205,7 +115,6 @@ void MenuLevelState::render(sf::RenderTarget* target)
 	{
 		target = window;
 	}
-    std::cout << window->getPosition().x << " " << window->getPosition().y << std::endl;
     target->draw(background);
 	target->draw(worldText);
 	for (auto& it : buttons)

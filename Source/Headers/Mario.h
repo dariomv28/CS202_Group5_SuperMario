@@ -1,9 +1,7 @@
 #pragma once
 
-#include "PlayerManager.h" // Ensure PlayerManager is included
+#include "PlayerManager.h" 
 #include "AnimationComponent.h"
-
-//class PhysicsEngine;
 
 class Mario : public PlayerManager {
 private:
@@ -11,11 +9,10 @@ private:
     std::string currentAction;
     bool isAnimationInProgress;
     std::unordered_map<std::string, sf::IntRect> spritesSheet;
-
-
+    bool isMovingLeft;
 public:
-    Mario(sf::Vector2f position, sf::Vector2f size, int health = 3, int speed = 15.0f);
     Mario();
+    Mario(sf::Vector2f position, sf::Vector2f size, int health = 3, int speed = 15.0f);
     ~Mario();
 
     // Initialization function
@@ -30,4 +27,8 @@ public:
     void render(sf::RenderTarget* target) override;
     void handleInput(const float& dt);
     void updateAnimation(const float& dt) override;
+
+    void updateHitboxSize();
+
+    void setBig(bool big) override;
 };

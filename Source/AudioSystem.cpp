@@ -8,7 +8,7 @@ AudioSystem::AudioSystem() {
 
 
 void AudioSystem::init() {
-	if (!music.openFromFile("Source/Resources/audio/BackGround Music.mp3")) {
+	if (!music.openFromFile("Source/Resources/audio/BackGround Music.wav")) {
 		throw("ERROR::AUDIOSYSTEM::CANNOT_LOAD_BACKGROUND_MUSIC");
 	}
 	if (!jumpSoundBuffer.loadFromFile("Source/Resources/audio/Jump.wav")) {
@@ -17,7 +17,7 @@ void AudioSystem::init() {
 	if (!buttonSoundBuffer.loadFromFile("Source/Resources/audio/buttonSound.wav")) {
 		throw("ERROR::AUDIOSYSTEM::CANNOT_LOAD_BUTTON_SOUND_EFFECT");
 	}
-	if (!coinSoundBuffer.loadFromFile("Source/Resources/audio/coin.wav")) {
+	if (!coinSoundBuffer.loadFromFile("Source/Resources/audio/coin.mp3")) {
 		throw("ERROR::AUDIOSYSTEM::CANNOT_LOAD_COIN_SOUND_EFFECT");
 	}
 	if (!brickSoundBuffer.loadFromFile("Source/Resources/audio/break brick.wav")) {
@@ -39,16 +39,14 @@ void AudioSystem::init() {
 	level2Music.setVolume(10.0f);
 	level3Music.setVolume(10.0f);
 	jumpSound.setBuffer(jumpSoundBuffer);
-	jumpSound.setVolume(200.0f);
+	jumpSound.setVolume(100.0f);
 	buttonSound.setBuffer(buttonSoundBuffer);
-	buttonSound.setVolume(200.0f);
+	buttonSound.setVolume(100.0f);
 	coinSound.setBuffer(coinSoundBuffer);
-	coinSound.setVolume(200.0f);
+	coinSound.setVolume(100.0f);
 	brickSound.setBuffer(brickSoundBuffer);
-	brickSound.setVolume(200.0f);
+	brickSound.setVolume(100.0f);
 }
-
-
 
 void AudioSystem::playMusic() {
 	if (currentBackgroundMusic == "MainMenu")
@@ -71,9 +69,6 @@ void AudioSystem::playLevel1Music() {
 	stopAllMusic();
 	level1Music.setLoop(true);
 	level1Music.play();
-	/*if (!level1Music.openFromFile("Source/Resources/audio/Level1Music.wav")) {
-		std::cerr << "Failed to load Level1Music.wav" << std::endl;
-	}*/
 }
 
 void AudioSystem::stopLevel1Music() {

@@ -24,7 +24,7 @@ protected:
 	void initBackground();
 	virtual void initButtons();
 	void initFonts();
-	//void initKeybinds();
+
 public:
 	MainMenuState(StateData* stateData);
 	virtual ~MainMenuState();

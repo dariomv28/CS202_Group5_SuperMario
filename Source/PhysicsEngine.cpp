@@ -5,15 +5,12 @@
 #include "Headers/LivingEntity.h"
 #include "Headers/Enemy.h"
 #include "Headers/PowerUpObject.h"
+#include "Headers/Trampoline.h"
 
 PhysicsEngine::PhysicsEngine() {
-//<<<<<<< HEAD
-//	gravity = sf::Vector2f(0, 1500.f);
-//	friction = sf::Vector2f(1500.f, 0);
-//=======
 	gravity = sf::Vector2f(0, 2500.f);
 	friction = sf::Vector2f(1000.f, 0);
-//>>>>>>> 1808eb3341cb58b223903281233a2c5afdcb8c1d
+	eventMediator = nullptr;
 }
 
 void PhysicsEngine::setEventMediator(GameEventMediator* mediator) {
@@ -89,60 +86,6 @@ void PhysicsEngine::fixPosition(GameObject* entity, GameObject* obj, Side collid
 	}
 }
 
-//void PhysicsEngine::resolveCollisionPlayerBlock(PlayerManager* entity, std::vector<Block*>& blocks, const float& dt) {
-//	// Resolve on the ground
-//	entity->setOnGround(false);
-//	/*0 is Bottom
-//	1 is Top
-//	2 is Left
-//	3 is Right*/
-//	//Make reaction of the blocks first
-//	for (auto& obj : blocks) {
-//		if (obj->getExist() == false) continue;
-//		Side Type = CollisionType(entity, obj);
-//		if (Type != Collide_None) {
-//			obj->reactToCollison(Type ^ 1);
-//		}
-//	}
-//	for (auto& obj : blocks)
-//	{
-//		if (obj->getExist() == false) continue;
-//
-//		//Resolve the right side
-//		Side Type = CollisionType(entity, obj);
-//		if (Type != Collide_None) fixPosition(entity, obj, Type);
-//		switch (Type) {
-//		case (Collide_Bottom):
-//			//fixPosition(entity, obj, Collide_Bottom);
-//			entity->setOnGround(true);
-//			entity->setVelocity(sf::Vector2f(entity->getVelocity().x, 0));
-//			entity->movementComponent->resetJumps();
-//			//std::cerr << "Collide Bottom\n";
-//			continue;
-//		case (Collide_Top):
-//			entity->setVelocity(sf::Vector2f(entity->getVelocity().x, 0));
-//			//std::cerr << "Collide Top\n";
-//			continue;
-//
-//		case (Collide_Right):
-//			entity->setVelocity(sf::Vector2f(0, entity->getVelocity().y));
-//			entity->setMoveRight(false);
-//			//std::cerr << "Collide Right\n";
-//			continue;
-//		case (Collide_Left):
-// 			entity->setVelocity(sf::Vector2f(0, entity->getVelocity().y));
-//			entity->setMoveLeft(false);
-//			//std::cerr << "Collide Left\n";
-//			continue;
-//		}
-//	}
-//
-//	//std::cerr << entity->getVelocity().x << std::endl;
-//	//fixPosition(entity, Blocks_Collide);
-//	
-//
-//}
-
 void PhysicsEngine::resolveCollisionPlayerBlock(PlayerManager* entity, std::vector<Block*>& blocks, const float& dt) {
 	entity->setOnGround(false);
 	entity->setMoveLeft(true);  // Reset movement restrictions at start of frame
@@ -185,9 +128,19 @@ void PhysicsEngine::resolveCollisionPlayerBlock(PlayerManager* entity, std::vect
 	}
 
 	if (hasBottomCollision) {
-		entity->setOnGround(true);
-		entity->setVelocity(sf::Vector2f(entity->getVelocity().x, -10.0f));
-		entity->movementComponent->resetJumps();
+		bool collidedWithTrampoline = false;
+		for (auto& block : blocks) {
+			if (dynamic_cast<Trampoline*>(block) && CollisionType(entity, block) == Collide_Bottom) {
+				collidedWithTrampoline = true;
+				break;
+			}
+		}
+
+		if (!collidedWithTrampoline) {
+			entity->setOnGround(true);
+			entity->setVelocity(sf::Vector2f(entity->getVelocity().x, -10.0f));
+			entity->movementComponent->resetJumps();
+		}
 	}
 
 	if (hasTopCollision) {
@@ -250,7 +203,6 @@ void PhysicsEngine::resolveCollisionEnemyBlock(std::vector<Enemy*>& enemies, std
 			case (Collide_Left):
 				fixPosition(enemy, block, Collide_Left);
 				enemy->reactToBlockCollision(Collide_Left);
-				enemy->setScaleSprite("RIGHT");
 				break;
 
 				//Resolve the ground
@@ -299,12 +251,8 @@ void PhysicsEngine::resolveCollisionEnemyEnemy(std::vector<Enemy*>& enemies, con
 				enemy1->setMoveRight(false);
 				enemy1->setMoveLeft(true);
 
-				enemy1->setScaleSprite("LEFT");
-
 				enemy2->setMoveRight(true);
 				enemy2->setMoveLeft(false);
-
-				enemy2->setScaleSprite("RIGHT");
 
 				continue;
 			}
@@ -315,12 +263,8 @@ void PhysicsEngine::resolveCollisionEnemyEnemy(std::vector<Enemy*>& enemies, con
 				enemy1->setMoveLeft(false);
 				enemy1->setMoveRight(true);
 
-				enemy1->setScaleSprite("RIGHT");
-
 				enemy2->setMoveRight(false);
 				enemy2->setMoveLeft(true);
-
-				enemy2->setScaleSprite("LEFT");
 
 				continue;
 			}

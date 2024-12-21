@@ -151,6 +151,10 @@ void GameEventMediator::pushPlayerRight() {
 	player->setVelocity(sf::Vector2f(500.0f, player->getVelocity().y));
 }
 
+void GameEventMediator::pushPlayerUpExtra() {
+	player->setVelocity(sf::Vector2f(player->getVelocity().x, -1700.0f));
+}
+
 void GameEventMediator::spawnPowerUp(PowerUpObject* PowerUp) {
 	this->PowerUps->push_back(PowerUp);
 	PowerUp->setEventMediator(this);

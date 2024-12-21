@@ -44,6 +44,10 @@ void Koopa::initAnimations() {
     spritesSheet = {
         { "WALK-1", sf::IntRect(52, 37, 16, 24) },    // Green Koopa walking frame 1
         { "WALK-2", sf::IntRect(69, 38, 16, 23) },   // Green Koopa walking frame 2
+
+        { "WALKR-1", sf::IntRect(760, 37, 16, 24) },    
+        { "WALKR-2", sf::IntRect(743, 38, 16, 23) },
+
         { "SHELL-STOP", sf::IntRect(188, 45, 16, 14) },    // Koopa in shell
 		{ "SHELL-MOVING-1", sf::IntRect(120, 45, 16, 14) }, // Koopa shell moving frame 1
 		{ "SHELL-MOVING-2", sf::IntRect(137, 45, 16, 14) },  // Koopa shell moving frame 2
@@ -59,8 +63,6 @@ void Koopa::move(const float& dt)
 
     if (this->position.x <= x_min) {
         this->position.x = std::max<float>(this->position.x, x_min);
-			
-		setScaleSprite("RIGHT");
 
         setMoveLeft(false);
         setMoveRight(true);
@@ -68,8 +70,6 @@ void Koopa::move(const float& dt)
 
     if (this->position.x >= x_max) {
         this->position.x = std::min<float>(this->position.x, x_max);
-            
-        setScaleSprite("LEFT");
 
         setMoveRight(false);
         setMoveLeft(true);
@@ -147,7 +147,12 @@ void Koopa::updateAnimation(const float& dt) {
         }
     }
     else {
-        animationComponent->setAnimationEnemies("WALK-", spritesSheet, 0.2f);
+        if (this->isMoveLeft()) {
+			animationComponent->setAnimationEnemies("WALKR-", spritesSheet, 0.2f);
+		}
+        else if (this->isMoveRight()) {
+            animationComponent->setAnimationEnemies("WALK-", spritesSheet, 0.2f);
+        }
     }
     animationComponent->update(dt);
 }
@@ -191,9 +196,4 @@ bool Koopa::getIsShelled() const {
 // Setter for shelled state
 void Koopa::setIsShelled(bool shelled) {
 	isShelled = shelled;
-}
-
-// Set the sprite scale based on the animation name
-void Koopa::setScaleSprite(std::string name) {
-   
 }

@@ -9,6 +9,3 @@ Enemy::Enemy() {
 
 }
 
-void Enemy::setScaleSprite(std::string Name) {
-
-}
