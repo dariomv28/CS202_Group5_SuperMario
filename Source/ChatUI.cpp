@@ -52,9 +52,9 @@ std::string ChatUI::wrapText(const std::string& text, const sf::Font& font, unsi
     sfText.setCharacterSize(fontSize);
 
     for (char c : text) {
-        if (c == ' ' || c == '\n') {
+        if (c == ' ' || c == '\n' || c == '-') {
             sfText.setString(line + word); // Check line + next word
-            if (sfText.getLocalBounds().width > maxWidth) {
+            if (sfText.getLocalBounds().width > maxWidth || c == '-') {
                 wrappedText += line + '\n'; // Break the line
                 line = word + ' ';          // Start a new line
             }
