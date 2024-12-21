@@ -135,8 +135,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Character.cpp" />
     <ClCompile Include="Source\CloudBlock.cpp" />
     <ClCompile Include="Source\DeathMenuState.cpp" />
+    <ClCompile Include="Source\Luigi.cpp" />
     <ClCompile Include="Source\MenuWorldState.cpp" />
     <ClCompile Include="Source\Bullet.cpp" />
     <ClCompile Include="Source\FireBuff.cpp" />
@@ -193,8 +195,10 @@
     <ClCompile Include="Source\UserData.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Headers\Character.h" />
     <ClInclude Include="Source\Headers\CloudBlock.h" />
     <ClInclude Include="Source\Headers\DeathMenuState.h" />
+    <ClInclude Include="Source\Headers\Luigi.h" />
     <ClInclude Include="Source\Headers\MenuWorldState.h" />
     <ClInclude Include="Source\Headers\Bullet.h" />
     <ClInclude Include="Source\Headers\FireBuff.h" />
