@@ -24,7 +24,7 @@ LevelManager::~LevelManager() {
     delete levelGUI;
     delete eventMediator;
     delete physicsEngine;
-    delete audio;
+    //delete audio;
 	delete chatComponent;
 	delete llmService;
     delete chatUI;

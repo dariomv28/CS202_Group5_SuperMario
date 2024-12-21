@@ -9,46 +9,43 @@
 #include "Headers/W2_LV3.h"
 #include "Headers/W3_LV2.h"
 
-GameState::GameState(StateData* stateData, MenuLevelState* menuLevelState)
-    : State(stateData), levelManager(nullptr), menuLevelState(menuLevelState) {}
+GameState::GameState(StateData* stateData, int worldID, int levelID)
+    : State(stateData), levelManager(nullptr), worldID(worldID), levelID(levelID) {}
 
 
 GameState::~GameState() {
     delete levelManager;
 }
 
-void GameState::loadLevel(PlayerManager* player, int worldID, int level) {
+void GameState::reloadLevel() {
     if (levelManager) {
         delete levelManager;
     }
-    if (menuLevelState) {
-        this->strartPlayerHp = menuLevelState->getHealth();
-    }
 
-    std::string worldLevel = "W" + std::to_string(worldID) + "_LV" + std::to_string(level);
+    std::string worldLevel = "W" + std::to_string(worldID) + "_LV" + std::to_string(levelID);
     if (worldLevel == "W1_LV1") {
-		levelManager = new W1_LV1(player, window);
+		levelManager = new W1_LV1(this->stateData->userData->getPlayer(worldID), window);
     }
     else if (worldLevel == "W1_LV2") {
-        levelManager = new W1_LV2(player, window);
+        levelManager = new W1_LV2(this->stateData->userData->getPlayer(worldID), window);
     } 	
     else if (worldLevel == "W1_LV3") {
-		levelManager = new W1_LV3(player, window);
+		levelManager = new W1_LV3(this->stateData->userData->getPlayer(worldID), window);
 	}
     else if (worldLevel == "W2_LV1") {
-		levelManager = new W2_LV1(player, window);
+		levelManager = new W2_LV1(this->stateData->userData->getPlayer(worldID), window);
     }
     else if (worldLevel == "W2_LV2") {
-        levelManager = new W2_LV2(player, window);
+        levelManager = new W2_LV2(this->stateData->userData->getPlayer(worldID), window);
     }
 	else if (worldLevel == "W2_LV3") {
-        levelManager = new W2_LV3(player, window);
+        levelManager = new W2_LV3(this->stateData->userData->getPlayer(worldID), window);
     }
     else if (worldLevel == "W3_LV1") {
-		levelManager = new W3_LV1(player, window);
+		levelManager = new W3_LV1(this->stateData->userData->getPlayer(worldID), window);
 	}
     else if (worldLevel == "W3_LV2") {
-		levelManager = new W3_LV2(player, window);
+		levelManager = new W3_LV2(this->stateData->userData->getPlayer(worldID), window);
 	}
 	else if (worldLevel == "W3_LV3") {
 		//	levelManager = new W3_LV3(player, window);
@@ -77,8 +74,6 @@ void GameState::render(sf::RenderTarget* target) {
     if (levelManager) {
         levelManager->render();
     }
-    // cerr << player->hitbox.getPosition().x << endl;
-	// cerr << Blocks.size() << endl;
 }
 
 void GameState::renderLevelManager(sf::RenderTarget* target) {
@@ -86,20 +81,6 @@ void GameState::renderLevelManager(sf::RenderTarget* target) {
         this->levelManager->render(target);
 }
 
-int GameState::getHealth() const
-{
-
-    return menuLevelState->getHealth();
-
-}
-
-int GameState::getHealthStart() const
-{
-
-    return this->strartPlayerHp;
-
-
-}
 
 void GameState::checkPause() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
@@ -108,27 +89,18 @@ void GameState::checkPause() {
 }
 
 void GameState::checkDeath() {
-
-    if (this->getHealth() <= 0) {
-        this->states->push(new DeathMenuState(this->stateData, this));
-    }
+	if (this->stateData->userData->getPlayer(worldID)->getHealth() <= 0) {
+		this->states->push(new DeathMenuState(this->stateData, this));
+	}
 }
 
 int GameState::getWorld() const {
-    return this->menuLevelState->getWorld();
+	return this->worldID;
 }
 
 int GameState::getLevel() const {
-    return this->menuLevelState->getLevel();
+	return this->levelID;
 }
 
-PlayerManager* GameState::getPlayer() const {
-    std::cout << "Player address GameState: " << menuLevelState->getPlayer() << std::endl;
-    return this->menuLevelState->getPlayer();
-}
 
-void GameState::setPlayerHealth(int newHealth) {
-    if (menuLevelState) {
-        menuLevelState->setPlayerHealth(newHealth);
-    }
-}
+

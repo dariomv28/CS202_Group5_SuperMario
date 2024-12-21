@@ -65,88 +65,88 @@ void MenuWorldState::updateGUI()
 	}
 
 	// Keyboard navigation
-	static int currentButtonIndex = 0;
+	//static int currentButtonIndex = 0;
 
-	// Move selection up
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-	{
-		// Prevent multiple rapid changes
-		static sf::Clock keyTimer;
-		if (keyTimer.getElapsedTime().asMilliseconds() > 100)
-		{
-			currentButtonIndex = (currentButtonIndex - 1 + buttons.size()) % buttons.size();
-			keyTimer.restart();
-		}
-	}
+	//// Move selection up
+	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+	//{
+	//	// Prevent multiple rapid changes
+	//	static sf::Clock keyTimer;
+	//	if (keyTimer.getElapsedTime().asMilliseconds() > 100)
+	//	{
+	//		currentButtonIndex = (currentButtonIndex - 1 + buttons.size()) % buttons.size();
+	//		keyTimer.restart();
+	//	}
+	//}
 
-	// Move selection down
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-	{
-		// Prevent multiple rapid changes
-		static sf::Clock keyTimer;
-		if (keyTimer.getElapsedTime().asMilliseconds() > 100)
-		{
-			currentButtonIndex = (currentButtonIndex + 1) % buttons.size();
-			keyTimer.restart();
-		}
-	}
+	//// Move selection down
+	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+	//{
+	//	// Prevent multiple rapid changes
+	//	static sf::Clock keyTimer;
+	//	if (keyTimer.getElapsedTime().asMilliseconds() > 100)
+	//	{
+	//		currentButtonIndex = (currentButtonIndex + 1) % buttons.size();
+	//		keyTimer.restart();
+	//	}
+	//}
 
-	for (size_t i = 0; i < buttons.size(); ++i)
-	{
-		if (i == currentButtonIndex)
-		{
-			buttons[i]->highlight(true);
-		}
-	}
+	//for (size_t i = 0; i < buttons.size(); ++i)
+	//{
+	//	if (i == currentButtonIndex)
+	//	{
+	//		buttons[i]->highlight(true);
+	//	}
+	//}
 
-	// Add a static flag to track key state
-	static bool enterReleased = false;
+	//// Add a static flag to track key state
+	//static bool enterReleased = false;
 
-	// Select button with Enter or Space
-	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) ||
-		sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) &&
-		enterReleased)
-	{
-		static sf::Clock keyTimer;
-		if (keyTimer.getElapsedTime().asMilliseconds() > 150)
-		{
-			// Reset the enter released flag
-			enterReleased = false;
+	//// Select button with Enter or Space
+	//if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) ||
+	//	sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) &&
+	//	enterReleased)
+	//{
+	//	static sf::Clock keyTimer;
+	//	if (keyTimer.getElapsedTime().asMilliseconds() > 150)
+	//	{
+	//		// Reset the enter released flag
+	//		enterReleased = false;
 
-			// Simulate button press for the currently selected button
-			if (currentButtonIndex == BTN_WORLD1)
-			{
-				this->stateData->audio->playbuttonSound();
-				states->push(new MenuLevelState(stateData, 1));
-				this->stateData->audio->playLevel1Music();
-			}
-			else if (currentButtonIndex == BTN_WORLD2)
-			{
-				this->stateData->audio->playbuttonSound();
-				states->push(new MenuLevelState(stateData, 2));
-				this->stateData->audio->playLevel2Music();
-			}
-			else if (currentButtonIndex == BTN_WORLD3)
-			{
-				this->stateData->audio->playbuttonSound();
-				states->push(new MenuLevelState(stateData, 3));
-				this->stateData->audio->playLevel3Music();
-			}
-			else if (currentButtonIndex == BTN_BACKTOMAIN)
-			{
-				this->stateData->audio->playbuttonSound();
-				this->stateData->audio->playMusic();
-				endState();
-			}
-		}
-	}
+	//		// Simulate button press for the currently selected button
+	//		if (currentButtonIndex == BTN_WORLD1)
+	//		{
+	//			this->stateData->audio->playbuttonSound();
+	//			states->push(new MenuLevelState(stateData, 1));
+	//			this->stateData->audio->playLevel1Music();
+	//		}
+	//		else if (currentButtonIndex == BTN_WORLD2)
+	//		{
+	//			this->stateData->audio->playbuttonSound();
+	//			states->push(new MenuLevelState(stateData, 2));
+	//			this->stateData->audio->playLevel2Music();
+	//		}
+	//		else if (currentButtonIndex == BTN_WORLD3)
+	//		{
+	//			this->stateData->audio->playbuttonSound();
+	//			states->push(new MenuLevelState(stateData, 3));
+	//			this->stateData->audio->playLevel3Music();
+	//		}
+	//		else if (currentButtonIndex == BTN_BACKTOMAIN)
+	//		{
+	//			this->stateData->audio->playbuttonSound();
+	//			this->stateData->audio->playMusic();
+	//			endState();
+	//		}
+	//	}
+	//}
 
-	// Reset the flag when the key is released
-	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) &&
-		!sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-	{
-		enterReleased = true;
-	}
+	//// Reset the flag when the key is released
+	//if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) &&
+	//	!sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	//{
+	//	enterReleased = true;
+	//}
 
 
 	if (buttons[BTN_WORLD1]->isPressed())
@@ -176,6 +176,7 @@ void MenuWorldState::updateGUI()
 
 void MenuWorldState::update(const float& dt)
 {
+
 	updateMousePosition();
 	updateGUI();
 }

@@ -2,7 +2,7 @@
 #include "stdafx.h"
 #include "GUI.h"
 #include "AudioSystem.h"
-
+#include "UserData.h"
 
 class State;
 
@@ -13,6 +13,7 @@ public:
 		window = nullptr;
 		states = nullptr;
 		audio = AudioSystem::getInstance();
+		userData = new UserData();
 	}
 
 	//Variables
@@ -20,7 +21,7 @@ public:
 	std::stack<State*>* states;
 
 	AudioSystem* audio;
-	
+	UserData* userData;
 };
 
 class State

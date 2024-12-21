@@ -22,31 +22,17 @@ void DeathMenuState::initTexts()
 
 
     titleText.setFont(font);
-    titleText.setString("Game Over");
+    titleText.setString("Game Over!");
     titleText.setCharacterSize(100);
     titleText.setFillColor(sf::Color::White);
     centerText(titleText, window->getView().getCenter().y - 250);
 
 
     questionText.setFont(font);
-    questionText.setString("Play Again?");
+    questionText.setString("Left click or Press enter to continue");
     questionText.setCharacterSize(50);
     questionText.setFillColor(sf::Color::White);
     centerText(questionText, window->getView().getCenter().y - 100);
-
-
-    yesButtonText.setFont(font);
-    yesButtonText.setString("Yes");
-    yesButtonText.setCharacterSize(60);
-    yesButtonText.setFillColor(sf::Color::White);
-    centerText(yesButtonText, window->getView().getCenter().y + 50);
-
-
-    noButtonText.setFont(font);
-    noButtonText.setString("No");
-    noButtonText.setCharacterSize(60);
-    noButtonText.setFillColor(sf::Color::White);
-    centerText(noButtonText, window->getView().getCenter().y + 150);
 }
 
 
@@ -86,35 +72,22 @@ void DeathMenuState::updateGUI()
 
 
     updateButtonHover(yesButtonText, mousePosView);
-    updateButtonHover(noButtonText, mousePosView);
 
 
-    if (yesButtonText.getGlobalBounds().contains(mousePosView) &&
-        sf::Mouse::isButtonPressed(sf::Mouse::Left))
-    {
-        
-        //this->stateData->audio->init();
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
+        sf::View view = window->getDefaultView();
 
-        gameState->setPlayerHealth(gameState->getHealthStart());
-        gameState->loadLevel(
-            gameState->getPlayer(),
-            gameState->getWorld(),
-            gameState->getLevel()
-        );
-        
+        // Set the view's position so its top-left corner is at (0, 0)
+        sf::Vector2f viewSize = view.getSize();
+        view.setCenter(viewSize.x / 2, viewSize.y / 2);
+
+        // Apply the view to the window
+        window->setView(view);
+		this->gameState->endState();
+        this->stateData->userData->resetPlayer(gameState->getWorld());
         this->endState();
-    }
-
-
-    if (noButtonText.getGlobalBounds().contains(mousePosView) &&
-        sf::Mouse::isButtonPressed(sf::Mouse::Left))
-    {
-        window->setView(window->getDefaultView());
-
-        this->stateData->audio->playMusic();
-        this->states->push(new MainMenuState(this->stateData));
-        this->endState();
-    }
+	}
+     
 }
 
 
@@ -133,6 +106,5 @@ void DeathMenuState::render(sf::RenderTarget* target)
     target->draw(this->background);
     target->draw(this->titleText);
     target->draw(this->questionText);
-    target->draw(this->yesButtonText);
-    target->draw(this->noButtonText);
+
 }

@@ -2,6 +2,14 @@
 #include "Headers/PhysicsEngine.h"
 #include <stdexcept>
 
+Mario::Mario(): PlayerManager(sf::Vector2f(0,0), sf::Vector2f(CELL_SIZE, CELL_SIZE), 3, 30.f), 
+                currentAction("IDLE"), isAnimationInProgress(false) 
+{
+    animationComponent = nullptr;
+    movementComponent = new MovementComponent(30.f, 4.0f);
+    init();
+}
+
 Mario::Mario(sf::Vector2f position, sf::Vector2f size, int health, int speed)
     : PlayerManager(position, size, health, speed), currentAction("IDLE"), isAnimationInProgress(false) {
     animationComponent = nullptr;

@@ -13,14 +13,14 @@ private:
     LevelManager* levelManager;
     PauseMenuState* pauseMenu;
     DeathMenuState* deathMenu;
-    MenuLevelState* menuLevelState;
 
+    int worldID, levelID;
     int strartPlayerHp;
 public:
-    GameState(StateData* stateData, MenuLevelState* menuLevelState);
+    GameState(StateData* stateData, int worldID, int levelID);
     virtual ~GameState();
 
-    void loadLevel(PlayerManager* player, int worldID, int levelID);
+    void reloadLevel();
     void update(const float& dt) override;
     void render(sf::RenderTarget* target = nullptr) override;
     void renderLevelManager(sf::RenderTarget* target);
@@ -29,10 +29,8 @@ public:
     void checkDeath();
     int getHealth() const;
     int getHealthStart() const;
-    void setPlayerHealth(int newHealth);
 
     int getWorld() const;
     int getLevel() const;
-    PlayerManager* getPlayer() const;
 };
 

@@ -7,8 +7,6 @@ MenuLevelState::MenuLevelState(StateData* stateData, int world) : MainMenuState(
     // Reinitialize buttons with level-specific content
     this->world = world;
     this->initButtons();
-    player = new Mario(sf::Vector2f(0.f, 0.f), sf::Vector2f(64.f, 64.f), 3.f, 30.f);
-    player->addBuff(new FireBuff());
 }
 
 MenuLevelState::~MenuLevelState()
@@ -79,119 +77,112 @@ void MenuLevelState::updateGUI()
         it->update(mousePosWindow);
     }
 
-    // Keyboard navigation
-    static int currentButtonIndex = 0;
+    //// Keyboard navigation
+    //static int currentButtonIndex = 0;
 
-    // Move selection up
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-    {
-        // Prevent multiple rapid changes
-        static sf::Clock keyTimer;
-        if (keyTimer.getElapsedTime().asMilliseconds() > 150)
-        {
-            currentButtonIndex = (currentButtonIndex - 1 + buttons.size()) % buttons.size();
-            keyTimer.restart();
-        }
-    }
+    //// Move selection up
+    //if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+    //{
+    //    // Prevent multiple rapid changes
+    //    static sf::Clock keyTimer;
+    //    if (keyTimer.getElapsedTime().asMilliseconds() > 150)
+    //    {
+    //        currentButtonIndex = (currentButtonIndex - 1 + buttons.size()) % buttons.size();
+    //        keyTimer.restart();
+    //    }
+    //}
 
-    // Move selection down
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-    {
-        // Prevent multiple rapid changes
-        static sf::Clock keyTimer;
-        if (keyTimer.getElapsedTime().asMilliseconds() > 150)
-        {
-            currentButtonIndex = (currentButtonIndex + 1) % buttons.size();
-            keyTimer.restart();
-        }
-    }
+    //// Move selection down
+    //if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+    //{
+    //    // Prevent multiple rapid changes
+    //    static sf::Clock keyTimer;
+    //    if (keyTimer.getElapsedTime().asMilliseconds() > 150)
+    //    {
+    //        currentButtonIndex = (currentButtonIndex + 1) % buttons.size();
+    //        keyTimer.restart();
+    //    }
+    //}
 
-    for (size_t i = 0; i < buttons.size(); ++i)
-    {
-        if (i == currentButtonIndex)
-        {
-            buttons[i]->highlight(true);
-        }
-    }
+    //for (size_t i = 0; i < buttons.size(); ++i)
+    //{
+    //    if (i == currentButtonIndex)
+    //    {
+    //        buttons[i]->highlight(true);
+    //    }
+    //}
 
-    // Add a static flag to track key state
-    static bool enterReleased = false;
+    //// Add a static flag to track key state
+    //static bool enterReleased = false;
 
-    // Select button with Enter or Space
-    if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) ||
-        sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) &&
-        enterReleased)
-    {
-        static sf::Clock keyTimer;
-        if (keyTimer.getElapsedTime().asMilliseconds() > 150)
-        {
-            // Reset the enter released flag
-            enterReleased = false;
+    //// Select button with Enter or Space
+    //if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) ||
+    //    sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) &&
+    //    enterReleased)
+    //{
+    //    static sf::Clock keyTimer;
+    //    if (keyTimer.getElapsedTime().asMilliseconds() > 150)
+    //    {
+    //        // Reset the enter released flag
+    //        enterReleased = false;
 
-            // Simulate button press for the currently selected button
-            if (currentButtonIndex == BTN_LEVEL1)
-            {
-                this->stateData->audio->playbuttonSound();
-                GameState* gameState = new GameState(this->stateData, this);
-                this->setLevel(1);
-                gameState->loadLevel(player, world, level);
-                this->states->push(gameState);
+    //        // Simulate button press for the currently selected button
+    //        if (currentButtonIndex == BTN_LEVEL1)
+    //        {
+    //            this->stateData->audio->playbuttonSound();
+    //            GameState* gameState = new GameState(this->stateData, world, 1);
+    //            gameState->reloadLevel();
+    //            this->states->push(gameState);
 
-            }
-            else if (currentButtonIndex == BTN_LEVEL2)
-            {
-                this->stateData->audio->playbuttonSound();
-                GameState* gameState = new GameState(this->stateData, this);
-                this->setLevel(2);
-                gameState->loadLevel(player, world, level);
-                this->states->push(gameState);
+    //        }
+    //        else if (currentButtonIndex == BTN_LEVEL2)
+    //        {
+    //            this->stateData->audio->playbuttonSound();
+    //            GameState* gameState = new GameState(this->stateData, world, 2);
+    //            gameState->reloadLevel();
+    //            this->states->push(gameState);
 
-            }
-            else if (currentButtonIndex == BTN_LEVEL3)
-            {
-                this->stateData->audio->playbuttonSound();
-                GameState* gameState = new GameState(this->stateData, this);
-                this->setLevel(3);
-                gameState->loadLevel(player, world, level);
-                this->states->push(gameState);
+    //        }
+    //        else if (currentButtonIndex == BTN_LEVEL3)
+    //        {
+    //            this->stateData->audio->playbuttonSound();
+    //            GameState* gameState = new GameState(this->stateData, world, 3);
+    //            gameState->reloadLevel();
+    //            this->states->push(gameState);
 
-            }
-            else if (currentButtonIndex == BTN_BACK)
-            {
-                this->stateData->audio->playbuttonSound();
-                endState();
-            }
-        }
-    }
+    //        }
+    //        else if (currentButtonIndex == BTN_BACK)
+    //        {
+    //            this->stateData->audio->playbuttonSound();
+    //            endState();
+    //        }
+    //    }
+    //}
 
-    // Reset the flag when the key is released
-    if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) &&
-        !sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-    {
-        enterReleased = true;
-    }
+    //// Reset the flag when the key is released
+    //if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) &&
+    //    !sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    //{
+    //    enterReleased = true;
+    //}
 
     // Existing mouse press handlers
     if (buttons[BTN_LEVEL1]->isPressed())
     {
-        GameState* gameState = new GameState(this->stateData, this);
-        this->setLevel(1);
-        gameState->loadLevel(player, world, level);
+        GameState* gameState = new GameState(this->stateData, world, 1);
+        gameState->reloadLevel();
         this->states->push(gameState);
     }
     else if (buttons[BTN_LEVEL2]->isPressed())
     {
-        GameState* gameState = new GameState(this->stateData, this);
-        this->setLevel(2);
-        gameState->loadLevel(player, world, level);
+        GameState* gameState = new GameState(this->stateData, world, 2);
+        gameState->reloadLevel();
         this->states->push(gameState);
     }
     else if (buttons[BTN_LEVEL3]->isPressed())
     {
-        GameState* gameState = new GameState(this->stateData, this);
-
-        this->setLevel(3);
-        gameState->loadLevel(player, world, level);
+        GameState* gameState = new GameState(this->stateData, world, 3);
+        gameState->reloadLevel();
         this->states->push(gameState);
     }
     else if (buttons[BTN_BACK]->isPressed())
@@ -202,6 +193,8 @@ void MenuLevelState::updateGUI()
 
 void MenuLevelState::update(const float& dt)
 {
+    //Defaut view
+    window->setView(window->getDefaultView());
     updateMousePosition();
     updateGUI();
 }
@@ -212,47 +205,11 @@ void MenuLevelState::render(sf::RenderTarget* target)
 	{
 		target = window;
 	}
+    std::cout << window->getPosition().x << " " << window->getPosition().y << std::endl;
     target->draw(background);
 	target->draw(worldText);
 	for (auto& it : buttons)
 	{
 		it->render(target);
 	}
-}
-
-
-int MenuLevelState::getWorld() const {
-    std::cout << "World value: " << world << ", address = " << this << std::endl;
-    return this->world;
-}
-
-void MenuLevelState::setWorld(int newWorld) {
-    this->world = newWorld;
-    std::cout << "setWorld called: world = " << this->world << ", address = " << this << std::endl;
-}
-
-int MenuLevelState::getLevel() const {
-    std::cout << "Level value: " << level << ", address = " << this << std::endl;
-    return this->level;
-}
-
-void MenuLevelState::setLevel(int newLevel) {
-    this->level = newLevel;
-    std::cout << "setLevel called: level = " << this->level << ", address = " << this << std::endl;
-}
-
-PlayerManager* MenuLevelState::getPlayer() const {
-    std::cout << "Player address MenuLevelState: " << player << std::endl;
-    return this->player;
-}
-
-int MenuLevelState::getHealth() {
-    return player->getHealth();
-
-}
-
-void MenuLevelState::setPlayerHealth(int newHealth) {
-    if (player) {
-        player->setHealth(newHealth);
-    }
 }
