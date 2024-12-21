@@ -7,6 +7,7 @@ class MenuWorldState :
     public MainMenuState
 {
 private:
+    int world;
     void initButtons() override;
 public:
     MenuWorldState(StateData* stateData);
@@ -14,5 +15,6 @@ public:
 
     void updateGUI() override;
     void update(const float& dt) override;
+    void render(sf::RenderTarget* target) override;
 };
 

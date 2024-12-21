@@ -6,6 +6,7 @@ namespace GUI
 		sf::Font* font, std::string text, unsigned charSize,
 		sf::Color textIdleColor, sf::Color textHoverColor, sf::Color textActiveColor)
 	{
+		this->disable = false;
 		this->stickyAllowed = stickyAllowed;
 		this->width = width;
 		this->height = height;
@@ -34,12 +35,19 @@ namespace GUI
 
 	const bool Button::isPressed() const
 	{
+		if (this->disable)
+			return false;
 		if (this->buttonState == BTN_ACTIVE) {
 			audio->playbuttonSound();
 			return true;
 		}
 
 		return false;
+	}
+
+	void Button::setDisable(bool disable)
+	{
+		this->disable = disable;
 	}
 
 	const std::string Button::getText() const
@@ -183,6 +191,14 @@ namespace GUI
 	void TextureButton::update(const sf::Vector2i mousePos)
 	{
 		/* Update the booleans for hover and pressed */
+
+		//If the button is disabled, set it grey
+		if (this->disable)
+		{
+			this->sprite.setColor(sf::Color(100, 100, 100, 255));
+			this->text.setFillColor(sf::Color(100, 100, 100, 255));
+			return;
+		}
 
 		//Idle
 		this->buttonState = BTN_IDLE;

@@ -4,6 +4,7 @@
 MenuWorldState::MenuWorldState(StateData* stateData) : MainMenuState(stateData)
 {
 	// Reinitialize buttons with world-specific content
+	world = 0;
 	this->initButtons();
 }
 
@@ -66,18 +67,21 @@ void MenuWorldState::updateGUI()
 
 	if (buttons[BTN_WORLD1]->isPressed())
 	{
+		world = 0;
 		states->push(new MenuLevelState(stateData, 1));
 		this->stateData->audio->playLevel1Music();
 
 	}
 	else if (buttons[BTN_WORLD2]->isPressed())
 	{
+		world = 1;
 		states->push(new MenuLevelState(stateData, 2));
 		this->stateData->audio->playLevel2Music();
 
 	}
 	else if (buttons[BTN_WORLD3]->isPressed())
 	{
+		world = 2;
 		states->push(new MenuLevelState(stateData, 3));
 		this->stateData->audio->playLevel3Music();
 
@@ -95,3 +99,10 @@ void MenuWorldState::update(const float& dt)
 	updateGUI();
 }
 
+void MenuWorldState::render(sf::RenderTarget* target)
+{
+	if (!target)
+		target = window;
+	target->draw(background[world]);
+	renderGUI();
+}

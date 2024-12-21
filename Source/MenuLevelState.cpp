@@ -83,6 +83,10 @@ void MenuLevelState::updateGUI()
     {
         it->update(mousePosWindow);
     }
+    //If user hasn't completed the previous level, disable these buttons
+  //  buttons[BTN_LEVEL2]->setDisable(!this->stateData->userData->getCompleted(world, 1));
+   // buttons[BTN_LEVEL3]->setDisable(!this->stateData->userData->getCompleted(world, 2));
+    
 
     // Existing mouse press handlers
     if (buttons[BTN_LEVEL1]->isPressed())
@@ -122,7 +126,7 @@ void MenuLevelState::render(sf::RenderTarget* target)
 	{
 		target = window;
 	}
-    target->draw(background);
+    target->draw(background[world-1]);
 	target->draw(worldText);
 	for (auto& it : buttons)
 	{

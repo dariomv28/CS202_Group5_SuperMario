@@ -45,7 +45,7 @@ void MapManager::initStyle() {
 	background_styles["W1_LV3"] = "basic";
 
 	background_styles["W2_LV1"] = "snow";
-	background_styles["W2_LV2"] = "basicnight";
+	background_styles["W2_LV2"] = "snownight";
 	background_styles["W2_LV3"] = "snow";
 
 	background_styles["W3_LV1"] = "gray";

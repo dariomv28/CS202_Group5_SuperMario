@@ -77,5 +77,4 @@ void Trampoline::startBounceAnimation() {
 
 void Trampoline::render(sf::RenderTarget* target) {
     target->draw(entitySprite);
-    target->draw(hitbox);
 }

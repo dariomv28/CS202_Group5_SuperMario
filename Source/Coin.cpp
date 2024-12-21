@@ -48,7 +48,6 @@ void Coin::reactToCollison()
 void Coin::render(sf::RenderTarget* target)
 {
 	target->draw(entitySprite);
-	target->draw(hitbox);
 }
 
 

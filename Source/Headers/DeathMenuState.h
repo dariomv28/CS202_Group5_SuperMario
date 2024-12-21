@@ -26,7 +26,8 @@ protected:
     void initBackground();
     void initTexts();
     void centerText(sf::Text& text, float y);
-
+   
+    void updateBackground();
     void updateButtonHover(sf::Text& text, sf::Vector2f mousePos);
 
 public:

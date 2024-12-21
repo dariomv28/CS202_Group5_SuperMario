@@ -13,10 +13,20 @@ void MainMenuState::initVariables()
 
 void MainMenuState::initBackground()
 {
-	backgroundTexture.loadFromFile("Source/Resources/texture/menu_background.png");
-	background.setTexture(backgroundTexture);
-	background.setScale(window->getSize().x / background.getGlobalBounds().width, 
-		window->getSize().y / background.getGlobalBounds().height);
+	backgroundTexture[0].loadFromFile("Source/Resources/texture/basic_mainmenu.png");
+	background[0].setTexture(backgroundTexture[0]);
+	background[0].setScale(window->getSize().x / background[0].getGlobalBounds().width,
+		window->getSize().y / background[0].getGlobalBounds().height);
+
+    backgroundTexture[1].loadFromFile("Source/Resources/texture/snow_mainmenu.png");
+    background[1].setTexture(backgroundTexture[1]);
+    background[1].setScale(window->getSize().x / background[1].getGlobalBounds().width,
+		window->getSize().y / background[1].getGlobalBounds().height);
+
+    backgroundTexture[2].loadFromFile("Source/Resources/texture/fire_mainmenu.png");
+	background[2].setTexture(backgroundTexture[2]);
+	background[2].setScale(window->getSize().x / background[2].getGlobalBounds().width,
+        window->getSize().y / background[2].getGlobalBounds().height);
 }
 
 void MainMenuState::initFonts()
@@ -221,6 +231,6 @@ void MainMenuState::render(sf::RenderTarget* target)
 	if (!target)
 		target = this->window;
 
-	target->draw(this->background);
+	target->draw(this->background[0]);
 	renderGUI();
 }

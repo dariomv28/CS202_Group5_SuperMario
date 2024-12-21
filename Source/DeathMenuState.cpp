@@ -8,8 +8,8 @@ void DeathMenuState::initVariables() {}
 
 void DeathMenuState::initBackground()
 {
-    background.setSize(sf::Vector2f(window->getSize().x, window->getSize().y));
-    background.setFillColor(sf::Color::Black);
+    background.setSize(sf::Vector2f(SCREEN_WIDTH, SCREEN_HEIGHT));
+    background.setFillColor(sf::Color(0, 0, 0, 150));
     background.setPosition(0.f, 0.f);
 }
 
@@ -23,14 +23,14 @@ void DeathMenuState::initTexts()
 
     titleText.setFont(font);
     titleText.setString("Game Over!");
-    titleText.setCharacterSize(100);
+    titleText.setCharacterSize(75);
     titleText.setFillColor(sf::Color::White);
     centerText(titleText, window->getView().getCenter().y - 250);
 
 
     questionText.setFont(font);
     questionText.setString("Left click or Press enter to continue");
-    questionText.setCharacterSize(50);
+    questionText.setCharacterSize(30);
     questionText.setFillColor(sf::Color::White);
     centerText(questionText, window->getView().getCenter().y - 100);
 }
@@ -42,6 +42,13 @@ void DeathMenuState::centerText(sf::Text& text, float y)
         window->getView().getCenter().x - text.getGlobalBounds().width / 2,
         y
     );
+}
+
+void DeathMenuState::updateBackground() {
+    sf::Vector2f viewCenter = window->getView().getCenter();
+    sf::Vector2f viewSize = window->getView().getSize();
+
+    background.setPosition(viewCenter.x - viewSize.x / 2.f, viewCenter.y - viewSize.y / 2.f);
 }
 
 
@@ -70,19 +77,10 @@ void DeathMenuState::updateGUI()
 {
     sf::Vector2f mousePosView = window->mapPixelToCoords(sf::Mouse::getPosition(*window));
 
-
-    updateButtonHover(yesButtonText, mousePosView);
-
+    updateBackground();
+    updateButtonHover(questionText, mousePosView);
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
-        sf::View view = window->getDefaultView();
-
-        // Set the view's position so its top-left corner is at (0, 0)
-        sf::Vector2f viewSize = view.getSize();
-        view.setCenter(viewSize.x / 2, viewSize.y / 2);
-
-        // Apply the view to the window
-        window->setView(view);
 		this->gameState->endState();
         this->stateData->userData->resetPlayer(gameState->getWorld());
         this->endState();
@@ -102,6 +100,9 @@ void DeathMenuState::render(sf::RenderTarget* target)
 {
     if (!target)
         target = this->window;
+
+    if (gameState)
+        gameState->renderLevelManager(target);
 
     target->draw(this->background);
     target->draw(this->titleText);

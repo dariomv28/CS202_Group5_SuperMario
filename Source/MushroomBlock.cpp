@@ -85,5 +85,4 @@ void MushroomBlock::reactToCollison(int collidedSide) {
 
 void MushroomBlock::render(sf::RenderTarget* target) {
 	target->draw(entitySprite);
-	target->draw(hitbox);
 }

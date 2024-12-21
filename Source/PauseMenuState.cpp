@@ -13,7 +13,7 @@ void PauseMenuState::initVariables()
 
 void PauseMenuState::initBackground()
 {
-    background.setSize(sf::Vector2f(window->getSize().x, window->getSize().y));
+    background.setSize(sf::Vector2f(SCREEN_WIDTH, SCREEN_HEIGHT));
     background.setFillColor(sf::Color(0, 0, 0, 150));
 }
 

@@ -65,5 +65,4 @@ void Pipe::render(sf::RenderTarget* target) {
 	for (auto& pipe : sprite_pipe) {
 		target->draw(pipe);
 	}
-	target->draw(hitbox);
 }

@@ -481,7 +481,6 @@ void Mario::updateAnimation(const float& dt) {
 void Mario::render(sf::RenderTarget* target) {
     if (target) {
         target->draw(entitySprite);
-        target->draw(hitbox);
         //std::cout << this->getOnGround() << std::endl;
     }
     else {

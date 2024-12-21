@@ -46,6 +46,5 @@ void PowerUpObject::reactToBlockCollision(Block* block) {
 
 void PowerUpObject::render(sf::RenderTarget* target) {
 	target->draw(entitySprite);
-	target->draw(hitbox);
 }
 

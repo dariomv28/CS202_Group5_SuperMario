@@ -90,5 +90,4 @@ void SolidBlock::reactToCollison(int collidedSide) {
 
 void SolidBlock::render(sf::RenderTarget* target) {
 	target->draw(entitySprite);
-	target->draw(hitbox);
 }

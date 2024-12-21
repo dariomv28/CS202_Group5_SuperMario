@@ -23,6 +23,7 @@ namespace GUI
 		bool stickyAllowed;
 		bool unpressed;
 		AudioSystem* audio;
+		bool disable;
 
 	public:
 		Button(bool stickyAllowed, float x, float y, float width, float height,
@@ -36,9 +37,13 @@ namespace GUI
 	
 		//Setters
 		void setText(const std::string text);
+		void setDisable(bool disable);
+		bool getDisable() { return disable; }
 
 		virtual void render(sf::RenderTarget* target) = 0;
 		virtual void update(const sf::Vector2i mousePos) = 0;
+
+
 
 		void highlight(bool isHighlighted);
 		virtual void setPosition(float x, float y) = 0;
@@ -89,7 +94,7 @@ namespace GUI
 			sf::Color text_idle_color, sf::Color text_hover_color, sf::Color text_active_color,
 			std::string idleDirec, std::string hoverDirec, std::string activeDirec);
 		~TextureButton();
-
+		
 		void setPosition(float x, float y);
 		void render(sf::RenderTarget* target);
 		void update(const sf::Vector2i mousePos);

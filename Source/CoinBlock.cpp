@@ -69,7 +69,6 @@ void CoinBlock::render(sf::RenderTarget* target)
 	if (isCoinAnimating) {
 		target->draw(coinSprite);
 	}
-	target->draw(hitbox);
 }
 
 void CoinBlock::initAnimations()

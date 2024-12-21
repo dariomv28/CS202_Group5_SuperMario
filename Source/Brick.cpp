@@ -61,7 +61,6 @@ void Brick::render(sf::RenderTarget* target) {
 	}
 	
 	// Optional: render hitbox for debugging
-	target->draw(hitbox);
 };
 
 void Brick::initSpritesSheet() {

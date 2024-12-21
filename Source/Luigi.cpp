@@ -471,7 +471,6 @@ void Luigi::updateAnimation(const float& dt) {
 void Luigi::render(sf::RenderTarget* target) {
     if (target) {
         target->draw(entitySprite);
-        target->draw(hitbox);
         //std::cout << this->getOnGround() << std::endl;
     }
     else {

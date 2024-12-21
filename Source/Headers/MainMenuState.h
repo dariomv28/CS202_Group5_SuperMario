@@ -10,8 +10,8 @@ protected:
 	int nButtons;
 	float btn_Width, btn_Height, btn_CharSize;
 
-	sf::Texture backgroundTexture;
-	sf::Sprite background;
+	sf::Texture backgroundTexture[3];
+	sf::Sprite background[3];
 
 	sf::Texture logoTexture;
 	sf::Sprite logo;
@@ -21,7 +21,7 @@ protected:
 	std::vector<GUI::Button*> buttons;
 
 	void initVariables();
-	void initBackground();
+	virtual void initBackground();
 	virtual void initButtons();
 	void initFonts();
 
