@@ -2,7 +2,7 @@
 #include "Headers/PhysicsEngine.h"
 #include <stdexcept>
 
-Luigi::Luigi() : PlayerManager(sf::Vector2f(0, 0), sf::Vector2f(CELL_SIZE, CELL_SIZE), 3, 30.f),
+Luigi::Luigi() : PlayerManager(sf::Vector2f(0, 0), sf::Vector2f(CELL_SIZE, CELL_SIZE), 4, 30.f),
 currentAction("IDLE"), isAnimationInProgress(false)
 {
     animationComponent = nullptr;

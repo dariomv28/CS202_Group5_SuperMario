@@ -7,5 +7,5 @@
 
 class Character {
 public:
-    static PlayerManager* createPlayer(const std::string& name, sf::Vector2f position, sf::Vector2f size, int health, int speed);
+    static PlayerManager* createPlayer(const std::string& name);
 };
