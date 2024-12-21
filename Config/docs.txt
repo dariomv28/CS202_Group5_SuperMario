@@ -130,8 +130,8 @@ how to enjoy life|Spend time with loved ones, try new things, and do what makes 
 why do people laugh|Laughter is a natural response to joy or humor that makes us feel good.
 what is a dream|A dream is a series of thoughts or images your brain creates while you sleep.
 am i doing good|Absolutely! Keep up the great work!
-is it okay to lose|Of course! Losing is just part of the learning process.
-instructions|Use arrow keys to move, SPACE to jump. Reach the end of the level to progress. Eat mushrooms to grow bigger. Collect coins for extra bonuses. Good luck!
+is it okay to lose|Of course! Losing is just part of the learning process.s
+instructions|MOVING: ARROW KEYS \n JUMP: SPACE \n SPRINT: CTRL FIRE (BIG MARIO) : CTRL \n CHATBOT : TAB
 plot world 1|World 1 is the Grass Land, where youll encounter Goombas and Koopas. This is where your adventure begins and where youll learn the basics of the game to prepare you for the challenges ahead. Your goal is to reach the end of the level and take as much experience as you can to face the next worlds. Good luck!
 world 2 level 1|In World 2, level 1, the keys are reversed. Youll need to adapt quickly to the new controls to avoid falling into pits or getting hit by enemies. Keep an eye out for hidden blocks and power-ups to help you on your journey. Good luck!
 why i cant move|Oh, it seems that you are in world 2 level 1, where the keys are reversed!. Youll need to adapt quickly to the new controls to avoid falling into pits or getting hit by enemies. Keep an eye out for hidden blocks and power-ups to help you on your journey. Good luck!
