@@ -35,6 +35,7 @@ public:
 	bool isJump() const;
 	void setJump(bool jump);
 
+	bool isMovingLeft;
 
 	//Functions
 	void updateVelocity(const float& dt);

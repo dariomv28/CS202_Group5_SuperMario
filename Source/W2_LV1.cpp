@@ -41,10 +41,12 @@ void W2_LV1::update(const float& dt) {
         if (player->isMoveLeft()) {
 			player->setMoveLeft(false);
 			player->setMoveRight(true);
+            player->isMovingLeft = false;
 		}
         else if (player->isMoveRight()) {
             player->setMoveRight(false);
             player->setMoveLeft(true);
+            player->isMovingLeft = true;
         }
         eventMediator->updateEvents(cur_dt);
         eventMediator->updateLevelGUI(window->getView());
