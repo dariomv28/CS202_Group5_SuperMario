@@ -157,6 +157,7 @@ void MenuLevelState::render(sf::RenderTarget* target)
 		target = window;
 	}
     target->draw(background[world]);
+	target->draw(logo);
 	target->draw(worldText);
 	for (auto& it : buttons)
 	{

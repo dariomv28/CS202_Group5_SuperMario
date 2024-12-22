@@ -273,7 +273,6 @@ void Luigi::initAnimations() {
 void Luigi::update(const float& dt) {
     updateAnimation(dt);
     updateHitboxSize();
-    std::cout << "Velocity y: " << movementComponent->velocity.y << std::endl;
     updateVelocity(dt);
     eventMediator->applyExternalForce(this, dt);
     move(dt);

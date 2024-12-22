@@ -8,6 +8,7 @@
 #include "Headers/W2_LV2.h"
 #include "Headers/W2_LV3.h"
 #include "Headers/W3_LV2.h"
+#include "Headers/W3_LV3.h"
 
 GameState::GameState(StateData* stateData, int worldID, int levelID)
     : State(stateData), levelManager(nullptr), worldID(worldID), levelID(levelID) {}
@@ -48,7 +49,7 @@ void GameState::reloadLevel() {
 		levelManager = new W3_LV2(this->stateData->userData->getPlayer(worldID), window);
 	}
 	else if (worldLevel == "W3_LV3") {
-		//	levelManager = new W3_LV3(player, window);
+		levelManager = new W3_LV3(this->stateData->userData->getPlayer(worldID), window);
 	}
 	else {
 		cerr << "Invalid level" << endl;
