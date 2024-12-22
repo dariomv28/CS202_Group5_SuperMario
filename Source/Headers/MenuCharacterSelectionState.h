@@ -1,39 +1,60 @@
 #pragma once
+
 #include "State.h"
-#include <SFML/Graphics.hpp>
 
-class MenuCharacterSelectionState : public State
-{
+class MenuCharacterSelectionState : public State {
 private:
-
+    // Resources
     sf::Texture marioTexture;
     sf::Texture luigiTexture;
-    sf::Sprite characterSprite;
     sf::Texture backgroundTexture;
-    sf::Sprite backgroundSprite;
-
-
-    sf::RectangleShape selectionBox;
-    void initBackground();
-
-
+    sf::Texture frameTexture;
     sf::Font font;
-    sf::Text title;
 
+    // UI Elements
+    sf::Sprite backgroundSprite;
+    struct CharacterCard {
+        sf::RectangleShape card;
+        sf::Sprite characterSprite;
+        sf::Text nameText;
+        sf::Text descriptionText;
+        bool isSelected;
+        float scale;
+        sf::Vector2f originalPos;
+    };
+    std::vector<CharacterCard> characterCards;
 
+    // Animation
+    float animationTime;
+    float cardHoverScale;
+    float cardNormalScale;
+
+    // Selection
     int currentCharacterIndex;
+    bool transitioningOut;
+    float transitionAlpha;
 
+    // UI Components
+    sf::Text title;
+    sf::RectangleShape selectionIndicator;
+    sf::Text promptText;
+
+    // Initialization functions
     void initTextures();
-    void initSprites();
-    void initFonts();
-    void initTitle();
-    void initSelectionBox();
+    void initBackground();
+    void initFont();
+    void initCharacterCards();
+    void initUI();
+
+    // Animation helpers
+    void updateCardAnimations(const float& dt);
+    void updateTransitionEffect(const float& dt);
 
 public:
     MenuCharacterSelectionState(StateData* stateData);
     virtual ~MenuCharacterSelectionState();
 
     void updateInput();
-    void update(const float& dt) override;
-    void render(sf::RenderTarget* target = nullptr) override;
+    void update(const float& dt);
+    void render(sf::RenderTarget* target);
 };
