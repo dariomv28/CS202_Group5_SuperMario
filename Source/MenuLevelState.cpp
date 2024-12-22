@@ -86,6 +86,8 @@ void MenuLevelState::updateTransitionEffect(const float& dt) {
 	if (transitioningOut) {
 		transitionAlpha += dt * 255.f * 2.f;
 		if (transitionAlpha >= 255.f) {
+			transitioningOut = 0;
+			transitionAlpha = 0.f;
 			if (level == 1) {
 				GameState* gameState = new GameState(this->stateData, world, 1);
 				gameState->reloadLevel();
@@ -108,7 +110,6 @@ void MenuLevelState::updateTransitionEffect(const float& dt) {
 
 void MenuLevelState::updateGUI()
 {
-	if (transitioningOut) return;
 
     for (auto& it : buttons)
     {
