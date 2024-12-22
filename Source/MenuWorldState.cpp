@@ -112,5 +112,6 @@ void MenuWorldState::render(sf::RenderTarget* target)
 	if (!target)
 		target = window;
 	target->draw(background[world]);
+	target->draw(logo);
 	renderGUI();
 }

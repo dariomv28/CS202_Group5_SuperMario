@@ -30,9 +30,9 @@ void Cannon::update(const float& dt) {
 	else {
 		reloadTimer = 0;
 		// Spawn 2 rockets at 2 sides of the cannon
-		eventMediator->spawnPowerUp(new Rocket(sf::Vector2f(this->getPosition().x - CELL_SIZE, this->getPosition().y), sf::Vector2f(CELL_SIZE-2, CELL_SIZE-2), 
+		eventMediator->spawnPowerUp(new Rocket(sf::Vector2f(this->getPosition().x - CELL_SIZE, this->getPosition().y-1), sf::Vector2f(CELL_SIZE-2, CELL_SIZE-2), 
 			"rocket_left", sf::Vector2f(-500, 0)));
-		eventMediator->spawnPowerUp(new Rocket(sf::Vector2f(this->getPosition().x + CELL_SIZE, this->getPosition().y), sf::Vector2f(CELL_SIZE-2, CELL_SIZE-2),
+		eventMediator->spawnPowerUp(new Rocket(sf::Vector2f(this->getPosition().x + CELL_SIZE, this->getPosition().y-1), sf::Vector2f(CELL_SIZE-2, CELL_SIZE-2),
 			"rocket_right", sf::Vector2f(500, 0)));
 	}
 }

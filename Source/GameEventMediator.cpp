@@ -140,6 +140,10 @@ void GameEventMediator::addPlayerHealth(int health) {
 	player->setHealth(player->getHealth() + health);
 }
 
+sf::Vector2f GameEventMediator::getPlayerPosition() {
+	return player->getPosition();
+}
+
 
 void GameEventMediator::pushPlayerLeft() {
 	player->setVelocity(sf::Vector2f(-500.0f, player->getVelocity().y));

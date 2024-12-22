@@ -37,7 +37,10 @@ void Lava::initSpritesSheet() {
 
 void Lava::update(const float& dt) {
     // Update animation timer
+    
     animationTimer += dt;
+    
+    
 
     if (animationTimer >= animationSpeed) {
         animationTimer = 0.f;
@@ -56,6 +59,11 @@ void Lava::update(const float& dt) {
                 isAnimatingForward = true;
             }
         }
+        sf::Vector2f playerPos = eventMediator->getPlayerPosition();
+        if (abs(playerPos.x - entitySprite.getPosition().x) > SCREEN_WIDTH) {
+            return;
+        }
+
 
         std::string frameName = "lava_" + std::to_string(currentFrame);
         entitySprite.setTextureRect(spritesSheet[frameName]);

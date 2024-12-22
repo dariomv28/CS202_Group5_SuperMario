@@ -196,6 +196,7 @@
     <ClCompile Include="Source\W2_LV3.cpp" />
     <ClCompile Include="Source\W3_LV2.cpp" />
     <ClCompile Include="Source\UserData.cpp" />
+    <ClCompile Include="Source\W3_LV3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Headers\Rocket.h" />
@@ -259,6 +260,7 @@
     <ClInclude Include="Source\Headers\W2_LV3.h" />
     <ClInclude Include="Source\Headers\W3_LV2.h" />
     <ClInclude Include="Source\Headers\UserData.h" />
+    <ClInclude Include="Source\Headers\W3_LV3.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Source\Headers\source.rc" />
