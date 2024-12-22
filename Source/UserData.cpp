@@ -69,7 +69,7 @@ void UserData::setCompleted(int world, int level)
 	completed["W" + std::to_string(world) + "_LV" + std::to_string(level)] = true;
 }
 
-void  UserData::setNameCharacter(const std::string& name) {
+void UserData::setNameCharacter(const std::string& name) {
 	nameCharacter = name;
 }
 

@@ -2,7 +2,6 @@
 #include "Headers/MenuWorldState.h"
 #include "Headers/MenuCharacterSelectionState.h"
 
-
 void MainMenuState::initVariables()
 {
 	nButtons = 4;
