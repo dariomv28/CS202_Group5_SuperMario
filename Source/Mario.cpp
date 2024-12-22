@@ -273,7 +273,7 @@ void Mario::initAnimations() {
 void Mario::update(const float& dt) {
     updateAnimation(dt);
 	updateHitboxSize();
-	//std::cout << "Velocity y: " << movementComponent->velocity.y << std::endl;
+	std::cout << "Position x: " << position.x << " Position y: " << position.y << std::endl;
     updateVelocity(dt);
 	eventMediator->applyExternalForce(this, dt);
     move(dt);
