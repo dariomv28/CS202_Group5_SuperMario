@@ -21,9 +21,9 @@ namespace GUI
 		short unsigned buttonState;
 
 		bool stickyAllowed;
-		bool unpressed;
 		AudioSystem* audio;
 		bool disable;
+
 
 	public:
 		Button(bool stickyAllowed, float x, float y, float width, float height,

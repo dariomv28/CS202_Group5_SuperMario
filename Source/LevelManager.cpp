@@ -72,22 +72,21 @@ void LevelManager::update(const float& dt) {
 
     if (chatBot) {
         chatUI->update(window->getView());
+        return;
     }
-    else {
-        float cur_dt = dt;
-        if (firstUpdate)
-        {
-            cur_dt = 0;
-            firstUpdate = false;
-        }
-        if (mapManager) {
-            mapManager->update(player, cur_dt);
-        }
+    if (firstUpdate)
+    {
+        firstUpdate = false;
+        return;
+    }
+    if (mapManager) {
+        mapManager->update(player, dt);
+    }
 
-        eventMediator->updateInput(cur_dt);
-        eventMediator->updateEvents(cur_dt);
-        eventMediator->updateLevelGUI(window->getView());
-    }
+    eventMediator->updateInput(dt);
+    eventMediator->updateEvents(dt);
+    eventMediator->updateLevelGUI(window->getView());
+    
 }
 
 

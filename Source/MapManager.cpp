@@ -55,7 +55,10 @@ void MapManager::initStyle() {
 
 void MapManager::update(PlayerManager* player, float dt) {
 	updateView(player, dt);
-  
+	
+	if (player->getPosition().y > get_map_sketch_height()*CELL_SIZE) {
+		player->setHealth(0);
+	}
 }
 
 

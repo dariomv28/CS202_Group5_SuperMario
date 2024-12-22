@@ -1,5 +1,9 @@
 #include "Headers/GUI.h"
 
+bool globalMousePressed = false;
+bool globalMouseReleased = true;
+
+
 namespace GUI
 {
 	Button::Button(bool stickyAllowed, float x, float y, float width, float height,
@@ -102,31 +106,30 @@ namespace GUI
 
 		//Idle
 		this->buttonState = BTN_IDLE;
-		//Check if the users have unpressed
 
-		if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
-			this->unpressed = true;
-		//Hover
+		// Check if the mouse is hovering over the button
 		if (this->shape.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos)))
 		{
 			this->buttonState = BTN_HOVER;
 
-			//Pressed
-			if (this->stickyAllowed && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			// Handle activation logic
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 			{
-				this->buttonState = BTN_ACTIVE;
-				this->unpressed = false;
+				// Activate only if the global mouse has been released since the last click
+				if (!globalMousePressed && globalMouseReleased)
+				{
+					this->buttonState = BTN_ACTIVE;
+					globalMousePressed = true;  // Mark the mouse as pressed globally
+					globalMouseReleased = false; // Mouse is no longer released
+				}
 			}
-			else if (!this->stickyAllowed && this->unpressed && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			else
 			{
-				this->buttonState = BTN_ACTIVE;
-				this->unpressed = false;
+				// Mark global mouse as released when no button is pressed
+				globalMouseReleased = true;
+				globalMousePressed = false;
 			}
 		}
-
-		//Check if the users is still pressing
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-			this->unpressed = false;
 
 		switch (this->buttonState)
 		{
@@ -204,29 +207,29 @@ namespace GUI
 		this->buttonState = BTN_IDLE;
 		//Check if the users have unpressed
 
-		if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
-			this->unpressed = true;
-		//Hover
 		if (this->sprite.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos)))
 		{
 			this->buttonState = BTN_HOVER;
 
-			//Pressed
-			if (this->stickyAllowed && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			// Handle activation logic
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 			{
-				this->buttonState = BTN_ACTIVE;
-				this->unpressed = false;
+				// Activate only if the global mouse has been released since the last click
+				if (!globalMousePressed && globalMouseReleased)
+				{
+					this->buttonState = BTN_ACTIVE;
+					globalMousePressed = true;  // Mark the mouse as pressed globally
+					globalMouseReleased = false; // Mouse is no longer released
+				}
 			}
-			else if (!this->stickyAllowed && this->unpressed && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			else
 			{
-				this->buttonState = BTN_ACTIVE;
-				this->unpressed = false;
+				// Mark global mouse as released when no button is pressed
+				globalMouseReleased = true;
+				globalMousePressed = false;
 			}
 		}
 
-		//Check if the users is still pressing
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-			this->unpressed = false;
 
 		//Set the texture
 		switch (this->buttonState)

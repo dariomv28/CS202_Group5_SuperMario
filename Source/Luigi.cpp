@@ -1,5 +1,6 @@
 #include "Headers/Luigi.h"
 #include "Headers/PhysicsEngine.h"
+#include "Headers/FireBuff.h"
 #include <stdexcept>
 
 Luigi::Luigi() : PlayerManager(sf::Vector2f(0, 0), sf::Vector2f(CELL_SIZE, CELL_SIZE), 4, 30.f),
@@ -367,16 +368,23 @@ void Luigi::handleInput(const float& dt) {
 }
 
 void Luigi::setBig(bool big) {
-    if (is_big != big) {
-        is_big = big;
-        updateHitboxSize();
+    if (is_big == big) return;
 
-        if (isMovingLeft) {
-            currentAction = "IDLER-";
-        }
-        else {
-            currentAction = "IDLE-";
-        }
+    if (big == true) {
+        addBuff(new FireBuff);
+    }
+    else {
+        removeBuff("fire");
+    }
+
+    is_big = big;
+    updateHitboxSize();
+
+    if (isMovingLeft) {
+        currentAction = "IDLER-";
+    }
+    else {
+        currentAction = "IDLE-";
     }
 }
 
