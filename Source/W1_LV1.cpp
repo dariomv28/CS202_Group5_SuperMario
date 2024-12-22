@@ -12,6 +12,16 @@ W1_LV1::W1_LV1(PlayerManager* player, sf::RenderWindow *window):
 
 	Enemies.push_back(new Koopa(sf::Vector2f(700.0f, 500.0f), sf::Vector2f(64.f, 64.f)));
 
+    MovingBlock* block = new MovingBlock(
+        sf::Vector2f(300.f, 100.f),    // Initial position
+        sf::Vector2f(64.f, 64.f),      // Size
+        "basic_ground_single",          // Texture name
+        100.f,                         // Movement speed
+        300.f                          // Movement distance
+    );
+
+	Blocks.push_back(block);
+
     initGameEventMediator();
 }
 

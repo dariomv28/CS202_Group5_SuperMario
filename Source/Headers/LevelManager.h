@@ -12,6 +12,7 @@
 #include "AudioSystem.h"
 #include "ChatUI.h"
 #include "OllamaService.h"
+#include "MovingBlock.h"
 
 class LevelManager {
 protected:
