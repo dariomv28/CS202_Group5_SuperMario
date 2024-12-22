@@ -32,6 +32,12 @@ void MainMenuState::initBackground()
 	background[3].setTexture(backgroundTexture[3]);
 	background[3].setScale(window->getSize().x / background[3].getGlobalBounds().width,
         window->getSize().y / background[3].getGlobalBounds().height);
+
+    logoTexture.loadFromFile("Source/Resources/texture/logo.png");
+    logo.setTexture(logoTexture);
+    logo.setScale(0.5, 0.5);
+    logo.setPosition(window->getSize().x / 2 - logo.getGlobalBounds().width / 2, 50);
+
 }
 
 void MainMenuState::initFonts()
@@ -192,6 +198,6 @@ void MainMenuState::render(sf::RenderTarget* target)
 		target = this->window;
 
 	target->draw(this->background[0]);
-    target->draw(titleText);
+    target->draw(this->logo);
 	renderGUI();
 }
