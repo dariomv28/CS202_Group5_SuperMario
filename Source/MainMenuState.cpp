@@ -41,6 +41,33 @@ void MainMenuState::initFonts()
 	}
 }
 
+void MainMenuState::initTitleText()
+{
+    // Load a retro pixel-style font
+    if (!fontTitle.loadFromFile("Source/Resources/font/American Captain.ttf"))
+    {
+        throw("ERROR::MAINMENUSTATE::FAILED_TO_LOAD_FONT");
+    }
+
+    // Set up the title text
+    titleText.setFont(fontTitle);
+    titleText.setString("     Group 5 - 23TT2\nSUPER MARIO GAME");
+    titleText.setCharacterSize(50);
+
+    // Style the text
+    titleText.setFillColor(sf::Color(255, 255, 0)); // Bright yellow
+    titleText.setOutlineThickness(3);
+    titleText.setOutlineColor(sf::Color(0, 0, 0));  // Black outline
+
+    // Center the title on the screen
+    sf::Vector2u windowSize = window->getSize();
+    sf::FloatRect textBounds = titleText.getLocalBounds();
+    titleText.setPosition(
+        windowSize.x / 2.f - textBounds.width / 2.f,
+        windowSize.y / 6.f - textBounds.height / 2.f
+    );
+}
+
 void MainMenuState::initButtons()
 {
     buttons.resize(nButtons);
@@ -99,6 +126,7 @@ MainMenuState::MainMenuState(StateData* stateData)
 	this->initBackground();
 	this->initFonts();
 	this->initButtons();
+    this->initTitleText();
 }
 
 MainMenuState::~MainMenuState()
@@ -115,86 +143,6 @@ void MainMenuState::updateGUI()
     {
         it->update(mousePosWindow);
     }
-
-    // Keyboard navigation
-    //static int currentButtonIndex = 0;
-
-    //// Move selection up
-    //if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-    //{
-    //    // Prevent multiple rapid changes
-    //    static sf::Clock keyTimer;
-    //    if (keyTimer.getElapsedTime().asMilliseconds() > 100)
-    //    {
-    //        currentButtonIndex = (currentButtonIndex - 1 + buttons.size()) % buttons.size();
-    //        keyTimer.restart();
-    //    }
-    //}
-
-    //// Move selection down
-    //if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-    //{
-    //    // Prevent multiple rapid changes
-    //    static sf::Clock keyTimer;
-    //    if (keyTimer.getElapsedTime().asMilliseconds() > 100)
-    //    {
-    //        currentButtonIndex = (currentButtonIndex + 1) % buttons.size();
-    //        keyTimer.restart();
-    //    }
-    //}
-
-    //for (size_t i = 0; i < buttons.size(); ++i)
-    //{
-    //    if (i == currentButtonIndex)
-    //    {
-    //        buttons[i]->highlight(true);
-    //    }
-    //}
-
-    //// Add a static flag to track key state
-    //static bool enterReleased = false;
-
-    //// Select button with Enter or Space
-    //if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) ||
-    //    sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) &&
-    //    enterReleased)
-    //{
-    //    static sf::Clock keyTimer;
-    //    if (keyTimer.getElapsedTime().asMilliseconds() > 150)
-    //    {
-    //        // Reset the enter released flag
-    //        enterReleased = false;
-
-    //        // Simulate button press for the currently selected button
-    //        if (currentButtonIndex == BTN_CONTINUE)
-    //        {
-    //            std::cout << "Continue Pressed\n";
-    //            this->stateData->audio->playbuttonSound();
-    //        }
-    //        else if (currentButtonIndex == BTN_NEWGAME)
-    //        {
-    //            this->states->push(new MenuWorldState(this->stateData));
-    //            this->stateData->audio->playbuttonSound();
-    //        }
-    //        else if (currentButtonIndex == BTN_LEADER)
-    //        {
-    //            std::cout << "Leader Board Pressed\n";
-    //            this->stateData->audio->playbuttonSound();
-    //        }
-    //        else if (currentButtonIndex == BTN_EXIT)
-    //        {
-    //            this->stateData->audio->playbuttonSound();
-    //            endState();
-    //        }
-    //    }
-    //}
-
-    //// Reset the flag when the key is released
-    //if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Enter) &&
-    //    !sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-    //{
-    //    enterReleased = true;
-    //}
 
     // Existing mouse press handlers
     if (buttons[BTN_CONTINUE]->isPressed())
@@ -244,5 +192,6 @@ void MainMenuState::render(sf::RenderTarget* target)
 		target = this->window;
 
 	target->draw(this->background[0]);
+    target->draw(titleText);
 	renderGUI();
 }

@@ -17,10 +17,14 @@ protected:
 	sf::Sprite logo;
 
 	sf::Font font;
+	sf::Font fontTitle;
 
 	std::vector<GUI::Button*> buttons;
+	
+	sf::Text titleText;
 
 	void initVariables();
+	void initTitleText();
 	virtual void initBackground();
 	virtual void initButtons();
 	void initFonts();

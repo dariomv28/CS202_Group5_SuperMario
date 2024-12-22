@@ -13,8 +13,6 @@ W2_LV1::~W2_LV1() {
 }
 
 void W2_LV1::update(const float& dt) {
-	this->player->isMovingLeft = !this->player->isMovingLeft;
-
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Tab)) {
         static sf::Clock keyTimer;
         if (keyTimer.getElapsedTime().asMilliseconds() > 300)

@@ -8,10 +8,12 @@ class MenuLevelState : public MainMenuState
 {
 private:
     int world;
+    int level;
     sf::Text worldText;
 
-    int level;
-
+	// Transition effects
+	bool transitioningOut;
+	float transitionAlpha;
 
     void initButtons() override;
     PlayerManager* player;
@@ -23,4 +25,5 @@ public:
     void updateGUI() override;
     void update(const float& dt) override;
     void render(sf::RenderTarget* target) override;
+    void updateTransitionEffect(const float& dt);
 };

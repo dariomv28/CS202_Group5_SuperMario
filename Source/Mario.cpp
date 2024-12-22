@@ -527,18 +527,4 @@ void Mario::Load(std::ifstream& file)
 	{
 		std::cerr << "Unable to load game!" << std::endl;
 	}
-    
-	//std::ofstream TempFile("TempSaveGame.txt");
- //   std::string line;
-	//while (std::getline(file, line)) {
-	//	TempFile << line << std::endl;
-	//}
-
-	//TempFile.close();
- //   file.close();
-
-	//std::remove("SaveGame.txt");
-	//const char* oldname = "TempSaveGame.txt";
-	//const char* newname = "SaveGame.txt";
-	//std::rename(oldname, newname);
 }

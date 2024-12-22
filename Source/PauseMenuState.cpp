@@ -57,9 +57,9 @@ void PauseMenuState::initButtons()
     );
 
     y += btn_Height * 1.5;
-    buttons[PauseMenu::BTN_LEVELMENU] = new GUI::TextButton(false,
+    buttons[PauseMenu::BTN_MAINMENU] = new GUI::TextButton(false,
         x, y, btn_Width, btn_Height,
-        &font, "LEVEL MENU", btn_CharSize,
+        &font, "MAIN MENU", btn_CharSize,
         textIdleColor, textHoverColor, textActiveColor,
         idleColor, hoverColor, activeColor,
         sf::Color(255, 255, 255, 50), sf::Color(255, 255, 255, 100)
@@ -96,11 +96,11 @@ void PauseMenuState::updateGUI()
     {
         endState();
     }
-    if (buttons[PauseMenu::BTN_LEVELMENU]->isPressed())
+    if (buttons[PauseMenu::BTN_MAINMENU]->isPressed())
     {
-        this->gameState->endState();   
-        this->endState();
-        
+		while (this->states->size() != 0)
+			this->states->pop();
+		this->states->push(new MainMenuState(stateData));
     }
 }
 
@@ -143,7 +143,7 @@ void PauseMenuState::updateButtonPositions() {
 
     buttons[PauseMenu::BTN_CONTINUE]->setPosition(x, y);
 	buttons[PauseMenu::BTN_SAVEGAME]->setPosition(x, y + btn_Height * 1.5);
-    buttons[PauseMenu::BTN_LEVELMENU]->setPosition(x, y + btn_Height * 3.0);
+    buttons[PauseMenu::BTN_MAINMENU]->setPosition(x, y + btn_Height * 3.0);
 }
 
 void PauseMenuState::updateBackground()
