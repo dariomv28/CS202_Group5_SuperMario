@@ -39,6 +39,9 @@ protected:
 	float ConstantLeft;
 	float ConstantRight;
 
+	int currentWorld;
+	int currentLevel;
+
 public:
     MapManager(sf::RenderWindow* window);
     virtual ~MapManager();
@@ -59,6 +62,10 @@ public:
 		vector<Block*>& Blocks, vector<PowerUpObject*>& PowerUp, PlayerManager* i_mario);
 
 	sf::Color get_map_sketch_pixel(const unsigned short i_x, const unsigned short i_y) const;
+
+	void Save(std::ofstream& file);
+	void Load(std::ifstream& file);
+	
 };
 
 

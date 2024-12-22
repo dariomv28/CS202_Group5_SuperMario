@@ -482,3 +482,54 @@ void Mario::render(sf::RenderTarget* target) {
 bool Mario::getIsBig() const {
     return is_big;
 }
+
+void Mario::Save(std::ofstream& file)
+{
+	if (file.is_open())
+	{
+		file << m_name << std::endl;
+		file << position.x << " " << position.y << std::endl;
+		file << health << std::endl;
+		file << speed << std::endl;
+		file << is_big << std::endl;
+
+	}
+	else
+	{
+		std::cerr << "Unable to save game!" << std::endl;
+	}
+
+	std::cerr << "SaveGame.txt" << std::endl;
+
+}
+
+void Mario::Load(std::ifstream& file)
+{
+	if (file.is_open())
+	{
+		std::string name;
+		file >> name;
+		file >> position.x >> position.y;
+		file >> health;
+		file >> speed;
+		file >> is_big;
+	}
+	else
+	{
+		std::cerr << "Unable to load game!" << std::endl;
+	}
+    
+	//std::ofstream TempFile("TempSaveGame.txt");
+ //   std::string line;
+	//while (std::getline(file, line)) {
+	//	TempFile << line << std::endl;
+	//}
+
+	//TempFile.close();
+ //   file.close();
+
+	//std::remove("SaveGame.txt");
+	//const char* oldname = "TempSaveGame.txt";
+	//const char* newname = "SaveGame.txt";
+	//std::rename(oldname, newname);
+}

@@ -166,3 +166,15 @@ void PlayerManager::setHealth(int health) {
         this->health = health;
     }
 }
+
+void PlayerManager::Save(std::ofstream& file)
+{
+}
+
+void PlayerManager::Load(std::ifstream& file)
+{
+}
+
+void PlayerManager::getRemainInfo()
+{
+}

@@ -39,7 +39,7 @@ public:
     void initGameEventMediator();
     virtual void update(const float& dt);
     virtual void render(sf::RenderTarget* target = nullptr);
-
+    void SaveGame();
 
     void initializeChatSystem();
 };
