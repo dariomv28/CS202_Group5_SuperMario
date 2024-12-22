@@ -55,9 +55,8 @@ public:
 	/*void updateHealth(); */
 	
 	// Player events
-	void player2ndBuff();
-	void decreasePlayerHealth();
-	void increasePlayerHealth();
+	void setPlayerBig(bool isBig);
+	void addPlayerHealth(int health);
 	void pushPlayerLeft();
 	void pushPlayerRight();
 	void pushPlayerUpExtra();

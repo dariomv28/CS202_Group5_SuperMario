@@ -135,8 +135,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Character.cpp" />
     <ClCompile Include="Source\CloudBlock.cpp" />
     <ClCompile Include="Source\DeathMenuState.cpp" />
+    <ClCompile Include="Source\Luigi.cpp" />
+    <ClCompile Include="Source\MenuCharacterSelectionState.cpp" />
     <ClCompile Include="Source\MenuWorldState.cpp" />
     <ClCompile Include="Source\Bullet.cpp" />
     <ClCompile Include="Source\FireBuff.cpp" />
@@ -193,8 +196,11 @@
     <ClCompile Include="Source\UserData.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Headers\Character.h" />
     <ClInclude Include="Source\Headers\CloudBlock.h" />
     <ClInclude Include="Source\Headers\DeathMenuState.h" />
+    <ClInclude Include="Source\Headers\Luigi.h" />
+    <ClInclude Include="Source\Headers\MenuCharacterSelectionState.h" />
     <ClInclude Include="Source\Headers\MenuWorldState.h" />
     <ClInclude Include="Source\Headers\Bullet.h" />
     <ClInclude Include="Source\Headers\FireBuff.h" />
@@ -262,6 +268,7 @@
     <Image Include="Source\Resources\texture\mario.jpg" />
     <Image Include="Source\Resources\texture\Mario_Luigi.png" />
     <Image Include="Source\Resources\texture\menu_background.png" />
+    <Image Include="Source\Resources\texture\selection_character_background.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

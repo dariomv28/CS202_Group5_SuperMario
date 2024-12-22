@@ -39,12 +39,15 @@ void Mushroom::reactToCollison()
 	{
 	case 1:
 		// Healing mushroom
-		eventMediator->increasePlayerHealth();
+		eventMediator->addPlayerHealth(1);
 		break;
 	case 2:
 		//Grow big mushroom
-		eventMediator->player2ndBuff();
-
+		eventMediator->setPlayerBig(true);
+		break;
+	case 3:
+		// 2 Healing mushroom
+		eventMediator->addPlayerHealth(2);
 		break;
 	}
 	//Delete this block

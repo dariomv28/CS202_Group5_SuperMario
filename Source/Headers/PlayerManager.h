@@ -34,7 +34,7 @@ public:
 
     // Buffs
     virtual void addBuff(PlayerBuff* buff);
-    virtual void removeBuff(PlayerBuff* buff);
+    virtual void removeBuff(std::string type);
 
     // Setters and Getters
     virtual void setBig(bool big);

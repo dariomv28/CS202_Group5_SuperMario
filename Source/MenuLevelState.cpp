@@ -22,10 +22,17 @@ void MenuLevelState::initButtons()
 
     // Init World text
     worldText.setFont(font);
-    worldText.setString("world " + std::to_string(world));
-    worldText.setCharacterSize(50);
-    worldText.setFillColor(sf::Color::Cyan);
-    worldText.setPosition(SCREEN_WIDTH/2 - worldText.getGlobalBounds().width/2, y - worldText.getGlobalBounds().height*2);
+    worldText.setString("WORLD " + std::to_string(world));
+
+    // Adjust the font size and color for better visibility
+    worldText.setCharacterSize(60); // Increase size for emphasis
+    worldText.setFillColor(sf::Color::Yellow); // Use a bright contrasting color
+    worldText.setOutlineThickness(5); // Add outline for better readability
+    worldText.setOutlineColor(sf::Color::Red); // Red outline for contrast
+
+    // Position the text in the center of the screen
+    worldText.setPosition(SCREEN_WIDTH / 2 - worldText.getGlobalBounds().width / 2,
+        y - worldText.getGlobalBounds().height * 2);
 
     //y += btn_Height * 1.5;
 

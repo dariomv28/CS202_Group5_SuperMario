@@ -2,13 +2,16 @@
 #include "stdafx.h"
 #include "PlayerManager.h"
 
+
 class UserData
 {
 private:
 	std::string name;
+	std::string nameCharacter;
 	std::vector<PlayerManager*> player;
 	std::unordered_map<std::string, long long> score;
 	std::unordered_map<std::string, bool> completed;
+	
 public:
 	UserData();
 	~UserData();
@@ -26,5 +29,8 @@ public:
 	
 	bool getCompleted(int world, int level);
 	void setCompleted(int world, int level);
+	void setNameCharacter(const std::string& name);
+	void createPlayer();
+	
 };
 

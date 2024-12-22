@@ -1,19 +1,20 @@
 ﻿#include "Headers/Mario.h"
 #include "Headers/PhysicsEngine.h"
+#include "Headers/FireBuff.h"
 #include <stdexcept>
 
 Mario::Mario(): PlayerManager(sf::Vector2f(0,0), sf::Vector2f(CELL_SIZE, CELL_SIZE), 3, 30.f), 
                 currentAction("IDLE"), isAnimationInProgress(false) 
 {
     animationComponent = nullptr;
-    movementComponent = new MovementComponent(30.f, 4.0f);
+    movementComponent = new MovementComponent(30.f, 4.0f, 2, -900.f);
     init();
 }
 
 Mario::Mario(sf::Vector2f position, sf::Vector2f size, int health, int speed)
     : PlayerManager(position, size, health, speed), currentAction("IDLE-"), isAnimationInProgress(false) {
     animationComponent = nullptr;
-    movementComponent = new MovementComponent(speed, 4.0f);
+    movementComponent = new MovementComponent(speed, 4.0f, 2, -900.f);
     init();
 }
 
@@ -272,7 +273,7 @@ void Mario::initAnimations() {
 void Mario::update(const float& dt) {
     updateAnimation(dt);
 	updateHitboxSize();
-	std::cout << "Velocity y: " << movementComponent->velocity.y << std::endl;
+	//std::cout << "Velocity y: " << movementComponent->velocity.y << std::endl;
     updateVelocity(dt);
 	eventMediator->applyExternalForce(this, dt);
     move(dt);
@@ -367,6 +368,15 @@ void Mario::handleInput(const float& dt) {
 }
 
 void Mario::setBig(bool big) {
+    if (big == is_big) {
+		return;
+	}
+    if (big == true) {
+        addBuff(new FireBuff());
+    }
+	else {
+		removeBuff("fire");
+	}
     if (is_big != big) {  
         is_big = big;
         updateHitboxSize();

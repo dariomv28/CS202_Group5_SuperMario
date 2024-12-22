@@ -1,5 +1,7 @@
 #include "Headers/MainMenuState.h"
 #include "Headers/MenuWorldState.h"
+#include "Headers/MenuCharacterSelectionState.h"
+
 
 void MainMenuState::initVariables()
 {
@@ -183,7 +185,7 @@ void MainMenuState::updateGUI()
     }
     if (buttons[BTN_NEWGAME]->isPressed())
     {
-        this->states->push(new MenuWorldState(this->stateData));
+        this->states->push(new MenuCharacterSelectionState(this->stateData));
     }
     if (buttons[BTN_LEADER]->isPressed())
     {

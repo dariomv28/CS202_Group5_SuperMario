@@ -1,17 +1,17 @@
 #include "Headers/UserData.h"
 #include "Headers/Mario.h"
+#include "Headers/Character.h"
+
 
 UserData::UserData()
 {
 	player.assign(4, nullptr);
-	player[1] = new Mario();
-	player[2] = new Mario();
-	player[3] = new Mario();
 }
 
 UserData::~UserData()
 {
 }
+
 
 void UserData::setName(std::string name)
 {
@@ -23,10 +23,20 @@ std::string UserData::getName()
 	return name;
 }
 
+void UserData::createPlayer() {
+	player[1] = Character::createPlayer(nameCharacter);
+	player[2] = Character::createPlayer(nameCharacter);
+	player[3] = Character::createPlayer(nameCharacter);
+}
+
+
 void UserData::resetPlayer(int world)
 {
 	player[world] = nullptr;
-	player[world] = new Mario();
+
+	player[1] = Character::createPlayer(nameCharacter);
+	player[world] = Character::createPlayer(nameCharacter);
+
 }
 
 void UserData::setPlayer(int world, PlayerManager* player)
@@ -58,4 +68,10 @@ void UserData::setCompleted(int world, int level)
 {
 	completed["W" + std::to_string(world) + "_LV" + std::to_string(level)] = true;
 }
+
+void  UserData::setNameCharacter(const std::string& name) {
+	nameCharacter = name;
+}
+
+
 
