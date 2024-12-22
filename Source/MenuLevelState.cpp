@@ -126,7 +126,7 @@ void MenuLevelState::render(sf::RenderTarget* target)
 	{
 		target = window;
 	}
-    target->draw(background[world-1]);
+    target->draw(background[world]);
 	target->draw(worldText);
 	for (auto& it : buttons)
 	{
