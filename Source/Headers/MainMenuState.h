@@ -10,8 +10,8 @@ protected:
 	int nButtons;
 	float btn_Width, btn_Height, btn_CharSize;
 
-	sf::Texture backgroundTexture[3];
-	sf::Sprite background[3];
+	sf::Texture backgroundTexture[4];
+	sf::Sprite background[4];
 
 	sf::Texture logoTexture;
 	sf::Sprite logo;

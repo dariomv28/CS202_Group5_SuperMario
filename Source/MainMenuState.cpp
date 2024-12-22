@@ -18,15 +18,21 @@ void MainMenuState::initBackground()
 	background[0].setScale(window->getSize().x / background[0].getGlobalBounds().width,
 		window->getSize().y / background[0].getGlobalBounds().height);
 
-    backgroundTexture[1].loadFromFile("Source/Resources/texture/snow_mainmenu.png");
+    backgroundTexture[1].loadFromFile("Source/Resources/texture/night_mainmenu.png");
     background[1].setTexture(backgroundTexture[1]);
     background[1].setScale(window->getSize().x / background[1].getGlobalBounds().width,
-		window->getSize().y / background[1].getGlobalBounds().height);
+        window->getSize().y / background[1].getGlobalBounds().height);
 
-    backgroundTexture[2].loadFromFile("Source/Resources/texture/fire_mainmenu.png");
-	background[2].setTexture(backgroundTexture[2]);
-	background[2].setScale(window->getSize().x / background[2].getGlobalBounds().width,
-        window->getSize().y / background[2].getGlobalBounds().height);
+
+    backgroundTexture[2].loadFromFile("Source/Resources/texture/snow_mainmenu.png");
+    background[2].setTexture(backgroundTexture[2]);
+    background[2].setScale(window->getSize().x / background[2].getGlobalBounds().width,
+		window->getSize().y / background[2].getGlobalBounds().height);
+
+    backgroundTexture[3].loadFromFile("Source/Resources/texture/fire_mainmenu.png");
+	background[3].setTexture(backgroundTexture[3]);
+	background[3].setScale(window->getSize().x / background[3].getGlobalBounds().width,
+        window->getSize().y / background[3].getGlobalBounds().height);
 }
 
 void MainMenuState::initFonts()
