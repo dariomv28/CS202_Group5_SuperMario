@@ -3,7 +3,10 @@
 class Cannon :
     public Block
 {
-    public:
+private:
+	const float reloadDuration = 5.0f;
+	float reloadTimer;
+public:
 	Cannon();
 	Cannon(sf::Vector2f position, sf::Vector2f size, std::string name);
 	~Cannon();

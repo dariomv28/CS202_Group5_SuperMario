@@ -135,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Rocket.cpp" />
     <ClCompile Include="Source\Character.cpp" />
     <ClCompile Include="Source\CloudBlock.cpp" />
     <ClCompile Include="Source\DeathMenuState.cpp" />
@@ -197,6 +198,7 @@
     <ClCompile Include="Source\UserData.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Headers\Rocket.h" />
     <ClInclude Include="Source\Headers\Character.h" />
     <ClInclude Include="Source\Headers\CloudBlock.h" />
     <ClInclude Include="Source\Headers\DeathMenuState.h" />
