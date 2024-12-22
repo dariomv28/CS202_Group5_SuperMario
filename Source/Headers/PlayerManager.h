@@ -16,6 +16,7 @@ protected:
     std::unordered_map<std::string, sf::IntRect> allSpritesMario;
     std::unordered_map<std::string, sf::IntRect> allSpritesLuigi;
 public:
+    bool isMovingLeft;
 
     PlayerManager(sf::Vector2f position, sf::Vector2f size, int health, int speed);
     virtual ~PlayerManager();

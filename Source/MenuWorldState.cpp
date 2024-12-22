@@ -14,47 +14,52 @@ MenuWorldState::~MenuWorldState()
 
 void MenuWorldState::initButtons()
 {
-	buttons.resize(4); // 3 worlds
+	buttons.resize(nButtons);
 
 	float x = window->getSize().x / 2 - btn_Width / 2;
 	float y = window->getSize().y / 2.2;
 
-	buttons[BTN_WORLD1] = new GUI::TextureButton(false,
+	sf::Color idleColor(50, 50, 50, 200);
+	sf::Color hoverColor(70, 70, 70, 220);
+	sf::Color activeColor(90, 90, 90, 240);
+
+	sf::Color textIdleColor(255, 255, 255, 255);
+	sf::Color textHoverColor(255, 255, 200, 255);
+	sf::Color textActiveColor(255, 255, 255, 255);
+
+	buttons[BTN_WORLD1] = new GUI::TextButton(false,
 		x, y, btn_Width, btn_Height,
-		&font, "World 1", btn_CharSize,
-		sf::Color::Black, sf::Color::White, sf::Color::White,
-		"Source/Resources/texture/menu_button.png",
-		"Source/Resources/texture/menu_button.png",
-		"Source/Resources/texture/menu_button.png"
+		&font, "WORLD 1", btn_CharSize,
+		textIdleColor, textHoverColor, textActiveColor,
+		idleColor, hoverColor, activeColor,
+		sf::Color(255, 255, 255, 50), sf::Color(255, 255, 255, 100)
 	);
 
 	y += btn_Height * 1.5;
-	buttons[BTN_WORLD2] = new GUI::TextureButton(false,
+	buttons[BTN_WORLD2] = new GUI::TextButton(false,
 		x, y, btn_Width, btn_Height,
-		&font, "World 2", btn_CharSize,
-		sf::Color::Black, sf::Color::White, sf::Color::White,
-		"Source/Resources/texture/menu_button.png",
-		"Source/Resources/texture/menu_button.png",
-		"Source/Resources/texture/menu_button.png"
+		&font, "WORLD 2", btn_CharSize,
+		textIdleColor, textHoverColor, textActiveColor,
+		idleColor, hoverColor, activeColor,
+		sf::Color(255, 255, 255, 50), sf::Color(255, 255, 255, 100)
 	);
 
 	y += btn_Height * 1.5;
-	buttons[BTN_WORLD3] = new GUI::TextureButton(false,
+	buttons[BTN_WORLD3] = new GUI::TextButton(false,
 		x, y, btn_Width, btn_Height,
-		&font, "World 3", btn_CharSize,
-		sf::Color::Black, sf::Color::White, sf::Color::White,
-		"Source/Resources/texture/menu_button.png",
-		"Source/Resources/texture/menu_button.png",
-		"Source/Resources/texture/menu_button.png"
+		&font, "WORLD 3", btn_CharSize,
+		textIdleColor, textHoverColor, textActiveColor,
+		idleColor, hoverColor, activeColor,
+		sf::Color(255, 255, 255, 50), sf::Color(255, 255, 255, 100)
 	);
+
 	y += btn_Height * 1.5;
-	buttons[BTN_BACKTOMAIN] = new GUI::TextureButton(false,
+	buttons[BTN_BACKTOMAIN] = new GUI::TextButton(false,
 		x, y, btn_Width, btn_Height,
-		&font, "Back", btn_CharSize,
-		sf::Color::Black, sf::Color::White, sf::Color::White,
-		"Source/Resources/texture/menu_button.png",
-		"Source/Resources/texture/menu_button.png",
-		"Source/Resources/texture/menu_button.png"
+		&font, "BACK", btn_CharSize,
+		textIdleColor, textHoverColor, textActiveColor,
+		idleColor, hoverColor, activeColor,
+		sf::Color(255, 255, 255, 50), sf::Color(255, 255, 255, 100)
 	);
 }
 

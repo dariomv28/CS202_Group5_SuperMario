@@ -15,66 +15,53 @@ MenuLevelState::~MenuLevelState()
 
 void MenuLevelState::initButtons()
 {
-    buttons.resize(4); // 3 levels + 1 back button
+	buttons.resize(nButtons);
 
-    float x = window->getSize().x / 2 - btn_Width / 2;
-    float y = window->getSize().y / 2.2;
+	float x = window->getSize().x / 2 - btn_Width / 2;
+	float y = window->getSize().y / 2.2;
 
-    // Init World text
-    worldText.setFont(font);
-    worldText.setString("WORLD " + std::to_string(world));
+	sf::Color idleColor(50, 50, 50, 200);
+	sf::Color hoverColor(70, 70, 70, 220);
+	sf::Color activeColor(90, 90, 90, 240);
 
-    // Adjust the font size and color for better visibility
-    worldText.setCharacterSize(60); // Increase size for emphasis
-    worldText.setFillColor(sf::Color::Yellow); // Use a bright contrasting color
-    worldText.setOutlineThickness(5); // Add outline for better readability
-    worldText.setOutlineColor(sf::Color::Red); // Red outline for contrast
+	sf::Color textIdleColor(255, 255, 255, 255);
+	sf::Color textHoverColor(255, 255, 200, 255);
+	sf::Color textActiveColor(255, 255, 255, 255);
 
-    // Position the text in the center of the screen
-    worldText.setPosition(SCREEN_WIDTH / 2 - worldText.getGlobalBounds().width / 2,
-        y - worldText.getGlobalBounds().height * 2);
+	buttons[BTN_LEVEL1] = new GUI::TextButton(false,
+		x, y, btn_Width, btn_Height,
+		&font, "LEVEL 1", btn_CharSize,
+		textIdleColor, textHoverColor, textActiveColor,
+		idleColor, hoverColor, activeColor,
+		sf::Color(255, 255, 255, 50), sf::Color(255, 255, 255, 100)
+	);
 
-    //y += btn_Height * 1.5;
+	y += btn_Height * 1.5;
+	buttons[BTN_LEVEL2] = new GUI::TextButton(false,
+		x, y, btn_Width, btn_Height,
+		&font, "LEVEL 2", btn_CharSize,
+		textIdleColor, textHoverColor, textActiveColor,
+		idleColor, hoverColor, activeColor,
+		sf::Color(255, 255, 255, 50), sf::Color(255, 255, 255, 100)
+	);
 
+	y += btn_Height * 1.5;
+	buttons[BTN_LEVEL3] = new GUI::TextButton(false,
+		x, y, btn_Width, btn_Height,
+		&font, "LEVEL 3", btn_CharSize,
+		textIdleColor, textHoverColor, textActiveColor,
+		idleColor, hoverColor, activeColor,
+		sf::Color(255, 255, 255, 50), sf::Color(255, 255, 255, 100)
+	);
 
-    buttons[BTN_LEVEL1] = new GUI::TextureButton( false,
-        x, y, btn_Width, btn_Height,
-        &font,  "Level 1", btn_CharSize,
-        sf::Color::Black, sf::Color::White, sf::Color::White,
-        "Source/Resources/texture/menu_button.png",
-        "Source/Resources/texture/menu_button.png",
-        "Source/Resources/texture/menu_button.png"
-    );
-
-    y += btn_Height * 1.5;
-    buttons[BTN_LEVEL2] = new GUI::TextureButton(false,
-        x, y, btn_Width, btn_Height,
-        &font, "Level 2", btn_CharSize,
-        sf::Color::Black, sf::Color::White, sf::Color::White,
-        "Source/Resources/texture/menu_button.png",
-        "Source/Resources/texture/menu_button.png",
-        "Source/Resources/texture/menu_button.png"
-    );
-
-    y += btn_Height * 1.5;
-    buttons[BTN_LEVEL3] = new GUI::TextureButton(false,
-        x, y, btn_Width, btn_Height,
-        &font, "Level 3", btn_CharSize,
-        sf::Color::Black, sf::Color::White, sf::Color::White,
-        "Source/Resources/texture/menu_button.png",
-        "Source/Resources/texture/menu_button.png",
-        "Source/Resources/texture/menu_button.png"
-    );
-
-    y += btn_Height * 1.5;
-    buttons[BTN_BACK] = new GUI::TextureButton(false,
-        x, y, btn_Width, btn_Height,
-        &font, "Back", btn_CharSize,
-        sf::Color::Black, sf::Color::White, sf::Color::White,
-        "Source/Resources/texture/menu_button.png",
-        "Source/Resources/texture/menu_button.png",
-        "Source/Resources/texture/menu_button.png"
-    );
+	y += btn_Height * 1.5;
+	buttons[BTN_BACK] = new GUI::TextButton(false,
+		x, y, btn_Width, btn_Height,
+		&font, "BACK", btn_CharSize,
+		textIdleColor, textHoverColor, textActiveColor,
+		idleColor, hoverColor, activeColor,
+		sf::Color(255, 255, 255, 50), sf::Color(255, 255, 255, 100)
+	);
 }
 
 void MenuLevelState::updateGUI()

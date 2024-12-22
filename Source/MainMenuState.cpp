@@ -2,13 +2,12 @@
 #include "Headers/MenuWorldState.h"
 #include "Headers/MenuCharacterSelectionState.h"
 
-
 void MainMenuState::initVariables()
 {
-	nButtons = 4;
-	btn_Width = 400;
-	btn_Height = 75;
-	btn_CharSize = 20;
+    nButtons = 4;
+    btn_Width = 400;
+    btn_Height = 75; 
+    btn_CharSize = 20;     
 }
 
 void MainMenuState::initBackground()
@@ -50,50 +49,53 @@ void MainMenuState::initFonts()
 
 void MainMenuState::initButtons()
 {
-	buttons.resize(nButtons);
+    buttons.resize(nButtons);
 
-	float x = window->getSize().x / 2 - btn_Width / 2;
-	float y = window->getSize().y / 2.2;
+    float x = window->getSize().x / 2 - btn_Width / 2;
+    float y = window->getSize().y / 2.2;
 
-	buttons[BTN_CONTINUE] = new GUI::TextureButton(false,
-		x, y, btn_Width, btn_Height,
-		&font, "continue", btn_CharSize,
-		sf::Color::Black, sf::Color::White, sf::Color::White,
-		"Source/Resources/texture/menu_button.png", 
-		"Source/Resources/texture/menu_button.png", 
-		"Source/Resources/texture/menu_button.png"
-	);
-	
-	y += btn_Height * 1.5;
-	buttons[BTN_NEWGAME] = new GUI::TextureButton(false,
-		x, y, btn_Width, btn_Height,
-		&font, "new game", btn_CharSize,
-		sf::Color::Black, sf::Color::White, sf::Color::White,
-		"Source/Resources/texture/menu_button.png", 
-		"Source/Resources/texture/menu_button.png", 
-		"Source/Resources/texture/menu_button.png"
-	);
+    sf::Color idleColor(50, 50, 50, 200);
+    sf::Color hoverColor(70, 70, 70, 220);
+    sf::Color activeColor(90, 90, 90, 240);
 
-	y += btn_Height * 1.5;
-	buttons[BTN_LEADER] = new GUI::TextureButton(false,
-		x, y, btn_Width, btn_Height,
-		&font, "leader board", btn_CharSize,
-		sf::Color::Black, sf::Color::White, sf::Color::White,
-		"Source/Resources/texture/menu_button.png", 
-		"Source/Resources/texture/menu_button.png", 
-		"Source/Resources/texture/menu_button.png"
-	);
+    sf::Color textIdleColor(255, 255, 255, 255);
+    sf::Color textHoverColor(255, 255, 200, 255);
+    sf::Color textActiveColor(255, 255, 255, 255);
 
-	y += btn_Height * 1.5;
-	buttons[BTN_EXIT] = new GUI::TextureButton(false, 
-		x, y, btn_Width, btn_Height,
-		&font, "exit", btn_CharSize,
-		sf::Color::Black, sf::Color::White, sf::Color::White,
-		"Source/Resources/texture/menu_button.png", 
-		"Source/Resources/texture/menu_button.png", 
-		"Source/Resources/texture/menu_button.png"
-	);
+    buttons[BTN_CONTINUE] = new GUI::TextButton(false,
+        x, y, btn_Width, btn_Height,
+        &font, "CONTINUE", btn_CharSize,
+        textIdleColor, textHoverColor, textActiveColor,
+        idleColor, hoverColor, activeColor,
+        sf::Color(255, 255, 255, 50), sf::Color(255, 255, 255, 100)  
+    );
 
+    y += btn_Height * 1.5;
+    buttons[BTN_NEWGAME] = new GUI::TextButton(false,
+        x, y, btn_Width, btn_Height,
+        &font, "NEW GAME", btn_CharSize,
+        textIdleColor, textHoverColor, textActiveColor,
+        idleColor, hoverColor, activeColor,
+        sf::Color(255, 255, 255, 50), sf::Color(255, 255, 255, 100)
+    );
+
+    y += btn_Height * 1.5;
+    buttons[BTN_LEADER] = new GUI::TextButton(false,
+        x, y, btn_Width, btn_Height,
+        &font, "LEADER BOARD", btn_CharSize,
+        textIdleColor, textHoverColor, textActiveColor,
+        idleColor, hoverColor, activeColor,
+        sf::Color(255, 255, 255, 50), sf::Color(255, 255, 255, 100)
+    );
+
+    y += btn_Height * 1.5;
+    buttons[BTN_EXIT] = new GUI::TextButton(false,
+        x, y, btn_Width, btn_Height,
+        &font, "EXIT", btn_CharSize,
+        textIdleColor, textHoverColor, textActiveColor,
+        idleColor, hoverColor, activeColor,
+        sf::Color(255, 255, 255, 50), sf::Color(255, 255, 255, 100)
+    );
 }
 
 MainMenuState::MainMenuState(StateData* stateData)

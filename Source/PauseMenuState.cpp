@@ -5,7 +5,7 @@
 
 void PauseMenuState::initVariables()
 {
-    nButtons = 2;
+    nButtons = 3;
     btn_Width = 400;
     btn_Height = 75;
     btn_CharSize = 20;
@@ -30,24 +30,39 @@ void PauseMenuState::initButtons()
 
     float x = window->getSize().x / 2 - btn_Width / 2;
     float y = window->getSize().y / 2.2;
+    
+    sf::Color idleColor(50, 50, 50, 200);
+    sf::Color hoverColor(70, 70, 70, 220);
+    sf::Color activeColor(90, 90, 90, 240);
 
-    buttons[PauseMenu::BTN_CONTINUE] = new GUI::TextureButton(false,
+    sf::Color textIdleColor(255, 255, 255, 255);
+    sf::Color textHoverColor(255, 255, 200, 255);
+    sf::Color textActiveColor(255, 255, 255, 255);
+
+    buttons[PauseMenu::BTN_CONTINUE] = new GUI::TextButton(false,
         x, y, btn_Width, btn_Height,
-        &font, "Continue", btn_CharSize,
-        sf::Color::Black, sf::Color::White, sf::Color::White,
-        "Source/Resources/texture/menu_button.png",
-        "Source/Resources/texture/menu_button.png",
-        "Source/Resources/texture/menu_button.png"
+        &font, "CONTINUE", btn_CharSize,
+        textIdleColor, textHoverColor, textActiveColor,
+        idleColor, hoverColor, activeColor,
+        sf::Color(255, 255, 255, 50), sf::Color(255, 255, 255, 100)
     );
 
     y += btn_Height * 1.5;
-    buttons[PauseMenu::BTN_LEVELMENU] = new GUI::TextureButton(false,
+    buttons[PauseMenu::BTN_SAVEGAME] = new GUI::TextButton(false,
         x, y, btn_Width, btn_Height,
-        &font, "Level Menu", btn_CharSize,
-        sf::Color::Black, sf::Color::White, sf::Color::White,
-        "Source/Resources/texture/menu_button.png",
-        "Source/Resources/texture/menu_button.png",
-        "Source/Resources/texture/menu_button.png"
+        &font, "SAVE GAME", btn_CharSize,
+        textIdleColor, textHoverColor, textActiveColor,
+        idleColor, hoverColor, activeColor,
+        sf::Color(255, 255, 255, 50), sf::Color(255, 255, 255, 100)
+    );
+
+    y += btn_Height * 1.5;
+    buttons[PauseMenu::BTN_LEVELMENU] = new GUI::TextButton(false,
+        x, y, btn_Width, btn_Height,
+        &font, "LEVEL MENU", btn_CharSize,
+        textIdleColor, textHoverColor, textActiveColor,
+        idleColor, hoverColor, activeColor,
+        sf::Color(255, 255, 255, 50), sf::Color(255, 255, 255, 100)
     );
 }
 
@@ -89,10 +104,6 @@ void PauseMenuState::updateGUI()
     }
 }
 
-
-
-
-
 void PauseMenuState::update(const float& dt)
 {
     updateBackground();
@@ -131,7 +142,8 @@ void PauseMenuState::updateButtonPositions() {
     float y = viewCenter.y - viewSize.y / 4;
 
     buttons[PauseMenu::BTN_CONTINUE]->setPosition(x, y);
-    buttons[PauseMenu::BTN_LEVELMENU]->setPosition(x, y + btn_Height * 1.5);
+	buttons[PauseMenu::BTN_SAVEGAME]->setPosition(x, y + btn_Height * 1.5);
+    buttons[PauseMenu::BTN_LEVELMENU]->setPosition(x, y + btn_Height * 3.0);
 }
 
 void PauseMenuState::updateBackground()
