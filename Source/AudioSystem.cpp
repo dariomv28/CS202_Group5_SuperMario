@@ -20,6 +20,9 @@ void AudioSystem::init() {
 	if (!coinSoundBuffer.loadFromFile("Source/Resources/audio/coin.mp3")) {
 		throw("ERROR::AUDIOSYSTEM::CANNOT_LOAD_COIN_SOUND_EFFECT");
 	}
+	if (!mushroomSoundBuffer.loadFromFile("Source/Resources/audio/eat mushroom.mp3")) {
+		throw("ERROR::AUDIOSYSTEM::CANNOT_LOAD_COIN_MUSHROOM_EFFECT");
+	}
 	if (!brickSoundBuffer.loadFromFile("Source/Resources/audio/break brick.wav")) {
 		throw("ERROR::AUDIOSYSTEM::CANNOT_LOAD_BRICK_SOUND_EFFECT");
 	}
@@ -46,6 +49,8 @@ void AudioSystem::init() {
 	coinSound.setVolume(100.0f);
 	brickSound.setBuffer(brickSoundBuffer);
 	brickSound.setVolume(100.0f);
+	mushroomSound.setBuffer(mushroomSoundBuffer);
+	mushroomSound.setVolume(100.0f);
 }
 
 void AudioSystem::playMusic() {
@@ -183,6 +188,10 @@ sf::SoundBuffer& AudioSystem::getBrickSoundBuffer() {
 	return brickSoundBuffer;
 }
 
+sf::SoundBuffer& AudioSystem::getMushroomSoundBuffer() {
+	return mushroomSoundBuffer;
+}
+
 void AudioSystem::stop() {
 	isStopped = true;
 	std::cout << "AudioSystem is now stopped. Access blocked." << std::endl;
@@ -191,4 +200,8 @@ void AudioSystem::stop() {
 void AudioSystem::resume() {
 	isStopped = false;
 	std::cout << "AudioSystem is now active. Access restored." << std::endl;
+}
+
+void AudioSystem::playMushroomSound() {
+	mushroomSound.play();
 }
