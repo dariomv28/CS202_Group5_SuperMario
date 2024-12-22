@@ -296,14 +296,12 @@ void Mario::handleInput(const float& dt) {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
         movementComponent->isMoveLeft = true;
         entitySprite.setScale(4.0f, 4.0f);
-        //hitbox.setScale(1.0f, 1.0f);
         isMovingLeft = true;
         isWalking = true;
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         movementComponent->isMoveRight = true;
         entitySprite.setScale(4.0f, 4.0f);
-        //hitbox.setScale(1.0f, 1.0f);
         isWalking = true;
         isMovingLeft = false;
     }
