@@ -20,6 +20,7 @@ LevelManager::LevelManager(PlayerManager* player, sf::RenderWindow* window) {
 }
 
 LevelManager::~LevelManager() {
+    SaveGame();
     delete mapManager;
     delete levelGUI;
     delete eventMediator;
@@ -29,6 +30,22 @@ LevelManager::~LevelManager() {
     delete chatUI;
     //delete livingEntity;
     //delete movementComponent;
+}
+
+void LevelManager::SaveGame()
+{
+	//- create a save file named "SaveGame.txt"
+	std::ofstream saveFile("SaveGame.txt");
+    
+    
+    // - Mario
+    player->Save(saveFile);
+
+    // -Map
+	mapManager->Save(saveFile);
+
+    saveFile.close();
+
 }
 
 void LevelManager::initGameEventMediator() {
@@ -42,7 +59,6 @@ void LevelManager::initGameEventMediator() {
     //eventMediator->addMovementComponent(movementComponent);
     //eventMediator->addLivingEntity(livingEntity);
 }
-
 
 void LevelManager::update(const float& dt) {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Tab)) {

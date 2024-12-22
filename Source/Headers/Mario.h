@@ -12,6 +12,7 @@ private:
     bool isMovingLeft;
 public:
     Mario();
+
     Mario(sf::Vector2f position, sf::Vector2f size, int health = 3, int speed = 15.0f);
     ~Mario();
 
@@ -31,4 +32,8 @@ public:
     void updateHitboxSize();
 
     void setBig(bool big) override;
+
+	void Save(std::ofstream& file) override;
+	void Load(std::ifstream& file) override;
+	//void getRemainInfo() override;
 };

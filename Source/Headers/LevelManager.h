@@ -12,6 +12,7 @@
 #include "AudioSystem.h"
 #include "ChatUI.h"
 #include "OllamaService.h"
+#include "MovingBlock.h"
 
 class LevelManager {
 protected:
@@ -39,7 +40,7 @@ public:
     void initGameEventMediator();
     virtual void update(const float& dt);
     virtual void render(sf::RenderTarget* target = nullptr);
-
+    void SaveGame();
 
     void initializeChatSystem();
 };

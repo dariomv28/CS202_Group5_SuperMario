@@ -41,5 +41,8 @@ public:
     bool getBig() const;
     int getHealth() const;
     void setHealth(int health);
+    virtual void Save(std::ofstream& file);
+	virtual void Load(std::ifstream& file);
+    virtual void getRemainInfo();
 };
 

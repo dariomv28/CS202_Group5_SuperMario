@@ -116,6 +116,8 @@ void MapManager::draw_map(sf::RenderTarget* target)
 void MapManager::get_map_sketch(const unsigned int world, const unsigned int level)
 {
 	map_sketch.loadFromFile("Source/Resources/texture/LevelSketch_W" + std::to_string(world) + "_LV" + std::to_string(level) + ".png");
+	this->currentWorld = world;
+	this->currentLevel = level;
 	return;
 }
 
@@ -140,7 +142,7 @@ sf::Color MapManager::get_map_sketch_pixel(const unsigned short i_x, const unsig
 
 void MapManager::convert_sketch(const unsigned int world, const unsigned int level, vector<Enemy*>& i_enemies, 
 	vector<Block*> &Blocks, vector<PowerUpObject*>& PowerUp , PlayerManager* i_mario)
-{
+{	
 	get_map_sketch(world, level);
 	update_background(world, level);
 
@@ -266,3 +268,50 @@ void MapManager::convert_sketch(const unsigned int world, const unsigned int lev
 	}
 }
 
+void MapManager::Save(std::ofstream& file)
+{
+
+
+	if (file.is_open())
+	{
+		file << currentWorld << endl;
+		file << currentLevel << endl;
+
+		file << view_x << endl;
+		file << CurrentLeft << endl;
+		file << CurrentRight << endl;
+
+	}
+}
+
+void MapManager::Load(std::ifstream& file)
+{
+
+	if (file.is_open())
+	{
+		file >> currentWorld;
+		file >> currentLevel;
+
+		file >> view_x;
+		file >> CurrentLeft;
+		file >> CurrentRight;
+		View = sf::View(sf::FloatRect(view_x, 0, SCREEN_WIDTH, SCREEN_HEIGHT));
+
+	}
+	else
+	{
+		cerr << "Error: Unable to load the game" << endl;
+	}
+	
+	//std::ofstream TempFile("TempSaveGame.txt");
+	//std::string line;
+	//while (std::getline(file, line)) {
+	//	TempFile << line << std::endl;
+	//}
+
+	//TempFile.close();
+	//file.close();
+
+	//std::remove("SaveGame.txt");
+	//std::rename("TempSaveGame.txt", "SaveGame.txt");
+}

@@ -143,6 +143,7 @@
     <ClCompile Include="Source\MenuWorldState.cpp" />
     <ClCompile Include="Source\Bullet.cpp" />
     <ClCompile Include="Source\FireBuff.cpp" />
+    <ClCompile Include="Source\MovingBlock.cpp" />
     <ClCompile Include="Source\OllamaService.cpp" />
     <ClCompile Include="Source\PauseMenuState.cpp" />
     <ClCompile Include="Source\PlayerBuff.cpp" />
@@ -204,6 +205,7 @@
     <ClInclude Include="Source\Headers\MenuWorldState.h" />
     <ClInclude Include="Source\Headers\Bullet.h" />
     <ClInclude Include="Source\Headers\FireBuff.h" />
+    <ClInclude Include="Source\Headers\MovingBlock.h" />
     <ClInclude Include="Source\Headers\OllamaService.h" />
     <ClInclude Include="Source\Headers\PauseMenuState.h" />
     <ClInclude Include="Source\Headers\PlayerBuff.h" />

@@ -89,7 +89,10 @@ void MenuWorldState::updateGUI()
 	else if (buttons[BTN_BACKTOMAIN]->isPressed())
 	{
 		this->stateData->audio->playMusic();
-		endState();
+		while (states->size() > 1)
+		{
+			states->pop();
+		}
 	}
 }
 

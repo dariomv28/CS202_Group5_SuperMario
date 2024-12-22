@@ -53,6 +53,5 @@ public:
 	virtual void render(sf::RenderTarget* target = nullptr) = 0;
 	std::string getNameCharacter() const;
 	void setNameCharacter(const std::string& name);
-
 };
 
