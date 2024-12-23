@@ -135,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\FlyingKoopa.cpp" />
     <ClCompile Include="Source\Bowser.cpp" />
     <ClCompile Include="Source\Rocket.cpp" />
     <ClCompile Include="Source\Character.cpp" />
@@ -201,6 +202,7 @@
     <ClCompile Include="Source\WinFlag.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Headers\FlyingKoopa.h" />
     <ClInclude Include="Source\Headers\Bowser.h" />
     <ClInclude Include="Source\Headers\Rocket.h" />
     <ClInclude Include="Source\Headers\Character.h" />
