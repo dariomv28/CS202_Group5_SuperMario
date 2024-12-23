@@ -8,6 +8,18 @@ MenuWorldState::MenuWorldState(StateData* stateData) : MainMenuState(stateData)
 	this->initButtons();
 }
 
+MenuWorldState::MenuWorldState(StateData* stateData, bool Continue) : MainMenuState(stateData)
+{
+	// continue old world
+	std::ifstream saveFile("SaveGame.txt");
+	int currentWorld;
+	saveFile >> currentWorld;
+	world = currentWorld;
+	saveFile.close();
+
+	this->Continue = Continue;
+}
+
 MenuWorldState::~MenuWorldState()
 {
 }
@@ -103,6 +115,12 @@ void MenuWorldState::updateGUI()
 
 void MenuWorldState::update(const float& dt)
 {
+	if (Continue)
+	{
+		Continue = false;
+		states->push(new MenuLevelState(stateData, world, 1));
+		return;
+	}
 	updateMousePosition();
 	updateGUI();
 }

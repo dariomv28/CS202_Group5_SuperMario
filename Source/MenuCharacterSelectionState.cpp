@@ -190,11 +190,20 @@ void MenuCharacterSelectionState::initUI() {
     );
 }
 
+MenuCharacterSelectionState::MenuCharacterSelectionState(StateData* stateData, bool Continue)
+    : State(stateData), currentCharacterIndex(0), transitioningOut(false),
+    transitionAlpha(0.f), animationTime(0.f),
+    cardHoverScale(1.1f), cardNormalScale(1.f)
+{
+	this->Continue = Continue;
+}
+
 MenuCharacterSelectionState::MenuCharacterSelectionState(StateData* stateData)
     : State(stateData), currentCharacterIndex(0), transitioningOut(false),
     transitionAlpha(0.f), animationTime(0.f),
     cardHoverScale(1.1f), cardNormalScale(1.f)
 {
+    Continue = false;
     initTextures();
     initBackground();
     initFont();
@@ -276,6 +285,33 @@ void MenuCharacterSelectionState::updateTransitionEffect(const float& dt) {
 }
 
 void MenuCharacterSelectionState::update(const float& dt) {
+    if (Continue)
+    {
+        this->Continue = false;
+		std::ifstream saveFile("SaveGame.txt");
+		std::string currentCharacter;
+        int currentWorld, currentLevel;
+        float view_x, CurrentLeft, CurrentRight;
+
+        saveFile >> currentWorld;
+		saveFile >> currentLevel;
+
+        saveFile >> view_x;
+        saveFile >> CurrentLeft;
+        saveFile >> CurrentRight;
+		saveFile >> currentCharacter;
+		saveFile.close();
+
+        std::cerr << currentCharacter << std::endl;
+
+
+		this->stateData->userData->setNameCharacter(currentCharacter);
+		this->stateData->userData->UserData::createPlayer();
+		this->states->push(new MenuWorldState(this->stateData, 1));
+		this->endState();
+
+        return;
+    }
     updateMousePosition();
     updateInput();
     updateCardAnimations(dt);

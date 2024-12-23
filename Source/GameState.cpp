@@ -9,6 +9,7 @@
 #include "Headers/W2_LV3.h"
 #include "Headers/W3_LV2.h"
 #include "Headers/W3_LV3.h"
+#include "Headers/W4.h"
 
 GameState::GameState(StateData* stateData, int worldID, int levelID)
     : State(stateData), levelManager(nullptr), worldID(worldID), levelID(levelID) {}
@@ -51,12 +52,23 @@ void GameState::reloadLevel() {
 	else if (worldLevel == "W3_LV3") {
 		levelManager = new W3_LV3(this->stateData->userData->getPlayer(worldID), window);
 	}
+    else if (worldID == 4)
+    {
+        // Continue state
+        std::ifstream saveFile("SaveGame.txt");
+        int currentWorld;
+        int currentLevel;
+        saveFile >> currentWorld;
+        saveFile >> currentLevel;
+        saveFile.close();
+
+        levelManager = new W4(this->stateData->userData->getPlayer(currentWorld), window);
+    }
 	else {
 		cerr << "Invalid level" << endl;
 	}
  
 }
-
 
 void GameState::update(const float& dt) {
     if (levelManager) {

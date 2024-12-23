@@ -1,6 +1,7 @@
 #include "Headers/MainMenuState.h"
 #include "Headers/MenuWorldState.h"
 #include "Headers/MenuCharacterSelectionState.h"
+#include "Headers/GameState.h"
 
 void MainMenuState::initVariables()
 {
@@ -155,9 +156,8 @@ void MainMenuState::updateGUI()
     {
         std::cout << "Continue Pressed\n";
 
-        // this->states->push(new GameState(this->stateData))
-        // player->update position.x
-        // update user data
+        this->states->push(new MenuCharacterSelectionState(this->stateData, 1));
+
     }
     if (buttons[BTN_NEWGAME]->isPressed())
     {

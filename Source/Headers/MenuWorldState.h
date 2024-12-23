@@ -8,9 +8,11 @@ class MenuWorldState :
 {
 private:
     int world;
+	bool Continue;
     void initButtons() override;
 public:
     MenuWorldState(StateData* stateData);
+    MenuWorldState(StateData* stateData, bool Continue);
     virtual ~MenuWorldState();
 
     void updateGUI() override;

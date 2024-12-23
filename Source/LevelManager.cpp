@@ -36,13 +36,12 @@ void LevelManager::SaveGame()
 {
 	//- create a save file named "SaveGame.txt"
 	std::ofstream saveFile("SaveGame.txt");
-    
-    
-    // - Mario
-    player->Save(saveFile);
 
     // -Map
 	mapManager->Save(saveFile);
+
+    // - Mario
+    player->Save(saveFile);
 
     saveFile.close();
 

@@ -198,6 +198,7 @@
     <ClCompile Include="Source\W3_LV2.cpp" />
     <ClCompile Include="Source\UserData.cpp" />
     <ClCompile Include="Source\W3_LV3.cpp" />
+    <ClCompile Include="Source\W4.cpp" />
     <ClCompile Include="Source\WinFlag.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -264,6 +265,7 @@
     <ClInclude Include="Source\Headers\W3_LV2.h" />
     <ClInclude Include="Source\Headers\UserData.h" />
     <ClInclude Include="Source\Headers\W3_LV3.h" />
+    <ClInclude Include="Source\Headers\W4.h" />
     <ClInclude Include="Source\Headers\WinFlag.h" />
   </ItemGroup>
   <ItemGroup>
