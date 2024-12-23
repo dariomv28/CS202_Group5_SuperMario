@@ -34,6 +34,7 @@ void Mushroom::update(const float& dt)
 
 void Mushroom::reactToCollison()
 {
+	eventMediator->playMushroomSound();
 	//Depend on the type of mushroom, we will spawn different things
 	switch (type)
 	{

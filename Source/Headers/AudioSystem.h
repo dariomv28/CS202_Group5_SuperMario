@@ -13,10 +13,12 @@ private:
 	sf::Sound buttonSound;
 	sf::Sound coinSound;
 	sf::Sound brickSound;
+	sf::Sound mushroomSound;
 	sf::SoundBuffer jumpSoundBuffer;
 	sf::SoundBuffer buttonSoundBuffer;
 	sf::SoundBuffer coinSoundBuffer;
 	sf::SoundBuffer brickSoundBuffer;
+	sf::SoundBuffer mushroomSoundBuffer;
 	std::string currentBackgroundMusic;
 
 	bool isInitialized = false;
@@ -41,11 +43,13 @@ public:
 	void playCoinSound();
 	void stopCoinSound();
 	void playBrickDestroyedSound();
+	void playMushroomSound();
 
 	sf::SoundBuffer& getJumpSoundBuffer();
 	sf::SoundBuffer& getButtonSoundBuffer();
 	sf::SoundBuffer& getCoinSoundBuffer();
 	sf::SoundBuffer& getBrickSoundBuffer();
+	sf::SoundBuffer& getMushroomSoundBuffer();
 	sf::Sound& getJumpSound();
 
 	void stop();

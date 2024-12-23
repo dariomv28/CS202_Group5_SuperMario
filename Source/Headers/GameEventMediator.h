@@ -82,6 +82,7 @@ public:
 	void playCoinSound();
 	void playJumpSound();
 	void playBrickDestroyedSound();
+	void playMushroomSound();
 
 	PlayerManager*& getPlayer() { return player; }
 };

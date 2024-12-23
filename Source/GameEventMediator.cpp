@@ -239,3 +239,7 @@ void GameEventMediator::playJumpSound() {
 void GameEventMediator::playBrickDestroyedSound() {
 	audio->playBrickDestroyedSound();
 }
+
+void GameEventMediator::playMushroomSound() {
+	audio->playMushroomSound();
+}
