@@ -4,7 +4,7 @@ how are you|I'm doing great, thanks for asking! Hope youre enjoying the game.
 whats up|Just here to help you out with the game!
 thank you|Youre welcome! Let me know if you need more help.
 thanks|Youre welcome! Happy to help.
-who are you|Im your in-game assistant, here to guide you on your adventure!
+who are you|Im your in game assistant, here to guide you on your adventure!
 whats your name|You can call me your Adventure Guide!
 help|Sure! Ask me anything about the game, and Ill do my best to assist you.
 how to play|Use arrow keys to move and space to jump. Good luck!
@@ -13,18 +13,18 @@ where am i|You are in the Mushroom Kingdom, home to Mario and Luigi!
 what should i do|Your goal is to rescue Princess Peach and defeat Bowser!
 objective|Your goal is to rescue Princess Peach and defeat Bowser!
 how to jump|Press the SPACE bar to jump over obstacles.
-how to attack|Jump on the enemies to defeat them, or use power-ups like fireballs!
-how to defeat enemies|Jump on enemies or use fireballs if you have a flower power-up!
-how to get power up|Collect mushrooms and flowers from ? blocks to get power-ups.
+how to attack|Jump on the enemies to defeat them, or use power ups like fireballs!
+how to defeat enemies|Jump on enemies or use fireballs if you have a flower power up!
+how to get power up|Collect mushrooms and flowers from ? blocks to get power ups.
 how to sprint|Hold down the SHIFT key while moving to sprint.
 run faster|Hold down the SHIFT key while moving to sprint.
 what are coins for|Collect 100 coins to get an extra life!
 coins|Collect 100 coins to get an extra life!
-extra life|Collect green 1-Up mushrooms or 100 coins to gain an extra life!
+extra life|Collect green 1 Up mushrooms or 100 coins to gain an extra life!
 how to save the princess|Reach the end of the castle and defeat Bowser to save Princess Peach.
 how to climb|Find ladders or platforms to climb. Jump when needed!
 how to swim|Use arrow keys to navigate underwater, but watch out for air pockets!
-how to use power-ups|Use power-ups like mushrooms, fire flowers, or stars by collecting them.
+how to use power ups|Use power ups like mushrooms, fire flowers, or stars by collecting them.
 princess|Reach the end of the castle and defeat Bowser to save Princess Peach.
 where is bowser|Bowser is at the end of the castle. Be prepared for a tough fight!
 who is bowser|Bowser is the main villain of this game, trying to stop you from saving the princess.
@@ -32,7 +32,7 @@ who is mario|Mario is the hero of this story, setting out to save Princess Peach
 who is luigi|Luigi is Marios brother and a fellow hero of the Mushroom Kingdom!
 what is this place|This is the Mushroom Kingdom, home to adventure and fun!
 what is a goomba|Goombas are small enemies. Jump on them to defeat them.
-what is a koopa|Koopas are turtle-like enemies. Jump on them to send their shells flying!
+what is a koopa|Koopas are turtle like enemies. Jump on them to send their shells flying!
 game over|Dont worry! Restart the level and try again. You can do it!
 save progress|Your progress is saved automatically after completing a level.
 how to pause|Press the ESC key to pause the game.
@@ -78,10 +78,10 @@ why is the sky blue|The sky looks blue because of the way sunlight interacts wit
 how to stop procrastinating|Break tasks into smaller pieces and start with the easiest one.
 what is happiness|Happiness is finding joy in the little things and being content with life.
 what is sadness|Sadness is a natural emotion that comes from loss or disappointment.
-how to jump higher|In the game, get a power-up like a super mushroom or jump on springboards!
+how to jump higher|In the game, get a power up like a super mushroom or jump on springboards!
 how to run faster|Hold the SHIFT key while moving to sprint in the game.
 how to find secrets|Look for hidden blocks, alternative paths, or listen to subtle game cues.
-what is a mushroom|In the game, mushrooms are power-ups that make Mario grow bigger.
+what is a mushroom|In the game, mushrooms are power ups that make Mario grow bigger.
 how to cook|Start with simple recipes and follow the instructions step by step.
 how to write an essay|Plan your points, write a clear introduction, and support your arguments with evidence.
 what is a hero|A hero is someone brave who helps others and fights for good.
@@ -95,25 +95,25 @@ how to get better at games|Practice often, watch tutorials, and learn from your 
 why do we dream|Dreams are the minds way of processing memories and emotions while you sleep.
 how to focus|Eliminate distractions, take short breaks, and use tools like a timer.
 what is a warp pipe|In the game, warp pipes are shortcuts that take you to new areas.
-how to beat a boss|Learn the bosses attack patterns and use your skills and power-ups wisely.
+how to beat a boss|Learn the bosses attack patterns and use your skills and power ups wisely.
 what is the best way to study|Find a quiet space, focus on one topic at a time, and take breaks to recharge.
 how to overcome fear|Face your fears gradually and remind yourself of your strengths.
 how to make a decision|Weigh the pros and cons, and trust your instincts.
-what is the best power-up|The invincibility star makes you unstoppable for a short time!
+what is the best power up|The invincibility star makes you unstoppable for a short time!
 what is the meaning of friendship|Friendship is about trust, support, and shared experiences.
 how to improve memory|Practice regularly, use memory techniques, and get enough sleep.
 what is a fire flower|A fire flower lets you throw fireballs in the game to defeat enemies.
 how to deal with stress|Take deep breaths, relax, and focus on what you can control.
 why is it raining|Rain is part of the water cycle and helps keep the Earth hydrated.
-how to be confident|Believe in yourself, focus on your strengths, and practice self-care.
-what is the best strategy|Plan ahead, use power-ups, and stay calm under pressure.
+how to be confident|Believe in yourself, focus on your strengths, and practice self care.
+what is the best strategy|Plan ahead, use power ups, and stay calm under pressure.
 how to save money|Set a budget, avoid unnecessary expenses, and save regularly.
 why is the ocean salty|The ocean is salty because minerals from rocks are carried to the sea by rivers.
 how to sleep better|Stick to a regular schedule, avoid screens before bed, and create a relaxing environment.
 what is the best way to relax|Listen to music, meditate, or take a walk in nature.
 what is a fun fact|Did you know? The largest mushroom ever found was over 2,000 years old!
 how to unlock a level|Complete the current level and explore for hidden paths or keys.
-what is the fastest way to win|Learn shortcuts, collect power-ups, and focus on your goal.
+what is the fastest way to win|Learn shortcuts, collect power ups, and focus on your goal.
 why am i stuck|Explore every area and try new strategies. You might be missing something small!
 how to swim faster|Press the arrow keys in quick succession to move through the water efficiently.
 how to use a star|The star grants temporary invincibility. Use it to charge through enemies!
@@ -132,6 +132,8 @@ what is a dream|A dream is a series of thoughts or images your brain creates whi
 am i doing good|Absolutely! Keep up the great work!
 is it okay to lose|Of course! Losing is just part of the learning process.s
 instructions| MOVING : ARROW KEYS OR W, A, S, D --JUMP : SPACE --SPRINT : CTRL --FIRE : F [BIG MARIO] --CHATBOT : TAB
-plot world 1|World 1 is the Grass Land, where youll encounter Goombas and Koopas. This is where your adventure begins and where youll learn the basics of the game to prepare you for the challenges ahead. Your goal is to reach the end of the level and take as much experience as you can to face the next worlds. Good luck!
-world 2 level 1|In World 2, level 1, the keys are reversed. Youll need to adapt quickly to the new controls to avoid falling into pits or getting hit by enemies. Keep an eye out for hidden blocks and power-ups to help you on your journey. Good luck!
-why i cant move|Oh, it seems that you are in world 2 level 1, where the keys are reversed!. Youll need to adapt quickly to the new controls to avoid falling into pits or getting hit by enemies. Keep an eye out for hidden blocks and power-ups to help you on your journey. Good luck!
+plot world 1|Welcome to Grass Land, the starting point of your journey to rescue the princess! This lush, vibrant world is teeming with Goombas and Koopas, serving as the perfect training ground for a budding hero. As you navigate through green hills and sunny skies, you'll master the basics of movement, jumping, and combat.
+plot world 2|Snow Land is a cold and slippery place, where moving carefully is very important. The icy ground makes it harder to stay in control, and you will face new types of enemies along the way. Hidden blocks and helpful power ups are scattered around, so take your time to explore and find them. Do your best to keep moving forward to save the princess!
+plot world 3|Prepare for the ultimate test in Fire Land, a scorching domain filled with lava pits, dangerous traps, and relentless enemies. This fiery landscape is Bowser's stronghold, and the final hurdle before your showdown with the tyrant himself. Only the bravest and most skilled adventurers can survive the blistering heat and overpower Bowser's minions.
+world 2 level 1|In World 2, level 1, the keys are reversed. Youll need to adapt quickly to the new controls to avoid falling into pits or getting hit by enemies. Keep an eye out for hidden blocks and power ups to help you on your journey. Good luck!
+why i cant move|Oh, it seems that you are in world 2 level 1, where the keys are reversed!. Youll need to adapt quickly to the new controls to avoid falling into pits or getting hit by enemies. Keep an eye out for hidden blocks and power ups to help you on your journey. Good luck!
