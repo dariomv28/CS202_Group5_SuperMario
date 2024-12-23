@@ -43,4 +43,6 @@ public:
     void increaseCoins(int numCoins);
     void increaseScore(int numScore);
     void updateHealth(int playerHealth);
+    int getScore() const;
+
 };

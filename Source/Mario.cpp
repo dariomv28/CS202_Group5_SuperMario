@@ -17,8 +17,10 @@ Mario::Mario(sf::Vector2f position, sf::Vector2f size, int health, int speed)
     init();
 }
 
+
+
 Mario::~Mario() {
-    delete animationComponent;
+   //elet   nimationComponen
 }
 
 void Mario::init() {

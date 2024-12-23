@@ -197,6 +197,10 @@ PlayerManager::PlayerManager(sf::Vector2f position, sf::Vector2f size, int healt
 };
 
 PlayerManager::~PlayerManager() {
+	for (auto& buff : buffs) {
+		delete buff;
+	}
+	buffs.clear();
 }
 
 void PlayerManager::init() {

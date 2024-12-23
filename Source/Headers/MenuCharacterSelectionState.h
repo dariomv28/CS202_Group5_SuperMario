@@ -4,6 +4,9 @@
 
 class MenuCharacterSelectionState : public State {
 private:
+    //Continue
+    bool Continue;
+
     // Resources
     sf::Texture marioTexture;
     sf::Texture luigiTexture;
@@ -51,6 +54,7 @@ private:
     void updateTransitionEffect(const float& dt);
 
 public:
+    MenuCharacterSelectionState(StateData* stateData, bool Continue);
     MenuCharacterSelectionState(StateData* stateData);
     virtual ~MenuCharacterSelectionState();
 

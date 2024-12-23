@@ -206,3 +206,7 @@ void LevelGUI::updateHealth(int playerHealth) {
     health = playerHealth;
     this->livesText.setString("x" + std::to_string(health));
 }
+
+int LevelGUI::getScore() const {
+	return score;
+}

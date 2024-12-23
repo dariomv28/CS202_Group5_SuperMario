@@ -4,9 +4,7 @@
 #include "LevelManager.h"
 #include "DeathMenuState.h"
 #include "PauseMenuState.h"
-
-
-class MenuLevelState;
+#include "WinMenuState.h"
 
 class GameState : public State {
 private:
@@ -14,8 +12,11 @@ private:
     PauseMenuState* pauseMenu;
     DeathMenuState* deathMenu;
 
+    WinMenuState* winMenu;
+
+    PlayerManager* clonePlayer;
+
     int worldID, levelID;
-    int strartPlayerHp;
 public:
     GameState(StateData* stateData, int worldID, int levelID);
     virtual ~GameState();
@@ -25,10 +26,12 @@ public:
     void render(sf::RenderTarget* target = nullptr) override;
     void renderLevelManager(sf::RenderTarget* target);
 
+    void saveGame();
+
     void checkPause();
     void checkDeath();
-    int getHealth() const;
-    int getHealthStart() const;
+    void checkWin();
+
 
     int getWorld() const;
     int getLevel() const;

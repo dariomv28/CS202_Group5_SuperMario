@@ -99,7 +99,7 @@ void PauseMenuState::updateGUI()
     if (buttons[PauseMenu::BTN_MAINMENU]->isPressed())
     {
         this->gameState->endState();
-        this->stateData->userData->resetPlayer(gameState->getWorld());
+       // this->stateData->userData->resetPlayer(gameState->getWorld());
         this->endState();
     }
 }

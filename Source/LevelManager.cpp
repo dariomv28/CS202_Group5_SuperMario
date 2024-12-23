@@ -20,7 +20,6 @@ LevelManager::LevelManager(PlayerManager* player, sf::RenderWindow* window) {
 }
 
 LevelManager::~LevelManager() {
-    SaveGame();
     delete mapManager;
     delete levelGUI;
     delete eventMediator;
@@ -32,19 +31,9 @@ LevelManager::~LevelManager() {
     //delete movementComponent;
 }
 
-void LevelManager::SaveGame()
+int LevelManager::getScore()
 {
-	//- create a save file named "SaveGame.txt"
-	std::ofstream saveFile("SaveGame.txt");
-    
-    
-    // - Mario
-    player->Save(saveFile);
-
-    // -Map
-	mapManager->Save(saveFile);
-
-    saveFile.close();
+	return levelGUI->getScore();
 
 }
 
