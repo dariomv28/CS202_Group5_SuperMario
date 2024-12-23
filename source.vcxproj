@@ -136,6 +136,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Bowser.cpp" />
+    <ClCompile Include="Source\PeteyPiranha.cpp" />
     <ClCompile Include="Source\Rocket.cpp" />
     <ClCompile Include="Source\Character.cpp" />
     <ClCompile Include="Source\CloudBlock.cpp" />
@@ -203,6 +204,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Headers\Bowser.h" />
+    <ClInclude Include="Source\Headers\PeteyPiranha.h" />
     <ClInclude Include="Source\Headers\Rocket.h" />
     <ClInclude Include="Source\Headers\Character.h" />
     <ClInclude Include="Source\Headers\CloudBlock.h" />
