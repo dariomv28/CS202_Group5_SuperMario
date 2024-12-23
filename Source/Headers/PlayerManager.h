@@ -15,6 +15,18 @@ protected:
 
     std::unordered_map<std::string, sf::IntRect> allSpritesMario;
     std::unordered_map<std::string, sf::IntRect> allSpritesLuigi;
+
+    // Transformation
+    const float TRANSFORMATION_DURATION = 0.5f;
+    float transformationTimer;
+    bool isTransforming;
+
+    // Animation
+    std::string m_name;
+    std::string currentAction;
+    bool isAnimationInProgress;
+    std::unordered_map<std::string, sf::IntRect> spritesSheet;
+
 public:
     PlayerManager(sf::Vector2f position, sf::Vector2f size, int health, int speed);
     virtual ~PlayerManager();
@@ -36,12 +48,14 @@ public:
     virtual void removeBuff(std::string type);
 
     // Setters and Getters
-    virtual void setBig(bool big);
+    void setBig(bool big);
     bool getBig() const;
     int getHealth() const;
     void setHealth(int health);
     virtual void Save(std::ofstream& file);
 	virtual void Load(std::ifstream& file);
     virtual void getRemainInfo();
+
+	void updateHitboxSize();
 };
 
