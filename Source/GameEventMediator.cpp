@@ -54,6 +54,10 @@ void GameEventMediator::addAudioSystem(AudioSystem* audio) {
 	audio->setEventMediator(this);
 }
 
+void GameEventMediator::addWindow(sf::RenderWindow* window) {
+	this->window = window;
+}
+
 /*void GameEventMediator::addLivingEntity(LivingEntity* livingEntity) {
 	this->livingEntity = livingEntity;
 	livingEntity->setEventMediator(this);

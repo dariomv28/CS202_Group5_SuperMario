@@ -5,12 +5,12 @@ class FireBuff :
 {
 private:
     sf::Clock reloadTimer;
-    const float reloadTime = 0.5f;
+    const float reloadTime = 0.35f;
     int direction;
 public:
     FireBuff();
 	virtual ~FireBuff();
 
-	void applyBuff(PlayerManager* player, GameEventMediator* eventMediator) override;
+	void applyBuff(GameEventMediator* eventMediator) override;
 };
 

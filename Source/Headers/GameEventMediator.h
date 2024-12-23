@@ -23,6 +23,7 @@ private:
 	std::vector<PowerUpObject*>* PowerUps;
 	LevelGUI* levelGUI;
 	AudioSystem* audio;
+	sf::RenderWindow* window;
 	//MovementComponent* movementComponent;
 	//LivingEntity* livingEntity;
 
@@ -37,8 +38,11 @@ public:
 	void addLevelGUI(LevelGUI* levelGUI);
 	void addPowerUp(std::vector<PowerUpObject*>& PowerUps);
 	void addAudioSystem(AudioSystem* audio);
+	void addWindow(sf::RenderWindow* window);
 	//void addMovementComponent(MovementComponent* movementComponent);
 	//void addLivingEntity(LivingEntity* livingEntity);
+
+	sf::RenderWindow*& getWindow() { return window; }
 
 	// Physics Engine functions
 	void applyExternalForce(LivingEntity* entity, const float& dt);

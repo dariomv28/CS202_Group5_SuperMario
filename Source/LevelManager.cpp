@@ -56,6 +56,7 @@ void LevelManager::initGameEventMediator() {
     eventMediator->addLevelGUI(levelGUI);
     eventMediator->addPowerUp(PowerUps);
     eventMediator->addAudioSystem(audio);
+    eventMediator->addWindow(window);
     //eventMediator->addMovementComponent(movementComponent);
     //eventMediator->addLivingEntity(livingEntity);
 }
