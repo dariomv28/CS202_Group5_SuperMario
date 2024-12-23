@@ -210,7 +210,7 @@ void PlayerManager::init() {
 void PlayerManager::update(const float& dt) {
 	updateAnimation(dt);
 	updateHitboxSize();
-	//std::cout << "Position x: " << position.x << " Position y: " << position.y << std::endl;
+	std::cout << "Position x: " << position.x << " Position y: " << position.y << std::endl;
 	updateVelocity(dt);
 	eventMediator->applyExternalForce(this, dt);
 	move(dt);

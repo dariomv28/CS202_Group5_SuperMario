@@ -119,12 +119,7 @@ void LevelManager::render(sf::RenderTarget* target) {
 }
 
 void LevelManager::initializeChatSystem() {
-    // Create LLM service
-//<<<<<<< HEAD
-//	LLMService* llmService = new OllamaLLMService();
-//=======
     LLMService* llmService = new OllamaService();
-//>>>>>>> 896ddaff63316a2ac62201991f6a83440c3452ce
 
     // Create chat component
     chatComponent = new ChatComponent(llmService);
