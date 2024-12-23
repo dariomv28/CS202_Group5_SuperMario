@@ -24,6 +24,7 @@ private:
 	LevelGUI* levelGUI;
 	AudioSystem* audio;
 	sf::RenderWindow* window;
+	bool finishedLevel;
 	//MovementComponent* movementComponent;
 	//LivingEntity* livingEntity;
 
@@ -39,6 +40,7 @@ public:
 	void addPowerUp(std::vector<PowerUpObject*>& PowerUps);
 	void addAudioSystem(AudioSystem* audio);
 	void addWindow(sf::RenderWindow* window);
+	void addfinishedLevel(bool* finishedLevel);
 	//void addMovementComponent(MovementComponent* movementComponent);
 	//void addLivingEntity(LivingEntity* livingEntity);
 
@@ -52,6 +54,10 @@ public:
 	void updateInput(const float& dt);
 	void updateEvents(const float& dt);
 	void updateLevelGUI(const sf::View& view);
+
+	//Setters and getters
+	void setFinishedLevel(bool finishedLevel) { this->finishedLevel = finishedLevel; }
+	bool getFinishedLevel() { return finishedLevel; }
 
 	// LevelGUI events
 	void increaseCoins(int numCoins);

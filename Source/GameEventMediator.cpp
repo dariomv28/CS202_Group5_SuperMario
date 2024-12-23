@@ -58,6 +58,12 @@ void GameEventMediator::addWindow(sf::RenderWindow* window) {
 	this->window = window;
 }
 
+void GameEventMediator::addfinishedLevel(bool* finishedLevel) {
+	this->finishedLevel = finishedLevel;
+}
+
+
+
 /*void GameEventMediator::addLivingEntity(LivingEntity* livingEntity) {
 	this->livingEntity = livingEntity;
 	livingEntity->setEventMediator(this);

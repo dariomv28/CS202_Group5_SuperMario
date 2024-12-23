@@ -27,6 +27,7 @@ protected:
     PhysicsEngine* physicsEngine;
     AudioSystem* audio;
     bool firstUpdate;
+    bool* finishedLevel;
 
     ChatComponent* chatComponent = nullptr;
 	LLMService* llmService = nullptr;
@@ -41,6 +42,7 @@ public:
     virtual void update(const float& dt);
     virtual void render(sf::RenderTarget* target = nullptr);
     int getScore();
+    bool getFinishedLevel() { return *finishedLevel; }
 
     void initializeChatSystem();
 };

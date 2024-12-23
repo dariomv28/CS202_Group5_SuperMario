@@ -1,5 +1,6 @@
-#pragma once 
+#pragma once
 
+#include "WinFlag.h"
 #include "Enemy.h"
 #include "Mario.h"
 #include "Block.h"

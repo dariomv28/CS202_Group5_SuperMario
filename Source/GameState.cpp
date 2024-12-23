@@ -134,11 +134,9 @@ void GameState::saveGame() {
 }
 
 void GameState::checkWin() {
-    if (clonePlayer->getPosition().x > 1000000) {
+    if (levelManager->getFinishedLevel()) {
         saveGame();
         this->states->push(new WinMenuState(this->stateData, this));
-
-
 	}
 }
 

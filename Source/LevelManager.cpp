@@ -6,6 +6,8 @@ LevelManager::LevelManager(PlayerManager* player, sf::RenderWindow* window) {
 	this->window = window;
     this->player = player;
 
+    finishedLevel = new bool(false);
+
 	firstUpdate = true;
     mapManager = new MapManager(window);
    
@@ -46,6 +48,7 @@ void LevelManager::initGameEventMediator() {
     eventMediator->addPowerUp(PowerUps);
     eventMediator->addAudioSystem(audio);
     eventMediator->addWindow(window);
+    eventMediator->addfinishedLevel(finishedLevel);
     //eventMediator->addMovementComponent(movementComponent);
     //eventMediator->addLivingEntity(livingEntity);
 }
