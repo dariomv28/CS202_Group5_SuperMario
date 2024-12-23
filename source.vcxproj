@@ -136,6 +136,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Bowser.cpp" />
+    <ClCompile Include="Source\LeaderboardState.cpp" />
     <ClCompile Include="Source\Rocket.cpp" />
     <ClCompile Include="Source\Character.cpp" />
     <ClCompile Include="Source\CloudBlock.cpp" />
@@ -171,6 +172,7 @@
     <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\GameObject.cpp" />
     <ClCompile Include="Source\MapManager.cpp" />
+    <ClCompile Include="Source\SettingState.cpp" />
     <ClCompile Include="Source\W1_LV1.cpp" />
     <ClCompile Include="Source\W2_LV1.cpp" />
     <ClCompile Include="Source\W3_LV1.cpp" />
@@ -202,6 +204,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Headers\Bowser.h" />
+    <ClInclude Include="Source\Headers\LeaderboardState.h" />
     <ClInclude Include="Source\Headers\Rocket.h" />
     <ClInclude Include="Source\Headers\Character.h" />
     <ClInclude Include="Source\Headers\CloudBlock.h" />
@@ -239,6 +242,7 @@
     <ClInclude Include="Source\Headers\Enemy.h" />
     <ClInclude Include="Source\Headers\GameObject.h" />
     <ClInclude Include="Source\Headers\MapManager.h" />
+    <ClInclude Include="Source\Headers\SettingState.h" />
     <ClInclude Include="Source\Headers\W1_LV1.h" />
     <ClInclude Include="Source\Headers\W2_LV1.h" />
     <ClInclude Include="Source\Headers\W3_LV1.h" />
