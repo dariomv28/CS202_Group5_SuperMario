@@ -247,6 +247,8 @@ void MapManager::convert_sketch(const unsigned int world, const unsigned int lev
 				else if (pixel.r == 255 && pixel.g == 255 && pixel.b < 40) {
 					Blocks.push_back(new CloudBlock(sf::Vector2f(CELL_SIZE*a, CELL_SIZE*b), sf::Vector2f(CELL_SIZE*4, CELL_SIZE), "cloudblock", (float) pixel.b/10));
 				}
+				else if (pixel == sf::Color(255, 255, 255))
+					Blocks.push_back(new WinFlag(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "win_flag"));
 				//Power Ups
 				else if (pixel == sf::Color(255, 177, 13)) {
 					PowerUp.push_back(new Coin(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE - 10, CELL_SIZE), "coin"));

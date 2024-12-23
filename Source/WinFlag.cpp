@@ -16,14 +16,39 @@ WinFlag::WinFlag(sf::Vector2f position, sf::Vector2f size, std::string name) :
 
     initSpritesSheet();
 
-    entitySprite.setTexture(flagTexture);
+    /*entitySprite.setTexture(flagTexture);
     entitySprite.setTextureRect(spritesSheet[FlagState::SLIDING][0]);
+
+    position.x += 25.f;
     entitySprite.setPosition(position);
     entitySprite.setScale(size.x / entitySprite.getGlobalBounds().width, size.y / entitySprite.getGlobalBounds().height);
 
     originalPosition = entitySprite.getPosition();
     targetPosition = originalPosition;
-    targetPosition.y = 768.f - size.y;
+    targetPosition.y = 300.f;*/
+
+    // Initialize flag
+    entitySprite.setTexture(flagTexture);
+    entitySprite.setTextureRect(spritesSheet[FlagState::SLIDING][0]);
+    position.x += 25.f;
+    entitySprite.setPosition(position);
+    entitySprite.setScale(size.x / entitySprite.getGlobalBounds().width, size.y / entitySprite.getGlobalBounds().height);
+
+    // Initialize pole
+    poleSprite.setTexture(flagTexture);
+    poleSprite.setTextureRect(sf::IntRect(42, 138, 2, 16));
+    poleSprite.setPosition(position.x - 3.f, position.y - 470.f);
+    poleSprite.setScale(8, 34);
+
+    // Initialize top sphere
+    sphereSprite.setTexture(flagTexture);
+    sphereSprite.setTextureRect(sf::IntRect(5, 129, 8, 8));
+    sphereSprite.setPosition(position.x - 11.f, position.y - 490.f);
+    sphereSprite.setScale(4, 4);
+
+    originalPosition = entitySprite.getPosition();
+    targetPosition = originalPosition;
+    targetPosition.y = 250.f; 
 }
 
 WinFlag::~WinFlag()
@@ -47,7 +72,7 @@ void WinFlag::update(const float& dt) {
             animationTimer += dt;
 
             float progress = std::min(animationTimer / SLIDE_DURATION, 1.0f);
-            float newY = originalPosition.y + (targetPosition.y - originalPosition.y) * progress;
+            float newY = originalPosition.y - abs((targetPosition.y - originalPosition.y)) * progress;
             entitySprite.setPosition(entitySprite.getPosition().x, newY);
 
             float frameTime = fmod(animationTimer, ANIMATION_FRAME_DURATION * 2);  
@@ -80,4 +105,7 @@ void WinFlag::reactToCollison(int collidedSide) {
 
 void WinFlag::render(sf::RenderTarget* target) {
     target->draw(entitySprite);
+    target->draw(poleSprite);
+    target->draw(sphereSprite);
+    target->draw(hitbox);
 }
