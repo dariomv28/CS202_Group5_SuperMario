@@ -62,6 +62,9 @@ void GameEventMediator::addfinishedLevel(bool* finishedLevel) {
 	this->finishedLevel = finishedLevel;
 }
 
+void GameEventMediator::setFinishedLevel(bool finishedLevel) {
+	*this->finishedLevel = finishedLevel;
+}
 
 
 /*void GameEventMediator::addLivingEntity(LivingEntity* livingEntity) {
@@ -105,6 +108,7 @@ void GameEventMediator::updateInput(const float& dt) {
 
 void GameEventMediator::updateEvents(const float& dt) {
 	// Update events of the objects by themselves
+
 	player->update(dt);
 	for (auto& enemy : *enemies) {
 		enemy->update(dt);

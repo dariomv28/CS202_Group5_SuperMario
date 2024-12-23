@@ -9,6 +9,8 @@ W1_LV1::W1_LV1(PlayerManager* player, sf::RenderWindow *window):
 	// Convert the sketch of World1 to the game
 	mapManager->convert_sketch(1,1, Enemies, Blocks, PowerUps, player);
 
+	//Blocks.push_back(new WinFlag(sf::Vector2f(1200.f, 768.0f), sf::Vector2f(64.f, 64.f), "win_flag"));
+
     // Add enemies to the game with specific boundaries
 
 	Enemies.push_back(new Koopa(sf::Vector2f(700.0f, 768.0f), sf::Vector2f(64.f, 64.f)));

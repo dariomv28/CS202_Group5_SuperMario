@@ -1,7 +1,7 @@
 #include "Headers/WinFlag.h"
 
 WinFlag::WinFlag(sf::Vector2f position, sf::Vector2f size, std::string name) :
-	Block(position, size, name)
+    Block(position, size, name)
 {
     animationState = FlagState::IDLE;
     isAnimating = false;
@@ -48,7 +48,8 @@ WinFlag::WinFlag(sf::Vector2f position, sf::Vector2f size, std::string name) :
 
     originalPosition = entitySprite.getPosition();
     targetPosition = originalPosition;
-    targetPosition.y = 250.f; 
+    targetPosition.y = position.y - 470.f;
+
 }
 
 WinFlag::~WinFlag()
@@ -73,6 +74,12 @@ void WinFlag::update(const float& dt) {
 
             float progress = std::min(animationTimer / SLIDE_DURATION, 1.0f);
             float newY = originalPosition.y - abs((targetPosition.y - originalPosition.y)) * progress;
+            if (newY == targetPosition.y) {
+				isAnimating = false;
+				animationState = FlagState::COMPLETED;
+                return;
+			}
+            
             entitySprite.setPosition(entitySprite.getPosition().x, newY);
 
             float frameTime = fmod(animationTimer, ANIMATION_FRAME_DURATION * 2);  
@@ -81,6 +88,7 @@ void WinFlag::update(const float& dt) {
 
             if (progress >= 4.0f) {
                 isAnimating = false;
+
                 animationState = FlagState::COMPLETED;
             }
         }

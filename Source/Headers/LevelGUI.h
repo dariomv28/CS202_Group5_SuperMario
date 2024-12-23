@@ -38,11 +38,13 @@ public:
     void updatePosition(const sf::View& view);
     void updateTime();
     void update(const sf::View& view);
+    void updateFinalScore(const sf::View& view);
 
     void render(sf::RenderTarget* target);
     void increaseCoins(int numCoins);
     void increaseScore(int numScore);
     void updateHealth(int playerHealth);
     int getScore() const;
+    int getCoins() const;
 
 };

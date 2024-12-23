@@ -80,7 +80,6 @@ void DeathMenuState::updateGUI()
     updateBackground();
     updateButtonHover(questionText, mousePosView);
 
-    std::cout << "DeathMenuState::updateGUI() " << getQuit() << '\n';
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
 		this->gameState->endState();
         this->endState();

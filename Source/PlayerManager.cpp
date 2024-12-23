@@ -210,7 +210,6 @@ void PlayerManager::init() {
 void PlayerManager::update(const float& dt) {
 	updateAnimation(dt);
 	updateHitboxSize();
-	std::cout << "Position x: " << position.x << " Position y: " << position.y << std::endl;
 	updateVelocity(dt);
 	eventMediator->applyExternalForce(this, dt);
 	move(dt);
@@ -222,7 +221,6 @@ void PlayerManager::update(const float& dt) {
 void PlayerManager::render(sf::RenderTarget* target) {
 	if (target) {
 		target->draw(entitySprite);
-		//std::cout << this->getOnGround() << std::endl;
 	}
 	else {
 		std::cerr << "Render target is null!" << std::endl;

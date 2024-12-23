@@ -53,21 +53,9 @@ void GameState::reloadLevel() {
     else if (worldLevel == "W3_LV2") {
 		levelManager = new W3_LV2(clonePlayer, window);
 	}
-	else if (worldLevel == "W3_LV3") {
-		levelManager = new W3_LV3(clonePlayer, window);
-	}
-    //else if (worldID == 4)
-    //{
-    //    // Continue state
-    //    std::ifstream saveFile("SaveGame.txt");
-    //    int currentWorld;
-    //    int currentLevel;
-    //    saveFile >> currentWorld;
-    //    saveFile >> currentLevel;
-    //    saveFile.close();
-
-    //    levelManager = new W4(this->stateData->userData->getPlayer(currentWorld), window);
-    //}
+    else if (worldLevel == "W3_LV3") {
+        levelManager = new W3_LV3(clonePlayer, window);
+    }
 	else {
 		cerr << "Invalid level" << endl;
 	}
@@ -75,7 +63,6 @@ void GameState::reloadLevel() {
 }
 
 void GameState::update(const float& dt) {
-    std::cout << getQuit() << '\n';
     if (levelManager) {
 		levelManager->update(dt);
     }
@@ -131,10 +118,12 @@ void GameState::saveGame() {
     this->stateData->userData->setScore(worldID, levelID, levelManager->getScore());
 
     //Save the data
+    this->stateData->userData->saveData();
 }
 
 void GameState::checkWin() {
     if (levelManager->getFinishedLevel()) {
+        levelManager->updateFinalScore();
         saveGame();
         this->states->push(new WinMenuState(this->stateData, this));
 	}

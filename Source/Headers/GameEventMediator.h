@@ -24,7 +24,7 @@ private:
 	LevelGUI* levelGUI;
 	AudioSystem* audio;
 	sf::RenderWindow* window;
-	bool finishedLevel;
+	bool* finishedLevel;
 	//MovementComponent* movementComponent;
 	//LivingEntity* livingEntity;
 
@@ -56,7 +56,7 @@ public:
 	void updateLevelGUI(const sf::View& view);
 
 	//Setters and getters
-	void setFinishedLevel(bool finishedLevel) { this->finishedLevel = finishedLevel; }
+	void setFinishedLevel(bool finishedLevel);
 	bool getFinishedLevel() { return finishedLevel; }
 
 	// LevelGUI events

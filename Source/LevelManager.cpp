@@ -33,6 +33,10 @@ LevelManager::~LevelManager() {
     //delete movementComponent;
 }
 
+void LevelManager::updateFinalScore() {
+	levelGUI->updateFinalScore(window->getView());
+}
+
 int LevelManager::getScore()
 {
 	return levelGUI->getScore();
@@ -54,6 +58,8 @@ void LevelManager::initGameEventMediator() {
 }
 
 void LevelManager::update(const float& dt) {
+    //std::cout << "LevelManager::update " << *finishedLevel << std::endl;
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Tab)) {
         static sf::Clock keyTimer;
         if (keyTimer.getElapsedTime().asMilliseconds() > 300)
