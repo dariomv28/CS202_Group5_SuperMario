@@ -35,7 +35,7 @@ public:
     virtual ~DeathMenuState();
 
     void updateGUI();
-    void update(const float& dt);
+    void update(const float& dt, const sf::Event& event);
     void render(sf::RenderTarget* target);
 };
 

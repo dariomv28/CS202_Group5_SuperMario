@@ -119,7 +119,7 @@ void MyApp::update()
 			this->states.pop();
 			return;
 		}
-		this->states.top()->update(this->dt);
+		this->states.top()->update(this->dt, sfEvent);
 		
 	}
 	// End the window

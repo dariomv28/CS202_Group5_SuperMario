@@ -62,7 +62,7 @@ void GameState::reloadLevel() {
  
 }
 
-void GameState::update(const float& dt) {
+void GameState::update(const float& dt, const sf::Event& event) {
     if (levelManager) {
 		levelManager->update(dt);
     }

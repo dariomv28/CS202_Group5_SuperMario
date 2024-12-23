@@ -49,7 +49,7 @@ public:
 	virtual void endState();
 		
 	virtual void updateMousePosition();
-	virtual void update(const float& dt) = 0;
+	virtual void update(const float& dt, const sf::Event& event) = 0;
 	virtual void render(sf::RenderTarget* target = nullptr) = 0;
 	std::string getNameCharacter() const;
 	void setNameCharacter(const std::string& name);

@@ -108,7 +108,7 @@ void PauseMenuState::updateGUI()
     }
 }
 
-void PauseMenuState::update(const float& dt)
+void PauseMenuState::update(const float& dt, const sf::Event& event)
 {
     updateBackground();
     updateButtonPositions();

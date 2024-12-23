@@ -159,7 +159,7 @@ void MenuLevelState::updateGUI()
     }
 }
 
-void MenuLevelState::update(const float& dt)
+void MenuLevelState::update(const float& dt, const sf::Event& event)
 {
     //Defaut view
     window->setView(window->getDefaultView());

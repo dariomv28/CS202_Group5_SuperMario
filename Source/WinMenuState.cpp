@@ -74,7 +74,7 @@ void WinMenuState::updateGUI() {
 	}
 }
 
-void WinMenuState::update(const float& dt) {
+void WinMenuState::update(const float& dt, const sf::Event& event) {
 	updateMousePosition();
 	updateGUI();
 }

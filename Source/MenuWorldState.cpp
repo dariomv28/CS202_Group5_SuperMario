@@ -113,7 +113,7 @@ void MenuWorldState::updateGUI()
 	}
 }
 
-void MenuWorldState::update(const float& dt)
+void MenuWorldState::update(const float& dt, const sf::Event& event)
 {
 	if (Continue)
 	{

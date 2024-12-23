@@ -88,7 +88,7 @@ void DeathMenuState::updateGUI()
 }
 
 
-void DeathMenuState::update(const float& dt)
+void DeathMenuState::update(const float& dt, const sf::Event& event)
 {
     updateMousePosition();
     updateGUI();
