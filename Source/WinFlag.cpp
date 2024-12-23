@@ -1,7 +1,7 @@
 #include "Headers/WinFlag.h"
 
 WinFlag::WinFlag(sf::Vector2f position, sf::Vector2f size, std::string name) :
-	Block(position, size, name)
+    Block(position, size, name)
 {
     animationState = FlagState::IDLE;
     isAnimating = false;
@@ -48,7 +48,8 @@ WinFlag::WinFlag(sf::Vector2f position, sf::Vector2f size, std::string name) :
 
     originalPosition = entitySprite.getPosition();
     targetPosition = originalPosition;
-    targetPosition.y = 250.f; 
+    targetPosition.y = position.y - 470.f;
+
 }
 
 WinFlag::~WinFlag()
