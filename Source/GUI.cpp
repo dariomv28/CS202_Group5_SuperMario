@@ -103,6 +103,15 @@ namespace GUI
 	void TextButton::update(const sf::Vector2i mousePos)
 	{
 		/* Update the booleans for hover and pressed */
+		//If the button is disabled, set it transparent grey
+		if (disable)
+		{
+			this->shape.setFillColor(sf::Color(100, 100, 100, 150));
+			//this->text.setFillColor(sf::Color(100, 100, 100, 255));
+			this->shape.setOutlineColor(sf::Color(100, 100, 100, 150));
+			return;
+		}
+
 
 		//Idle
 		this->buttonState = BTN_IDLE;

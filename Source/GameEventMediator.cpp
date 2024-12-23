@@ -54,6 +54,19 @@ void GameEventMediator::addAudioSystem(AudioSystem* audio) {
 	audio->setEventMediator(this);
 }
 
+void GameEventMediator::addWindow(sf::RenderWindow* window) {
+	this->window = window;
+}
+
+void GameEventMediator::addfinishedLevel(bool* finishedLevel) {
+	this->finishedLevel = finishedLevel;
+}
+
+void GameEventMediator::setFinishedLevel(bool finishedLevel) {
+	*this->finishedLevel = finishedLevel;
+}
+
+
 /*void GameEventMediator::addLivingEntity(LivingEntity* livingEntity) {
 	this->livingEntity = livingEntity;
 	livingEntity->setEventMediator(this);
@@ -95,6 +108,7 @@ void GameEventMediator::updateInput(const float& dt) {
 
 void GameEventMediator::updateEvents(const float& dt) {
 	// Update events of the objects by themselves
+
 	player->update(dt);
 	for (auto& enemy : *enemies) {
 		enemy->update(dt);
@@ -151,6 +165,12 @@ void GameEventMediator::pushPlayerLeft() {
 
 void GameEventMediator::pushPlayerRight() {
 	player->setVelocity(sf::Vector2f(500.0f, player->getVelocity().y));
+}
+
+void GameEventMediator::pushPlayerUp() {
+	float horizontalForce = -300.0f;
+	float verticalForce = -500.0f;
+	player->setVelocity(sf::Vector2f(horizontalForce, verticalForce));
 }
 
 void GameEventMediator::pushPlayerUpExtra() {

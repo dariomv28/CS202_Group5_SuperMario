@@ -3,6 +3,8 @@
 #include "LevelManager.h"
 #include "Goomba.h"
 #include "Koopa.h"
+#include "PeteyPiranha.h"
+#include "Heriss.h"
 
 class W1_LV1 : public LevelManager {
 public:

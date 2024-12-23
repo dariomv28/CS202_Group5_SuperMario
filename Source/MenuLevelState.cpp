@@ -10,6 +10,22 @@ MenuLevelState::MenuLevelState(StateData* stateData, int world) : MainMenuState(
 	transitionAlpha = 0.0f;
 }
 
+MenuLevelState::MenuLevelState(StateData* stateData, int world, bool Continue) : MainMenuState(stateData)
+{
+	// continue old world
+	std::ifstream saveFile("SaveGame.txt");
+	int currentWorld, currentLevel;
+	saveFile >> currentWorld;
+	saveFile >> currentLevel;
+	saveFile.close();
+
+	this->Continue = Continue;
+	this->world = world;
+	this->level = currentLevel;
+	transitionAlpha = 0.0f;
+
+}
+
 MenuLevelState::~MenuLevelState()
 {
 }
@@ -83,6 +99,8 @@ void MenuLevelState::initButtons()
 }
 
 void MenuLevelState::updateTransitionEffect(const float& dt) {
+
+	//std::cerr << level << std::endl;
 	if (transitioningOut) {
 		transitionAlpha += dt * 255.f * 2.f;
 		if (transitionAlpha >= 255.f) {
@@ -117,8 +135,8 @@ void MenuLevelState::updateGUI()
     }
 
     // If user hasn't completed the previous level, disable these buttons
-	// buttons[BTN_LEVEL2]->setDisable(!this->stateData->userData->getCompleted(world, 1));
-	// buttons[BTN_LEVEL3]->setDisable(!this->stateData->userData->getCompleted(world, 2));
+	buttons[BTN_LEVEL2]->setDisable(!this->stateData->userData->getCompleted(world, 1));
+	buttons[BTN_LEVEL3]->setDisable(!this->stateData->userData->getCompleted(world, 2));
     
     // Existing mouse press handlers
     if (buttons[BTN_LEVEL1]->isPressed())
@@ -145,6 +163,15 @@ void MenuLevelState::update(const float& dt)
 {
     //Defaut view
     window->setView(window->getDefaultView());
+
+	if (Continue)
+	{
+		this->Continue = false;
+		transitioningOut = true;
+		updateTransitionEffect(dt);
+		return;
+	}
+
     updateMousePosition();
     updateGUI();
 	updateTransitionEffect(dt);

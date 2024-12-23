@@ -6,6 +6,8 @@ LevelManager::LevelManager(PlayerManager* player, sf::RenderWindow* window) {
 	this->window = window;
     this->player = player;
 
+    finishedLevel = new bool(false);
+
 	firstUpdate = true;
     mapManager = new MapManager(window);
    
@@ -20,7 +22,6 @@ LevelManager::LevelManager(PlayerManager* player, sf::RenderWindow* window) {
 }
 
 LevelManager::~LevelManager() {
-    SaveGame();
     delete mapManager;
     delete levelGUI;
     delete eventMediator;
@@ -32,19 +33,13 @@ LevelManager::~LevelManager() {
     //delete movementComponent;
 }
 
-void LevelManager::SaveGame()
+void LevelManager::updateFinalScore() {
+	levelGUI->updateFinalScore(window->getView());
+}
+
+int LevelManager::getScore()
 {
-	//- create a save file named "SaveGame.txt"
-	std::ofstream saveFile("SaveGame.txt");
-    
-    
-    // - Mario
-    player->Save(saveFile);
-
-    // -Map
-	mapManager->Save(saveFile);
-
-    saveFile.close();
+	return levelGUI->getScore();
 
 }
 
@@ -56,11 +51,15 @@ void LevelManager::initGameEventMediator() {
     eventMediator->addLevelGUI(levelGUI);
     eventMediator->addPowerUp(PowerUps);
     eventMediator->addAudioSystem(audio);
+    eventMediator->addWindow(window);
+    eventMediator->addfinishedLevel(finishedLevel);
     //eventMediator->addMovementComponent(movementComponent);
     //eventMediator->addLivingEntity(livingEntity);
 }
 
 void LevelManager::update(const float& dt) {
+    //std::cout << "LevelManager::update " << *finishedLevel << std::endl;
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Tab)) {
         static sf::Clock keyTimer;
         if (keyTimer.getElapsedTime().asMilliseconds() > 300)
@@ -129,12 +128,7 @@ void LevelManager::render(sf::RenderTarget* target) {
 }
 
 void LevelManager::initializeChatSystem() {
-    // Create LLM service
-//<<<<<<< HEAD
-//	LLMService* llmService = new OllamaLLMService();
-//=======
     LLMService* llmService = new OllamaService();
-//>>>>>>> 896ddaff63316a2ac62201991f6a83440c3452ce
 
     // Create chat component
     chatComponent = new ChatComponent(llmService);

@@ -50,7 +50,7 @@ void PauseMenuState::initButtons()
     y += btn_Height * 1.5;
     buttons[PauseMenu::BTN_SAVEGAME] = new GUI::TextButton(false,
         x, y, btn_Width, btn_Height,
-        &font, "SAVE GAME", btn_CharSize,
+        &font, "RETRY", btn_CharSize,
         textIdleColor, textHoverColor, textActiveColor,
         idleColor, hoverColor, activeColor,
         sf::Color(255, 255, 255, 50), sf::Color(255, 255, 255, 100)
@@ -59,7 +59,7 @@ void PauseMenuState::initButtons()
     y += btn_Height * 1.5;
     buttons[PauseMenu::BTN_MAINMENU] = new GUI::TextButton(false,
         x, y, btn_Width, btn_Height,
-        &font, "MAIN MENU", btn_CharSize,
+        &font, "LEVEL MENU", btn_CharSize,
         textIdleColor, textHoverColor, textActiveColor,
         idleColor, hoverColor, activeColor,
         sf::Color(255, 255, 255, 50), sf::Color(255, 255, 255, 100)
@@ -95,11 +95,15 @@ void PauseMenuState::updateGUI()
     if (buttons[PauseMenu::BTN_CONTINUE]->isPressed())
     {
         endState();
-    }
+    } else if (buttons[PauseMenu::BTN_SAVEGAME]->isPressed())
+	{
+		this->gameState->reloadLevel();
+		this->endState();
+	}
     if (buttons[PauseMenu::BTN_MAINMENU]->isPressed())
     {
         this->gameState->endState();
-        this->stateData->userData->resetPlayer(gameState->getWorld());
+       // this->stateData->userData->resetPlayer(gameState->getWorld());
         this->endState();
     }
 }

@@ -6,14 +6,14 @@
 Luigi::Luigi() : PlayerManager(sf::Vector2f(0, 0), sf::Vector2f(CELL_SIZE, CELL_SIZE), 4, 30.f)
 {
     animationComponent = nullptr;
-    movementComponent = new MovementComponent(30.f, 4.0f, 1, -1400.f);
+    movementComponent = new MovementComponent(30.f, 4.0f, 1, -1450.f);
     init();
 }
 
 Luigi::Luigi(sf::Vector2f position, sf::Vector2f size, int health, int speed)
     : PlayerManager(position, size, health, speed) {
     animationComponent = nullptr;
-    movementComponent = new MovementComponent(speed, 4.0f, 1, -1400.f);
+    movementComponent = new MovementComponent(speed, 4.0f, 1, -1450.f);
     init();
 }
 

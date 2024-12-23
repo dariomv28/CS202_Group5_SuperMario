@@ -30,9 +30,9 @@ void Bullet::initSpritesSheet()
 
 void Bullet::update(const float& dt) {
 	updateAnimation(dt);
-	sf::Vector2f gravity = sf::Vector2f(0.f, 5000.f);
-	sf::Vector2f combinedVelocity = velocity + gravity*dt;
-	this->setPosition(this->getPosition() + combinedVelocity * dt);
+	//sf::Vector2f gravity = sf::Vector2f(0.f, 5000.f);
+	//sf::Vector2f combinedVelocity = velocity + gravity*dt;
+	this->setPosition(this->getPosition() + velocity * dt);
 
 }
 
@@ -43,6 +43,10 @@ void Bullet::render(sf::RenderTarget* target)
 
 void Bullet::reactToCollison()
 {
+	if (sender == "enemy") {
+		eventMediator->addPlayerHealth(-1);
+		eventMediator->deletePowerUp(this);
+	}
 }
 
 void Bullet::reactToEnemyCollision(Enemy* enemy)

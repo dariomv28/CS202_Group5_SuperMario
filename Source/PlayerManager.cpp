@@ -197,6 +197,10 @@ PlayerManager::PlayerManager(sf::Vector2f position, sf::Vector2f size, int healt
 };
 
 PlayerManager::~PlayerManager() {
+	for (auto& buff : buffs) {
+		delete buff;
+	}
+	buffs.clear();
 }
 
 void PlayerManager::init() {
@@ -206,19 +210,17 @@ void PlayerManager::init() {
 void PlayerManager::update(const float& dt) {
 	updateAnimation(dt);
 	updateHitboxSize();
-	std::cout << "Position x: " << position.x << " Position y: " << position.y << std::endl;
 	updateVelocity(dt);
 	eventMediator->applyExternalForce(this, dt);
 	move(dt);
 	for (auto& buff : buffs) {
-		buff->applyBuff(this, this->eventMediator);
+		buff->applyBuff(this->eventMediator);
 	}
 }
 
 void PlayerManager::render(sf::RenderTarget* target) {
 	if (target) {
 		target->draw(entitySprite);
-		//std::cout << this->getOnGround() << std::endl;
 	}
 	else {
 		std::cerr << "Render target is null!" << std::endl;

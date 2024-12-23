@@ -23,6 +23,8 @@ private:
 	std::vector<PowerUpObject*>* PowerUps;
 	LevelGUI* levelGUI;
 	AudioSystem* audio;
+	sf::RenderWindow* window;
+	bool* finishedLevel;
 	//MovementComponent* movementComponent;
 	//LivingEntity* livingEntity;
 
@@ -37,8 +39,12 @@ public:
 	void addLevelGUI(LevelGUI* levelGUI);
 	void addPowerUp(std::vector<PowerUpObject*>& PowerUps);
 	void addAudioSystem(AudioSystem* audio);
+	void addWindow(sf::RenderWindow* window);
+	void addfinishedLevel(bool* finishedLevel);
 	//void addMovementComponent(MovementComponent* movementComponent);
 	//void addLivingEntity(LivingEntity* livingEntity);
+
+	sf::RenderWindow*& getWindow() { return window; }
 
 	// Physics Engine functions
 	void applyExternalForce(LivingEntity* entity, const float& dt);
@@ -48,6 +54,10 @@ public:
 	void updateInput(const float& dt);
 	void updateEvents(const float& dt);
 	void updateLevelGUI(const sf::View& view);
+
+	//Setters and getters
+	void setFinishedLevel(bool finishedLevel);
+	bool getFinishedLevel() { return finishedLevel; }
 
 	// LevelGUI events
 	void increaseCoins(int numCoins);
@@ -61,9 +71,11 @@ public:
 	void pushPlayerLeft();
 	void pushPlayerRight();
 	void pushPlayerUpExtra();
+	void pushPlayerUp();
 
 	// PowerUp events
 	void spawnPowerUp(PowerUpObject* PowerUp);
+	void spawnEnemy(Enemy* enemy);
 
 	// Object deletion functions
 	void defeatPlayer();

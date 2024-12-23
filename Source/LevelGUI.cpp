@@ -169,6 +169,13 @@ void LevelGUI::updateTime() {
     }
 }
 
+void LevelGUI::updateFinalScore(const sf::View& view) {
+	score += std::min(0, (999 - timeCount)*5);
+    score += coinsCollected * 100;
+    update(view);
+	//scoreLabel.setString("Score: " + std::to_string(score));
+}
+
 void LevelGUI::update(const sf::View& view) {
     //updateInfo();
     updatePosition(view);
@@ -205,4 +212,12 @@ void LevelGUI::updateHealth(int playerHealth) {
 
     health = playerHealth;
     this->livesText.setString("x" + std::to_string(health));
+}
+
+int LevelGUI::getScore() const {
+	return score;
+}
+
+int LevelGUI::getCoins() const {
+	return coinsCollected;
 }

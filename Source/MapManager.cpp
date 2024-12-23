@@ -247,6 +247,8 @@ void MapManager::convert_sketch(const unsigned int world, const unsigned int lev
 				else if (pixel.r == 255 && pixel.g == 255 && pixel.b < 40) {
 					Blocks.push_back(new CloudBlock(sf::Vector2f(CELL_SIZE*a, CELL_SIZE*b), sf::Vector2f(CELL_SIZE*4, CELL_SIZE), "cloudblock", (float) pixel.b/10));
 				}
+				else if (pixel == sf::Color(255, 255, 255))
+					Blocks.push_back(new WinFlag(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE, CELL_SIZE), "win_flag"));
 				//Power Ups
 				else if (pixel == sf::Color(255, 177, 13)) {
 					PowerUp.push_back(new Coin(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * b), sf::Vector2f(CELL_SIZE - 10, CELL_SIZE), "coin"));
@@ -269,52 +271,4 @@ void MapManager::convert_sketch(const unsigned int world, const unsigned int lev
 			}
 		}
 	}
-}
-
-void MapManager::Save(std::ofstream& file)
-{
-
-
-	if (file.is_open())
-	{
-		file << currentWorld << endl;
-		file << currentLevel << endl;
-
-		file << view_x << endl;
-		file << CurrentLeft << endl;
-		file << CurrentRight << endl;
-
-	}
-}
-
-void MapManager::Load(std::ifstream& file)
-{
-
-	if (file.is_open())
-	{
-		file >> currentWorld;
-		file >> currentLevel;
-
-		file >> view_x;
-		file >> CurrentLeft;
-		file >> CurrentRight;
-		View = sf::View(sf::FloatRect(view_x, 0, SCREEN_WIDTH, SCREEN_HEIGHT));
-
-	}
-	else
-	{
-		cerr << "Error: Unable to load the game" << endl;
-	}
-	
-	//std::ofstream TempFile("TempSaveGame.txt");
-	//std::string line;
-	//while (std::getline(file, line)) {
-	//	TempFile << line << std::endl;
-	//}
-
-	//TempFile.close();
-	//file.close();
-
-	//std::remove("SaveGame.txt");
-	//std::rename("TempSaveGame.txt", "SaveGame.txt");
 }

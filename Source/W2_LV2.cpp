@@ -56,5 +56,5 @@ W2_LV2::W2_LV2(PlayerManager* player, sf::RenderWindow* window) :
 }
 
 W2_LV2::~W2_LV2() {
-
+	
 }

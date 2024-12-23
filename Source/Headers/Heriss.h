@@ -1,12 +1,7 @@
 #pragma once
 #include "Enemy.h"
-#include "AnimationComponent.h"
-#include "MovementComponent.h"
-#include <SFML/Graphics.hpp>
-#include <unordered_map>
-#include <string>
 
-class Koopa : public Enemy {
+class Heriss : public Enemy {
 private:
     // Movement and positioning
     float walkSpeed;
@@ -14,8 +9,6 @@ private:
     float x_max;
 
     bool isAlive;
-    bool isShelled;
-    float shellTimer;
     float disappearDelay = 0.0f;
 
     // Animation sprite sheet
@@ -25,21 +18,17 @@ private:
     std::string currentAction;
     bool isAnimationInProgress;
 
-    // Initialization
-    virtual void initAnimations();
+    void initAnimations();
 
 public:
-    // Constructors
-    Koopa();
-    Koopa(sf::Vector2f position, sf::Vector2f size, float x_min = 32.0f, float x_max = 13416.0f);
-    
+    Heriss();
+    Heriss(sf::Vector2f position, sf::Vector2f size, float x_min, float x_max);
+
     void updateAnimation(const float& dt) override;
 
     // State getters and setters
     bool getIsAlive() const;
     void setIsAlive(bool alive);
-    bool getIsShelled() const;
-	void setIsShelled(bool shelled);
 
     // Update function
     void update(const float& dt) override;

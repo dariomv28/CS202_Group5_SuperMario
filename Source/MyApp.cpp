@@ -72,6 +72,7 @@ MyApp::MyApp()
 
 MyApp::~MyApp()
 {
+	stateData.userData->saveData();
 	delete this->window;
 
 	while (!this->states.empty()) {
@@ -111,13 +112,15 @@ void MyApp::update()
 
 	if (!this->states.empty())
 	{	
-		this->states.top()->update(this->dt);
 		if (this->states.top()->getQuit())
 		{
 			// std::cout << this->states.size() << "\n";
 			delete this->states.top();
 			this->states.pop();
+			return;
 		}
+		this->states.top()->update(this->dt);
+		
 	}
 	// End the window
 	else {

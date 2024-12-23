@@ -14,11 +14,14 @@ Mario::Mario(sf::Vector2f position, sf::Vector2f size, int health, int speed)
     : PlayerManager(position, size, health, speed) {
     animationComponent = nullptr;
     movementComponent = new MovementComponent(speed, 4.0f, 2, -900.f);
+
     init();
 }
 
+
+
 Mario::~Mario() {
-    delete animationComponent;
+   //elet   nimationComponen
 }
 
 void Mario::init() {

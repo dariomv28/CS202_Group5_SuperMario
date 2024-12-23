@@ -7,7 +7,7 @@ protected:
 	std::string type;
 public:
 	//PlayerBuff();
-	virtual void applyBuff(PlayerManager* player, GameEventMediator* eventMediator) = 0;
+	virtual void applyBuff(GameEventMediator* eventMediator) = 0;
 	std::string getType();
 };
 

@@ -190,6 +190,7 @@ void PhysicsEngine::resolveCollisionPlayerEnemy(PlayerManager* entity, std::vect
 void PhysicsEngine::resolveCollisionEnemyBlock(std::vector<Enemy*>& enemies, std::vector<Block*>& blocks, const float& dt) {
 	for (auto& enemy : enemies) {
 		for (auto& block : blocks) {
+			if (!block->getExist()) continue;
 			//Resolve the right side
 			Side Type = CollisionType(enemy, block);
 			
