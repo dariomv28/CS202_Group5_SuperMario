@@ -68,6 +68,7 @@ public:
 
 	// PowerUp events
 	void spawnPowerUp(PowerUpObject* PowerUp);
+	void spawnEnemy(Enemy* enemy);
 
 	// Object deletion functions
 	void defeatPlayer();

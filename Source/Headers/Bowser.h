@@ -37,6 +37,10 @@ public:
     void reactToPlayerCollision(int collidedSide) override;
     void reactToBlockCollision(int collidedSide) override;
 
+	//void summonMinions(); //Summon Goombas and Koopa
+	///void summonCircleFireballs();
+	//void summon
+
 	void setIsAlive(bool alive) override;
 	bool getIsAlive() const override;
 };

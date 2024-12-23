@@ -135,8 +135,8 @@ void MenuLevelState::updateGUI()
     }
 
     // If user hasn't completed the previous level, disable these buttons
-	 buttons[BTN_LEVEL2]->setDisable(!this->stateData->userData->getCompleted(world, 1));
-	 buttons[BTN_LEVEL3]->setDisable(!this->stateData->userData->getCompleted(world, 2));
+	// buttons[BTN_LEVEL2]->setDisable(!this->stateData->userData->getCompleted(world, 1));
+	// buttons[BTN_LEVEL3]->setDisable(!this->stateData->userData->getCompleted(world, 2));
     
     // Existing mouse press handlers
     if (buttons[BTN_LEVEL1]->isPressed())

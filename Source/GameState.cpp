@@ -108,6 +108,12 @@ void GameState::checkPause() {
 
 void GameState::checkDeath() {
 	if (clonePlayer->getHealth() <= 0) {
+        for (int i = 1; i < levelID; i++)
+        {
+			this->stateData->userData->setCompleted(worldID, i, false);
+            this->stateData->userData->setScore(worldID, i, 0); 
+		}
+        this->stateData->userData->resetPlayer(worldID);
 		this->states->push(new DeathMenuState(this->stateData, this));
 	}
 }
@@ -121,7 +127,7 @@ void GameState::saveGame() {
     this->stateData->userData->setPlayer(worldID, clonePlayer);
 
     //Set the level as completed and set the score
-    this->stateData->userData->setCompleted(worldID, levelID);
+    this->stateData->userData->setCompleted(worldID, levelID, true);
     this->stateData->userData->setScore(worldID, levelID, levelManager->getScore());
 
     //Save the data
