@@ -12,7 +12,7 @@ FireBuff::~FireBuff() {
 void FireBuff::applyBuff(GameEventMediator* eventMediator) {
 
 	//Check if user pressed F
-	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::F)) {
+	if (!sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 		return;
 	}
 	//Get the curent position of the mouse
