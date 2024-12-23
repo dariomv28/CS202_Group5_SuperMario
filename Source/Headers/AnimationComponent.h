@@ -19,6 +19,8 @@ public:
     size_t currentFrameIndex;
     float animationSpeed;
     float elapsedTime;
+
+    bool isAnimationComplete();
 };
 
 #endif

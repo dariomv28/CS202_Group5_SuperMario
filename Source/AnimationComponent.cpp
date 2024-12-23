@@ -36,6 +36,11 @@ void AnimationComponent::setAnimation(const std::string& animationName, const st
     }*/
 }
 
+bool AnimationComponent::isAnimationComplete() {
+    // Return true if we've reached the last frame
+    return currentFrameIndex >= currentAnimationFrames.size() - 1;
+}
+
 void AnimationComponent::setAnimationEnemies(const std::string& animationName, const std::unordered_map<std::string, sf::IntRect>& spritesSheet, float speed) {
     if (currentAnimationName == animationName) {
         //std::cout << "Animation already set: " << animationName << std::endl;

@@ -184,7 +184,7 @@ void Koopa::reactToPlayerCollision(int collidedSide) {
             this->setMoveLeft(true);
             eventMediator->pushPlayerRight();
         }
-        eventMediator->addPlayerHealth(-1);
+        // eventMediator->addPlayerHealth(-1);
     }
 }
 

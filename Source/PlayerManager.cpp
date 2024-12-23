@@ -4,7 +4,8 @@
 #include "Headers/FireBuff.h"
 
 PlayerManager::PlayerManager(sf::Vector2f position, sf::Vector2f size, int health, int speed)
-    : LivingEntity(position, size, health, speed) {
+    : LivingEntity(position, size, health, speed), currentAction("IDLE-"), isAnimationInProgress(false), transformationTimer(0.0f) {
+
     init();
     is_big = false;
     is_fire = false;
@@ -203,15 +204,217 @@ void PlayerManager::init() {
 }
 
 void PlayerManager::update(const float& dt) {
+	updateAnimation(dt);
+	updateHitboxSize();
+	std::cout << "Position x: " << position.x << " Position y: " << position.y << std::endl;
+	updateVelocity(dt);
+	eventMediator->applyExternalForce(this, dt);
+	move(dt);
+	for (auto& buff : buffs) {
+		buff->applyBuff(this, this->eventMediator);
+	}
 }
 
 void PlayerManager::render(sf::RenderTarget* target) {
+	if (target) {
+		target->draw(entitySprite);
+		//std::cout << this->getOnGround() << std::endl;
+	}
+	else {
+		std::cerr << "Render target is null!" << std::endl;
+	}
+}
+
+void PlayerManager::updateHitboxSize() {
+	if (is_big) {
+		if (currentAction == "JUMP-") {
+			hitbox.setSize(sf::Vector2f(80.f, 128.f));
+		}
+		else if (currentAction == "CROUCH-") {
+			hitbox.setSize(sf::Vector2f(64.f, 120.f));
+		}
+		else {
+			hitbox.setSize(sf::Vector2f(64.f, 122.f));
+		}
+	}
+	else {
+		hitbox.setSize(sf::Vector2f(64.f, 64.f));
+	}
+	hitbox.setPosition(position);
 }
 
 void PlayerManager::handleInput(const float& dt) {
+	// Reset movement flags
+	movementComponent->isMoveLeft = false;
+	movementComponent->isMoveRight = false;
+	movementComponent->isJump = false;
+
+	bool isWalking = false;
+	bool isRunning = false;
+	bool isCrouching = false;
+
+	// Simultaneous movement and jump handling
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+		movementComponent->isMoveLeft = true;
+		entitySprite.setScale(4.0f, 4.0f);
+		isWalking = true;
+		isMovingLeft = true;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+		movementComponent->isMoveRight = true;
+		entitySprite.setScale(4.0f, 4.0f);
+		isWalking = true;
+		isMovingLeft = false;
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+		if (is_big) {
+			currentAction = "CROUCH";
+			isAnimationInProgress = true;
+			isCrouching = true;
+		}
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) {
+		isRunning = true;
+	}
+
+	if (isRunning) {
+		movementComponent->maxVelocity = 4.0f * 100 + 150.0f;
+	}
+	else {
+		movementComponent->maxVelocity = 4.0f * 100;
+	}
+
+	// Improved jump handling
+	static bool spaceWasPressed = false;
+	bool spaceIsPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::Space) ||
+		sf::Keyboard::isKeyPressed(sf::Keyboard::W) ||
+		sf::Keyboard::isKeyPressed(sf::Keyboard::Up);
+
+	// Immediate jump request when space is first pressed
+	if (spaceIsPressed && !spaceWasPressed) {
+		if (movementComponent->getJumpsRemaining() > 0) {
+			eventMediator->playJumpSound();
+		}
+		movementComponent->isJump = true;
+		currentAction = "JUMP-";
+		isAnimationInProgress = true;
+
+		// Reset jump animation if needed
+		if (!movementComponent->onGround && movementComponent->getJumpsRemaining() > 0) {
+			animationComponent->currentFrameIndex = 0;
+			animationComponent->elapsedTime = 0;
+		}
+	}
+	spaceWasPressed = spaceIsPressed;
+
+	// Animation and action state management
+	if (currentAction != "JUMP-") {
+		if (isWalking && isRunning) {
+			currentAction = "RUN-";
+		}
+		else if (isWalking) {
+			currentAction = "WALK-";
+		}
+		else if (isCrouching) {
+			currentAction = "CROUCH-";
+		}
+		else {
+			currentAction = "IDLE-";
+		}
+	}
 }
 
 void PlayerManager::updateAnimation(const float& dt) {
+	if (isTransforming) {
+		transformationTimer += dt;
+
+		if (transformationTimer >= TRANSFORMATION_DURATION) {
+			isTransforming = false;
+			transformationTimer = 0.f;
+			currentAction = isMovingLeft ? "IDLER-" : "IDLE-";
+		}
+		else {
+			if (isMovingLeft) {
+				animationComponent->setAnimation("BECOME_BIGR-", spritesSheet, 0.2f, false);
+			}
+			else {
+				animationComponent->setAnimation("BECOME_BIG-", spritesSheet, 0.2f, false);
+			}
+		}
+
+		animationComponent->update(dt);
+		return;
+	}
+
+	std::string prefix = is_big ? "isBig_" : "";
+	bool animationSet = false;
+
+	if (currentAction == "JUMP-") {
+		// Use a faster animation speed to make sure we see the jump frames
+		if (isMovingLeft) {
+			animationComponent->setAnimation(prefix + "JUMPR-", spritesSheet, 0.2f, is_big);
+			animationSet = true;
+
+			// If the jump animation has completed and we're on the ground
+			if (animationComponent->currentFrameIndex == animationComponent->currentAnimationFrames.size() - 1
+				&& movementComponent->onGround) {
+				currentAction = "IDLER-";
+			}
+		}
+		else {
+			animationComponent->setAnimation(prefix + "JUMP-", spritesSheet, 0.2f, is_big);
+			animationSet = true;
+
+			// If the jump animation has completed and we're on the ground
+			if (animationComponent->currentFrameIndex == animationComponent->currentAnimationFrames.size() - 1
+				&& movementComponent->onGround) {
+				currentAction = "IDLE-";
+			}
+		}
+	}
+	else if (currentAction == "RUN-") {
+		if (isMovingLeft) {
+			animationComponent->setAnimation(prefix + "RUNR-", spritesSheet, 0.15f, is_big);
+			animationSet = true;
+		}
+		else {
+			animationComponent->setAnimation(prefix + "RUN-", spritesSheet, 0.15f, is_big);
+			animationSet = true;
+		}
+	}
+	else if (currentAction == "WALK-") {
+		if (isMovingLeft) {
+			animationComponent->setAnimation(prefix + "WALKR-", spritesSheet, 0.2f, is_big);
+			animationSet = true;
+		}
+		else {
+			animationComponent->setAnimation(prefix + "WALK-", spritesSheet, 0.2f, is_big);
+			animationSet = true;
+		}
+	}
+	else if (currentAction == "CROUCH-") {
+		if (isMovingLeft) {
+			animationComponent->setAnimation(prefix + "CROUCHR-", spritesSheet, 0.2f, is_big);
+			animationSet = true;
+		}
+		else {
+			animationComponent->setAnimation(prefix + "CROUCH-", spritesSheet, 0.2f, is_big);
+			animationSet = true;
+		}
+	}
+
+	if (!animationSet) {
+		if (isMovingLeft) {
+			animationComponent->setAnimation(prefix + "IDLER-", spritesSheet, 0.5f, is_big);
+		}
+		else {
+			animationComponent->setAnimation(prefix + "IDLE-", spritesSheet, 0.5f, is_big);
+		}
+	}
+
+	animationComponent->update(0.016f);
 }
 
 void PlayerManager::addBuff(PlayerBuff* buff) {
@@ -239,20 +442,26 @@ std::string PlayerManager::getImagePath() const {
 }
 
 void PlayerManager::setBig(bool big) {
-	//Change the size of the player
-	if (big == is_big) return;
-	if (big) {
-		is_big = true;
+	if (big == is_big) {
+		return;
+	}
+
+	if (big == true) {
+		// Start transformation animation
+		isTransforming = true;
+		currentAction = "BECOME_BIG-";
+	}
+
+	if (big == true) {
 		addBuff(new FireBuff());
-		setSize(sf::Vector2f(CELL_SIZE, 2*CELL_SIZE));
-		setPosition(getPosition().x, getPosition().y - CELL_SIZE);
 	}
 	else {
-		is_big = false;
 		removeBuff("fire");
-		setSize(sf::Vector2f(CELL_SIZE,CELL_SIZE));
-		setPosition(getPosition().x, getPosition().y + CELL_SIZE);
 	}
+
+	// The actual size change will happen after animation completes
+	is_big = big;
+	updateHitboxSize();
 }
 
 bool PlayerManager::getBig() const {
@@ -271,10 +480,38 @@ void PlayerManager::setHealth(int health) {
 
 void PlayerManager::Save(std::ofstream& file)
 {
+	if (file.is_open())
+	{
+		file << m_name << std::endl;
+		file << position.x << " " << position.y << std::endl;
+		file << health << std::endl;
+		file << speed << std::endl;
+		file << is_big << std::endl;
+
+	}
+	else
+	{
+		std::cerr << "Unable to save game!" << std::endl;
+	}
+
+	std::cerr << "SaveGame.txt" << std::endl;
 }
 
 void PlayerManager::Load(std::ifstream& file)
 {
+	if (file.is_open())
+	{
+		std::string name;
+		file >> name;
+		file >> position.x >> position.y;
+		file >> health;
+		file >> speed;
+		file >> is_big;
+	}
+	else
+	{
+		std::cerr << "Unable to load game!" << std::endl;
+	}
 }
 
 void PlayerManager::getRemainInfo()

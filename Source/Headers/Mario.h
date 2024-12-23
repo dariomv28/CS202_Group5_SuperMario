@@ -4,11 +4,6 @@
 #include "AnimationComponent.h"
 
 class Mario : public PlayerManager {
-private:
-    std::string m_name;
-    std::string currentAction;
-    bool isAnimationInProgress;
-    std::unordered_map<std::string, sf::IntRect> spritesSheet;
 public:
     Mario();
 
@@ -18,21 +13,4 @@ public:
     // Initialization function
     void init();
     void initAnimations();
-
-    //Setters and Getters
-    bool getIsBig() const;
-
-    // Functions
-    void update(const float& dt) override;
-    void render(sf::RenderTarget* target) override;
-    void handleInput(const float& dt);
-    void updateAnimation(const float& dt) override;
-
-    void updateHitboxSize();
-
-    void setBig(bool big) override;
-
-	void Save(std::ofstream& file) override;
-	void Load(std::ifstream& file) override;
-	//void getRemainInfo() override;
 };
