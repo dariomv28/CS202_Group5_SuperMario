@@ -71,6 +71,7 @@ public:
 	void pushPlayerLeft();
 	void pushPlayerRight();
 	void pushPlayerUpExtra();
+	void pushPlayerUp();
 
 	// PowerUp events
 	void spawnPowerUp(PowerUpObject* PowerUp);

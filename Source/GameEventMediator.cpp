@@ -167,6 +167,12 @@ void GameEventMediator::pushPlayerRight() {
 	player->setVelocity(sf::Vector2f(500.0f, player->getVelocity().y));
 }
 
+void GameEventMediator::pushPlayerUp() {
+	float horizontalForce = -300.0f;
+	float verticalForce = -500.0f;
+	player->setVelocity(sf::Vector2f(horizontalForce, verticalForce));
+}
+
 void GameEventMediator::pushPlayerUpExtra() {
 	player->setVelocity(sf::Vector2f(player->getVelocity().x, -1700.0f));
 }
