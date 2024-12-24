@@ -135,8 +135,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\EnterNameState.cpp" />
     <ClCompile Include="Source\FlyingKoopa.cpp" />
     <ClCompile Include="Source\Bowser.cpp" />
+    <ClCompile Include="Source\Heriss.cpp" />
+    <ClCompile Include="Source\LeaderboardState.cpp" />
     <ClCompile Include="Source\PeteyPiranha.cpp" />
     <ClCompile Include="Source\Rocket.cpp" />
     <ClCompile Include="Source\Character.cpp" />
@@ -173,6 +176,7 @@
     <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\GameObject.cpp" />
     <ClCompile Include="Source\MapManager.cpp" />
+    <ClCompile Include="Source\SettingState.cpp" />
     <ClCompile Include="Source\W1_LV1.cpp" />
     <ClCompile Include="Source\W2_LV1.cpp" />
     <ClCompile Include="Source\W3_LV1.cpp" />
@@ -204,8 +208,11 @@
     <ClCompile Include="Source\WinMenuState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Headers\EnterNameState.h" />
     <ClInclude Include="Source\Headers\FlyingKoopa.h" />
     <ClInclude Include="Source\Headers\Bowser.h" />
+    <ClInclude Include="Source\Headers\Heriss.h" />
+    <ClInclude Include="Source\Headers\LeaderboardState.h" />
     <ClInclude Include="Source\Headers\PeteyPiranha.h" />
     <ClInclude Include="Source\Headers\Rocket.h" />
     <ClInclude Include="Source\Headers\Character.h" />

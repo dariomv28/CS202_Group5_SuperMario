@@ -2,6 +2,7 @@
 #include "Headers/MenuWorldState.h"
 #include "Headers/MenuCharacterSelectionState.h"
 #include "Headers/GameState.h"
+#include "Headers/EnterNameState.h"
 
 void MainMenuState::initVariables()
 {
@@ -161,7 +162,8 @@ void MainMenuState::updateGUI()
     }
     if (buttons[BTN_NEWGAME]->isPressed())
     {
-        this->states->push(new MenuCharacterSelectionState(this->stateData));
+        this->states->push(new EnterNameState(this->stateData));
+        //this->states->push(new MenuCharacterSelectionState(this->stateData));
     }
     if (buttons[BTN_LEADER]->isPressed())
     {
@@ -173,7 +175,7 @@ void MainMenuState::updateGUI()
     }
 }
 
-void MainMenuState::update(const float& dt)
+void MainMenuState::update(const float& dt, const sf::Event& event)
 {
 	updateMousePosition();
 	updateGUI();

@@ -29,7 +29,7 @@ public:
     virtual ~PauseMenuState();
 
     virtual void updateGUI();
-    virtual void update(const float& dt);
+    virtual void update(const float& dt, const sf::Event& event);
 
     void renderGUI();
     void updateButtonPositions();

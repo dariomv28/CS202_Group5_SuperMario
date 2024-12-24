@@ -42,9 +42,10 @@ void WinMenuState::initTexts() {
 }
 
 void WinMenuState::centerText(sf::Text& text, float y) {
-	sf::FloatRect textRect = text.getLocalBounds();
-	text.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
-	text.setPosition(sf::Vector2f(window->getSize().x / 2.0f, y));
+	text.setPosition(
+		window->getView().getCenter().x - text.getGlobalBounds().width / 2,
+		y
+	);
 }
 
 void WinMenuState::updateBackground() {
@@ -73,7 +74,7 @@ void WinMenuState::updateGUI() {
 	}
 }
 
-void WinMenuState::update(const float& dt) {
+void WinMenuState::update(const float& dt, const sf::Event& event) {
 	updateMousePosition();
 	updateGUI();
 }

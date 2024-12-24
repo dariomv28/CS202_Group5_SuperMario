@@ -53,29 +53,16 @@ void GameState::reloadLevel() {
     else if (worldLevel == "W3_LV2") {
 		levelManager = new W3_LV2(clonePlayer, window);
 	}
-	else if (worldLevel == "W3_LV3") {
-		levelManager = new W3_LV3(clonePlayer, window);
-	}
-    //else if (worldID == 4)
-    //{
-    //    // Continue state
-    //    std::ifstream saveFile("SaveGame.txt");
-    //    int currentWorld;
-    //    int currentLevel;
-    //    saveFile >> currentWorld;
-    //    saveFile >> currentLevel;
-    //    saveFile.close();
-
-    //    levelManager = new W4(this->stateData->userData->getPlayer(currentWorld), window);
-    //}
+    else if (worldLevel == "W3_LV3") {
+        levelManager = new W3_LV3(clonePlayer, window);
+    }
 	else {
 		cerr << "Invalid level" << endl;
 	}
  
 }
 
-void GameState::update(const float& dt) {
-    std::cout << getQuit() << '\n';
+void GameState::update(const float& dt, const sf::Event& event) {
     if (levelManager) {
 		levelManager->update(dt);
     }
@@ -108,6 +95,12 @@ void GameState::checkPause() {
 
 void GameState::checkDeath() {
 	if (clonePlayer->getHealth() <= 0) {
+        for (int i = 1; i < levelID; i++)
+        {
+			this->stateData->userData->setCompleted(worldID, i, false);
+            this->stateData->userData->setScore(worldID, i, 0); 
+		}
+        this->stateData->userData->resetPlayer(worldID);
 		this->states->push(new DeathMenuState(this->stateData, this));
 	}
 }
@@ -121,18 +114,18 @@ void GameState::saveGame() {
     this->stateData->userData->setPlayer(worldID, clonePlayer);
 
     //Set the level as completed and set the score
-    this->stateData->userData->setCompleted(worldID, levelID);
+    this->stateData->userData->setCompleted(worldID, levelID, true);
     this->stateData->userData->setScore(worldID, levelID, levelManager->getScore());
 
     //Save the data
+    this->stateData->userData->saveData();
 }
 
 void GameState::checkWin() {
-    if (clonePlayer->getPosition().x > 1000000) {
+    if (levelManager->getFinishedLevel()) {
+        levelManager->updateFinalScore();
         saveGame();
         this->states->push(new WinMenuState(this->stateData, this));
-
-
 	}
 }
 

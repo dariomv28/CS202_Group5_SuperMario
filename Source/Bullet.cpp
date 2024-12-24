@@ -43,6 +43,10 @@ void Bullet::render(sf::RenderTarget* target)
 
 void Bullet::reactToCollison()
 {
+	if (sender == "enemy") {
+		eventMediator->addPlayerHealth(-1);
+		eventMediator->deletePowerUp(this);
+	}
 }
 
 void Bullet::reactToEnemyCollision(Enemy* enemy)

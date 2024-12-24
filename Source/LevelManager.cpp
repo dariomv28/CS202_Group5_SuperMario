@@ -6,6 +6,8 @@ LevelManager::LevelManager(PlayerManager* player, sf::RenderWindow* window) {
 	this->window = window;
     this->player = player;
 
+    finishedLevel = new bool(false);
+
 	firstUpdate = true;
     mapManager = new MapManager(window);
    
@@ -31,6 +33,10 @@ LevelManager::~LevelManager() {
     //delete movementComponent;
 }
 
+void LevelManager::updateFinalScore() {
+	levelGUI->updateFinalScore(window->getView());
+}
+
 int LevelManager::getScore()
 {
 	return levelGUI->getScore();
@@ -46,11 +52,14 @@ void LevelManager::initGameEventMediator() {
     eventMediator->addPowerUp(PowerUps);
     eventMediator->addAudioSystem(audio);
     eventMediator->addWindow(window);
+    eventMediator->addfinishedLevel(finishedLevel);
     //eventMediator->addMovementComponent(movementComponent);
     //eventMediator->addLivingEntity(livingEntity);
 }
 
 void LevelManager::update(const float& dt) {
+    //std::cout << "LevelManager::update " << *finishedLevel << std::endl;
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Tab)) {
         static sf::Clock keyTimer;
         if (keyTimer.getElapsedTime().asMilliseconds() > 300)

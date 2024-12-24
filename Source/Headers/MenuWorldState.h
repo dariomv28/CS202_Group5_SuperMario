@@ -16,7 +16,7 @@ public:
     virtual ~MenuWorldState();
 
     void updateGUI() override;
-    void update(const float& dt) override;
+    void update(const float& dt, const sf::Event& event) override;
     void render(sf::RenderTarget* target) override;
 };
 

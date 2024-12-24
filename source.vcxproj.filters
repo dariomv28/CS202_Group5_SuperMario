@@ -210,6 +210,12 @@
     <ClCompile Include="Source\WinMenuState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
+=======
+    <ClCompile Include="Source\Heriss.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+>>>>>>> 0b9740ae20eabce605c6cfa3ad146f42d45ea876
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Headers\resource.h">
@@ -413,6 +419,12 @@
     <ClInclude Include="Source\Headers\WinMenuState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
+=======
+    <ClInclude Include="Source\Headers\Heriss.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+>>>>>>> 0b9740ae20eabce605c6cfa3ad146f42d45ea876
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Source\Headers\source.rc">

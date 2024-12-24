@@ -29,7 +29,7 @@ public:
 	long long getScore(int world, int level);
 	
 	bool getCompleted(int world, int level);
-	void setCompleted(int world, int level);
+	void setCompleted(int world, int level, bool complete);
 	void setNameCharacter(const std::string& name);
 	std::string getNameCharacter() const;
 	void createPlayer();

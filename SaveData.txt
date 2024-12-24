@@ -1,4 +1,4 @@
-NoName
+Khoa be de
 Mario
 3
 0
@@ -6,9 +6,5 @@ Mario
 0
 3
 0
-2
-W1_LV1
-0
-W1_LV2
 0
 0

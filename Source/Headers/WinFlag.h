@@ -25,6 +25,9 @@ private:
     static constexpr float ANIMATION_FRAME_DURATION = 0.1f;  // Time between animation frames
     int currentFrame = 0;
 
+    sf::Sprite poleSprite;
+    sf::Sprite sphereSprite;
+
 public:
 	WinFlag(sf::Vector2f position, sf::Vector2f size, std::string name);
 	~WinFlag();

@@ -284,7 +284,7 @@ void MenuCharacterSelectionState::updateTransitionEffect(const float& dt) {
     }
 }
 
-void MenuCharacterSelectionState::update(const float& dt) {
+void MenuCharacterSelectionState::update(const float& dt, const sf::Event& event) {
     if (Continue)
     {
         this->Continue = false;

@@ -5,6 +5,7 @@
 #include "Koopa.h"
 #include "FlyingKoopa.h"
 #include "PeteyPiranha.h"
+#include "Heriss.h"
 
 class W1_LV1 : public LevelManager {
 public:
