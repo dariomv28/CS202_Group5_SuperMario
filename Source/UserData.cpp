@@ -13,7 +13,6 @@ UserData::~UserData()
 {
 }
 
-
 void UserData::setName(std::string name)
 {
 	this->name = name;
