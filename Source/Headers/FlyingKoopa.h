@@ -5,14 +5,14 @@ class FlyingKoopa :
 {
 private:
     // Movement and positioning
-  //  float walkSpeed;
+    float walkSpeed;
     float x_min;
     float x_max;
 
     bool isAlive;
   //  bool isShelled;
   //  float shellTimer;
-  //  float disappearDelay = 0.0f;
+    float disappearDelay = 0.0f;
 
     // Animation sprite sheet
     std::unordered_map<std::string, sf::IntRect> spritesSheet;

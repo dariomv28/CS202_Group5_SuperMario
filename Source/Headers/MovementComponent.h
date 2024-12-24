@@ -13,6 +13,7 @@ public:
 	int MAX_JUMPS;
 
 	int acceleration;
+	int preventFalling;
 	int maxVelocity;
 	bool isMoveLeft;
 	bool isMoveRight;

@@ -12,6 +12,7 @@ W1_LV1::W1_LV1(PlayerManager* player, sf::RenderWindow *window):
     // Add enemies to the game with specific boundaries
 
 	Enemies.push_back(new Koopa(sf::Vector2f(700.0f, 768.0f), sf::Vector2f(64.f, 64.f)));
+	Enemies.push_back(new FlyingKoopa(sf::Vector2f(100.0f, 100.0f), sf::Vector2f(64.f, 64.f), 20.f,600.f));
 
 	Enemies.push_back(new Koopa(sf::Vector2f(2037.f, 768.0f), sf::Vector2f(64.f, 64.f)));
 
