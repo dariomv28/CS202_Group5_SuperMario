@@ -50,7 +50,7 @@ void EnterNameState::initText() {
 
     // Input text
     this->inputText.setFont(this->font);
-    this->inputText.setString("_");
+    this->inputText.setString("");
     this->inputText.setCharacterSize(30);
     this->inputText.setFillColor(sf::Color::White);
     this->inputText.setPosition(
@@ -135,12 +135,22 @@ void EnterNameState::updateInput(const sf::Event& event) {
             }
         }
         this->inputText.setString(this->userInput + "_");
+
+        // Center the text
+        sf::FloatRect textBounds = this->inputText.getLocalBounds();
+        this->inputText.setOrigin(
+            textBounds.left + textBounds.width / 2.0f,
+            textBounds.top + textBounds.height / 2.0f
+        );
+        this->inputText.setPosition(this->window->getSize().x / 2.0f, 180.f); // Center on screen
+
         isKeyPressed = true;
     }
     if (event.type == sf::Event::KeyReleased) {
         isKeyPressed = false;
     }
 }
+
 
 void EnterNameState::updateButtons() {
     this->confirmButton->update(this->mousePosWindow);
