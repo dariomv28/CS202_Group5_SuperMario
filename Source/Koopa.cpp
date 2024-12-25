@@ -114,7 +114,7 @@ void Koopa::getDamaged() {
         this->movementComponent->acceleration = 0;
         eventMediator->increaseScore(200);
     }
-    else if (shellTimer > 3.0f) {
+    else if (shellTimer > 1.0f) {
         isAlive = false;
         isShelled = false;
         this->hitbox.setSize(sf::Vector2f(64.f, 56.f));
