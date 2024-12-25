@@ -20,7 +20,7 @@ void PhysicsEngine::setEventMediator(GameEventMediator* mediator) {
 void PhysicsEngine::applyGravity(LivingEntity* entity, const float& dt) {
 	sf::Vector2f currentVelocity = entity->getVelocity();
 
-	currentVelocity.y += gravity.y * dt;
+	currentVelocity.y += (gravity.y  - entity->movementComponent->preventFalling) * dt;
 
 	if (currentVelocity.y > entity->movementComponent->MAX_FALL_SPEED) {
 		currentVelocity.y = entity->movementComponent->MAX_FALL_SPEED;

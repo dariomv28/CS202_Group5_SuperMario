@@ -3,6 +3,7 @@
 #include "LevelManager.h"
 #include "Goomba.h"
 #include "Koopa.h"
+#include "FlyingKoopa.h"
 #include "PeteyPiranha.h"
 #include "Heriss.h"
 
