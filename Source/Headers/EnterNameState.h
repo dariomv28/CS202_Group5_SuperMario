@@ -13,6 +13,7 @@ private:
     GUI::TextButton* confirmButton;
     GUI::TextButton* cancelButton;
 
+
     void initFonts();
     void initText();
     void initButtons();
