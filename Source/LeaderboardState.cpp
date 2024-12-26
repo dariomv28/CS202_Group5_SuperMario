@@ -111,7 +111,7 @@ void LeaderboardState::createTableRow(size_t index, const std::string& rank, con
     tableData.push_back(row);
 }
 
-void LeaderboardState::loadLeaderboardData()
+/*void LeaderboardState::loadLeaderboardData()
 {
     // Clear existing data
     tableData.clear();
@@ -122,6 +122,74 @@ void LeaderboardState::loadLeaderboardData()
     createTableRow(1, "2", "Player2", "95", "90", "85", "270");
     createTableRow(2, "3", "Player3", "90", "85", "80", "255");
     // Add more rows as needed
+}*/
+
+void LeaderboardState::loadLeaderboardData()
+{
+    // Clear existing data
+    tableData.clear();
+
+    std::ifstream file("LeaderBoard.csv");
+    if (!file.is_open())
+    {
+        throw std::runtime_error("ERROR::LEADERBOARDSTATE::COULD NOT OPEN LeaderBoard.csv");
+    }
+
+    std::string line;
+    std::vector<std::tuple<std::string, int, int, int, int>> players; // Name, World1, World2, World3, Total
+
+    // Skip the header line
+    std::getline(file, line);
+
+    while (std::getline(file, line))
+    {
+        std::stringstream ss(line);
+        std::string name, level1, level2, level3, level4, level5, level6, level7, level8, level9;
+        int w1, w2, w3, total;
+
+        // Read player name and scores for 9 levels
+        std::getline(ss, name, ',');
+        std::getline(ss, level1, ',');
+        std::getline(ss, level2, ',');
+        std::getline(ss, level3, ',');
+        std::getline(ss, level4, ',');
+        std::getline(ss, level5, ',');
+        std::getline(ss, level6, ',');
+        std::getline(ss, level7, ',');
+        std::getline(ss, level8, ',');
+        std::getline(ss, level9, ',');
+
+        // Calculate world scores and total score
+        w1 = std::stoi(level1) + std::stoi(level2) + std::stoi(level3);
+        w2 = std::stoi(level4) + std::stoi(level5) + std::stoi(level6);
+        w3 = std::stoi(level7) + std::stoi(level8) + std::stoi(level9);
+        total = w1 + w2 + w3;
+
+        if (total > 0)
+        {
+            players.emplace_back(name, w1, w2, w3, total);
+        }
+    }
+
+    file.close();
+
+    // Sort players by total score in descending order
+    std::sort(players.begin(), players.end(), [](const auto& a, const auto& b) {
+        return std::get<4>(a) > std::get<4>(b);
+        });
+
+    // Populate table with the sorted data
+    size_t rank = 1;
+    for (const auto& player : players)
+    {
+        createTableRow(rank++,
+            std::to_string(rank),
+            std::get<0>(player),
+            std::to_string(std::get<1>(player)),
+            std::to_string(std::get<2>(player)),
+            std::to_string(std::get<3>(player)),
+            std::to_string(std::get<4>(player)));
+    }
 }
 
 void LeaderboardState::updateButtons()
