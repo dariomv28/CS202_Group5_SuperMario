@@ -1,7 +1,9 @@
 #pragma once
 #include "MainMenuState.h"
 
-enum world_options { BTN_WORLD1 = 0, BTN_WORLD2, BTN_WORLD3, BTN_BACKTOMAIN };
+namespace WorldMenu {
+	enum world_options { BTN_WORLD1 = 0, BTN_WORLD2, BTN_WORLD3, BTN_SETTING, BTN_BACKTOMAIN };
+}
 
 class MenuWorldState :
     public MainMenuState

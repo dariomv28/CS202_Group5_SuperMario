@@ -9,11 +9,6 @@
 class GameState : public State {
 private:
     LevelManager* levelManager;
-    PauseMenuState* pauseMenu;
-    DeathMenuState* deathMenu;
-
-    WinMenuState* winMenu;
-
     PlayerManager* clonePlayer;
 
     int worldID, levelID;
@@ -24,7 +19,6 @@ public:
     void reloadLevel();
     void update(const float& dt, const sf::Event& event) override;
     void render(sf::RenderTarget* target = nullptr) override;
-    void renderLevelManager(sf::RenderTarget* target);
 
     void saveGame();
 

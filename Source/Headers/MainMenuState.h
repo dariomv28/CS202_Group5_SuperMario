@@ -1,8 +1,10 @@
 #pragma once
 #include "State.h"
 
-enum menu_options { BTN_CONTINUE = 0, BTN_NEWGAME, BTN_LEADER, BTN_EXIT };
+namespace MainMenu {
+	enum menu_options{ BTN_CONTINUE = 0, BTN_NEWGAME, BTN_LEADER, BTN_SETTING, BTN_EXIT };
 
+}
 class MainMenuState : 
 	public State
 {
@@ -23,7 +25,7 @@ protected:
 	
 	sf::Text titleText;
 
-	void initVariables();
+	virtual void initVariables();
 	void initTitleText();
 	virtual void initBackground();
 	virtual void initButtons();

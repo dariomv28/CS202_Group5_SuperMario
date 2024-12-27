@@ -4,10 +4,11 @@
 #include "Headers/GameState.h"
 #include "Headers/EnterNameState.h"
 #include "Headers/LeaderboardState.h"
+#include "Headers/SettingState.h"
 
 void MainMenuState::initVariables()
 {
-    nButtons = 4;
+    nButtons = 5;
     btn_Width = 400;
     btn_Height = 75; 
     btn_CharSize = 20;     
@@ -82,7 +83,7 @@ void MainMenuState::initButtons()
     buttons.resize(nButtons);
 
     float x = window->getSize().x / 2 - btn_Width / 2;
-    float y = window->getSize().y / 2.2;
+    float y = window->getSize().y / 2.75;
 
     sf::Color idleColor(50, 50, 50, 200);
     sf::Color hoverColor(70, 70, 70, 220);
@@ -92,7 +93,7 @@ void MainMenuState::initButtons()
     sf::Color textHoverColor(255, 255, 200, 255);
     sf::Color textActiveColor(255, 255, 255, 255);
 
-    buttons[BTN_CONTINUE] = new GUI::TextButton(false,
+    buttons[MainMenu::BTN_CONTINUE] = new GUI::TextButton(false,
         x, y, btn_Width, btn_Height,
         &font, "CONTINUE", btn_CharSize,
         textIdleColor, textHoverColor, textActiveColor,
@@ -101,7 +102,7 @@ void MainMenuState::initButtons()
     );
 
     y += btn_Height * 1.5;
-    buttons[BTN_NEWGAME] = new GUI::TextButton(false,
+    buttons[MainMenu::BTN_NEWGAME] = new GUI::TextButton(false,
         x, y, btn_Width, btn_Height,
         &font, "NEW GAME", btn_CharSize,
         textIdleColor, textHoverColor, textActiveColor,
@@ -110,7 +111,7 @@ void MainMenuState::initButtons()
     );
 
     y += btn_Height * 1.5;
-    buttons[BTN_LEADER] = new GUI::TextButton(false,
+    buttons[MainMenu::BTN_LEADER] = new GUI::TextButton(false,
         x, y, btn_Width, btn_Height,
         &font, "LEADER BOARD", btn_CharSize,
         textIdleColor, textHoverColor, textActiveColor,
@@ -119,7 +120,18 @@ void MainMenuState::initButtons()
     );
 
     y += btn_Height * 1.5;
-    buttons[BTN_EXIT] = new GUI::TextButton(false,
+
+    buttons[MainMenu::BTN_SETTING] = new GUI::TextButton(false,
+        x, y, btn_Width, btn_Height,
+        &font, "SETTING", btn_CharSize,
+        textIdleColor, textHoverColor, textActiveColor,
+        idleColor, hoverColor, activeColor,
+        sf::Color(255, 255, 255, 50), sf::Color(255, 255, 255, 100)
+    );
+
+
+    y += btn_Height * 1.5;
+    buttons[MainMenu::BTN_EXIT] = new GUI::TextButton(false,
         x, y, btn_Width, btn_Height,
         &font, "EXIT", btn_CharSize,
         textIdleColor, textHoverColor, textActiveColor,
@@ -154,23 +166,29 @@ void MainMenuState::updateGUI()
     }
 
     // Existing mouse press handlers
-    if (buttons[BTN_CONTINUE]->isPressed())
+    if (buttons[MainMenu::BTN_CONTINUE]->isPressed())
     {
         this->stateData->userData->loadData();
 
         this->states->push(new MenuWorldState(this->stateData));
 
     }
-    if (buttons[BTN_NEWGAME]->isPressed())
+    if (buttons[MainMenu::BTN_NEWGAME]->isPressed())
     {
         this->states->push(new EnterNameState(this->stateData));
         //this->states->push(new MenuCharacterSelectionState(this->stateData));
     }
-    if (buttons[BTN_LEADER]->isPressed())
+    if (buttons[MainMenu::BTN_LEADER]->isPressed())
     {
         this->states->push(new LeaderboardState(this->stateData));
     }
-    if (buttons[BTN_EXIT]->isPressed())
+    if (buttons[MainMenu::BTN_SETTING]->isPressed())
+	{
+		this->states->push(new SettingState(this->stateData, this));
+	}
+
+
+    if (buttons[MainMenu::BTN_EXIT]->isPressed())
     {
         endState();
     }

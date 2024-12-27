@@ -24,6 +24,9 @@ private:
 	bool isInitialized = false;
 	bool isStopped = false;
 
+	bool allowMusic = true;
+	bool allowSound = true;
+
 	GameEventMediator* eventMediator;
 public:
 	AudioSystem();
@@ -58,7 +61,16 @@ public:
 	void stopAllMusic();
 
 	void setEventMediator(GameEventMediator* eventMediator);
+	void setAllowMusic(bool allowMusic);
+	void setAllowSound(bool allowSound);
 
+	bool getAllowMusic() {
+		return allowMusic;
+	}
+
+	bool getAllowSound() {
+		return allowSound;
+	}
 
 	static AudioSystem* getInstance() {
 		if (instance == nullptr) {
