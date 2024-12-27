@@ -76,10 +76,9 @@ void PeteyPiranha::reactToPlayerCollision(int collidedSide) {
     if (collidedSide == Collide_Top) {
         if (isMouthOpen && !hasDamagedPlayer) {
 
-            eventMediator->addPlayerHealth(-1);
+            eventMediator->damagePlayer(-1);
             hasDamagedPlayer = true;
         }
-
     }
     else {
 

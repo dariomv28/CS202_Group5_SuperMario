@@ -4,7 +4,7 @@ class Bowser :
     public Enemy
 {
 private:
-    const float reloadDuration = 7.5f;
+    const float reloadDuration = 12.f;
 
 	// Movement and positioning
 	float walkSpeed;
@@ -24,7 +24,7 @@ private:
 	std::string currentSkill;
 
 	// Shooting
-	const float reloadFire = 1.5f;
+	const float reloadFire = 5.5f;
 	float reloadTimer;
 
 	void initAnimations();

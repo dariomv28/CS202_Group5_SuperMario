@@ -72,7 +72,9 @@ MyApp::MyApp()
 
 MyApp::~MyApp()
 {
-	stateData.userData->saveData();
+	if (stateData.userData->getPlayer(1) != nullptr) {
+		stateData.userData->setPlayer(1, nullptr);
+	}
 	delete this->window;
 
 	while (!this->states.empty()) {
