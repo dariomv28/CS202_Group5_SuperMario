@@ -21,15 +21,41 @@ void LeaderboardState::centerTable()
 {
     // Calculate center position for table
     TABLE_X = (window->getSize().x - TOTAL_WIDTH) / 2.f;
-    TABLE_Y = (window->getSize().y - (ROW_HEIGHT * MAX_ENTRIES + HEADER_HEIGHT)) / 2.f;
+    // Adjust TABLE_Y to move the table closer to the header
+    TABLE_Y = (window->getSize().y - (ROW_HEIGHT * MAX_ENTRIES + HEADER_HEIGHT)) / 2.f - 50.f;
 }
 
 void LeaderboardState::initVariables()
 {
     // Initialize header background
     headerBackground.setSize(sf::Vector2f(TOTAL_WIDTH, HEADER_HEIGHT));
-    headerBackground.setFillColor(sf::Color(70, 70, 70, 200));
+    headerBackground.setFillColor(sf::Color(144, 238, 144, 200)); // Set header background color to light green
     // Position will be set after centerTable() is called
+
+    // Initialize gradient background
+    gradientBackground.setPrimitiveType(sf::Quads);
+    gradientBackground.resize(4);
+
+    gradientBackground[0].position = sf::Vector2f(0, 0);
+    gradientBackground[1].position = sf::Vector2f(window->getSize().x, 0);
+    gradientBackground[2].position = sf::Vector2f(window->getSize().x, window->getSize().y);
+    gradientBackground[3].position = sf::Vector2f(0, window->getSize().y);
+
+    gradientBackground[0].color = sf::Color(50, 50, 150); // Top-left color
+    gradientBackground[1].color = sf::Color(50, 50, 150); // Top-right color
+    gradientBackground[2].color = sf::Color(150, 50, 50); // Bottom-right color
+    gradientBackground[3].color = sf::Color(150, 50, 50); // Bottom-left color
+
+    // Initialize star shapes
+    starShape.setRadius(15.f);
+    starShape.setPointCount(6);
+    starShape.setFillColor(sf::Color(255, 215, 0));
+    starShape.setOutlineColor(sf::Color(204, 172, 0));
+    starShape.setOutlineThickness(2.f);
+
+    starShape2 = starShape;
+
+    animationTime = 0.f;
 }
 
 void LeaderboardState::initFonts()
@@ -45,7 +71,7 @@ void LeaderboardState::initTitle()
     titleText.setFont(font);
     titleText.setString("Leaderboard");
     titleText.setCharacterSize(60);
-    titleText.setFillColor(sf::Color::White);
+    titleText.setFillColor(sf::Color(255, 215, 0));  // Gold color
 
     // Center the title above the table
     titleText.setPosition(
@@ -83,10 +109,10 @@ void LeaderboardState::initBackButton()
         30.f, 30.f, 100.f, 50.f,
         &font, "Back", 24,
         sf::Color(70, 70, 70, 200),  // Background idle color
-        sf::Color(250, 250, 250, 250),  // Background hover color
+        sf::Color(144, 238, 144, 250),  // Background hover color (light green)
         sf::Color(20, 20, 20, 50),  // Background active color
         sf::Color(0, 0, 255, 255),  // Text idle color (blue)
-        sf::Color(150, 150, 150, 255),  // Text hover color
+        sf::Color(255, 255, 255, 255),  // Text hover color (white)
         sf::Color(20, 20, 20, 255)   // Text active color
     );
 }
@@ -103,7 +129,7 @@ void LeaderboardState::createTableRow(size_t index, const std::string& rank, con
         sf::Text cell;
         cell.setFont(font);
         cell.setString(rowData[i]);
-        cell.setCharacterSize(20);
+        cell.setCharacterSize(30);
         cell.setFillColor(sf::Color::White);
         cell.setPosition(
             TABLE_X + (i * COLUMN_WIDTH) + (COLUMN_WIDTH / 2.f) - (cell.getGlobalBounds().width / 2.f),
@@ -115,23 +141,11 @@ void LeaderboardState::createTableRow(size_t index, const std::string& rank, con
     tableData.push_back(row);
 }
 
-/*void LeaderboardState::loadLeaderboardData()
-{
-    // Clear existing data
-    tableData.clear();
-
-    // TODO: Load actual data from your game's scoring system
-    // This is example data
-    createTableRow(0, "1", "Player1", "100", "95", "90", "285");
-    createTableRow(1, "2", "Player2", "95", "90", "85", "270");
-    createTableRow(2, "3", "Player3", "90", "85", "80", "255");
-    // Add more rows as needed
-}*/
-
 void LeaderboardState::loadLeaderboardData()
 {
     // Clear existing data
     tableData.clear();
+    //borders.clear(); // Clear borders as well
 
     std::ifstream file("LeaderBoard.csv");
     if (!file.is_open())
@@ -216,12 +230,29 @@ void LeaderboardState::update(const float& dt, const sf::Event& event)
 {
     updateMousePosition();
     updateGUI(event);
+    updateRowHighlighting();
+    updateAnimation(dt);
+    //updateScroll(event);
+}
+
+void LeaderboardState::updateAnimation(const float& dt)
+{
+    animationTime += dt;
+
+    float starBob = std::sin(animationTime * 3.f) * 5.f;
+    float starBob2 = std::sin(animationTime * 3.f + 1.f) * 5.f;
+
+    starShape.setPosition(50.f, 150.f + starBob);
+    starShape2.setPosition(window->getSize().x - 80.f, 150.f + starBob2);
 }
 
 void LeaderboardState::render(sf::RenderTarget* target)
 {
     if (!target)
         target = window;
+
+    // Render gradient background
+    target->draw(gradientBackground);
 
     // Render title
     target->draw(titleText);
@@ -244,6 +275,47 @@ void LeaderboardState::render(sf::RenderTarget* target)
         }
     }
 
+    // Render star shapes
+    target->draw(starShape);
+    target->draw(starShape2);
+
     // Render back button
     backButton->render(target);
 }
+
+void LeaderboardState::updateRowHighlighting()
+{
+    for (size_t i = 0; i < tableData.size(); ++i)
+    {
+        for (auto& cell : tableData[i])
+        {
+            if (cell.getGlobalBounds().contains(mousePosWindow.x, mousePosWindow.y))
+            {
+                cell.setFillColor(sf::Color::Yellow);
+            }
+            else
+            {
+                cell.setFillColor(sf::Color::White);
+            }
+        }
+    }
+}
+
+//void LeaderboardState::updateScroll(const sf::Event& event)
+//{
+//    if (event.type == sf::Event::MouseWheelScrolled)
+//    {
+//        float scrollOffset = event.mouseWheelScroll.delta * 20.f;
+//        for (auto& row : tableData)
+//        {
+//            for (auto& cell : row)
+//            {
+//                cell.move(0.f, scrollOffset);
+//            }
+//        }
+//        for (auto& border : borders)
+//        {
+//            border.move(0.f, scrollOffset);
+//        }
+//    }
+//}
