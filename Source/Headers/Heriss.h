@@ -5,8 +5,8 @@ class Heriss : public Enemy {
 private:
     // Movement and positioning
     float walkSpeed;
-    float x_min;
-    float x_max;
+    float x_min = 32.0f;
+    float x_max = 13416.0f;
 
     bool isAlive;
     float disappearDelay = 0.0f;
@@ -22,7 +22,7 @@ private:
 
 public:
     Heriss();
-    Heriss(sf::Vector2f position, sf::Vector2f size, float x_min, float x_max);
+    Heriss(sf::Vector2f position, sf::Vector2f size, float x_min = 32.0f, float x_max = 13416.f);
 
     void updateAnimation(const float& dt) override;
 

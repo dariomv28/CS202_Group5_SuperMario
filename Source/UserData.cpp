@@ -75,6 +75,7 @@ long long UserData::getScore(int world, int level)
 	return score["W" + std::to_string(world) + "_LV" + std::to_string(level)];
 }
 
+
 bool UserData::getCompleted(int world, int level)
 {
 	return completed["W" + std::to_string(world) + "_LV" + std::to_string(level)];
@@ -124,6 +125,7 @@ void UserData::saveData() {
 	}
 
 	file.close();
+	saveCSV();
 }
 
 void UserData::loadData() {
@@ -169,4 +171,27 @@ void UserData::loadData() {
 
 
 	file.close();
+}
+
+void UserData::saveCSV() {
+	long long totalScore = 0;
+
+	std::ofstream file("LeaderBoard.csv", std::ios::app);
+
+	if (file.is_open()) {
+		file << name;
+		for (int world = 1; world <= 3; world++) {
+			for (int level = 1; level <= 3; level++) {
+				long long levelScore = getScore(world, level);
+				file << ", " << levelScore;
+				totalScore += levelScore;
+			}
+		}
+		file << ", " << totalScore << "\n";
+
+		file.close();
+	}
+	else {
+		std::cerr << "Error: Unable to open LeaderBoard.csv for writing" << std::endl;
+	}
 }

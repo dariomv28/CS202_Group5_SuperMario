@@ -103,7 +103,9 @@ void Heriss::update(const float& dt) {
 }
 
 void Heriss::getDamaged() {
-    // Heriss ne peut pas être tué
+    if (!isAlive) return;
+    setIsAlive(false);
+    eventMediator->increaseScore(300);
 }
 
 void Heriss::reactToPlayerCollision(int collidedSide) {

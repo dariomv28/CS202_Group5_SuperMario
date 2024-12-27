@@ -28,6 +28,7 @@ public:
 	void setScore(int world, int level, long long score);
 	long long getScore(int world, int level);
 	
+
 	bool getCompleted(int world, int level);
 	void setCompleted(int world, int level, bool complete);
 	void setNameCharacter(const std::string& name);
@@ -37,5 +38,6 @@ public:
 	void saveData();
 	void loadData();
 	
+	void saveCSV();
 };
 
