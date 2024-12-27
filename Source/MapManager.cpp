@@ -268,6 +268,12 @@ void MapManager::convert_sketch(const unsigned int world, const unsigned int lev
 				{
 					i_enemies.push_back(new Koopa(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * (b - map_height)), sf::Vector2f(CELL_SIZE, CELL_SIZE)));
 				}
+				else if (sf::Color(131, 162, 164) == pixel) {
+					i_enemies.push_back(new FlyingKoopa(sf::Vector2f(CELL_SIZE* a, CELL_SIZE* (b - map_height)), sf::Vector2f(CELL_SIZE, CELL_SIZE)));
+				}
+				else if (sf::Color(13, 162, 164) == pixel) {
+					i_enemies.push_back(new PeteyPiranha(sf::Vector2f(CELL_SIZE* a, CELL_SIZE* (b - map_height)), sf::Vector2f(CELL_SIZE, CELL_SIZE)));
+				}
 			}
 		}
 	}
