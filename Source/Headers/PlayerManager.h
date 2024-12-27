@@ -27,12 +27,21 @@ protected:
     bool isAnimationInProgress;
     std::unordered_map<std::string, sf::IntRect> spritesSheet;
 
+    // Flashing when losing health
+    float flashDuration;
+    float flashTimer;
+    float flashInterval;
+    bool isVisible;
+
 public:
     PlayerManager(sf::Vector2f position, sf::Vector2f size, int health, int speed);
     virtual ~PlayerManager();
 
     //Setters and Getters
     std::string getImagePath() const;
+
+    bool immortal;
+    bool isFlashing;
 
     // Initialization function
     virtual void init();
@@ -57,5 +66,8 @@ public:
     virtual void getRemainInfo();
 
 	void updateHitboxSize();
+
+    // Flashing 
+    void startFlashing();
 };
 
