@@ -16,8 +16,10 @@ W1_LV3::W1_LV3(PlayerManager* player, sf::RenderWindow* window) :
 
 	std::unordered_multimap<std::string, std::pair<float, std::pair<float, std::pair<float, float>>>> boundaries = {
 		{"G", {400, {704.f, {32.f, 576.f}}}},
+		
 
 		{"G", {600, {576, {575, 1344}}}},
+		
 		{"K", {700, {576, {575, 1344}}}},
 
 		{"G", {1400, {384, {1360, 2032}}}},
@@ -28,9 +30,20 @@ W1_LV3::W1_LV3(PlayerManager* player, sf::RenderWindow* window) :
 
 		{"K", {3800, {704, {3752, 4144}}}},
 
+
+		{"FK", {7700, {300, {7450, 7950}}}},
+		{"FK", {8400, {300, {8050, 8550}}}},
+		{"FK", {8900, {300, {8650, 9150}}}},
+		{"FK", {9500, {300, {9250, 9750}}}},
+		
+
+
+		{"fK", {4500, {576, {4300, 4700}}}},
+
 		{"G", {6800, {768, {6784, 7281}}}},
 
 		{"G", {10500, {768, {10442, 11328}}}},
+		{"K", {10700, {768, {10442, 11328}}}},
 		{"K", {10700, {768, {10442, 11328}}}},
 		{"K", {10900, {768, {10442, 11328}}}},
 	};
@@ -44,6 +57,10 @@ W1_LV3::W1_LV3(PlayerManager* player, sf::RenderWindow* window) :
 		else if (x.first == "G") {
 			Enemies.push_back(new Goomba(sf::Vector2f(x.second.first, x.second.second.first), sf::Vector2f(64.f, 64.f), x.second.second.second.first, x.second.second.second.second));
 		}
+		else if (x.first == "FK") {
+			Enemies.push_back(new FlyingKoopa(sf::Vector2f(x.second.first, x.second.second.first), sf::Vector2f(64.f, 64.f), x.second.second.second.first, x.second.second.second.second));
+		}
+
 	}
 
 	initGameEventMediator();

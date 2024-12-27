@@ -1,5 +1,6 @@
 #include "Headers/W3_LV3.h"
 #include "Headers/Bowser.h"
+//#include "Headers/Mushroom.h"
 
 W3_LV3::W3_LV3(PlayerManager* player, sf::RenderWindow* window):
 	LevelManager(player, window) 
@@ -15,7 +16,19 @@ W3_LV3::~W3_LV3() {
 
 }
 
+
+void W3_LV3::updateMushroom(const float& dt) {
+	reloadMushroomTimer += dt;
+	if (reloadMushroomTimer >= reloadMushroom) {
+		reloadMushroomTimer = 0;
+		eventMediator->deletePowerUp(current_mushroom);
+		current_mushroom = new Mushroom(sf::Vector2f(random(374, 1120), 768.f), sf::Vector2f(64, 64), "mushroom", 2);
+		eventMediator->spawnPowerUp(current_mushroom);
+
+	}
+}
 void W3_LV3::update(const float& dt) {
+	updateMushroom(dt);
 	LevelManager::update(dt);
 }
 

@@ -1,6 +1,6 @@
 #include "Headers/FlyingKoopa.h"
 
-FlyingKoopa::FlyingKoopa()
+FlyingKoopa::FlyingKoopa(): Enemy()
 {
     walkSpeed = 20.f;
 

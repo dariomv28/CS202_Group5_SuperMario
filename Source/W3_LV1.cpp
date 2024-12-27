@@ -7,15 +7,21 @@ W3_LV1::W3_LV1(PlayerManager* player, sf::RenderWindow* window):
 
 	std::unordered_multimap<std::string, std::pair<float, std::pair<float, std::pair<float, float>>>> boundaries = {
 		{"G", {2100, {576, {2013, 2545}}} },
+		{"H", {300, {134, {200, 450}}} },
+		
 
 		{"G", {9200, {134, {9197, 9855}}} },
 		{"K", {9400, {134, {9197, 9855}}} },
+		{"H", {9600, {134, {9197, 9855}}} },
 
 		{"K", {11200, {582, {11095, 11392}}} },
+		{"H", {11250, {582, {11095, 11392}}} },
 
 		{"K", {3300, {576, {3218, 3400}}} },
 
-		{"G", {4300, {640, {4243, 4413}}} },
+		{"H", {5700, {640, {5500, 5900}}} },
+		
+		
 	};
 
 	for (auto x : boundaries) {
@@ -24,6 +30,9 @@ W3_LV1::W3_LV1(PlayerManager* player, sf::RenderWindow* window):
 		}
 		else if (x.first == "G") {
 			Enemies.push_back(new Goomba(sf::Vector2f(x.second.first, x.second.second.first), sf::Vector2f(64.f, 64.f), x.second.second.second.first, x.second.second.second.second));
+		}
+		else if (x.first == "H") {
+			Enemies.push_back(new Heriss(sf::Vector2f(x.second.first, x.second.second.first), sf::Vector2f(64.f, 64.f), x.second.second.second.first, x.second.second.second.second));
 		}
 	}
 

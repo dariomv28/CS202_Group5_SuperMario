@@ -1,5 +1,6 @@
 #include "Headers/W1_LV2.h"
 
+
 W1_LV2::W1_LV2(PlayerManager* player, sf::RenderWindow* window) :
 	LevelManager(player, window)
 {
@@ -8,6 +9,8 @@ W1_LV2::W1_LV2(PlayerManager* player, sf::RenderWindow* window) :
 	std::unordered_multimap<std::string, std::pair<float, float>> noBoundaries = {
 		{"K", {769, 768}},
 		{"G", {12015, 768}},
+		{"PF", {4670, 768}},
+		{"PF", {2000, 768}},
 	};
 
 	for (auto x : noBoundaries) {
@@ -17,14 +20,24 @@ W1_LV2::W1_LV2(PlayerManager* player, sf::RenderWindow* window) :
 		else if (x.first == "G") {
 			Enemies.push_back(new Goomba(sf::Vector2f(x.second.first, x.second.second), sf::Vector2f(64.f, 64.f)));
 		}
+		else if (x.first == "PF") {
+			Enemies.push_back(new PeteyPiranha(sf::Vector2f(x.second.first, x.second.second), sf::Vector2f(64.f, 64.f)));
+		}
 	}
 
 	std::unordered_multimap<std::string, std::pair<float, std::pair<float, std::pair<float, float>>>> boundaries = {
 		{"K", {1100, {320, {1053, 1487}}}},
+		//{"H", {1100, {320, {1053, 1487}}}},
+		
 
 		{"G", {5500, {576, {5459, 5888}}}},
+		
 
 		{"G", {6200, {384, {5914, 6581}}}},
+		{"FK", {5200, {400, {5150, 5500}}}},
+		
+		
+		
 		{"K", {6400, {384, {5914, 6581}}}},
 
 		{"K", {6100, {128, {6016, 6468}}}},
@@ -35,8 +48,11 @@ W1_LV2::W1_LV2(PlayerManager* player, sf::RenderWindow* window) :
 
 		{"G", {8500, {512, {8441, 9040}}}},
 		{"K", {8600, {512, {8441, 9040}}}},
+		{"FK", {8500, {200, {8441, 9040}}}},
 
-		{"K", {10800, {512, {10557, 10757}}}},
+		{"FK", {10700, {300, {10400, 11000}}}},
+
+		//{"K", {10800, {512, {10557, 10757}}}},
 	};
 
 	// Enemies.push_back(new Koopa(sf::Vector2f(6200, 384), sf::Vector2f(64.f, 64.f), 5914, 6581));
@@ -47,6 +63,9 @@ W1_LV2::W1_LV2(PlayerManager* player, sf::RenderWindow* window) :
 		}
 		else if (x.first == "G") {
 			Enemies.push_back(new Goomba(sf::Vector2f(x.second.first, x.second.second.first), sf::Vector2f(64.f, 64.f), x.second.second.second.first, x.second.second.second.second));
+		}
+		else if (x.first == "FK") {
+			Enemies.push_back(new FlyingKoopa(sf::Vector2f(x.second.first, x.second.second.first), sf::Vector2f(64.f, 64.f), x.second.second.second.first, x.second.second.second.second));
 		}
 	}
 

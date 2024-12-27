@@ -51,13 +51,19 @@ void Bullet::reactToCollison()
 
 void Bullet::reactToEnemyCollision(Enemy* enemy)
 {
-	enemy->getDamaged();
-	eventMediator->deletePowerUp(this);
+	if (sender != "enemy")
+	{
+		enemy->getDamaged();
+		eventMediator->deletePowerUp(this);
+	}
 }
 
 void Bullet::reactToBlockCollision(Block* block)
 {
-	this->eventMediator->deletePowerUp(this);
+	if (sender != "enemy")
+	{
+		this->eventMediator->deletePowerUp(this);
+	}
 }
 
 void Bullet::updateAnimation(const float& dt)
