@@ -43,6 +43,17 @@ FlyingKoopa::FlyingKoopa(sf::Vector2f position, sf::Vector2f size, float x_min, 
 	//initAnimations();
 }
 
+FlyingKoopa::FlyingKoopa(sf::Vector2f position, sf::Vector2f size) : FlyingKoopa()
+{
+    this->position = position;
+    this->size = size;
+    this->x_min = position.x - 300.f;
+    this->x_max = position.x + 300.f;
+    this->movementComponent->preventFalling = 2500;
+    setMoveRight(true);
+    //initAnimations();
+}
+
 void FlyingKoopa::initAnimations() {
     spritesSheet = {
         { "FLY-1", sf::IntRect(86, 37, 16, 24) },    // Green Koopa walking frame 1
