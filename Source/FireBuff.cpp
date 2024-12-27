@@ -41,5 +41,6 @@ void FireBuff::applyBuff(GameEventMediator* eventMediator) {
 		std::string sender = "player";
 		Bullet* bullet = new Bullet(bulletPosition, bulletSize, "bullet", sender, bulletVelocity);
 		eventMediator->spawnPowerUp(bullet);	
+		eventMediator->playShotSound();
 	}
 }

@@ -23,6 +23,9 @@ void AudioSystem::init() {
 	if (!mushroomSoundBuffer.loadFromFile("Source/Resources/audio/eat mushroom.mp3")) {
 		throw("ERROR::AUDIOSYSTEM::CANNOT_LOAD_COIN_MUSHROOM_EFFECT");
 	}
+	if (!shotSoundBuffer.loadFromFile("Source/Resources/audio/shoot.mp3")) {
+		throw("ERROR::AUDIOSYSTEM::CANNOT_LOAD_SHOT_SOUND_EFFECT");
+	}
 	if (!brickSoundBuffer.loadFromFile("Source/Resources/audio/break brick.wav")) {
 		throw("ERROR::AUDIOSYSTEM::CANNOT_LOAD_BRICK_SOUND_EFFECT");
 	}
@@ -51,6 +54,8 @@ void AudioSystem::init() {
 	brickSound.setVolume(100.0f);
 	mushroomSound.setBuffer(mushroomSoundBuffer);
 	mushroomSound.setVolume(100.0f);
+	shotSound.setBuffer(shotSoundBuffer);
+	shotSound.setVolume(100.0f);
 }
 
 void AudioSystem::playMusic() {
@@ -204,4 +209,8 @@ void AudioSystem::resume() {
 
 void AudioSystem::playMushroomSound() {
 	mushroomSound.play();
+}
+
+void AudioSystem::playShotSound() {
+	shotSound.play();
 }
