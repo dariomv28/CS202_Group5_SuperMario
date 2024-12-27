@@ -110,7 +110,7 @@ void Heriss::getDamaged() {
 
 void Heriss::reactToPlayerCollision(int collidedSide) {
     if (collidedSide == Collide_Top) {
-        eventMediator->addPlayerHealth(-1);
+        eventMediator->damagePlayer(-1);
         eventMediator->pushPlayerUp();
     }
     else if (collidedSide == Collide_Left) {

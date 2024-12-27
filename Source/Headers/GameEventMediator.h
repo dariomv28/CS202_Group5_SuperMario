@@ -67,6 +67,7 @@ public:
 	// Player events
 	void setPlayerBig(bool isBig);
 	void addPlayerHealth(int health);
+	void damagePlayer(int health);
 	sf::Vector2f getPlayerPosition();
 	void pushPlayerLeft();
 	void pushPlayerRight();
@@ -95,6 +96,7 @@ public:
 	void playJumpSound();
 	void playBrickDestroyedSound();
 	void playMushroomSound();
+	void playShotSound();
 
 	PlayerManager*& getPlayer() { return player; }
 };
