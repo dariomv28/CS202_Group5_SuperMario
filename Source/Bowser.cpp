@@ -71,7 +71,7 @@ void Bowser::updateShooting(const float& dt) {
             eventMediator->getPlayerPosition().y - this->getPosition().y);
         float length = sqrt(directionVector.x * directionVector.x + directionVector.y * directionVector.y);
         sf::Vector2f direction = sf::Vector2f(directionVector.x / length, directionVector.y / length);
-        sf::Vector2f bulletVelocity = sf::Vector2f(direction.x * 750.f, direction.y * 750.f);
+        sf::Vector2f bulletVelocity = sf::Vector2f(direction.x * 600.f, direction.y * 600.f);
         eventMediator->spawnPowerUp(new Bullet(this->getCenter(), sf::Vector2f(64, 64),
             "bullet","enemy", bulletVelocity));
     }
