@@ -274,6 +274,9 @@ void MapManager::convert_sketch(const unsigned int world, const unsigned int lev
 				else if (sf::Color(13, 162, 164) == pixel) {
 					i_enemies.push_back(new PeteyPiranha(sf::Vector2f(CELL_SIZE* a, CELL_SIZE* (b - map_height)), sf::Vector2f(CELL_SIZE, CELL_SIZE)));
 				}
+				else if (sf::Color(179, 133, 186) == pixel) {
+					i_enemies.push_back(new Heriss(sf::Vector2f(CELL_SIZE * a, CELL_SIZE * (b - map_height)), sf::Vector2f(CELL_SIZE, CELL_SIZE)));
+				}
 			}
 		}
 	}
