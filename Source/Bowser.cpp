@@ -1,4 +1,6 @@
 #include "Headers/Bowser.h"
+#include "Headers/Rocket.h"
+#include "Headers/Bullet.h"
 
 Bowser::Bowser()
 {
@@ -28,6 +30,9 @@ Bowser::Bowser()
     hitbox.setFillColor(sf::Color::Transparent);
     hitbox.setOutlineColor(sf::Color::Green);
     hitbox.setOutlineThickness(-1.f);
+
+    // shooting
+    reloadTimer = 0;
 }
 
 Bowser::Bowser(sf::Vector2f position, sf::Vector2f size, float x_min, float x_max): Bowser()
@@ -55,9 +60,27 @@ void Bowser::initAnimations() {
     };
 }
 
+void Bowser::updateShooting(const float& dt) {
+    if (reloadTimer < reloadFire) {
+        reloadTimer += dt;
+    }
+    else {
+        reloadTimer = 0;
+		std::cerr << "Bowser shoot" << std::endl;
+        sf::Vector2f directionVector = sf::Vector2f(eventMediator->getPlayerPosition().x - this->getPosition().x, 
+            eventMediator->getPlayerPosition().y - this->getPosition().y);
+        float length = sqrt(directionVector.x * directionVector.x + directionVector.y * directionVector.y);
+        sf::Vector2f direction = sf::Vector2f(directionVector.x / length, directionVector.y / length);
+        sf::Vector2f bulletVelocity = sf::Vector2f(direction.x * 750.f, direction.y * 750.f);
+        eventMediator->spawnPowerUp(new Bullet(this->getCenter(), sf::Vector2f(64, 64),
+            "bullet","enemy", bulletVelocity));
+    }
+}
+
 void Bowser::update(const float& dt) {
     updateAnimation(dt);
     updateVelocity(dt);
+    updateShooting(dt);
     eventMediator->applyExternalForce(this, dt);
 	move(dt);
 }
