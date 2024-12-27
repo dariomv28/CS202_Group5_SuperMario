@@ -6,6 +6,13 @@
 PlayerManager::PlayerManager(sf::Vector2f position, sf::Vector2f size, int health, int speed)
     : LivingEntity(position, size, health, speed), currentAction("IDLE-"), isAnimationInProgress(false), transformationTimer(0.0f) {
 
+	isFlashing = false;
+	flashDuration = 1.5f;
+	flashTimer = 0.f;
+	flashInterval = 0.1f;
+	isVisible = true;
+	immortal = false;
+
     init();
     is_big = false;
     is_fire = false;
@@ -208,6 +215,19 @@ void PlayerManager::init() {
 }
 
 void PlayerManager::update(const float& dt) {
+	if (isFlashing) {
+		flashTimer -= dt;
+		isVisible = static_cast<int>((flashDuration - flashTimer) / flashInterval) % 2 == 0;
+
+		if (flashTimer <= 0) {
+			isFlashing = false;
+			isVisible = true;
+			immortal = false;
+		}
+	}
+
+	entitySprite.setColor(sf::Color(255, 255, 255, isVisible ? 255 : 0));
+
 	updateAnimation(dt);
 	updateHitboxSize();
 	updateVelocity(dt);
@@ -224,6 +244,15 @@ void PlayerManager::render(sf::RenderTarget* target) {
 	}
 	else {
 		std::cerr << "Render target is null!" << std::endl;
+	}
+}
+
+void PlayerManager::startFlashing() {
+	if (!isFlashing) {
+		isFlashing = true;
+		flashTimer = flashDuration;
+		isVisible = true;
+		immortal = true;
 	}
 }
 

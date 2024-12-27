@@ -144,14 +144,18 @@ void GameEventMediator::setPlayerBig(bool isBig) {
 }
 
 void GameEventMediator::addPlayerHealth(int health) {
+	if (!player->immortal) player->setHealth(player->getHealth() + health);
+
+	if (!player->isFlashing) {
+		player->startFlashing();
+	}
+
 	if (health < 0) {
 		if (player->getBig()) {
 			player->setBig(false);
 			return;
 		}
 	}
-
-	player->setHealth(player->getHealth() + health);
 }
 
 sf::Vector2f GameEventMediator::getPlayerPosition() {
