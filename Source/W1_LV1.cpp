@@ -51,13 +51,7 @@ W1_LV1::W1_LV1(PlayerManager* player, sf::RenderWindow *window):
 	Enemies.push_back(new Koopa(sf::Vector2f(1300.f, 256.0f), sf::Vector2f(64.f, 64.f), 1294.f, 1538.f));
 
 	// Other enemies
-
-	Enemies.push_back(new FlyingKoopa(sf::Vector2f(100.0f, 100.0f), sf::Vector2f(64.f, 64.f), 20.f, 600.f));
-
-	Enemies.push_back(new PeteyPiranha(sf::Vector2f(2000.f, 768.0f), sf::Vector2f(64.f, 64.f)));
-	Enemies.push_back(new PeteyPiranha(sf::Vector2f(5000.f, 768.0f), sf::Vector2f(64.f, 64.f)));
-	Enemies.push_back(new PeteyPiranha(sf::Vector2f(7000.f, 768.0f), sf::Vector2f(64.f, 64.f)));
-
+		
 	
     initGameEventMediator();
 }
