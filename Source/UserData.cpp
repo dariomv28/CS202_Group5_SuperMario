@@ -132,7 +132,7 @@ void UserData::loadData() {
 	std::ifstream file("SaveData.txt");
 	//Load the user's name
 
-	file >> name;
+	getline(file, name);
 	//Load the name character
 
 	file >> nameCharacter;
