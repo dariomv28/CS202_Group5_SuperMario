@@ -24,7 +24,7 @@ private:
 	std::string currentSkill;
 
 	// Shooting
-	const float reloadFire = 2.0f;
+	const float reloadFire = 1.5f;
 	float reloadTimer;
 
 	void initAnimations();
