@@ -110,6 +110,16 @@ struct Object
 };
 
 typedef std::vector<std::array<Cell, SCREEN_HEIGHT / CELL_SIZE>> Map;
+#include <random> 
+// create the function random number in the range from x to y random by mt19937
+
+inline int random(int x, int y)
+{
+	std::random_device rd;
+	std::mt19937 mt(rd());
+	std::uniform_int_distribution<int> dist(x, y);
+	return dist(mt);
+}
 
 //#define CURL_STATICLIB
 //#include "../curl/curl.h"
