@@ -182,13 +182,14 @@ void LeaderboardState::loadLeaderboardData()
     size_t rank = 1;
     for (const auto& player : players)
     {
-        createTableRow(rank++,
+        createTableRow(rank,
             std::to_string(rank),
             std::get<0>(player),
             std::to_string(std::get<1>(player)),
             std::to_string(std::get<2>(player)),
             std::to_string(std::get<3>(player)),
             std::to_string(std::get<4>(player)));
+        rank++;
     }
 }
 
