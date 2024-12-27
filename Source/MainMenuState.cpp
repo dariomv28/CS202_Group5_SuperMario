@@ -3,6 +3,7 @@
 #include "Headers/MenuCharacterSelectionState.h"
 #include "Headers/GameState.h"
 #include "Headers/EnterNameState.h"
+#include "Headers/LeaderboardState.h"
 
 void MainMenuState::initVariables()
 {
@@ -167,7 +168,7 @@ void MainMenuState::updateGUI()
     }
     if (buttons[BTN_LEADER]->isPressed())
     {
-        std::cout << "Leader Board Pressed\n";
+        this->states->push(new LeaderboardState(this->stateData));
     }
     if (buttons[BTN_EXIT]->isPressed())
     {

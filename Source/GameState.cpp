@@ -98,8 +98,9 @@ void GameState::checkDeath() {
         for (int i = 1; i < levelID; i++)
         {
 			this->stateData->userData->setCompleted(worldID, i, false);
-            this->stateData->userData->setScore(worldID, i, 0); 
+            this->stateData->userData->setScore(worldID, i, 0);
 		}
+        
         this->stateData->userData->resetPlayer(worldID);
 		this->states->push(new DeathMenuState(this->stateData, this));
 	}

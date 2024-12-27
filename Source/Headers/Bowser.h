@@ -4,7 +4,7 @@ class Bowser :
     public Enemy
 {
 private:
-    const float reloadDuration = 7.5f;
+    const float reloadDuration = 12.f;
 
 	// Movement and positioning
 	float walkSpeed;
@@ -20,6 +20,13 @@ private:
 	std::string currentAction;
 	bool isAnimationInProgress;
 
+	// skill
+	std::string currentSkill;
+
+	// Shooting
+	const float reloadFire = 5.5f;
+	float reloadTimer;
+
 	void initAnimations();
 public:
     Bowser();
@@ -31,6 +38,7 @@ public:
     // Update function
     void update(const float& dt) override;
     void getDamaged() override;
+	void updateShooting(const float& dt);
 
     // Collision response
     void move(const float& dt) override;

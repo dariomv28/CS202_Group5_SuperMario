@@ -58,7 +58,6 @@ W1_LV1::W1_LV1(PlayerManager* player, sf::RenderWindow *window):
 	Enemies.push_back(new PeteyPiranha(sf::Vector2f(5000.f, 768.0f), sf::Vector2f(64.f, 64.f)));
 	Enemies.push_back(new PeteyPiranha(sf::Vector2f(7000.f, 768.0f), sf::Vector2f(64.f, 64.f)));
 
-	Enemies.push_back(new Heriss(sf::Vector2f(500.f, 768.f), sf::Vector2f(64.f, 64.f)));
 	
     initGameEventMediator();
 }
