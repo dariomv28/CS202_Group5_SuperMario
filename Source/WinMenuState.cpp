@@ -34,7 +34,7 @@ void WinMenuState::initTexts() {
 
 
 	questionText.setFont(font);
-	questionText.setString("Left click or Press enter to continue");
+	questionText.setString("Press enter to continue");
 	questionText.setCharacterSize(30);
 	questionText.setFillColor(sf::Color::White);
 	centerText(questionText, window->getView().getCenter().y - 100);
@@ -68,7 +68,7 @@ void WinMenuState::updateGUI() {
 	updateBackground();
 	updateButtonHover(questionText, mousePosView);
 
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
 		this->gameState->endState();
 		this->endState();
 	}
