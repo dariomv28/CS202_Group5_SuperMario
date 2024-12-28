@@ -112,6 +112,7 @@ void UserData::saveData() {
 	file << completed.size() << std::endl;
 
 	for (auto& i : completed) {
+		std::cout << i.first << i.second << std::endl;
 		file << i.first << std::endl;
 		file << i.second << std::endl;
 	}
@@ -132,10 +133,11 @@ void UserData::loadData() {
 	std::ifstream file("SaveData.txt");
 	//Load the user's name
 
-	getline(file, name);
+	file >> name;
 	//Load the name character
 
 	file >> nameCharacter;
+	std::cout << nameCharacter << std::endl;
 
 	//Load the player
 	for (int i = 1; i <= 3; i++) {
@@ -156,6 +158,7 @@ void UserData::loadData() {
 		bool value;
 		file >> key;
 		file >> value;
+		std::cout << key << value << std::endl;
 		completed[key] = value;
 	}
 
