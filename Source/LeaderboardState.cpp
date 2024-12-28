@@ -148,7 +148,7 @@ void LeaderboardState::loadLeaderboardData()
     //borders.clear(); // Clear borders as well
 
     std::ifstream file("LeaderBoard.csv");
-    if (!file.is_open())
+    if (!file.is_open())    
     {
         throw std::runtime_error("ERROR::LEADERBOARDSTATE::COULD NOT OPEN LeaderBoard.csv");
     }
