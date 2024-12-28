@@ -267,12 +267,17 @@ void LeaderboardState::render(sf::RenderTarget* target)
     }
 
     // Render table data
+    
+    int counter = 15;
     for (const auto& row : tableData)
     {
+        if (counter == 0)
+			break;
         for (const auto& cell : row)
         {
             target->draw(cell);
         }
+        counter--;
     }
 
     // Render star shapes
