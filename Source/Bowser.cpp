@@ -188,13 +188,13 @@ void Bowser::updateSkill_1(const float& dt) {
 void Bowser::updateSkill_2(const float& dt) {
 	//std::cerr << "Bowser skill 2" << std::endl;
     eventMediator->spawnEnemy(new Goomba(sf::Vector2f(374, 768.f), sf::Vector2f(64, 64), 310, 1184));
-    eventMediator->spawnEnemy(new FlyingKoopa(sf::Vector2f(374, 100.f), sf::Vector2f(64, 64)));
+    eventMediator->spawnEnemy(new FlyingKoopa(sf::Vector2f(374, 100.f), sf::Vector2f(64, 64), 53.f, 1472.f));
 
 	eventMediator->spawnEnemy(new Koopa(sf::Vector2f(1184, 768.f), sf::Vector2f(64, 64), 310, 1184));
     //eventMediator->spawnEnemy(new FlyingKoopa(sf::Vector2f(1184, 530.f), sf::Vector2f(64, 64)));
 
 	//eventMediator->spawnEnemy(new Goomba(sf::Vector2f(700.f, 768.f), sf::Vector2f(64, 64), 310, 1184));
-    eventMediator->spawnEnemy(new FlyingKoopa(sf::Vector2f(700.f, 530.f), sf::Vector2f(64, 64)));
+    eventMediator->spawnEnemy(new FlyingKoopa(sf::Vector2f(700.f, 480.f), sf::Vector2f(64, 64), 357.f, 1170.f));
 }
 
 void Bowser::getDamaged() {

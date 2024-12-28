@@ -21,7 +21,6 @@ Mario::Mario(sf::Vector2f position, sf::Vector2f size, int health, int speed)
 
 
 Mario::~Mario() {
-   //elet   nimationComponen
 }
 
 void Mario::init() {

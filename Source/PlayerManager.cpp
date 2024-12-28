@@ -239,6 +239,7 @@ void PlayerManager::update(const float& dt) {
 }
 
 void PlayerManager::render(sf::RenderTarget* target) {
+	std::cout << position.x << " " << position.y << std::endl;
 	if (target) {
 		target->draw(entitySprite);
 	}
