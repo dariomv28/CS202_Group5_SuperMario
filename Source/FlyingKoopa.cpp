@@ -1,4 +1,5 @@
 #include "Headers/FlyingKoopa.h"
+#include "Headers/Bullet.h"
 
 FlyingKoopa::FlyingKoopa(): Enemy()
 {
@@ -109,6 +110,23 @@ void FlyingKoopa::updateAnimation(const float& dt)
     animationComponent->update(dt);
 }
 
+void FlyingKoopa::updateShooting(const float& dt) {
+    if (reloadTimer < reloadFire) {
+        reloadTimer += dt;
+    }
+    else {
+        reloadTimer = 0;
+        std::cerr << "Bowser shoot" << std::endl;
+        sf::Vector2f directionVector = sf::Vector2f(eventMediator->getPlayerPosition().x - this->getPosition().x,
+            eventMediator->getPlayerPosition().y - this->getPosition().y);
+        float length = sqrt(directionVector.x * directionVector.x + directionVector.y * directionVector.y);
+        sf::Vector2f direction = sf::Vector2f(directionVector.x / length, directionVector.y / length);
+        sf::Vector2f bulletVelocity = sf::Vector2f(direction.x * 400.f, direction.y * 400.f);
+        eventMediator->spawnPowerUp(new Bullet(this->getCenter(), sf::Vector2f(20, 20),
+            "bullet", "enemy", bulletVelocity));
+    }
+}
+
 void FlyingKoopa::update(const float& dt)
 {
     updateAnimation(dt);
@@ -136,6 +154,9 @@ void FlyingKoopa::update(const float& dt)
             eventMediator->deleteEnemy(this);
         }
     }
+	else {
+		updateShooting(dt);
+	}
     move(dt);
 }
 

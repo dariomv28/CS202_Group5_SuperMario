@@ -12,6 +12,8 @@ private:
     bool isAlive;
 
     float disappearDelay = 0.0f;
+    float reloadTimer = 0.0f;
+	const float reloadFire = 5.0f;
 
     std::unordered_map<std::string, sf::IntRect> spritesSheet;
 
@@ -30,6 +32,7 @@ public:
    // void setIsShelled(bool shelled);
 
     // Update function
+    void updateShooting(const float& dt);
     void update(const float& dt) override;
     void getDamaged() override;
 
