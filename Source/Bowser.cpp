@@ -8,9 +8,10 @@
 Bowser::Bowser()
 {
     walkSpeed = 20.f;   
+    maxHealth = 30;
 
     isAlive = true;
-    setHealth(2);
+    setHealth(maxHealth);
 
     currentAction = "WALK-";
     isAnimationInProgress = false;
@@ -37,6 +38,30 @@ Bowser::Bowser()
 
     // shooting
     reloadTimer = 0;
+
+    healthBarBackground.setSize(sf::Vector2f(HEALTH_BAR_WIDTH, HEALTH_BAR_HEIGHT));
+    healthBarBackground.setFillColor(sf::Color::Red);
+    healthBarBackground.setOutlineColor(sf::Color::Black);
+    healthBarBackground.setOutlineThickness(1.f);
+
+    // Initialize health bar foreground (green)
+    healthBarForeground.setSize(sf::Vector2f(HEALTH_BAR_WIDTH, HEALTH_BAR_HEIGHT));
+    healthBarForeground.setFillColor(sf::Color::Green);
+}
+
+void Bowser::updateHealthBar() {
+    // Calculate the position above Bowser's head
+    float healthBarX = position.x + (hitbox.getSize().x - HEALTH_BAR_WIDTH) / 2;
+    float healthBarY = position.y + HEALTH_BAR_OFFSET_Y;
+
+    // Update background position
+    healthBarBackground.setPosition(healthBarX, healthBarY);
+
+    // Update foreground position and width based on current health
+    float healthPercentage = static_cast<float>(getHealth()) / maxHealth;
+    float currentHealthWidth = HEALTH_BAR_WIDTH * healthPercentage;
+    healthBarForeground.setSize(sf::Vector2f(currentHealthWidth, HEALTH_BAR_HEIGHT));
+    healthBarForeground.setPosition(healthBarX, healthBarY);
 }
 
 Bowser::Bowser(sf::Vector2f position, sf::Vector2f size, float x_min, float x_max): Bowser()
@@ -50,6 +75,14 @@ Bowser::Bowser(sf::Vector2f position, sf::Vector2f size, float x_min, float x_ma
 
 Bowser::~Bowser()
 {
+}
+
+void Bowser::render(sf::RenderTarget* target) {
+    target->draw(entitySprite);
+
+    // Draw health bar
+    target->draw(healthBarBackground);
+    target->draw(healthBarForeground);
 }
 
 void Bowser::initAnimations() {
@@ -121,6 +154,7 @@ void Bowser::update(const float& dt) {
         eventMediator->applyExternalForce(this, dt);
         move(dt);
 	}
+    updateHealthBar();
 }
 
 void Bowser::updateAnimation(const float& dt) {

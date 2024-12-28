@@ -10,6 +10,7 @@ private:
 	float walkSpeed;
 	float x_min = 32.0f;
 	float x_max = 13416.0f;
+	float maxHealth;
 
 	bool isAlive;
 
@@ -35,13 +36,17 @@ private:
 	float AnimationTimer;
 	bool doneAnimation = false;
 	bool doingAnimation = false;
-		// blind
-		const float blindDuration = 15.0f;
-		float blindTimer;
-		// render enemies
 
+	// blind
+	const float blindDuration = 15.0f;
+	float blindTimer;
+	// render enemies
 
-		
+	sf::RectangleShape healthBarBackground;
+	sf::RectangleShape healthBarForeground;
+	const float HEALTH_BAR_WIDTH = 100.f;
+	const float HEALTH_BAR_HEIGHT = 10.f;
+	const float HEALTH_BAR_OFFSET_Y = -20.f;
 
 	void initAnimations();
 public:
@@ -62,12 +67,16 @@ public:
     void reactToBlockCollision(int collidedSide) override;
 
 	//void summonMinions(); //Summon Goombas and Koopa
-	///void summonCircleFireballs();
+	//void summonCircleFireballs();
 	//void summon
+
 	void updateSkill_1(const float& dt);
 	void updateSkill_2(const float& dt);
 
 	void setIsAlive(bool alive) override;
 	bool getIsAlive() const override;
+	void updateHealthBar();
+
+	void render(sf::RenderTarget* target) override;
 };
 
