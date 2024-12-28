@@ -130,7 +130,7 @@ void EnterNameState::updateInput(const sf::Event& event) {
             }
         }
         else if (event.text.unicode >= 32 && event.text.unicode <= 126) { // Printable characters
-            if (this->userInput.size() < 20) { // Limit input to 20 characters
+            if (event.text.unicode != 32 && this->userInput.size() < 20) { // Limit input to 20 characters
                 this->userInput += static_cast<char>(event.text.unicode);
             }
         }

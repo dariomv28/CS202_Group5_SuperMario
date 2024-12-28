@@ -72,16 +72,12 @@ void PeteyPiranha::getDamaged() {
 }
 
 void PeteyPiranha::reactToPlayerCollision(int collidedSide) {
-
     if (collidedSide == Collide_Top) {
         if (isMouthOpen && !hasDamagedPlayer) {
 
             eventMediator->damagePlayer(-1);
             hasDamagedPlayer = true;
         }
-    }
-    else {
-
     }
 }
 
@@ -91,7 +87,6 @@ void PeteyPiranha::reactToBlockCollision(int collidedSide) {
 
 void PeteyPiranha::updateAnimation(const float& dt) {
     if (!isAlive) {
-
         return;
     }
 

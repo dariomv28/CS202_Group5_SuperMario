@@ -6,6 +6,7 @@
 #include "Headers/Enemy.h"
 #include "Headers/PowerUpObject.h"
 #include "Headers/Trampoline.h"
+#include "Headers/PeteyPiranha.h"
 
 PhysicsEngine::PhysicsEngine() {
 	gravity = sf::Vector2f(0, 2500.f);
@@ -191,6 +192,7 @@ void PhysicsEngine::resolveCollisionEnemyBlock(std::vector<Enemy*>& enemies, std
 	for (auto& enemy : enemies) {
 		for (auto& block : blocks) {
 			if (!block->getExist()) continue;
+
 			//Resolve the right side
 			Side Type = CollisionType(enemy, block);
 			
@@ -243,6 +245,11 @@ void PhysicsEngine::resolveCollisionEnemyEnemy(std::vector<Enemy*>& enemies, con
 
 			// Skip if either enemy is not alive
 			if (!enemy1->getIsAlive() || !enemy2->getIsAlive()) {
+				continue;
+			}
+
+			// Skip if one of the enemy is PeteyPiranha
+			if (dynamic_cast<PeteyPiranha*>(enemy1) || dynamic_cast<PeteyPiranha*>(enemy2)) {
 				continue;
 			}
 
