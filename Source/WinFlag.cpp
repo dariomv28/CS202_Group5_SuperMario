@@ -101,12 +101,13 @@ void WinFlag::update(const float& dt) {
 }
 
 void WinFlag::reactToCollison(int collidedSide) {
-    if (collidedSide == Collide_Left || collidedSide == Collide_Top) {
+    if (collidedSide == Collide_Left || collidedSide == Collide_Top || collidedSide == Collide_Bottom) {
         if (!isAnimating && animationState == FlagState::IDLE) {
             animationState = FlagState::SLIDING;
             isAnimating = true;
             animationTimer = 0.0f;
             currentFrame = 0;
+            this->setExist(false);
         }
     }
 }
@@ -116,4 +117,4 @@ void WinFlag::render(sf::RenderTarget* target) {
     target->draw(poleSprite);
     target->draw(sphereSprite);
     // target->draw(hitbox);
-}
+}   
