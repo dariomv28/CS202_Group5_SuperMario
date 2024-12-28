@@ -10,22 +10,16 @@ private:
     float x_max;
 
     bool isAlive;
-  //  bool isShelled;
-  //  float shellTimer;
+
     float disappearDelay = 0.0f;
 
-    // Animation sprite sheet
     std::unordered_map<std::string, sf::IntRect> spritesSheet;
 
-    // Current action string
- //   std::string currentAction;
- //   bool isAnimationInProgress;
-
-    // Initialization
     virtual void initAnimations();
 public:
     FlyingKoopa();
-    FlyingKoopa(sf::Vector2f position, sf::Vector2f size, float x_min = 32.0f, float x_max = 13416.0f);
+    FlyingKoopa(sf::Vector2f position, sf::Vector2f size);
+    FlyingKoopa(sf::Vector2f position, sf::Vector2f size, float x_min, float x_max);
 
     void updateAnimation(const float& dt) override;
 

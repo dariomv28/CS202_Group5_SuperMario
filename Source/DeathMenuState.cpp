@@ -101,7 +101,7 @@ void DeathMenuState::render(sf::RenderTarget* target)
         target = this->window;
 
     if (gameState)
-        gameState->renderLevelManager(target);
+        gameState->render(target);
 
     target->draw(this->background);
     target->draw(this->titleText);

@@ -23,6 +23,9 @@ void AudioSystem::init() {
 	if (!mushroomSoundBuffer.loadFromFile("Source/Resources/audio/eat mushroom.mp3")) {
 		throw("ERROR::AUDIOSYSTEM::CANNOT_LOAD_COIN_MUSHROOM_EFFECT");
 	}
+	if (!shotSoundBuffer.loadFromFile("Source/Resources/audio/shoot.mp3")) {
+		throw("ERROR::AUDIOSYSTEM::CANNOT_LOAD_SHOT_SOUND_EFFECT");
+	}
 	if (!brickSoundBuffer.loadFromFile("Source/Resources/audio/break brick.wav")) {
 		throw("ERROR::AUDIOSYSTEM::CANNOT_LOAD_BRICK_SOUND_EFFECT");
 	}
@@ -51,9 +54,14 @@ void AudioSystem::init() {
 	brickSound.setVolume(100.0f);
 	mushroomSound.setBuffer(mushroomSoundBuffer);
 	mushroomSound.setVolume(100.0f);
+	shotSound.setBuffer(shotSoundBuffer);
+	shotSound.setVolume(100.0f);
 }
 
 void AudioSystem::playMusic() {
+	if (!allowMusic) {
+		return;
+	}
 	if (currentBackgroundMusic == "MainMenu")
 		return;
 	currentBackgroundMusic = "MainMenu";
@@ -68,6 +76,9 @@ void AudioSystem::stopMusic() {
 }
 
 void AudioSystem::playLevel1Music() {
+	if (!allowMusic) {
+		return;
+	}
 	if (currentBackgroundMusic == "World1")
 		return;
 	currentBackgroundMusic = "World1";
@@ -81,6 +92,9 @@ void AudioSystem::stopLevel1Music() {
 }
 
 void AudioSystem::playLevel2Music() {
+	if (!allowMusic) {
+		return;
+	}
 	if (currentBackgroundMusic == "World2")
 		return;
 	currentBackgroundMusic = "World2";
@@ -94,6 +108,9 @@ void AudioSystem::stopLevel2Music() {
 }
 
 void AudioSystem::playLevel3Music() {
+	if (!allowMusic) {
+		return;
+	}
 	if (currentBackgroundMusic == "World3")
 		return;
 	currentBackgroundMusic = "World3";
@@ -107,13 +124,14 @@ void AudioSystem::stopLevel3Music() {
 }
 
 void AudioSystem::playJumpSound() {
-
-if (jumpSound.getBuffer() == nullptr) {
-		std::cerr << "Jump sound buffer is null! Cannot play sound." << std::endl;
+	if (!allowSound) {
 		return;
-}
-jumpSound.play();
-
+	}
+	if (jumpSound.getBuffer() == nullptr) {
+			std::cerr << "Jump sound buffer is null! Cannot play sound." << std::endl;
+			return;
+	}
+	jumpSound.play();
 }
 
 void AudioSystem::stopJumpSound() {
@@ -121,15 +139,22 @@ void AudioSystem::stopJumpSound() {
 }
 
 void AudioSystem::playbuttonSound() {
+	if (!allowSound) {
+		return;
+	}
 	buttonSound.play();
 }
 
 void AudioSystem::stopButtonSound() {
-
+	if (!allowSound) {
+		return;
+	}
 }
 
 void AudioSystem::playCoinSound() {
-
+	if (!allowSound) {
+		return;
+	}
 	if (coinSound.getBuffer() == nullptr) {
 		std::cerr << "Jump sound buffer is null! Cannot play sound." << std::endl;
 		return;
@@ -138,7 +163,9 @@ void AudioSystem::playCoinSound() {
 }
 
 void AudioSystem::stopCoinSound() {
-
+	if (!allowSound) {
+		return;
+	}
 }
 
 void AudioSystem::stopAllMusic() {
@@ -160,7 +187,44 @@ void AudioSystem::setEventMediator(GameEventMediator* eventMediator) {
 	this->eventMediator = eventMediator;
 }
 
+void AudioSystem::setAllowMusic(bool allowMusic) {
+	this->allowMusic = allowMusic;
+	if (allowMusic) {
+		if (currentBackgroundMusic == "Mainmenu") {
+			stopAllMusic();
+			music.setLoop(true);
+			music.play();
+		}
+		else if (currentBackgroundMusic == "World1") {
+			stopAllMusic();
+			level1Music.setLoop(true);
+			level1Music.play();
+		}
+		else if (currentBackgroundMusic == "World2") {
+			stopAllMusic();
+			level2Music.setLoop(true);
+			level2Music.play();
+		}
+		else if (currentBackgroundMusic == "World3") {
+			stopAllMusic();
+			level3Music.setLoop(true);
+			level3Music.play();
+		}
+	}
+	else {
+		stopAllMusic();
+	}
+}
+
+void AudioSystem::setAllowSound(bool allowSound) {
+	this->allowSound = allowSound;
+}
+
+
 void AudioSystem::playBrickDestroyedSound() {
+	if (!allowSound) {
+		return;
+	}
 	if (brickSound.getBuffer() == nullptr) {
 		std::cerr << "Jump sound buffer is null! Cannot play sound." << std::endl;
 		return;
@@ -203,5 +267,12 @@ void AudioSystem::resume() {
 }
 
 void AudioSystem::playMushroomSound() {
+	if (!allowSound) {
+		return;
+	}
 	mushroomSound.play();
+}
+
+void AudioSystem::playShotSound() {
+	shotSound.play();
 }

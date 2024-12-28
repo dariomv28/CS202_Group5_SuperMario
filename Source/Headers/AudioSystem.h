@@ -14,15 +14,20 @@ private:
 	sf::Sound coinSound;
 	sf::Sound brickSound;
 	sf::Sound mushroomSound;
+	sf::Sound shotSound;
 	sf::SoundBuffer jumpSoundBuffer;
 	sf::SoundBuffer buttonSoundBuffer;
 	sf::SoundBuffer coinSoundBuffer;
 	sf::SoundBuffer brickSoundBuffer;
 	sf::SoundBuffer mushroomSoundBuffer;
+	sf::SoundBuffer shotSoundBuffer;
 	std::string currentBackgroundMusic;
 
 	bool isInitialized = false;
 	bool isStopped = false;
+
+	bool allowMusic = true;
+	bool allowSound = true;
 
 	GameEventMediator* eventMediator;
 public:
@@ -44,6 +49,7 @@ public:
 	void stopCoinSound();
 	void playBrickDestroyedSound();
 	void playMushroomSound();
+	void playShotSound();
 
 	sf::SoundBuffer& getJumpSoundBuffer();
 	sf::SoundBuffer& getButtonSoundBuffer();
@@ -58,7 +64,16 @@ public:
 	void stopAllMusic();
 
 	void setEventMediator(GameEventMediator* eventMediator);
+	void setAllowMusic(bool allowMusic);
+	void setAllowSound(bool allowSound);
 
+	bool getAllowMusic() {
+		return allowMusic;
+	}
+
+	bool getAllowSound() {
+		return allowSound;
+	}
 
 	static AudioSystem* getInstance() {
 		if (instance == nullptr) {

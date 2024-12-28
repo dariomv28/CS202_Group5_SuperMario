@@ -2,10 +2,11 @@
 #include "Headers/MainMenuState.h"
 #include "Headers/GUI.h"
 #include "Headers/GameState.h"
+#include "Headers/SettingState.h"
 
 void PauseMenuState::initVariables()
 {
-    nButtons = 3;
+    nButtons = 4;
     btn_Width = 400;
     btn_Height = 75;
     btn_CharSize = 20;
@@ -55,6 +56,17 @@ void PauseMenuState::initButtons()
         idleColor, hoverColor, activeColor,
         sf::Color(255, 255, 255, 50), sf::Color(255, 255, 255, 100)
     );
+    
+    y += btn_Height * 1.5;
+    buttons[PauseMenu::BTN_SETTING] = new GUI::TextButton(false,
+        x, y, btn_Width, btn_Height,
+        &font, "SETTING", btn_CharSize,
+        textIdleColor, textHoverColor, textActiveColor,
+        idleColor, hoverColor, activeColor,
+        sf::Color(255, 255, 255, 50), sf::Color(255, 255, 255, 100)
+    );
+
+
 
     y += btn_Height * 1.5;
     buttons[PauseMenu::BTN_MAINMENU] = new GUI::TextButton(false,
@@ -100,6 +112,11 @@ void PauseMenuState::updateGUI()
 		this->gameState->reloadLevel();
 		this->endState();
 	}
+	else if (buttons[PauseMenu::BTN_SETTING]->isPressed())
+	{
+		this->states->push(new SettingState(stateData, gameState));
+	}
+	else
     if (buttons[PauseMenu::BTN_MAINMENU]->isPressed())
     {
         this->gameState->endState();
@@ -130,7 +147,7 @@ void PauseMenuState::render(sf::RenderTarget* target)
         target = this->window;
 
     if (gameState)
-        gameState->renderLevelManager(target);
+        gameState->render(target);
 
     target->draw(this->background);
 
@@ -147,7 +164,8 @@ void PauseMenuState::updateButtonPositions() {
 
     buttons[PauseMenu::BTN_CONTINUE]->setPosition(x, y);
 	buttons[PauseMenu::BTN_SAVEGAME]->setPosition(x, y + btn_Height * 1.5);
-    buttons[PauseMenu::BTN_MAINMENU]->setPosition(x, y + btn_Height * 3.0);
+    buttons[PauseMenu::BTN_SETTING]->setPosition(x, y + btn_Height * 3.0);
+    buttons[PauseMenu::BTN_MAINMENU]->setPosition(x, y + btn_Height * 4.5);
 }
 
 void PauseMenuState::updateBackground()

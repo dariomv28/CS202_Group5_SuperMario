@@ -84,7 +84,7 @@ void WinMenuState::render(sf::RenderTarget* target) {
 		target = window;
 	}
 	if (gameState)
-		gameState->renderLevelManager(target);
+		gameState->render(target);
 
 	target->draw(background);
 	target->draw(titleText);

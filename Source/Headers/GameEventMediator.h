@@ -96,6 +96,7 @@ public:
 	void playJumpSound();
 	void playBrickDestroyedSound();
 	void playMushroomSound();
+	void playShotSound();
 
 	PlayerManager*& getPlayer() { return player; }
 };

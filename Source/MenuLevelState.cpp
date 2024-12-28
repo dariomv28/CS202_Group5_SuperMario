@@ -1,6 +1,7 @@
 #include "Headers/MenuLevelState.h"
 #include "Headers/GameState.h"
 #include "Headers/FireBuff.h"
+#include "Headers/SettingState.h"
 
 MenuLevelState::MenuLevelState(StateData* stateData, int world) : MainMenuState(stateData),level(0)
 {
@@ -33,7 +34,7 @@ MenuLevelState::~MenuLevelState()
 void MenuLevelState::initButtons()
 {
 	float x = window->getSize().x / 2 - btn_Width / 2;
-	float y = window->getSize().y / 2.2;
+	float y = window->getSize().y / 2.75;
 
 	// Init World text
 	worldText.setFont(fontTitle);
@@ -61,7 +62,7 @@ void MenuLevelState::initButtons()
 	sf::Color textHoverColor(255, 255, 200, 255);
 	sf::Color textActiveColor(255, 255, 255, 255);
 
-	buttons[BTN_LEVEL1] = new GUI::TextButton(false,
+	buttons[LevelMenu::BTN_LEVEL1] = new GUI::TextButton(false,
 		x, y, btn_Width, btn_Height,
 		&font, "LEVEL 1", btn_CharSize,
 		textIdleColor, textHoverColor, textActiveColor,
@@ -70,7 +71,7 @@ void MenuLevelState::initButtons()
 	);
 
 	y += btn_Height * 1.5;
-	buttons[BTN_LEVEL2] = new GUI::TextButton(false,
+	buttons[LevelMenu::BTN_LEVEL2] = new GUI::TextButton(false,
 		x, y, btn_Width, btn_Height,
 		&font, "LEVEL 2", btn_CharSize,
 		textIdleColor, textHoverColor, textActiveColor,
@@ -79,7 +80,7 @@ void MenuLevelState::initButtons()
 	);
 
 	y += btn_Height * 1.5;
-	buttons[BTN_LEVEL3] = new GUI::TextButton(false,
+	buttons[LevelMenu::BTN_LEVEL3] = new GUI::TextButton(false,
 		x, y, btn_Width, btn_Height,
 		&font, "LEVEL 3", btn_CharSize,
 		textIdleColor, textHoverColor, textActiveColor,
@@ -88,7 +89,16 @@ void MenuLevelState::initButtons()
 	);
 
 	y += btn_Height * 1.5;
-	buttons[BTN_BACK] = new GUI::TextButton(false,
+	buttons[LevelMenu::BTN_SETTING] = new GUI::TextButton(false,
+		x, y, btn_Width, btn_Height,
+		&font, "SETTING", btn_CharSize,
+		textIdleColor, textHoverColor, textActiveColor,
+		idleColor, hoverColor, activeColor,
+		sf::Color(255, 255, 255, 50), sf::Color(255, 255, 255, 100)
+	);
+
+	y += btn_Height * 1.5;
+	buttons[LevelMenu::BTN_BACK] = new GUI::TextButton(false,
 		x, y, btn_Width, btn_Height,
 		&font, "BACK", btn_CharSize,
 		textIdleColor, textHoverColor, textActiveColor,
@@ -139,21 +149,24 @@ void MenuLevelState::updateGUI()
 	// buttons[BTN_LEVEL3]->setDisable(!this->stateData->userData->getCompleted(world, 2));
     
     // Existing mouse press handlers
-    if (buttons[BTN_LEVEL1]->isPressed())
+    if (buttons[LevelMenu::BTN_LEVEL1]->isPressed())
     {
 		transitioningOut = true;
 		level = 1; // Set level to transition to
     }
-    else if (buttons[BTN_LEVEL2]->isPressed())
+    else if (buttons[LevelMenu::BTN_LEVEL2]->isPressed())
     {
 		transitioningOut = true;
 		level = 2; // Set level to transition to
     }
-    else if (buttons[BTN_LEVEL3]->isPressed()) {
+    else if (buttons[LevelMenu::BTN_LEVEL3]->isPressed()) {
 		transitioningOut = true;
 		level = 3; // Set level to transition to
-    }
-    else if (buttons[BTN_BACK]->isPressed())
+    } else if (buttons[LevelMenu::BTN_SETTING]->isPressed())
+	{
+		this->states->push(new SettingState(stateData, this));
+	}
+    else if (buttons[LevelMenu::BTN_BACK]->isPressed())
     {
         endState();
     }

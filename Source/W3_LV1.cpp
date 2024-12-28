@@ -7,7 +7,7 @@ W3_LV1::W3_LV1(PlayerManager* player, sf::RenderWindow* window):
 
 	std::unordered_multimap<std::string, std::pair<float, std::pair<float, std::pair<float, float>>>> boundaries = {
 		{"G", {2100, {576, {2013, 2545}}} },
-		{"H", {300, {134, {200, 450}}} },
+		{"H", {300, {500, {100, 550}}} },
 		
 
 		{"G", {9200, {134, {9197, 9855}}} },

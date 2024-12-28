@@ -81,12 +81,6 @@ void GameState::render(sf::RenderTarget* target) {
     }
 }
 
-void GameState::renderLevelManager(sf::RenderTarget* target) {
-    if (this->levelManager)
-        this->levelManager->render(target);
-}
-
-
 void GameState::checkPause() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
         this->states->push(new PauseMenuState(this->stateData, this));

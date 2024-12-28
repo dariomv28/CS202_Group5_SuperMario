@@ -289,3 +289,7 @@ void GameEventMediator::playBrickDestroyedSound() {
 void GameEventMediator::playMushroomSound() {
 	audio->playMushroomSound();
 }
+
+void GameEventMediator::playShotSound() {
+	audio->playShotSound();
+}
