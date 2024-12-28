@@ -1,7 +1,5 @@
 ﻿#include "Headers/LevelGUI.h"
 
-
-
 LevelGUI::LevelGUI() {
     
     this->health = 3;
@@ -32,7 +30,7 @@ LevelGUI::LevelGUI() {
     this->characterName.setCharacterSize(30);
     this->characterName.setFillColor(sf::Color::White);
     this->characterName.setPosition(10.f, 10.f);
-    this->characterName.setString("Mario");
+    this->characterName.setString("Health");
     
     /*this->healthBar.setSize(sf::Vector2f(400.f, 20.f));
     this->healthBar.setFillColor(sf::Color::Green);
