@@ -1,4 +1,4 @@
-hungdeptrai
+.
 Mario
 3
 0
@@ -34,11 +34,4 @@ W3_LV3
 0
 W3_LV1
 0
-W3_LV2
-0
-W1_LV3
-0
-W2_LV1
-0
-W2_LV3
 0

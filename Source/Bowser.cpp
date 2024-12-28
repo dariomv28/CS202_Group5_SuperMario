@@ -133,7 +133,7 @@ void Bowser::update(const float& dt) {
         }
         else
         {
-            skill = random(1, 2);
+            skill = 2;
 			skillTimer = 0;
 			AnimationTimer = 0;
 			if (skill == 1)
@@ -191,10 +191,10 @@ void Bowser::updateSkill_2(const float& dt) {
     eventMediator->spawnEnemy(new FlyingKoopa(sf::Vector2f(374, 100.f), sf::Vector2f(64, 64)));
 
 	eventMediator->spawnEnemy(new Koopa(sf::Vector2f(1184, 768.f), sf::Vector2f(64, 64), 310, 1184));
-    eventMediator->spawnEnemy(new FlyingKoopa(sf::Vector2f(1184, 500.f), sf::Vector2f(64, 64)));
+    //eventMediator->spawnEnemy(new FlyingKoopa(sf::Vector2f(1184, 530.f), sf::Vector2f(64, 64)));
 
-	eventMediator->spawnEnemy(new Goomba(sf::Vector2f(700.f, 768.f), sf::Vector2f(64, 64), 310, 1184));
-    eventMediator->spawnEnemy(new FlyingKoopa(sf::Vector2f(700.f, 500.f), sf::Vector2f(64, 64)));
+	//eventMediator->spawnEnemy(new Goomba(sf::Vector2f(700.f, 768.f), sf::Vector2f(64, 64), 310, 1184));
+    eventMediator->spawnEnemy(new FlyingKoopa(sf::Vector2f(700.f, 530.f), sf::Vector2f(64, 64)));
 }
 
 void Bowser::getDamaged() {

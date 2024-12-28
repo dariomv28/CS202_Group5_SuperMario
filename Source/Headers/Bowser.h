@@ -30,7 +30,7 @@ private:
 	// skill
 	int skill;
 	const float skillDuration = 20.0f;
-	const float animationtime = 3.0f;
+	const float animationtime = 3.5f;
 	float skillTimer;
 	int stepAnimationSkill = 0;
 	float AnimationTimer;

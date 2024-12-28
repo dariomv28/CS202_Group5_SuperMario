@@ -80,7 +80,7 @@ void MenuLevelState::initButtons()
 	);
 
 	y += btn_Height * 1.5;
-	buttons[LevelMenu::BTN_LEVEL3] = new GUI::TextButton(false,
+	buttons[LevelMenu::BTN_LEVEL3] = new GUI::TextButton(true,
 		x, y, btn_Width, btn_Height,
 		&font, "LEVEL 3", btn_CharSize,
 		textIdleColor, textHoverColor, textActiveColor,
