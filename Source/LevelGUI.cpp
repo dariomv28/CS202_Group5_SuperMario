@@ -1,7 +1,5 @@
 ﻿#include "Headers/LevelGUI.h"
 
-
-
 LevelGUI::LevelGUI() {
     
     this->health = 3;
