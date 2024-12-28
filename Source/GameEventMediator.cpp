@@ -161,7 +161,7 @@ void GameEventMediator::addPlayerHealth(int health) {
 }
 
 void GameEventMediator::damagePlayer(int health) {
-	//if (!player->immortal) player->setHealth(player->getHealth() + health);
+	if (!player->immortal) player->setHealth(player->getHealth() + health);
 	if (!player->isFlashing) {
 		player->startFlashing();
 	}
