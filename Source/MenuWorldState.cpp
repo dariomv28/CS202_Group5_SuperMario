@@ -92,6 +92,10 @@ void MenuWorldState::updateGUI()
 		it->update(mousePosWindow);
 	}
 
+	buttons[WorldMenu::BTN_WORLD2]->setDisable(!this->stateData->userData->getCompleted(1, 3));
+	buttons[WorldMenu::BTN_WORLD3]->setDisable(!this->stateData->userData->getCompleted(2, 3));
+
+
 	if (buttons[WorldMenu::BTN_WORLD1]->isPressed())
 	{
 		world = 1;

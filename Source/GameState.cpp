@@ -89,7 +89,7 @@ void GameState::checkPause() {
 
 void GameState::checkDeath() {
 	if (clonePlayer->getHealth() <= 0) {
-        for (int i = 1; i < levelID; i++)
+        for (int i = 1; i <= 3; i++)
         {
 			this->stateData->userData->setCompleted(worldID, i, false);
             this->stateData->userData->setScore(worldID, i, 0);
