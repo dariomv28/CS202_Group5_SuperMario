@@ -159,6 +159,8 @@ void LeaderboardState::loadLeaderboardData()
     // Skip the header line
     std::getline(file, line);
 
+    
+
     while (std::getline(file, line))
     {
         std::stringstream ss(line);
@@ -182,8 +184,20 @@ void LeaderboardState::loadLeaderboardData()
         w2 = std::stoi(level4) + std::stoi(level5) + std::stoi(level6);
         w3 = std::stoi(level7) + std::stoi(level8) + std::stoi(level9);
         total = w1 + w2 + w3;
-
-        if (total > 0)
+        if (total <= 0) continue;
+        
+        bool found = false;
+        for (int i = 0; i < players.size(); i++) {
+            if (name == std::get<0>(players[i])) {
+                std::get<1>(players[i]) = w1;
+				std::get<2>(players[i]) = w2;
+				std::get<3>(players[i]) = w3;
+				std::get<4>(players[i]) = total;
+                found = true;
+                break;
+            }
+        }
+        if (!found)
         {
             players.emplace_back(name, w1, w2, w3, total);
         }
