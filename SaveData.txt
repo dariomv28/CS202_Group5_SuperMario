@@ -1,4 +1,4 @@
-kiet
+hungdeptrai
 Mario
 3
 0
@@ -12,12 +12,12 @@ W1_LV3
 W2_LV3
 0
 W1_LV1
-1
+0
 W1_LV2
 0
 9
 W1_LV1
-1700
+0
 W2_LV2
 0
 W1_LV2
