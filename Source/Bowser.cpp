@@ -10,7 +10,7 @@ Bowser::Bowser()
     walkSpeed = 20.f;   
 
     isAlive = true;
-    setHealth(50);
+    setHealth(2);
 
     currentAction = "WALK-";
     isAnimationInProgress = false;
@@ -154,16 +154,30 @@ void Bowser::updateSkill_1(const float& dt) {
 void Bowser::updateSkill_2(const float& dt) {
 	//std::cerr << "Bowser skill 2" << std::endl;
     eventMediator->spawnEnemy(new Goomba(sf::Vector2f(374, 768.f), sf::Vector2f(64, 64), 310, 1184));
-	//eventMediator->spawnEnemy(new FlyingKoopa(sf::Vector2f(374, 1000.f), sf::Vector2f(64, 64), 310, 1184));
+    eventMediator->spawnEnemy(new FlyingKoopa(sf::Vector2f(374, 100.f), sf::Vector2f(64, 64)));
 
 	eventMediator->spawnEnemy(new Koopa(sf::Vector2f(1184, 768.f), sf::Vector2f(64, 64), 310, 1184));
-	//eventMediator->spawnEnemy(new FlyingKoopa(sf::Vector2f(1184, 1000.f), sf::Vector2f(64, 64), 310, 1184));
+    eventMediator->spawnEnemy(new FlyingKoopa(sf::Vector2f(1184, 500.f), sf::Vector2f(64, 64)));
 
 	eventMediator->spawnEnemy(new Goomba(sf::Vector2f(700.f, 768.f), sf::Vector2f(64, 64), 310, 1184));
-	//eventMediator->spawnEnemy(new FlyingKoopa(sf::Vector2f(700.f, 1000.f), sf::Vector2f(64, 64), 310, 1184));
+    eventMediator->spawnEnemy(new FlyingKoopa(sf::Vector2f(700.f, 500.f), sf::Vector2f(64, 64)));
 }
 
 void Bowser::getDamaged() {
+    // Decrease health by 1 when hit
+    int currentHealth = getHealth();
+    currentHealth--;
+    setHealth(currentHealth);
+
+    // Check if Bowser is defeated
+    if (currentHealth <= 0) {
+        setIsAlive(false);
+        std::cerr << "Bowser defeated!" << std::endl;
+        eventMediator->setFinishedLevel(true);
+    }
+    else {
+        std::cerr << "Bowser health: " << currentHealth << std::endl;
+    }
 }
 
 void Bowser::move(const float& dt) {
