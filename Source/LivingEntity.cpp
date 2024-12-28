@@ -130,6 +130,6 @@ void LivingEntity::update(const float& dt) {
 void LivingEntity::render(sf::RenderTarget* target) {
 	if (target) {
 		target->draw(entitySprite);
-		target->draw(hitbox);
+		// target->draw(hitbox);
 	}
 }

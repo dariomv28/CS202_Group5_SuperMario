@@ -28,9 +28,7 @@ W1_LV1::W1_LV1(PlayerManager* player, sf::RenderWindow *window):
 
 	Enemies.push_back(new Goomba(sf::Vector2f(5800.f, 768.0f), sf::Vector2f(64.f, 64.f), 5706.f, 8512.f));
 	Enemies.push_back(new Goomba(sf::Vector2f(5900.f, 768.0f), sf::Vector2f(64.f, 64.f), 5706.f, 8512.f));
-	Enemies.push_back(new Goomba(sf::Vector2f(6000.f, 768.0f), sf::Vector2f(64.f, 64.f), 5706.f, 8512.f));
 
-	Enemies.push_back(new Koopa(sf::Vector2f(7000.f, 768.0f), sf::Vector2f(64.f, 64.f), 5706.f, 8512.f));
 	Enemies.push_back(new Koopa(sf::Vector2f(7100.f, 768.0f), sf::Vector2f(64.f, 64.f), 5706.f, 8512.f));
 	Enemies.push_back(new Koopa(sf::Vector2f(7200.f, 768.0f), sf::Vector2f(64.f, 64.f), 5706.f, 8512.f));
 
