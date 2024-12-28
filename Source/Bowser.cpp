@@ -1,6 +1,9 @@
 #include "Headers/Bowser.h"
 #include "Headers/Rocket.h"
 #include "Headers/Bullet.h"
+#include "Headers/Goomba.h"
+#include "Headers/FlyingKoopa.h"
+#include "Headers/Koopa.h"
 
 Bowser::Bowser()
 {
@@ -30,6 +33,7 @@ Bowser::Bowser()
     hitbox.setFillColor(sf::Color::Transparent);
     hitbox.setOutlineColor(sf::Color::Green);
     hitbox.setOutlineThickness(-1.f);
+    skill = random(1, 2);
 
     // shooting
     reloadTimer = 0;
@@ -50,13 +54,21 @@ Bowser::~Bowser()
 
 void Bowser::initAnimations() {
     spritesSheet = {
-        { "WALK-1", sf::IntRect(1, 186, 32, 35) },  
+        { "WALK-1", sf::IntRect(1, 186, 32, 35) },
         { "WALK-2", sf::IntRect(34, 186, 32, 35) },
         { "WALK-3", sf::IntRect(67, 186, 32, 35) },
+		{ "FIRE-1", sf::IntRect(100, 186, 32, 35) },
+		{ "FIRE-2", sf::IntRect(133, 186, 32, 35) },
+		{ "FIRE-3", sf::IntRect(166, 186, 32, 35)},
+		{ "FIRE-4", sf::IntRect(199, 186, 32, 35) },
 
 		{ "WALKR-1", sf::IntRect(795, 186, 32, 35) },
 		{ "WALKR-2", sf::IntRect(762, 186, 32, 35) },
-		{ "WALKR-3", sf::IntRect(729, 186, 32, 35) }
+		{ "WALKR-3", sf::IntRect(729, 186, 32, 35) },
+		{ "FIRER-1", sf::IntRect(696, 186, 32, 35) },
+		{ "FIRER-2", sf::IntRect(663, 186, 32, 35) },
+		{ "FIRER-3", sf::IntRect(630, 186, 32, 35) },
+		{ "FIRER-4", sf::IntRect(597, 186, 32, 35) }
     };
 }
 
@@ -71,7 +83,7 @@ void Bowser::updateShooting(const float& dt) {
             eventMediator->getPlayerPosition().y - this->getPosition().y);
         float length = sqrt(directionVector.x * directionVector.x + directionVector.y * directionVector.y);
         sf::Vector2f direction = sf::Vector2f(directionVector.x / length, directionVector.y / length);
-        sf::Vector2f bulletVelocity = sf::Vector2f(direction.x * 600.f, direction.y * 600.f);
+        sf::Vector2f bulletVelocity = sf::Vector2f(direction.x * 500.f, direction.y * 500.f);
         eventMediator->spawnPowerUp(new Bullet(this->getCenter(), sf::Vector2f(64, 64),
             "bullet","enemy", bulletVelocity));
     }
@@ -79,21 +91,76 @@ void Bowser::updateShooting(const float& dt) {
 
 void Bowser::update(const float& dt) {
     updateAnimation(dt);
-    updateVelocity(dt);
-    updateShooting(dt);
-    eventMediator->applyExternalForce(this, dt);
-	move(dt);
+	if (skillDuration <= skillTimer) {
+        updateVelocity(dt);
+        eventMediator->applyExternalForce(this, dt);
+        if (AnimationTimer <= animationtime)
+        {
+			AnimationTimer += dt;
+        }
+        else
+        {
+            skill = random(1, 2);
+			skillTimer = 0;
+			AnimationTimer = 0;
+			if (skill == 1)
+			{
+				updateSkill_1(dt);
+			}
+            else if (skill == 2)
+            {
+                updateSkill_2(dt);
+            }
+            
+        }
+	}
+	else {
+		skillTimer += dt;
+        updateVelocity(dt);
+        updateShooting(dt);
+        eventMediator->applyExternalForce(this, dt);
+        move(dt);
+	}
 }
 
 void Bowser::updateAnimation(const float& dt) {
-    if (this->isMoveLeft()) {
-        animationComponent->setAnimationEnemies("WALKR-", spritesSheet, 0.2f);
+    if (skillDuration <= skillTimer)
+    {
+		//std::cerr << "Bowser skill" << std::endl;
+        if (this->isMoveLeft()) {
+            animationComponent->setAnimationEnemies("FIRER-", spritesSheet, 0.2f);
+        }
+        else if (this->isMoveRight()) {
+            animationComponent->setAnimationEnemies("FIRE-", spritesSheet, 0.2f);
+        }
     }
-    else if (this->isMoveRight()) {
-        animationComponent->setAnimationEnemies("WALK-", spritesSheet, 0.2f);
+    else
+    {
+        if (this->isMoveLeft()) {
+            animationComponent->setAnimationEnemies("WALKR-", spritesSheet, 0.2f);
+        }
+        else if (this->isMoveRight()) {
+            animationComponent->setAnimationEnemies("WALK-", spritesSheet, 0.2f);
+        }
     }
 
     animationComponent->update(dt);
+}
+
+void Bowser::updateSkill_1(const float& dt) {
+
+}
+
+void Bowser::updateSkill_2(const float& dt) {
+	//std::cerr << "Bowser skill 2" << std::endl;
+    eventMediator->spawnEnemy(new Goomba(sf::Vector2f(374, 768.f), sf::Vector2f(64, 64), 310, 1184));
+	//eventMediator->spawnEnemy(new FlyingKoopa(sf::Vector2f(374, 1000.f), sf::Vector2f(64, 64), 310, 1184));
+
+	eventMediator->spawnEnemy(new Koopa(sf::Vector2f(1184, 768.f), sf::Vector2f(64, 64), 310, 1184));
+	//eventMediator->spawnEnemy(new FlyingKoopa(sf::Vector2f(1184, 1000.f), sf::Vector2f(64, 64), 310, 1184));
+
+	eventMediator->spawnEnemy(new Goomba(sf::Vector2f(700.f, 768.f), sf::Vector2f(64, 64), 310, 1184));
+	//eventMediator->spawnEnemy(new FlyingKoopa(sf::Vector2f(700.f, 1000.f), sf::Vector2f(64, 64), 310, 1184));
 }
 
 void Bowser::getDamaged() {

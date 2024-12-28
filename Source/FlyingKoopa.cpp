@@ -148,7 +148,7 @@ void FlyingKoopa::reactToPlayerCollision(int collidedSide)
         setMoveLeft(true);
         eventMediator->pushPlayerRight();
     }
-    eventMediator->addPlayerHealth(-1);
+    eventMediator->damagePlayer(-1);
 }
 
 void FlyingKoopa::reactToBlockCollision(int collidedSide)

@@ -8,6 +8,9 @@ private:
     const float reloadMushroom = 5.0f;
 	float reloadMushroomTimer;
 	Mushroom* current_mushroom;
+
+    sf::Texture blindFoldTexture;
+    sf::Sprite blindFold;
 public:
     W3_LV3(PlayerManager* player, sf::RenderWindow* window);
     virtual ~W3_LV3();

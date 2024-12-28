@@ -114,6 +114,8 @@ void GameEventMediator::updateEvents(const float& dt) {
 		enemy->update(dt);
 	}
 
+	std::cerr << enemies->size() << std::endl;
+
 	for (auto& block : *blocks) {
 		block->update(dt);
 	}
@@ -144,6 +146,10 @@ void GameEventMediator::setPlayerBig(bool isBig) {
 }
 
 void GameEventMediator::addPlayerHealth(int health) {
+	if (!player->isFlashing) {
+		player->startFlashing();
+	}
+
 	if (health < 0) {
 		if (player->getBig()) {
 			player->setBig(false);
@@ -152,6 +158,20 @@ void GameEventMediator::addPlayerHealth(int health) {
 	}
 
 	player->setHealth(player->getHealth() + health);
+}
+
+void GameEventMediator::damagePlayer(int health) {
+	if (!player->immortal) player->setHealth(player->getHealth() + health);
+	if (!player->isFlashing) {
+		player->startFlashing();
+	}
+
+	if (health < 0) {
+		if (player->getBig()) {
+			player->setBig(false);
+			return;
+		}
+	}
 }
 
 sf::Vector2f GameEventMediator::getPlayerPosition() {
@@ -180,6 +200,12 @@ void GameEventMediator::pushPlayerUpExtra() {
 void GameEventMediator::spawnPowerUp(PowerUpObject* PowerUp) {
 	this->PowerUps->push_back(PowerUp);
 	PowerUp->setEventMediator(this);
+}
+
+void GameEventMediator::spawnEnemy(Enemy* enemy) {
+	this->enemies->push_back(enemy);
+	//std::cerr << this->enemies->size() << std::endl;
+	enemy->setEventMediator(this);
 }
 
 void GameEventMediator::defeatPlayer() {
