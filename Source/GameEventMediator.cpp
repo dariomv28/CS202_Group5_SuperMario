@@ -110,18 +110,18 @@ void GameEventMediator::updateEvents(const float& dt) {
 	// Update events of the objects by themselves
 
 	player->update(dt);
-	for (auto& enemy : *enemies) {
-		enemy->update(dt);
+	for (int i = 0; i < enemies->size(); i++) {
+		(*enemies)[i]->update(dt);
 	}
 
-	std::cerr << enemies->size() << std::endl;
+	//std::cerr << enemies->size() << std::endl;
 
-	for (auto& block : *blocks) {
-		block->update(dt);
+	for (int i = 0; i < blocks->size(); i++) {
+		(*blocks)[i]->update(dt);
 	}
 
-	for (auto& PowerUp : *PowerUps) {
-		PowerUp->update(dt);
+	for (int i = 0; i < PowerUps->size(); i++) {
+		(*PowerUps)[i]->update(dt);
 	}
 	
 	// Update evetns from collisions
