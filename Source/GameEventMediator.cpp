@@ -114,6 +114,8 @@ void GameEventMediator::updateEvents(const float& dt) {
 		enemy->update(dt);
 	}
 
+	std::cerr << enemies->size() << std::endl;
+
 	for (auto& block : *blocks) {
 		block->update(dt);
 	}
@@ -198,6 +200,12 @@ void GameEventMediator::pushPlayerUpExtra() {
 void GameEventMediator::spawnPowerUp(PowerUpObject* PowerUp) {
 	this->PowerUps->push_back(PowerUp);
 	PowerUp->setEventMediator(this);
+}
+
+void GameEventMediator::spawnEnemy(Enemy* enemy) {
+	this->enemies->push_back(enemy);
+	//std::cerr << this->enemies->size() << std::endl;
+	enemy->setEventMediator(this);
 }
 
 void GameEventMediator::defeatPlayer() {

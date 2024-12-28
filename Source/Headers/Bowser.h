@@ -24,8 +24,24 @@ private:
 	std::string currentSkill;
 
 	// Shooting
-	const float reloadFire = 5.5f;
+	const float reloadFire = 5.0f;
 	float reloadTimer;
+	// skill
+	int skill;
+	const float skillDuration = 20.0f;
+	const float animationtime = 3.0f;
+	float skillTimer;
+	int stepAnimationSkill = 0;
+	float AnimationTimer;
+	bool doneAnimation = false;
+	bool doingAnimation = false;
+		// blind
+		const float blindDuration = 15.0f;
+		float blindTimer;
+		// render enemies
+
+
+		
 
 	void initAnimations();
 public:
@@ -48,6 +64,8 @@ public:
 	//void summonMinions(); //Summon Goombas and Koopa
 	///void summonCircleFireballs();
 	//void summon
+	void updateSkill_1(const float& dt);
+	void updateSkill_2(const float& dt);
 
 	void setIsAlive(bool alive) override;
 	bool getIsAlive() const override;

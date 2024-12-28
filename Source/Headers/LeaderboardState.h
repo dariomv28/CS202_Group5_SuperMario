@@ -16,6 +16,7 @@ private:
     sf::Font font;
     sf::Text titleText;
     sf::RectangleShape headerBackground;
+    sf::VertexArray gradientBackground;
 
     // Column headers
     std::vector<sf::Text> headers;
@@ -23,6 +24,11 @@ private:
 
     // Back button
     GUI::TextButton* backButton;
+
+    // Decorative elements
+    sf::CircleShape starShape;
+    sf::CircleShape starShape2;
+    float animationTime;
 
     // Helper functions
     void initVariables();
@@ -35,6 +41,9 @@ private:
         const std::string& world1, const std::string& world2,
         const std::string& world3, const std::string& total);
     void centerTable(); // New function to handle centering
+    void updateRowHighlighting();
+    void updateAnimation(const float& dt);
+    //void updateScroll(const sf::Event& event);
 
 public:
     LeaderboardState(StateData* state_data);
