@@ -108,12 +108,12 @@ void LeaderboardState::initBackButton()
         false,
         30.f, 30.f, 100.f, 50.f,
         &font, "Back", 24,
-        sf::Color(70, 70, 70, 200),  // Background idle color
-        sf::Color(144, 238, 144, 250),  // Background hover color (light green)
-        sf::Color(20, 20, 20, 50),  // Background active color
-        sf::Color(0, 0, 255, 255),  // Text idle color (blue)
-        sf::Color(255, 255, 255, 255),  // Text hover color (white)
-        sf::Color(20, 20, 20, 255)   // Text active color
+        sf::Color(50, 50, 50, 200),  // Background idle color
+        sf::Color(70, 70, 70, 220),  // Background hover color (light green)
+        sf::Color(90, 90, 90, 240),  // Background active color
+        sf::Color(255, 255, 255, 255),  // Text idle color (blue)
+        sf::Color(255, 255, 200, 255),  // Text hover color (white)
+        sf::Color(255, 255, 255, 255)   // Text active color
     );
 }
 
