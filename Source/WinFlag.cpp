@@ -115,5 +115,5 @@ void WinFlag::render(sf::RenderTarget* target) {
     target->draw(entitySprite);
     target->draw(poleSprite);
     target->draw(sphereSprite);
-    target->draw(hitbox);
+    // target->draw(hitbox);
 }
